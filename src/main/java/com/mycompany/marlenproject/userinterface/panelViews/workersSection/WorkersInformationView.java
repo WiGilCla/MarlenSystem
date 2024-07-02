@@ -42,8 +42,8 @@ public class WorkersInformationView extends javax.swing.JPanel {
         txtFirstName = new javax.swing.JTextField();
         txtFirstLastName = new javax.swing.JTextField();
         txtBloodType = new javax.swing.JTextField();
-        sltIdentificationType = new javax.swing.JComboBox<>();
         txtAge = new javax.swing.JTextField();
+        txtIdentificationType = new javax.swing.JTextField();
         information2Panel = new javax.swing.JPanel();
         lbsInformation2Panel = new javax.swing.JPanel();
         lbSecondName = new javax.swing.JLabel();
@@ -55,13 +55,12 @@ public class WorkersInformationView extends javax.swing.JPanel {
         txtSecondName = new javax.swing.JTextField();
         txtSecondLastName = new javax.swing.JTextField();
         txtEps = new javax.swing.JTextField();
-        dateVinculation = new com.toedter.calendar.JDateChooser();
         txtIdentificationNum = new javax.swing.JTextField();
+        txtDateVinculation = new javax.swing.JTextField();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, "INFORMACIÓN DE TRABAJADOR", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
         setPreferredSize(new java.awt.Dimension(800, 500));
 
-        buttonsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 204)));
         buttonsPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnDeleteWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconTrash.png"))); // NOI18N
@@ -105,10 +104,8 @@ public class WorkersInformationView extends javax.swing.JPanel {
                 .addGap(20, 20, 20))
         );
 
-        information1Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255)));
         information1Panel.setPreferredSize(new java.awt.Dimension(350, 300));
 
-        lbsInformation1Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lbsInformation1Panel.setPreferredSize(new java.awt.Dimension(150, 300));
 
         lbFirstName.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -135,7 +132,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
         lbsInformation1Panel.setLayout(lbsInformation1PanelLayout);
         lbsInformation1PanelLayout.setHorizontalGroup(
             lbsInformation1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbFirstlastName, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+            .addComponent(lbFirstlastName, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
             .addComponent(lbIdentificationType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbBloodType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbAge, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -157,11 +154,12 @@ public class WorkersInformationView extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        dataInformation1Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
         dataInformation1Panel.setPreferredSize(new java.awt.Dimension(230, 300));
 
+        txtFirstName.setEditable(false);
         txtFirstName.setPreferredSize(new java.awt.Dimension(75, 25));
 
+        txtFirstLastName.setEditable(false);
         txtFirstLastName.setPreferredSize(new java.awt.Dimension(75, 25));
         txtFirstLastName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,15 +167,22 @@ public class WorkersInformationView extends javax.swing.JPanel {
             }
         });
 
+        txtBloodType.setEditable(false);
         txtBloodType.setPreferredSize(new java.awt.Dimension(75, 25));
 
-        sltIdentificationType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cédula de ciudadanía", "Cédula de extranjería", "Tarjeta pasaporte", "Sin identificación" }));
-        sltIdentificationType.setPreferredSize(new java.awt.Dimension(75, 25));
-
+        txtAge.setEditable(false);
         txtAge.setPreferredSize(new java.awt.Dimension(75, 25));
         txtAge.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAgeActionPerformed(evt);
+            }
+        });
+
+        txtIdentificationType.setEditable(false);
+        txtIdentificationType.setPreferredSize(new java.awt.Dimension(75, 25));
+        txtIdentificationType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdentificationTypeActionPerformed(evt);
             }
         });
 
@@ -188,11 +193,11 @@ public class WorkersInformationView extends javax.swing.JPanel {
             .addGroup(dataInformation1PanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(dataInformation1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sltIdentificationType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtAge, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtAge, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
                     .addComponent(txtFirstLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtBloodType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtBloodType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtIdentificationType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         dataInformation1PanelLayout.setVerticalGroup(
@@ -202,13 +207,13 @@ public class WorkersInformationView extends javax.swing.JPanel {
                 .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtFirstLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
-                .addComponent(sltIdentificationType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtIdentificationType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
                 .addComponent(txtBloodType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout information1PanelLayout = new javax.swing.GroupLayout(information1Panel);
@@ -218,18 +223,16 @@ public class WorkersInformationView extends javax.swing.JPanel {
             .addGroup(information1PanelLayout.createSequentialGroup()
                 .addComponent(lbsInformation1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dataInformation1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
+                .addComponent(dataInformation1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE))
         );
         information1PanelLayout.setVerticalGroup(
             information1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbsInformation1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
-            .addComponent(dataInformation1Panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+            .addComponent(lbsInformation1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+            .addComponent(dataInformation1Panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
         );
 
-        information2Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         information2Panel.setPreferredSize(new java.awt.Dimension(350, 300));
 
-        lbsInformation2Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255)));
         lbsInformation2Panel.setPreferredSize(new java.awt.Dimension(150, 300));
 
         lbSecondName.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -258,14 +261,14 @@ public class WorkersInformationView extends javax.swing.JPanel {
             lbsInformation2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lbDateVinculation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbEps, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbIdentificationNum, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+            .addComponent(lbIdentificationNum, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
             .addComponent(lbSecondLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbSecondName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         lbsInformation2PanelLayout.setVerticalGroup(
             lbsInformation2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lbsInformation2PanelLayout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+                .addContainerGap(33, Short.MAX_VALUE)
                 .addComponent(lbSecondName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbSecondLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -278,11 +281,12 @@ public class WorkersInformationView extends javax.swing.JPanel {
                 .addGap(44, 44, 44))
         );
 
-        dataInformation2Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 255, 51)));
         dataInformation2Panel.setPreferredSize(new java.awt.Dimension(230, 300));
 
+        txtSecondName.setEditable(false);
         txtSecondName.setPreferredSize(new java.awt.Dimension(75, 25));
 
+        txtSecondLastName.setEditable(false);
         txtSecondLastName.setPreferredSize(new java.awt.Dimension(75, 25));
         txtSecondLastName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -290,16 +294,19 @@ public class WorkersInformationView extends javax.swing.JPanel {
             }
         });
 
+        txtEps.setEditable(false);
         txtEps.setPreferredSize(new java.awt.Dimension(75, 25));
 
-        dateVinculation.setPreferredSize(new java.awt.Dimension(75, 25));
-
+        txtIdentificationNum.setEditable(false);
         txtIdentificationNum.setPreferredSize(new java.awt.Dimension(75, 25));
         txtIdentificationNum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdentificationNumActionPerformed(evt);
             }
         });
+
+        txtDateVinculation.setEditable(false);
+        txtDateVinculation.setPreferredSize(new java.awt.Dimension(75, 25));
 
         javax.swing.GroupLayout dataInformation2PanelLayout = new javax.swing.GroupLayout(dataInformation2Panel);
         dataInformation2Panel.setLayout(dataInformation2PanelLayout);
@@ -308,11 +315,11 @@ public class WorkersInformationView extends javax.swing.JPanel {
             .addGroup(dataInformation2PanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(dataInformation2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSecondName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtSecondName, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
                     .addComponent(txtEps, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtSecondLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtIdentificationNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(dateVinculation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtDateVinculation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         dataInformation2PanelLayout.setVerticalGroup(
@@ -327,7 +334,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtEps, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(dateVinculation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDateVinculation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -338,12 +345,12 @@ public class WorkersInformationView extends javax.swing.JPanel {
             .addGroup(information2PanelLayout.createSequentialGroup()
                 .addComponent(lbsInformation2Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dataInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
+                .addComponent(dataInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))
         );
         information2PanelLayout.setVerticalGroup(
             information2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbsInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
-            .addComponent(dataInformation2Panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+            .addComponent(lbsInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+            .addComponent(dataInformation2Panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -386,6 +393,10 @@ public class WorkersInformationView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdentificationNumActionPerformed
 
+    private void txtIdentificationTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdentificationTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdentificationTypeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeleteWorker;
@@ -395,7 +406,6 @@ public class WorkersInformationView extends javax.swing.JPanel {
     private javax.swing.JPanel buttonsPanel;
     private javax.swing.JPanel dataInformation1Panel;
     private javax.swing.JPanel dataInformation2Panel;
-    private com.toedter.calendar.JDateChooser dateVinculation;
     private javax.swing.JPanel information1Panel;
     private javax.swing.JPanel information2Panel;
     private javax.swing.JLabel lbAge;
@@ -410,13 +420,14 @@ public class WorkersInformationView extends javax.swing.JPanel {
     private javax.swing.JLabel lbSecondName;
     private javax.swing.JPanel lbsInformation1Panel;
     private javax.swing.JPanel lbsInformation2Panel;
-    private javax.swing.JComboBox<String> sltIdentificationType;
     private javax.swing.JTextField txtAge;
     private javax.swing.JTextField txtBloodType;
+    private javax.swing.JTextField txtDateVinculation;
     private javax.swing.JTextField txtEps;
     private javax.swing.JTextField txtFirstLastName;
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtIdentificationNum;
+    private javax.swing.JTextField txtIdentificationType;
     private javax.swing.JTextField txtSecondLastName;
     private javax.swing.JTextField txtSecondName;
     // End of variables declaration//GEN-END:variables

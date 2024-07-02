@@ -82,6 +82,7 @@ public class AdminHome extends javax.swing.JFrame {
         jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1150, 512));
 
         btnAccountingSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconCalculation.png"))); // NOI18N
         btnAccountingSection.setText("Contabilidad");
@@ -172,6 +173,8 @@ public class AdminHome extends javax.swing.JFrame {
                 .addComponent(workersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        viewPanel.setPreferredSize(new java.awt.Dimension(900, 512));
 
         lbWelcome.setFont(new java.awt.Font("Yu Gothic UI", 1, 48)); // NOI18N
         lbWelcome.setText("¡Bienvenido!");
@@ -273,7 +276,7 @@ public class AdminHome extends javax.swing.JFrame {
             .addGroup(defaultPanelLayout.createSequentialGroup()
                 .addComponent(optionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE))
         );
         defaultPanelLayout.setVerticalGroup(
             defaultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
