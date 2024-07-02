@@ -4,11 +4,13 @@
  */
 package com.mycompany.marlenproject.logic;
 
+import java.io.Serializable;
 /**
  *
  * @author willy
  */
-public class Person {
+public class Person implements Serializable {
+    private int personId;
     private String firstName;
     private String secondName;
     private String firstLastName;
@@ -28,6 +30,14 @@ public class Person {
     }
 
     public Person() {
+    }
+
+    public int getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(int personId) {
+        this.personId = personId;
     }
 
     public String getFirstName() {

@@ -10,16 +10,21 @@ import java.util.Date;
  *
  * @author willy
  */
-public class Worker extends Person {
+public class Worker{
+    
+    private int workerId;
     private String bloodType;
     private String healthEntity;
     private Date dayLink;
+    private String position;
+    
+    private Person refPerson;
 
-    public Worker(String bloodType, String healthEntity, Date dayLink, String firstName, String secondName, String firstLastName, String secondLastName, String identificationType, String identificationNumber, String age) {
-        super(firstName, secondName, firstLastName, secondLastName, identificationType, identificationNumber, age);
+    public Worker(String bloodType, String healthEntity, Date dayLink, String position, String firstName, String secondName, String firstLastName, String secondLastName, String identificationType, String identificationNumber, String age) {
         this.bloodType = bloodType;
         this.healthEntity = healthEntity;
         this.dayLink = dayLink;
+        this.position = position;
     }
 
     public String getBloodType() {
@@ -45,6 +50,12 @@ public class Worker extends Person {
     public void setDayLink(Date dayLink) {
         this.dayLink = dayLink;
     }
-    
-    
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
 }

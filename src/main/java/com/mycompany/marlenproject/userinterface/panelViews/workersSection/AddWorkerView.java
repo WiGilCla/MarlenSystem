@@ -36,12 +36,14 @@ public class AddWorkerView extends javax.swing.JPanel {
         lbIdentificationType = new javax.swing.JLabel();
         lbBloodType = new javax.swing.JLabel();
         lbAge = new javax.swing.JLabel();
+        lbPosition = new javax.swing.JLabel();
         dataInformation1Panel = new javax.swing.JPanel();
         txtFirstName = new javax.swing.JTextField();
         txtFirstLastName = new javax.swing.JTextField();
         txtBloodType = new javax.swing.JTextField();
         sltIdentificationType = new javax.swing.JComboBox<>();
         txtAge = new javax.swing.JTextField();
+        sltPosition = new javax.swing.JComboBox<>();
         information2Panel = new javax.swing.JPanel();
         lbsInformation2Panel = new javax.swing.JPanel();
         lbSecondName = new javax.swing.JLabel();
@@ -79,7 +81,7 @@ public class AddWorkerView extends javax.swing.JPanel {
             .addGroup(buttonsPanelLayout.createSequentialGroup()
                 .addGap(255, 255, 255)
                 .addComponent(btnCleanFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(btnSaveWorker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(238, 238, 238))
         );
@@ -117,6 +119,10 @@ public class AddWorkerView extends javax.swing.JPanel {
         lbAge.setText("Edad:");
         lbAge.setPreferredSize(new java.awt.Dimension(0, 25));
 
+        lbPosition.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbPosition.setText("Cargo:");
+        lbPosition.setPreferredSize(new java.awt.Dimension(0, 25));
+
         javax.swing.GroupLayout lbsInformation1PanelLayout = new javax.swing.GroupLayout(lbsInformation1Panel);
         lbsInformation1Panel.setLayout(lbsInformation1PanelLayout);
         lbsInformation1PanelLayout.setHorizontalGroup(
@@ -126,6 +132,7 @@ public class AddWorkerView extends javax.swing.JPanel {
             .addComponent(lbBloodType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbAge, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbPosition, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         lbsInformation1PanelLayout.setVerticalGroup(
             lbsInformation1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,6 +147,8 @@ public class AddWorkerView extends javax.swing.JPanel {
                 .addComponent(lbBloodType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -166,6 +175,9 @@ public class AddWorkerView extends javax.swing.JPanel {
             }
         });
 
+        sltPosition.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jefe", "Administrador", "Pintor", "Lijador", "Carpintero", "Seguridad", " " }));
+        sltPosition.setPreferredSize(new java.awt.Dimension(75, 25));
+
         javax.swing.GroupLayout dataInformation1PanelLayout = new javax.swing.GroupLayout(dataInformation1Panel);
         dataInformation1Panel.setLayout(dataInformation1PanelLayout);
         dataInformation1PanelLayout.setHorizontalGroup(
@@ -173,11 +185,12 @@ public class AddWorkerView extends javax.swing.JPanel {
             .addGroup(dataInformation1PanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(dataInformation1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sltIdentificationType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sltIdentificationType, 0, 253, Short.MAX_VALUE)
                     .addComponent(txtAge, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtFirstLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtBloodType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtBloodType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sltPosition, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         dataInformation1PanelLayout.setVerticalGroup(
@@ -193,7 +206,9 @@ public class AddWorkerView extends javax.swing.JPanel {
                 .addComponent(txtBloodType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(sltPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout information1PanelLayout = new javax.swing.GroupLayout(information1Panel);
@@ -203,7 +218,7 @@ public class AddWorkerView extends javax.swing.JPanel {
             .addGroup(information1PanelLayout.createSequentialGroup()
                 .addComponent(lbsInformation1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dataInformation1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE))
+                .addComponent(dataInformation1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE))
         );
         information1PanelLayout.setVerticalGroup(
             information1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,7 +335,7 @@ public class AddWorkerView extends javax.swing.JPanel {
             .addGroup(information2PanelLayout.createSequentialGroup()
                 .addComponent(lbsInformation2Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dataInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))
+                .addComponent(dataInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE))
         );
         information2PanelLayout.setVerticalGroup(
             information2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,9 +349,9 @@ public class AddWorkerView extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(information1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
+                .addComponent(information1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(information2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
+                .addComponent(information2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(buttonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -390,11 +405,13 @@ public class AddWorkerView extends javax.swing.JPanel {
     private javax.swing.JLabel lbFirstlastName;
     private javax.swing.JLabel lbIdentificationNum;
     private javax.swing.JLabel lbIdentificationType;
+    private javax.swing.JLabel lbPosition;
     private javax.swing.JLabel lbSecondLastName;
     private javax.swing.JLabel lbSecondName;
     private javax.swing.JPanel lbsInformation1Panel;
     private javax.swing.JPanel lbsInformation2Panel;
     private javax.swing.JComboBox<String> sltIdentificationType;
+    private javax.swing.JComboBox<String> sltPosition;
     private javax.swing.JTextField txtAge;
     private javax.swing.JTextField txtBloodType;
     private javax.swing.JTextField txtEps;

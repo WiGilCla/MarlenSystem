@@ -38,12 +38,14 @@ public class WorkersInformationView extends javax.swing.JPanel {
         lbIdentificationType = new javax.swing.JLabel();
         lbBloodType = new javax.swing.JLabel();
         lbAge = new javax.swing.JLabel();
+        lbPosition = new javax.swing.JLabel();
         dataInformation1Panel = new javax.swing.JPanel();
         txtFirstName = new javax.swing.JTextField();
         txtFirstLastName = new javax.swing.JTextField();
         txtBloodType = new javax.swing.JTextField();
         txtAge = new javax.swing.JTextField();
         txtIdentificationType = new javax.swing.JTextField();
+        txtPosition = new javax.swing.JTextField();
         information2Panel = new javax.swing.JPanel();
         lbsInformation2Panel = new javax.swing.JPanel();
         lbSecondName = new javax.swing.JLabel();
@@ -128,6 +130,10 @@ public class WorkersInformationView extends javax.swing.JPanel {
         lbAge.setText("Edad:");
         lbAge.setPreferredSize(new java.awt.Dimension(0, 25));
 
+        lbPosition.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbPosition.setText("Cargo:");
+        lbPosition.setPreferredSize(new java.awt.Dimension(0, 25));
+
         javax.swing.GroupLayout lbsInformation1PanelLayout = new javax.swing.GroupLayout(lbsInformation1Panel);
         lbsInformation1Panel.setLayout(lbsInformation1PanelLayout);
         lbsInformation1PanelLayout.setHorizontalGroup(
@@ -137,6 +143,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
             .addComponent(lbBloodType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbAge, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbPosition, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         lbsInformation1PanelLayout.setVerticalGroup(
             lbsInformation1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,6 +158,8 @@ public class WorkersInformationView extends javax.swing.JPanel {
                 .addComponent(lbBloodType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -186,6 +195,14 @@ public class WorkersInformationView extends javax.swing.JPanel {
             }
         });
 
+        txtPosition.setEditable(false);
+        txtPosition.setPreferredSize(new java.awt.Dimension(75, 25));
+        txtPosition.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPositionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout dataInformation1PanelLayout = new javax.swing.GroupLayout(dataInformation1Panel);
         dataInformation1Panel.setLayout(dataInformation1PanelLayout);
         dataInformation1PanelLayout.setHorizontalGroup(
@@ -197,7 +214,8 @@ public class WorkersInformationView extends javax.swing.JPanel {
                     .addComponent(txtFirstLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtBloodType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtIdentificationType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtIdentificationType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtPosition, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
                 .addContainerGap())
         );
         dataInformation1PanelLayout.setVerticalGroup(
@@ -213,7 +231,9 @@ public class WorkersInformationView extends javax.swing.JPanel {
                 .addComponent(txtBloodType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout information1PanelLayout = new javax.swing.GroupLayout(information1Panel);
@@ -397,6 +417,10 @@ public class WorkersInformationView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdentificationTypeActionPerformed
 
+    private void txtPositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPositionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPositionActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeleteWorker;
@@ -416,6 +440,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
     private javax.swing.JLabel lbFirstlastName;
     private javax.swing.JLabel lbIdentificationNum;
     private javax.swing.JLabel lbIdentificationType;
+    private javax.swing.JLabel lbPosition;
     private javax.swing.JLabel lbSecondLastName;
     private javax.swing.JLabel lbSecondName;
     private javax.swing.JPanel lbsInformation1Panel;
@@ -428,6 +453,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtIdentificationNum;
     private javax.swing.JTextField txtIdentificationType;
+    private javax.swing.JTextField txtPosition;
     private javax.swing.JTextField txtSecondLastName;
     private javax.swing.JTextField txtSecondName;
     // End of variables declaration//GEN-END:variables
