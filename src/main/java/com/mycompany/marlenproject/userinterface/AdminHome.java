@@ -86,7 +86,6 @@ public class AdminHome extends javax.swing.JFrame {
 
         btnAccountingSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconCalculation.png"))); // NOI18N
         btnAccountingSection.setText("Contabilidad");
-        btnAccountingSection.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout accountingPanelLayout = new javax.swing.GroupLayout(accountingPanel);
         accountingPanel.setLayout(accountingPanelLayout);
@@ -107,7 +106,6 @@ public class AdminHome extends javax.swing.JFrame {
 
         btnQuotesSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconNewPage.png"))); // NOI18N
         btnQuotesSection.setText("Cotizaciones");
-        btnQuotesSection.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout quotesPanelLayout = new javax.swing.GroupLayout(quotesPanel);
         quotesPanel.setLayout(quotesPanelLayout);
@@ -128,7 +126,6 @@ public class AdminHome extends javax.swing.JFrame {
 
         btnWorkersSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconWorker.png"))); // NOI18N
         btnWorkersSection.setText("Trabajadores");
-        btnWorkersSection.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnWorkersSection.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnWorkersSectionActionPerformed(evt);

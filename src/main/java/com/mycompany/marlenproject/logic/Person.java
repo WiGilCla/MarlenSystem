@@ -5,18 +5,22 @@
 package com.mycompany.marlenproject.logic;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 /**
  *
  * @author willy
  */
+@Entity
 public class Person implements Serializable {
-    private int personId;
+    @Id
+    private String identificationNumber;
     private String firstName;
     private String secondName;
     private String firstLastName;
     private String secondLastName;
     private String identificationType;
-    private String identificationNumber;
+    
     private String age;
 
     public Person(String firstName, String secondName, String firstLastName, String secondLastName, String identificationType, String identificationNumber, String age) {
@@ -30,14 +34,6 @@ public class Person implements Serializable {
     }
 
     public Person() {
-    }
-
-    public int getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(int personId) {
-        this.personId = personId;
     }
 
     public String getFirstName() {

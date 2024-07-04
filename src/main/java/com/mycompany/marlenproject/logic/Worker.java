@@ -4,27 +4,51 @@
  */
 package com.mycompany.marlenproject.logic;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 /**
  *
  * @author willy
  */
-public class Worker{
+@Entity
+public class Worker implements Serializable{
     
+    @Id
     private int workerId;
     private String bloodType;
     private String healthEntity;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dayLink;
     private String position;
-    
-    private Person refPerson;
+    @OneToOne
+    private Person personId;
 
-    public Worker(String bloodType, String healthEntity, Date dayLink, String position, String firstName, String secondName, String firstLastName, String secondLastName, String identificationType, String identificationNumber, String age) {
+    public Worker(String bloodType, String healthEntity, Date dayLink, String position) {
         this.bloodType = bloodType;
         this.healthEntity = healthEntity;
         this.dayLink = dayLink;
         this.position = position;
+    }
+
+    public int getWorkerId() {
+        return workerId;
+    }
+
+    public void setWorkerId(int workerId) {
+        this.workerId = workerId;
+    }
+
+    public Person getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(Person personId) {
+        this.personId = personId;
     }
 
     public String getBloodType() {
