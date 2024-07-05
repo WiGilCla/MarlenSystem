@@ -4,10 +4,17 @@
  */
 package com.mycompany.marlenproject.persistence.controller;
 
+import com.mycompany.marlenproject.logic.Worker;
+import com.mycompany.marlenproject.persistence.WorkerJpaController;
+
 /**
  *
  * @author willy
  */
 public class workerController {
+    WorkerJpaController workerJpa = new WorkerJpaController();
+    public void saveWorkerPersis(Worker newWorker) throws Exception{
+         workerJpa.create(newWorker);
+    }
     
 }

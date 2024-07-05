@@ -14,7 +14,7 @@ import javax.persistence.Id;
 @Entity
 public class Person implements Serializable {
     @Id
-    private String identificationNumber;
+    private int identificationNumber;
     private String firstName;
     private String secondName;
     private String firstLastName;
@@ -23,7 +23,7 @@ public class Person implements Serializable {
     
     private String age;
 
-    public Person(String firstName, String secondName, String firstLastName, String secondLastName, String identificationType, String identificationNumber, String age) {
+    public Person(String firstName, String secondName, String firstLastName, String secondLastName, String identificationType, int identificationNumber, String age) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.firstLastName = firstLastName;
@@ -76,11 +76,11 @@ public class Person implements Serializable {
         this.identificationType = identificationType;
     }
 
-    public String getIdentificationNumber() {
+    public int getIdentificationNumber() {
         return identificationNumber;
     }
 
-    public void setIdentificationNumber(String identificationNumber) {
+    public void setIdentificationNumber(int identificationNumber) {
         this.identificationNumber = identificationNumber;
     }
 

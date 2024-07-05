@@ -4,9 +4,8 @@
  */
 package com.mycompany.marlenproject.persistence;
 
-import com.mycompany.marlenproject.logic.Person;
+import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.persistence.exceptions.NonexistentEntityException;
-import com.mycompany.marlenproject.persistence.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -21,13 +20,12 @@ import javax.persistence.criteria.Root;
  *
  * @author willy
  */
-public class PersonJpaController implements Serializable {
+public class WorkerJpaController implements Serializable {
 
-    public PersonJpaController(EntityManagerFactory emf) {
+    public WorkerJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    
-    public PersonJpaController() { 
+    public WorkerJpaController() { 
         this.emf = Persistence.createEntityManagerFactory("MarlenProjectPU"); 
     }
     private EntityManagerFactory emf = null;
@@ -36,18 +34,13 @@ public class PersonJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Person person) throws PreexistingEntityException, Exception {
+    public void create(Worker worker) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(person);
+            em.persist(worker);
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findPerson(person.getIdentificationNumber()) != null) {
-                throw new PreexistingEntityException("Person " + person + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -55,19 +48,19 @@ public class PersonJpaController implements Serializable {
         }
     }
 
-    public void edit(Person person) throws NonexistentEntityException, Exception {
+    public void edit(Worker worker) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            person = em.merge(person);
+            worker = em.merge(worker);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                int id = person.getIdentificationNumber();
-                if (findPerson(id) == null) {
-                    throw new NonexistentEntityException("The person with id " + id + " no longer exists.");
+                int id = worker.getWorkerId();
+                if (findWorker(id) == null) {
+                    throw new NonexistentEntityException("The worker with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -83,14 +76,14 @@ public class PersonJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Person person;
+            Worker worker;
             try {
-                person = em.getReference(Person.class, id);
-                person.getIdentificationNumber();
+                worker = em.getReference(Worker.class, id);
+                worker.getWorkerId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The person with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The worker with id " + id + " no longer exists.", enfe);
             }
-            em.remove(person);
+            em.remove(worker);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -99,19 +92,19 @@ public class PersonJpaController implements Serializable {
         }
     }
 
-    public List<Person> findPersonEntities() {
-        return findPersonEntities(true, -1, -1);
+    public List<Worker> findWorkerEntities() {
+        return findWorkerEntities(true, -1, -1);
     }
 
-    public List<Person> findPersonEntities(int maxResults, int firstResult) {
-        return findPersonEntities(false, maxResults, firstResult);
+    public List<Worker> findWorkerEntities(int maxResults, int firstResult) {
+        return findWorkerEntities(false, maxResults, firstResult);
     }
 
-    private List<Person> findPersonEntities(boolean all, int maxResults, int firstResult) {
+    private List<Worker> findWorkerEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Person.class));
+            cq.select(cq.from(Worker.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -123,20 +116,20 @@ public class PersonJpaController implements Serializable {
         }
     }
 
-    public Person findPerson(int id) {
+    public Worker findWorker(int id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Person.class, id);
+            return em.find(Worker.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getPersonCount() {
+    public int getWorkerCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Person> rt = cq.from(Person.class);
+            Root<Worker> rt = cq.from(Worker.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

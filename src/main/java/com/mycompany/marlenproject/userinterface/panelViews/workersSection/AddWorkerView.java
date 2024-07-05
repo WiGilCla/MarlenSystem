@@ -17,9 +17,9 @@ import javax.swing.JOptionPane;
  * @author willy
  */
 public class AddWorkerView extends javax.swing.JPanel {
-    private requestPerson newRequestPerson = new requestPerson();
-    private requestWorker newRequestWorker = new requestWorker();
-    private CheckFields checker = new CheckFields();
+    private final requestPerson newRequestPerson = new requestPerson();
+    private final requestWorker newRequestWorker = new requestWorker();
+    private final CheckFields checker = new CheckFields();
 
     /**
      * Creates new form SecondWorkersView
@@ -514,6 +514,12 @@ public class AddWorkerView extends javax.swing.JPanel {
             if(changeColorRequiredField() && changeColorNoRequiredField()){
                 try {
                     newRequestPerson.savePerson(personFirstName, personSecondName, personFirstLastName, personSecondLastName, personIdentificationType, personIdentificationNumber, personAge);
+                } catch (Exception ex) {
+                    Logger.getLogger(AddWorkerView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                try {
+                    newRequestWorker.saveWorker(personIdentificationNumber, bloodType, bloodTypeCmplt, healthEntity, dayLink, position);
                 } catch (Exception ex) {
                     Logger.getLogger(AddWorkerView.class.getName()).log(Level.SEVERE, null, ex);
                 }

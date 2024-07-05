@@ -13,19 +13,19 @@ import com.mycompany.marlenproject.persistence.controller.personController;
  * @author willy
  */
 public class requestPerson {
-    private personController PersonController = new personController();
-    private CheckFields checker = new CheckFields();
+    private final personController PersonController = new personController();
+    private final CheckFields checker = new CheckFields();
     
     public void savePerson(String personFirstName, String personSecondName, 
             String personFirstLastName, String personSecondLastName, String personIdentificationType, 
             String personIdentificationNumber, String personAge) throws Exception{
         
         String firstName = checker.capitalizedString(personFirstName);
-        String secondName = checker.capitalizedString(personSecondName);
+        String secondName = (personSecondName.isEmpty())? null:checker.capitalizedString(personSecondName);
         String firstLastName = checker.capitalizedString(personFirstLastName);
-        String secondLastName = checker.capitalizedString(personSecondLastName);
+        String secondLastName = (personSecondLastName.isEmpty())? null:checker.capitalizedString(personSecondLastName);
         String identificationType = checker.capitalizedString(personIdentificationType);
-        String identificationNumber = personIdentificationNumber;
+        int identificationNumber = Integer.parseInt( personIdentificationNumber);
         String age = personAge;
         
         System.out.println(firstName);

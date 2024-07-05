@@ -7,9 +7,10 @@ package com.mycompany.marlenproject.logic;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.SEQUENCE;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
 
 /**
  *
@@ -19,22 +20,28 @@ import javax.persistence.Temporal;
 public class Worker implements Serializable{
     
     @Id
+    @GeneratedValue(strategy=SEQUENCE, generator="ID_SEQ")
     private int workerId;
     private String bloodType;
     private String healthEntity;
-    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dayLink;
     private String position;
     @OneToOne
-    private Person personId;
+    private Person person;
 
-    public Worker(String bloodType, String healthEntity, Date dayLink, String position) {
+    public Worker(String bloodType, String healthEntity, Date dayLink, String position, Person person) {
         this.bloodType = bloodType;
         this.healthEntity = healthEntity;
         this.dayLink = dayLink;
         this.position = position;
+        this.person = person;
     }
 
+    public Worker() {
+    }
+    
+    
+    
     public int getWorkerId() {
         return workerId;
     }
@@ -44,11 +51,11 @@ public class Worker implements Serializable{
     }
 
     public Person getPersonId() {
-        return personId;
+        return person;
     }
 
-    public void setPersonId(Person personId) {
-        this.personId = personId;
+    public void setPersonId(Person person) {
+        this.person = person;
     }
 
     public String getBloodType() {
