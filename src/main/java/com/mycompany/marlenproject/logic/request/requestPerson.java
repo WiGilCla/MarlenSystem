@@ -7,6 +7,7 @@ package com.mycompany.marlenproject.logic.request;
 import com.mycompany.marlenproject.logic.CheckFields;
 import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.persistence.controller.personController;
+import java.util.Date;
 
 /**
  *
@@ -18,7 +19,7 @@ public class requestPerson {
     
     public void savePerson(String personFirstName, String personSecondName, 
             String personFirstLastName, String personSecondLastName, String personIdentificationType, 
-            String personIdentificationNumber, String personAge) throws Exception{
+            String personIdentificationNumber, Date birthdate) throws Exception{
         
         String firstName = checker.capitalizedString(personFirstName);
         String secondName = (personSecondName.isEmpty())? null:checker.capitalizedString(personSecondName);
@@ -26,7 +27,7 @@ public class requestPerson {
         String secondLastName = (personSecondLastName.isEmpty())? null:checker.capitalizedString(personSecondLastName);
         String identificationType = checker.capitalizedString(personIdentificationType);
         int identificationNumber = Integer.parseInt( personIdentificationNumber);
-        String age = personAge;
+        Date age = new java.sql.Date(birthdate.getTime()) ;
         
         System.out.println(firstName);
         System.out.println(secondName);

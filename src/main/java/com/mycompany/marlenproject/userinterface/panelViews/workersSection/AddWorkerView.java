@@ -7,6 +7,7 @@ package com.mycompany.marlenproject.userinterface.panelViews.workersSection;
 import com.mycompany.marlenproject.logic.CheckFields;
 import com.mycompany.marlenproject.logic.request.requestPerson;
 import com.mycompany.marlenproject.logic.request.requestWorker;
+import com.mycompany.marlenproject.persistence.exceptions.PreexistingEntityException;
 import java.awt.Color;
 import java.util.Date;
 import java.util.logging.Level;
@@ -20,6 +21,8 @@ public class AddWorkerView extends javax.swing.JPanel {
     private final requestPerson newRequestPerson = new requestPerson();
     private final requestWorker newRequestWorker = new requestWorker();
     private final CheckFields checker = new CheckFields();
+    private final Color colorRed = new Color(255,0,0);
+    private final Color colorWhite = new Color(255,255,255);
 
     /**
      * Creates new form SecondWorkersView
@@ -27,6 +30,7 @@ public class AddWorkerView extends javax.swing.JPanel {
     public AddWorkerView() {
         initComponents();
     }
+    
 
     private void personalizedMessage(String type, String message, String title){
         int typeMessage = 0;
@@ -45,7 +49,6 @@ public class AddWorkerView extends javax.swing.JPanel {
         String personFirstLastName = checker.removeStringBlanks(txtFirstLastName.getText());
         String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
         String personIdentificationNumber = checker.removeStringBlanks(txtIdentificationNum.getText());
-        String personAge = checker.removeStringBlanks(txtAge.getText());
         //Worker information
         String bloodType = sltBloodType.getSelectedItem().toString();
         String bloodTypeCmplt = sltBloodTypeCmplt.getSelectedItem().toString();
@@ -53,39 +56,45 @@ public class AddWorkerView extends javax.swing.JPanel {
         String position = sltPosition.getSelectedItem().toString();
         
         if(!checker.checkStringField(personFirstName)){
-            txtFirstName.setBackground(Color.red);
+            txtFirstName.setBackground(colorRed);
             return false;
         }
         if(!checker.checkStringField(personFirstLastName)){
-            txtFirstLastName.setBackground(Color.red);
+            txtFirstLastName.setBackground(colorRed);
              return false;
         }
         if(!checker.checkComboBox(personIdentificationType)){
-            sltIdentificationType.setBackground(Color.red);
+            sltIdentificationType.setBackground(colorRed);
             return false;
         }
-        if(!checker.checkNumberField(personIdentificationNumber)){
-            txtIdentificationNum.setBackground(Color.red);
+        if(!checker.checkNumberField(personIdentificationNumber) 
+                || !(personIdentificationNumber.length() <= 10  
+                && personIdentificationNumber.length() >= 8)){
+            txtIdentificationNum.setBackground(colorRed);
             return false;
         }
         if(!checker.checkComboBox(bloodType)){
-            sltBloodType.setBackground(Color.red);
+            sltBloodType.setBackground(colorRed);
             return false;
         }
         if(!checker.checkComboBox(bloodTypeCmplt)){
-            sltBloodTypeCmplt.setBackground(Color.red);
+            sltBloodTypeCmplt.setBackground(colorRed);
             return false;
         }
         if(!checker.checkComboBox(healthEntity)){
-            sltEPS.setBackground(Color.red);
+            sltEPS.setBackground(colorRed);
             return false;
         }
-        if(!checker.checkNumberField(personAge)){
-            txtAge.setBackground(Color.red);
+        if(null == dateBirthdate.getDate()){
+            dateBirthdate.setBackground(colorRed);
+            return false;
+        }
+        if(null == dateVinculation.getDate()){
+            dateVinculation.setBackground(colorRed);
             return false;
         }
         if(!checker.checkComboBox(position)){
-            sltPosition.setBackground(Color.red);
+            sltPosition.setBackground(colorRed);
             return false;
         }
         
@@ -98,15 +107,30 @@ public class AddWorkerView extends javax.swing.JPanel {
         
         
         if(!checker.checkStringField(personSecondName) && !personSecondName.equalsIgnoreCase("")){
-            txtSecondName.setBackground(Color.red);
+            txtSecondName.setBackground(colorRed);
             return false;
         }
         if(!checker.checkStringField(personSecondLastName) && !personSecondLastName.equalsIgnoreCase("")){
-            txtSecondLastName.setBackground(Color.red);
+            txtSecondLastName.setBackground(colorRed);
              return false;
         }
         
         return true;
+    }
+    
+    private void clearFields(){
+        txtFirstName.setText("");
+        txtSecondName.setText("");
+        txtFirstLastName.setText("");
+        txtSecondLastName.setText("");
+        sltIdentificationType.setSelectedIndex(0);
+        txtIdentificationNum.setText("");
+        sltBloodType.setSelectedIndex(0);
+        sltBloodTypeCmplt.setSelectedIndex(0);
+        sltEPS.setSelectedIndex(0);
+        dateBirthdate.setDate(null);
+        dateVinculation.setDate(null);
+        sltPosition.setSelectedIndex(0);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -127,10 +151,10 @@ public class AddWorkerView extends javax.swing.JPanel {
         txtFirstName = new javax.swing.JTextField();
         txtFirstLastName = new javax.swing.JTextField();
         sltIdentificationType = new javax.swing.JComboBox<>();
-        txtAge = new javax.swing.JTextField();
         sltPosition = new javax.swing.JComboBox<>();
         sltBloodType = new javax.swing.JComboBox<>();
         sltBloodTypeCmplt = new javax.swing.JComboBox<>();
+        dateBirthdate = new com.toedter.calendar.JDateChooser();
         information2Panel = new javax.swing.JPanel();
         lbsInformation2Panel = new javax.swing.JPanel();
         lbSecondName = new javax.swing.JLabel();
@@ -208,7 +232,7 @@ public class AddWorkerView extends javax.swing.JPanel {
         lbBloodType.setPreferredSize(new java.awt.Dimension(0, 25));
 
         lbAge.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
-        lbAge.setText("Edad:");
+        lbAge.setText("Fecha de nacimiento:");
         lbAge.setPreferredSize(new java.awt.Dimension(0, 25));
 
         lbPosition.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -247,8 +271,23 @@ public class AddWorkerView extends javax.swing.JPanel {
         dataInformation1Panel.setPreferredSize(new java.awt.Dimension(230, 300));
 
         txtFirstName.setPreferredSize(new java.awt.Dimension(75, 25));
+        txtFirstName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtFirstNameMouseClicked(evt);
+            }
+        });
+        txtFirstName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFirstNameActionPerformed(evt);
+            }
+        });
 
         txtFirstLastName.setPreferredSize(new java.awt.Dimension(75, 25));
+        txtFirstLastName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtFirstLastNameMouseClicked(evt);
+            }
+        });
         txtFirstLastName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFirstLastNameActionPerformed(evt);
@@ -257,22 +296,63 @@ public class AddWorkerView extends javax.swing.JPanel {
 
         sltIdentificationType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE UNA ...", "Cédula de ciudadanía", "Cédula de extranjería", "Tarjeta pasaporte", "Sin identificación" }));
         sltIdentificationType.setPreferredSize(new java.awt.Dimension(75, 25));
-
-        txtAge.setPreferredSize(new java.awt.Dimension(75, 25));
-        txtAge.addActionListener(new java.awt.event.ActionListener() {
+        sltIdentificationType.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sltIdentificationTypeMouseClicked(evt);
+            }
+        });
+        sltIdentificationType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAgeActionPerformed(evt);
+                sltIdentificationTypeActionPerformed(evt);
             }
         });
 
         sltPosition.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE UNA ...", "Jefe", "Administrador", "Pintor", "Lijador", "Carpintero", "Seguridad", " " }));
         sltPosition.setPreferredSize(new java.awt.Dimension(75, 25));
+        sltPosition.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sltPositionMouseClicked(evt);
+            }
+        });
+        sltPosition.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sltPositionActionPerformed(evt);
+            }
+        });
 
         sltBloodType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE UNA ...", "A", "B", "O", "AB" }));
         sltBloodType.setPreferredSize(new java.awt.Dimension(75, 25));
+        sltBloodType.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sltBloodTypeMouseClicked(evt);
+            }
+        });
+        sltBloodType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sltBloodTypeActionPerformed(evt);
+            }
+        });
 
         sltBloodTypeCmplt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE UNA ...", "+", "-" }));
         sltBloodTypeCmplt.setPreferredSize(new java.awt.Dimension(75, 25));
+        sltBloodTypeCmplt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sltBloodTypeCmpltMouseClicked(evt);
+            }
+        });
+        sltBloodTypeCmplt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sltBloodTypeCmpltActionPerformed(evt);
+            }
+        });
+
+        dateBirthdate.setDateFormatString("y/MM/d");
+        dateBirthdate.setPreferredSize(new java.awt.Dimension(75, 25));
+        dateBirthdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dateBirthdateMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout dataInformation1PanelLayout = new javax.swing.GroupLayout(dataInformation1Panel);
         dataInformation1Panel.setLayout(dataInformation1PanelLayout);
@@ -282,7 +362,6 @@ public class AddWorkerView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(dataInformation1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sltIdentificationType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtAge, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtFirstLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sltPosition, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -290,7 +369,8 @@ public class AddWorkerView extends javax.swing.JPanel {
                         .addComponent(sltBloodType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(sltBloodTypeCmplt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(dateBirthdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         dataInformation1PanelLayout.setVerticalGroup(
@@ -307,8 +387,8 @@ public class AddWorkerView extends javax.swing.JPanel {
                     .addComponent(sltBloodType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sltBloodTypeCmplt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(dateBirthdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(sltPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(8, Short.MAX_VALUE))
         );
@@ -381,8 +461,23 @@ public class AddWorkerView extends javax.swing.JPanel {
         dataInformation2Panel.setPreferredSize(new java.awt.Dimension(230, 300));
 
         txtSecondName.setPreferredSize(new java.awt.Dimension(75, 25));
+        txtSecondName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtSecondNameMouseClicked(evt);
+            }
+        });
+        txtSecondName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSecondNameActionPerformed(evt);
+            }
+        });
 
         txtSecondLastName.setPreferredSize(new java.awt.Dimension(75, 25));
+        txtSecondLastName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtSecondLastNameMouseClicked(evt);
+            }
+        });
         txtSecondLastName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSecondLastNameActionPerformed(evt);
@@ -391,8 +486,18 @@ public class AddWorkerView extends javax.swing.JPanel {
 
         dateVinculation.setDateFormatString("y/MM/d");
         dateVinculation.setPreferredSize(new java.awt.Dimension(75, 25));
+        dateVinculation.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dateVinculationMouseClicked(evt);
+            }
+        });
 
         txtIdentificationNum.setPreferredSize(new java.awt.Dimension(75, 25));
+        txtIdentificationNum.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtIdentificationNumMouseClicked(evt);
+            }
+        });
         txtIdentificationNum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdentificationNumActionPerformed(evt);
@@ -401,6 +506,16 @@ public class AddWorkerView extends javax.swing.JPanel {
 
         sltEPS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE UNA ...", "NO POSEE", "ALIANSALUD EPS", "ANAS WAYUU EPSI", "ASMET SALUD", "ASOCIACION INDIGENA DEL CAUCA EPSI", "CAJACOPI ATLANTICO", "CAPRESOCA", "CAPITAL SALUD EPS-S", "COMFACHOCO", "COMFAORIENTE", "COMFENALCO VALLE", "COMPENSAR EPS", "COOSALUD EPS-S", "DUSAKAWI EPSI", "EMS SANITAS", "EMSSANAR E.S.S.", "EPS FAMILIAR DE COLOMBIA", "EPS SANITAS", "EPS SURA", "FAMISANAR", "FONDO DE PASIVO SOCIAL DE FERROCARRILES NACIONALES DE COLOMBIA", "MALLAMAS EPSI", "MUTUAL SER", "NUEVA EPS", "PIJAOS SALUD EPSI", "SALUD BÓLIVAR EPS SAS", "SALUD MIA", "SALUD TOTAL EPS S.A.", "SAVIA SALUD EPS EPSS40", "SERVICIO OCCIDENTAL DE SALUD EPS SOS", "OTRO" }));
         sltEPS.setPreferredSize(new java.awt.Dimension(75, 25));
+        sltEPS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sltEPSMouseClicked(evt);
+            }
+        });
+        sltEPS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sltEPSActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout dataInformation2PanelLayout = new javax.swing.GroupLayout(dataInformation2Panel);
         dataInformation2Panel.setLayout(dataInformation2PanelLayout);
@@ -475,10 +590,6 @@ public class AddWorkerView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFirstLastNameActionPerformed
 
-    private void txtAgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAgeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAgeActionPerformed
-
     private void txtSecondLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSecondLastNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSecondLastNameActionPerformed
@@ -489,6 +600,7 @@ public class AddWorkerView extends javax.swing.JPanel {
 
     private void btnCleanFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanFieldsActionPerformed
         // TODO add your handling code here:
+        clearFields();
     }//GEN-LAST:event_btnCleanFieldsActionPerformed
 
     private void btnSaveWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveWorkerActionPerformed
@@ -501,7 +613,7 @@ public class AddWorkerView extends javax.swing.JPanel {
             String personSecondLastName = checker.removeStringBlanks(txtSecondLastName.getText());//
             String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
             String personIdentificationNumber = checker.removeStringBlanks(txtIdentificationNum.getText());
-            String personAge = checker.removeStringBlanks(txtAge.getText());
+            Date personBirthdate = dateBirthdate.getDate();
             //Worker information
             String bloodType = sltBloodType.getSelectedItem().toString();
             String bloodTypeCmplt = sltBloodTypeCmplt.getSelectedItem().toString();
@@ -513,23 +625,110 @@ public class AddWorkerView extends javax.swing.JPanel {
             
             if(changeColorRequiredField() && changeColorNoRequiredField()){
                 try {
-                    newRequestPerson.savePerson(personFirstName, personSecondName, personFirstLastName, personSecondLastName, personIdentificationType, personIdentificationNumber, personAge);
-                } catch (Exception ex) {
-                    Logger.getLogger(AddWorkerView.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-                try {
+                    newRequestPerson.savePerson(personFirstName, personSecondName, personFirstLastName, personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
                     newRequestWorker.saveWorker(personIdentificationNumber, bloodType, bloodTypeCmplt, healthEntity, dayLink, position);
-                } catch (Exception ex) {
+                    personalizedMessage("Information", "El trabajador ha sido agregado correctamente", "Operación exitosa");
+                    clearFields();
+                    
+                } catch (PreexistingEntityException ex) {
+                    personalizedMessage("Error", "El numero de identificación ya está asociado a alguien.", "Identificación duplicada");
+                    txtIdentificationNum.setBackground(colorRed);
+                }  catch (Exception ex) {
                     Logger.getLogger(AddWorkerView.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                //newRequestWorker.saveWorker(bloodType, bloodTypeCmplt, healthEntity, dayLink, position);
             }else{
                 personalizedMessage("Warning", "Asegurese de que los campos en rojo estén correctamente diligenciados", "Error en Campos");
             }
             
             
     }//GEN-LAST:event_btnSaveWorkerActionPerformed
+
+    private void txtFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFirstNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFirstNameActionPerformed
+
+    private void sltPositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltPositionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sltPositionActionPerformed
+
+    private void sltEPSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltEPSActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sltEPSActionPerformed
+
+    private void sltBloodTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltBloodTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sltBloodTypeActionPerformed
+
+    private void sltBloodTypeCmpltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltBloodTypeCmpltActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sltBloodTypeCmpltActionPerformed
+
+    private void sltIdentificationTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltIdentificationTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sltIdentificationTypeActionPerformed
+
+    private void txtSecondNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSecondNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSecondNameActionPerformed
+
+    private void txtFirstNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFirstNameMouseClicked
+        // TODO add your handling code here:
+        txtFirstName.setBackground(colorWhite);
+    }//GEN-LAST:event_txtFirstNameMouseClicked
+
+    private void txtSecondNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSecondNameMouseClicked
+        // TODO add your handling code here:
+        txtSecondName.setBackground(colorWhite);
+    }//GEN-LAST:event_txtSecondNameMouseClicked
+
+    private void txtFirstLastNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFirstLastNameMouseClicked
+        // TODO add your handling code here:
+        txtFirstLastName.setBackground(colorWhite);
+    }//GEN-LAST:event_txtFirstLastNameMouseClicked
+
+    private void txtSecondLastNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSecondLastNameMouseClicked
+        // TODO add your handling code here:
+        txtSecondLastName.setBackground(colorWhite);
+    }//GEN-LAST:event_txtSecondLastNameMouseClicked
+
+    private void sltIdentificationTypeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sltIdentificationTypeMouseClicked
+        // TODO add your handling code here:
+        sltIdentificationType.setBackground(colorWhite);
+    }//GEN-LAST:event_sltIdentificationTypeMouseClicked
+
+    private void txtIdentificationNumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdentificationNumMouseClicked
+        // TODO add your handling code here:
+        txtIdentificationNum.setBackground(colorWhite);
+    }//GEN-LAST:event_txtIdentificationNumMouseClicked
+
+    private void sltBloodTypeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sltBloodTypeMouseClicked
+        // TODO add your handling code here:
+        sltBloodType.setBackground(colorWhite);
+    }//GEN-LAST:event_sltBloodTypeMouseClicked
+
+    private void sltBloodTypeCmpltMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sltBloodTypeCmpltMouseClicked
+        // TODO add your handling code here:
+        sltBloodTypeCmplt.setBackground(colorWhite);
+    }//GEN-LAST:event_sltBloodTypeCmpltMouseClicked
+
+    private void sltEPSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sltEPSMouseClicked
+        // TODO add your handling code here:
+        sltEPS.setBackground(colorWhite);
+    }//GEN-LAST:event_sltEPSMouseClicked
+
+    private void dateVinculationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateVinculationMouseClicked
+        // TODO add your handling code here:
+        dateVinculation.setBackground(colorWhite);
+    }//GEN-LAST:event_dateVinculationMouseClicked
+
+    private void sltPositionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sltPositionMouseClicked
+        // TODO add your handling code here:
+        sltPosition.setBackground(colorWhite);
+    }//GEN-LAST:event_sltPositionMouseClicked
+
+    private void dateBirthdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateBirthdateMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dateBirthdateMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -538,6 +737,7 @@ public class AddWorkerView extends javax.swing.JPanel {
     private javax.swing.JPanel buttonsPanel;
     private javax.swing.JPanel dataInformation1Panel;
     private javax.swing.JPanel dataInformation2Panel;
+    private com.toedter.calendar.JDateChooser dateBirthdate;
     private com.toedter.calendar.JDateChooser dateVinculation;
     private javax.swing.JPanel information1Panel;
     private javax.swing.JPanel information2Panel;
@@ -559,7 +759,6 @@ public class AddWorkerView extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> sltEPS;
     private javax.swing.JComboBox<String> sltIdentificationType;
     private javax.swing.JComboBox<String> sltPosition;
-    private javax.swing.JTextField txtAge;
     private javax.swing.JTextField txtFirstLastName;
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtIdentificationNum;

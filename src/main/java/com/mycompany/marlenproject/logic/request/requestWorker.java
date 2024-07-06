@@ -23,7 +23,7 @@ public class requestWorker {
         
         String bloodType = workerBloodType.concat(workerBloodTypeCmplt);
         String healthEntity = checker.capitalizedString(workerHealthEntity);
-        Date dayLink = workerDayLink;
+        Date dayLink = new java.sql.Date( workerDayLink.getTime());
         String position = checker.capitalizedString(WorkerPosition);
         Person person = workerPerson;
         

@@ -5,6 +5,7 @@
 package com.mycompany.marlenproject.logic;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 /**
@@ -21,16 +22,16 @@ public class Person implements Serializable {
     private String secondLastName;
     private String identificationType;
     
-    private String age;
+    private Date birthdate;
 
-    public Person(String firstName, String secondName, String firstLastName, String secondLastName, String identificationType, int identificationNumber, String age) {
+    public Person(String firstName, String secondName, String firstLastName, String secondLastName, String identificationType, int identificationNumber, Date birthdate) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.firstLastName = firstLastName;
         this.secondLastName = secondLastName;
         this.identificationType = identificationType;
         this.identificationNumber = identificationNumber;
-        this.age = age;
+        this.birthdate = birthdate;
     }
 
     public Person() {
@@ -84,12 +85,12 @@ public class Person implements Serializable {
         this.identificationNumber = identificationNumber;
     }
 
-    public String getAge() {
-        return age;
+    public Date getBirthdate() {
+        return birthdate;
     }
 
-    public void setAge(String age) {
-        this.age = age;
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
     }
     
 }
