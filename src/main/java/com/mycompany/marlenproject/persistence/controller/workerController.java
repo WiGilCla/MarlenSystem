@@ -6,6 +6,7 @@ package com.mycompany.marlenproject.persistence.controller;
 
 import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.persistence.WorkerJpaController;
+import java.util.List;
 
 /**
  *
@@ -17,4 +18,7 @@ public class workerController {
          workerJpa.create(newWorker);
     }
     
+    public List<Worker> getWorkersPersis(){
+        return workerJpa.findWorkerEntities();
+    }
 }

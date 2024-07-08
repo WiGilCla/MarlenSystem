@@ -4,17 +4,51 @@
  */
 package com.mycompany.marlenproject.userinterface.panelViews.workersSection;
 
+import com.mycompany.marlenproject.logic.CheckFields;
+import com.mycompany.marlenproject.logic.Worker;
+import com.mycompany.marlenproject.logic.request.requestWorker;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
+
 /**
  *
  * @author willy
  */
 public class WorkersInformationView extends javax.swing.JPanel {
+    private final List<Worker> workers = new requestWorker().getWorkers();
+    private final CheckFields checker = new CheckFields();
+    private int workerViewing = 0;
+    
 
-    /**
-     * Creates new form SecondWorkersView
-     */
+    private void viewWorkerInformation(int index){
+        Worker worker = workers.get(index);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        
+        
+        txtFirstName.setText(worker.getPersonId().getFirstName());
+        txtSecondName.setText(worker.getPersonId().getSecondName());
+        txtFirstLastName.setText(worker.getPersonId().getFirstLastName());
+        txtSecondLastName.setText(worker.getPersonId().getSecondLastName());
+        txtIdentificationType.setText(worker.getPersonId().getIdentificationType());
+        txtIdentificationNum.setText(String.valueOf(worker.getPersonId().getIdentificationNumber()));
+        txtBloodType.setText(worker.getBloodType());
+        txtEps.setText(worker.getHealthEntity());
+        txtAge.setText(String.valueOf(checker.timeElapsed(worker.getPersonId().getBirthdate(), new Date())));
+        txtDateVinculation.setText(sdf.format(worker.getDayLink()));
+        txtPosition.setText(worker.getPosition());
+    }
+    
     public WorkersInformationView() {
         initComponents();
+        viewWorkerInformation(workerViewing);
     }
 
     /**
@@ -75,9 +109,19 @@ public class WorkersInformationView extends javax.swing.JPanel {
 
         btnNextWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconNext.png"))); // NOI18N
         btnNextWorker.setPreferredSize(new java.awt.Dimension(38, 38));
+        btnNextWorker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextWorkerActionPerformed(evt);
+            }
+        });
 
         btnPreviousWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconPrevious.png"))); // NOI18N
         btnPreviousWorker.setPreferredSize(new java.awt.Dimension(38, 38));
+        btnPreviousWorker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreviousWorkerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout buttonsPanelLayout = new javax.swing.GroupLayout(buttonsPanel);
         buttonsPanel.setLayout(buttonsPanelLayout);
@@ -420,6 +464,23 @@ public class WorkersInformationView extends javax.swing.JPanel {
     private void txtPositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPositionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPositionActionPerformed
+
+    private void btnNextWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextWorkerActionPerformed
+        // TODO add your handling code here:
+        if(workerViewing < workers.size()-1){
+            workerViewing++;
+            viewWorkerInformation(workerViewing);
+        }
+        
+    }//GEN-LAST:event_btnNextWorkerActionPerformed
+
+    private void btnPreviousWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousWorkerActionPerformed
+        // TODO add your handling code here:
+        if(workerViewing > 0){
+            workerViewing--;
+            viewWorkerInformation(workerViewing);
+        }
+    }//GEN-LAST:event_btnPreviousWorkerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

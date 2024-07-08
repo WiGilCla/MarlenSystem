@@ -5,6 +5,8 @@
 package com.mycompany.marlenproject.logic;
 
 import java.io.Serializable;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -22,7 +24,7 @@ public class Person implements Serializable {
     private String secondLastName;
     private String identificationType;
     
-    private Date birthdate;
+    private Date  birthdate;
 
     public Person(String firstName, String secondName, String firstLastName, String secondLastName, String identificationType, int identificationNumber, Date birthdate) {
         this.firstName = firstName;

@@ -4,7 +4,12 @@
  */
 package com.mycompany.marlenproject.logic;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  *
@@ -37,5 +42,15 @@ public class CheckFields {
             return firstLetter + otherLetter;
         }
         return text;
+    }
+    
+    public int timeElapsed(Date oldDate, Date laterDate){
+        long tiempoTranscurridoMillis = laterDate.getTime() - oldDate.getTime();
+        long segundosTranscurridos = tiempoTranscurridoMillis / 1000;
+        long minutosTranscurridos = segundosTranscurridos / 60;
+        long horasTranscurridas = minutosTranscurridos / 60;
+        long diasTranscurridos = horasTranscurridas / 24;
+        long añosTranscurridos = diasTranscurridos / 365;
+        return (int) añosTranscurridos;
     }
 }

@@ -346,7 +346,8 @@ public class AddWorkerView extends javax.swing.JPanel {
             }
         });
 
-        dateBirthdate.setDateFormatString("y/MM/d");
+        dateBirthdate.setDateFormatString("dd/MM/yyyy");
+        dateBirthdate.setMaxSelectableDate(new Date());
         dateBirthdate.setPreferredSize(new java.awt.Dimension(75, 25));
         dateBirthdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -484,7 +485,7 @@ public class AddWorkerView extends javax.swing.JPanel {
             }
         });
 
-        dateVinculation.setDateFormatString("y/MM/d");
+        dateVinculation.setDateFormatString("dd/MM/yyyy");
         dateVinculation.setPreferredSize(new java.awt.Dimension(75, 25));
         dateVinculation.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

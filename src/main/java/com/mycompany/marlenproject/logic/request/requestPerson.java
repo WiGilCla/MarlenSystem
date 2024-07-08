@@ -7,6 +7,8 @@ package com.mycompany.marlenproject.logic.request;
 import com.mycompany.marlenproject.logic.CheckFields;
 import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.persistence.controller.personController;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -18,8 +20,16 @@ public class requestPerson {
     private final CheckFields checker = new CheckFields();
     
     public void savePerson(String personFirstName, String personSecondName, 
-            String personFirstLastName, String personSecondLastName, String personIdentificationType, 
-            String personIdentificationNumber, Date birthdate) throws Exception{
+        String personFirstLastName, String personSecondLastName, String personIdentificationType, 
+        String personIdentificationNumber, Date personBirthdate) throws Exception{
+        
+        System.out.println("Nombre persona: ".concat(personFirstName));
+        System.out.println("Segundo Nombre persona: ".concat(personSecondName));
+        System.out.println("Apellido persona: ".concat(personFirstLastName));
+        System.out.println("Segundo Apellido persona: ".concat(personSecondLastName));
+        System.out.println("Tipo identificación persona: ".concat(personIdentificationType));
+        System.out.println("Numero identificación persona: ".concat(personIdentificationNumber));
+        System.out.println("Nacimiento persona: ".concat(String.valueOf(personBirthdate.toString())));
         
         String firstName = checker.capitalizedString(personFirstName);
         String secondName = (personSecondName.isEmpty())? null:checker.capitalizedString(personSecondName);
@@ -27,17 +37,10 @@ public class requestPerson {
         String secondLastName = (personSecondLastName.isEmpty())? null:checker.capitalizedString(personSecondLastName);
         String identificationType = checker.capitalizedString(personIdentificationType);
         int identificationNumber = Integer.parseInt( personIdentificationNumber);
-        Date age = new java.sql.Date(birthdate.getTime()) ;
         
-        System.out.println(firstName);
-        System.out.println(secondName);
-        System.out.println(firstLastName);
-        System.out.println(secondLastName);
-        System.out.println(identificationType);
-        System.out.println(identificationNumber);
-        System.out.println(age);
+        Timestamp birthdate = new Timestamp(personBirthdate.getTime());
         
-        Person newPerson = new Person(firstName, secondName, firstLastName, secondLastName, identificationType, identificationNumber, age);
+        Person newPerson = new Person(firstName, secondName, firstLastName, secondLastName, identificationType, identificationNumber, birthdate);
         
         PersonController.savePersonPersis(newPerson);
     }

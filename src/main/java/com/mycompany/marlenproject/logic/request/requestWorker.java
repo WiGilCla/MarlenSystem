@@ -8,7 +8,9 @@ import com.mycompany.marlenproject.logic.CheckFields;
 import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.persistence.controller.workerController;
+import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -17,23 +19,33 @@ import java.util.Date;
 public class requestWorker {
     private final workerController WorkerController = new workerController();
     private final CheckFields checker = new CheckFields();
+    
     public void saveWorker(String personId, String workerBloodType, String workerBloodTypeCmplt, String workerHealthEntity, Date workerDayLink, String WorkerPosition) throws Exception{
         Person workerPerson = new Person();
         workerPerson.setIdentificationNumber(Integer.parseInt(personId));
         
+        System.out.println("Tipo sangre trabajador: ".concat(workerBloodType).concat(workerBloodTypeCmplt));
+        System.out.println("Tipo Eps: ".concat(workerHealthEntity));
+        System.out.println("Dia vinculación: ".concat(workerDayLink.toString()));
+        System.out.println("Dia vinculación casteado: ".concat(workerDayLink.toString()));
+        System.out.println("Posición: ".concat(WorkerPosition));
+        
         String bloodType = workerBloodType.concat(workerBloodTypeCmplt);
         String healthEntity = checker.capitalizedString(workerHealthEntity);
-        Date dayLink = new java.sql.Date( workerDayLink.getTime());
+        Timestamp dayLink = new Timestamp( workerDayLink.getTime());
         String position = checker.capitalizedString(WorkerPosition);
         Person person = workerPerson;
         
-        System.out.println(bloodType);
-        System.out.println(healthEntity);
-        System.out.println(dayLink);
-        System.out.println(position);
+        
+        
+        
         
         Worker newWorker = new Worker(bloodType, healthEntity, dayLink, position,person);
         WorkerController.saveWorkerPersis(newWorker);
         
+    }
+    
+    public List<Worker> getWorkers(){
+        return WorkerController.getWorkersPersis();
     }
 }
