@@ -13,6 +13,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -136,6 +137,23 @@ public class WorkerJpaController implements Serializable {
         } finally {
             em.close();
         }
+    }
+    
+    public List<Worker> getActiveWorker(){
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            TypedQuery<Worker> query = em.createQuery(
+                "SELECT w FROM Worker w WHERE w.state = true", Worker.class);
+            return query.getResultList();
+        } catch (Exception e) {
+            return null;
+        }finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        
     }
     
 }

@@ -4,7 +4,11 @@
  */
 package com.mycompany.marlenproject.userinterface.panelViews.workersSection;
 
+import com.mycompany.marlenproject.logic.Worker;
+import com.mycompany.marlenproject.logic.request.requestWorker;
 import com.mycompany.marlenproject.userinterface.AdminHome;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -118,10 +122,17 @@ public class WorkersFirstView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddNewWorkerActionPerformed
 
     private void btnListWorkersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListWorkersActionPerformed
-        WorkersInformationView workersInformationView = new WorkersInformationView();
-        workersInformationView.setSize(800, 500);
-        workersInformationView.setLocation(0, 0);
-        adminHome.replacePanel(workersInformationView);
+        List<Worker> workers = new requestWorker().getActiveWorkers();
+        
+        if(!workers.isEmpty()){
+            WorkersInformationView workersInformationView = new WorkersInformationView(this.adminHome,workers );
+            workersInformationView.setSize(800, 500);
+            workersInformationView.setLocation(0, 0);
+            adminHome.replacePanel(workersInformationView);
+        }else{
+            JOptionPane.showMessageDialog(adminHome, "No tiene trabajadores registrados", "Sin registros", 0);
+        }
+        
     }//GEN-LAST:event_btnListWorkersActionPerformed
 
 

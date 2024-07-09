@@ -35,7 +35,7 @@ public class requestWorker {
     }
     
     public List<Worker> getWorkers(){
-        return WorkerController.getWorkersPersis();
+        return WorkerController.getWorkerPersis();
     }
     
     public void editWorkerInformation(int workerId,String personId, String workerBloodType, String workerBloodTypeCmplt, String workerHealthEntity, Date workerDayLink, String WorkerPosition, boolean workerState) throws Exception{
@@ -52,5 +52,9 @@ public class requestWorker {
         Worker newWorker = new Worker(bloodType, healthEntity, dayLink, position,state,person);
         newWorker.setWorkerId(workerId);
         WorkerController.editWorkerPersis(newWorker);    
+    }
+    
+    public List<Worker> getActiveWorkers(){
+        return WorkerController.getActiveWorkerPersis();
     }
 }

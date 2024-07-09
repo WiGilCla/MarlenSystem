@@ -18,11 +18,15 @@ public class workerController {
          workerJpa.create(newWorker);
     }
     
-    public List<Worker> getWorkersPersis(){
+    public List<Worker> getWorkerPersis(){
         return workerJpa.findWorkerEntities();
     }
     
     public void editWorkerPersis(Worker newWorker) throws Exception{
         workerJpa.edit(newWorker);
+    }
+    
+    public List<Worker> getActiveWorkerPersis(){
+       return workerJpa.getActiveWorker();
     }
 }

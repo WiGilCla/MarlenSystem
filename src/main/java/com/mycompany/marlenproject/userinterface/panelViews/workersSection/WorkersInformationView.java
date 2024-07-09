@@ -8,6 +8,7 @@ import com.mycompany.marlenproject.logic.CheckFields;
 import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.logic.request.requestWorker;
+import com.mycompany.marlenproject.userinterface.AdminHome;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,6 +17,7 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.OneToOne;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,9 +25,12 @@ import javax.persistence.OneToOne;
  */
 public class WorkersInformationView extends javax.swing.JPanel {
     private final requestWorker RequestWorker = new requestWorker();
-    private final List<Worker> workers = new requestWorker().getWorkers();
+    //private final List<Worker> workers = new requestWorker().getWorkers();
+    private final List<Worker> workers;
     private final CheckFields checker = new CheckFields();
     private int workerViewing = 0;
+    
+    private AdminHome adminHome; 
     
 
     private void viewWorkerInformation(int index){
@@ -46,9 +51,11 @@ public class WorkersInformationView extends javax.swing.JPanel {
         txtPosition.setText(worker.getPosition());
     }
     
-    public WorkersInformationView() {
+    public WorkersInformationView(AdminHome newPanel, List<Worker> listWorker) {
+        this.workers = listWorker;
         initComponents();
         viewWorkerInformation(workerViewing);
+        this.adminHome = newPanel;
     }
 
     /**
@@ -501,6 +508,19 @@ public class WorkersInformationView extends javax.swing.JPanel {
             RequestWorker.editWorkerInformation(workers.get(workerViewing).getWorkerId(), 
                     String.valueOf(person.getIdentificationNumber()), bloodType, 
                     bloodTypeCmpl, healthEntity, dayLink, position, state);
+            
+            workers.remove(workerViewing);
+            if(!workers.isEmpty() && workerViewing != 0){
+                workerViewing --;
+            }else if (workers.isEmpty()){
+                JOptionPane.showMessageDialog(adminHome, "No tiene trabajadores registrados", "Sin registros", 0);
+                WorkersFirstView workersFirstView  = new WorkersFirstView(this.adminHome);
+                workersFirstView.setSize(800, 500);
+                workersFirstView.setLocation(0, 0);
+                adminHome.replacePanel(workersFirstView);
+                return;
+            }
+            viewWorkerInformation(workerViewing);
         } catch (Exception ex) {
             Logger.getLogger(WorkersInformationView.class.getName()).log(Level.SEVERE, null, ex);
         }
