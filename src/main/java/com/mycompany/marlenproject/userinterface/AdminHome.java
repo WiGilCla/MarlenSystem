@@ -5,11 +5,8 @@
 package com.mycompany.marlenproject.userinterface;
 
 import com.mycompany.marlenproject.userinterface.panelViews.workersSection.WorkersFirstView;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 
 /**
  *
@@ -23,6 +20,7 @@ public class AdminHome extends javax.swing.JFrame {
     public AdminHome() {
         initComponents();
         setTitle("Administrador");
+        setLocationRelativeTo(null);
     }
     
     

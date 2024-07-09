@@ -7,7 +7,6 @@ package com.mycompany.marlenproject.logic.request;
 import com.mycompany.marlenproject.logic.CheckFields;
 import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.persistence.controller.personController;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Date;
 

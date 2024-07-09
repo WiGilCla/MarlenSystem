@@ -5,8 +5,6 @@
 package com.mycompany.marlenproject.logic;
 
 import java.io.Serializable;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;

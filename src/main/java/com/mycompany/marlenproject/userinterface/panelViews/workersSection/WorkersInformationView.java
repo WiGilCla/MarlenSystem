@@ -8,15 +8,9 @@ import com.mycompany.marlenproject.logic.CheckFields;
 import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.logic.request.requestWorker;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 /**
  *
