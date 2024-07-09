@@ -114,6 +114,9 @@
               <Dimension value="[180, 60]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditWorkerActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnNextWorker">
           <Properties>

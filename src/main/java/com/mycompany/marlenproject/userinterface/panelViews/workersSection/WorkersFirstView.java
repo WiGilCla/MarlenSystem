@@ -125,7 +125,7 @@ public class WorkersFirstView extends javax.swing.JPanel {
         List<Worker> workers = new requestWorker().getActiveWorkers();
         
         if(!workers.isEmpty()){
-            WorkersInformationView workersInformationView = new WorkersInformationView(this.adminHome,workers );
+            WorkersInformationView workersInformationView = new WorkersInformationView(this.adminHome,workers, 0);
             workersInformationView.setSize(800, 500);
             workersInformationView.setLocation(0, 0);
             adminHome.replacePanel(workersInformationView);

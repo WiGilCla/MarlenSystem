@@ -51,8 +51,9 @@ public class WorkersInformationView extends javax.swing.JPanel {
         txtPosition.setText(worker.getPosition());
     }
     
-    public WorkersInformationView(AdminHome newPanel, List<Worker> listWorker) {
+    public WorkersInformationView(AdminHome newPanel, List<Worker> listWorker, int index) {
         this.workers = listWorker;
+        this.workerViewing = index;
         initComponents();
         viewWorkerInformation(workerViewing);
         this.adminHome = newPanel;
@@ -118,6 +119,11 @@ public class WorkersInformationView extends javax.swing.JPanel {
         btnEditWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconEdit.png"))); // NOI18N
         btnEditWorker.setText("Editar información");
         btnEditWorker.setPreferredSize(new java.awt.Dimension(180, 60));
+        btnEditWorker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditWorkerActionPerformed(evt);
+            }
+        });
 
         btnNextWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconNext.png"))); // NOI18N
         btnNextWorker.setPreferredSize(new java.awt.Dimension(38, 38));
@@ -527,6 +533,13 @@ public class WorkersInformationView extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_btnDeleteWorkerActionPerformed
+
+    private void btnEditWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditWorkerActionPerformed
+        // TODO add your handling code here:
+        WorkerEditInformationView workerEditInformation = new WorkerEditInformationView(workers.get(workerViewing));
+        workerEditInformation.setSize(800, 500);
+        workerEditInformation.setVisible(true);
+    }//GEN-LAST:event_btnEditWorkerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
