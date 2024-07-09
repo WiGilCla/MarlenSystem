@@ -21,15 +21,7 @@ public class requestPerson {
     public void savePerson(String personFirstName, String personSecondName, 
         String personFirstLastName, String personSecondLastName, String personIdentificationType, 
         String personIdentificationNumber, Date personBirthdate) throws Exception{
-        
-        System.out.println("Nombre persona: ".concat(personFirstName));
-        System.out.println("Segundo Nombre persona: ".concat(personSecondName));
-        System.out.println("Apellido persona: ".concat(personFirstLastName));
-        System.out.println("Segundo Apellido persona: ".concat(personSecondLastName));
-        System.out.println("Tipo identificación persona: ".concat(personIdentificationType));
-        System.out.println("Numero identificación persona: ".concat(personIdentificationNumber));
-        System.out.println("Nacimiento persona: ".concat(String.valueOf(personBirthdate.toString())));
-        
+
         String firstName = checker.capitalizedString(personFirstName);
         String secondName = (personSecondName.isEmpty())? null:checker.capitalizedString(personSecondName);
         String firstLastName = checker.capitalizedString(personFirstLastName);

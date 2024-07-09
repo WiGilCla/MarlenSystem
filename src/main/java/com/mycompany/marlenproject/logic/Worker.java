@@ -26,21 +26,21 @@ public class Worker implements Serializable{
     private String healthEntity;
     private Date dayLink;
     private String position;
+    private boolean state;
     @OneToOne
     private Person person;
 
-    public Worker(String bloodType, String healthEntity, Date dayLink, String position, Person person) {
+    public Worker(String bloodType, String healthEntity, Date dayLink, String position,boolean state, Person person) {
         this.bloodType = bloodType;
         this.healthEntity = healthEntity;
         this.dayLink = dayLink;
         this.position = position;
         this.person = person;
+        this.state = state;
     }
 
     public Worker() {
     }
-    
-    
     
     public int getWorkerId() {
         return workerId;
@@ -48,14 +48,6 @@ public class Worker implements Serializable{
 
     public void setWorkerId(int workerId) {
         this.workerId = workerId;
-    }
-
-    public Person getPersonId() {
-        return person;
-    }
-
-    public void setPersonId(Person person) {
-        this.person = person;
     }
 
     public String getBloodType() {
@@ -89,4 +81,22 @@ public class Worker implements Serializable{
     public void setPosition(String position) {
         this.position = position;
     }
+
+    public boolean isState() {
+        return state;
+    }
+
+    public void setState(boolean state) {
+        this.state = state;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+    
+    
 }

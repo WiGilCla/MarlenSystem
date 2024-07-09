@@ -24,25 +24,14 @@ public class requestWorker {
         Person workerPerson = new Person();
         workerPerson.setIdentificationNumber(Integer.parseInt(personId));
         
-        System.out.println("Tipo sangre trabajador: ".concat(workerBloodType).concat(workerBloodTypeCmplt));
-        System.out.println("Tipo Eps: ".concat(workerHealthEntity));
-        System.out.println("Dia vinculación: ".concat(workerDayLink.toString()));
-        System.out.println("Dia vinculación casteado: ".concat(workerDayLink.toString()));
-        System.out.println("Posición: ".concat(WorkerPosition));
-        
         String bloodType = workerBloodType.concat(workerBloodTypeCmplt);
         String healthEntity = checker.capitalizedString(workerHealthEntity);
         Timestamp dayLink = new Timestamp( workerDayLink.getTime());
         String position = checker.capitalizedString(WorkerPosition);
         Person person = workerPerson;
-        
-        
-        
-        
-        
-        Worker newWorker = new Worker(bloodType, healthEntity, dayLink, position,person);
-        WorkerController.saveWorkerPersis(newWorker);
-        
+
+        Worker newWorker = new Worker(bloodType, healthEntity, dayLink, position,true,person);
+        WorkerController.saveWorkerPersis(newWorker);    
     }
     
     public List<Worker> getWorkers(){

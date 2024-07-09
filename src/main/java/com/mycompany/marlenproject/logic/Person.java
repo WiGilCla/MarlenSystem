@@ -21,7 +21,6 @@ public class Person implements Serializable {
     private String firstLastName;
     private String secondLastName;
     private String identificationType;
-    
     private Date  birthdate;
 
     public Person(String firstName, String secondName, String firstLastName, String secondLastName, String identificationType, int identificationNumber, Date birthdate) {
@@ -92,5 +91,5 @@ public class Person implements Serializable {
     public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
     }
-    
+
 }

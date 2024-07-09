@@ -27,15 +27,15 @@ public class WorkersInformationView extends javax.swing.JPanel {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         
         
-        txtFirstName.setText(worker.getPersonId().getFirstName());
-        txtSecondName.setText(worker.getPersonId().getSecondName());
-        txtFirstLastName.setText(worker.getPersonId().getFirstLastName());
-        txtSecondLastName.setText(worker.getPersonId().getSecondLastName());
-        txtIdentificationType.setText(worker.getPersonId().getIdentificationType());
-        txtIdentificationNum.setText(String.valueOf(worker.getPersonId().getIdentificationNumber()));
+        txtFirstName.setText(worker.getPerson().getFirstName());
+        txtSecondName.setText(worker.getPerson().getSecondName());
+        txtFirstLastName.setText(worker.getPerson().getFirstLastName());
+        txtSecondLastName.setText(worker.getPerson().getSecondLastName());
+        txtIdentificationType.setText(worker.getPerson().getIdentificationType());
+        txtIdentificationNum.setText(String.valueOf(worker.getPerson().getIdentificationNumber()));
         txtBloodType.setText(worker.getBloodType());
         txtEps.setText(worker.getHealthEntity());
-        txtAge.setText(String.valueOf(checker.timeElapsed(worker.getPersonId().getBirthdate(), new Date())));
+        txtAge.setText(String.valueOf(checker.timeElapsed(worker.getPerson().getBirthdate(), new Date())));
         txtDateVinculation.setText(sdf.format(worker.getDayLink()));
         txtPosition.setText(worker.getPosition());
     }
@@ -96,6 +96,11 @@ public class WorkersInformationView extends javax.swing.JPanel {
         btnDeleteWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconTrash.png"))); // NOI18N
         btnDeleteWorker.setText("Eliminar trabajador");
         btnDeleteWorker.setPreferredSize(new java.awt.Dimension(180, 60));
+        btnDeleteWorker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteWorkerActionPerformed(evt);
+            }
+        });
 
         btnEditWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconEdit.png"))); // NOI18N
         btnEditWorker.setText("Editar información");
@@ -475,6 +480,11 @@ public class WorkersInformationView extends javax.swing.JPanel {
             viewWorkerInformation(workerViewing);
         }
     }//GEN-LAST:event_btnPreviousWorkerActionPerformed
+
+    private void btnDeleteWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteWorkerActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnDeleteWorkerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
