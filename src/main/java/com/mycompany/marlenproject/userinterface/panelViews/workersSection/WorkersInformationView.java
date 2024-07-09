@@ -5,18 +5,24 @@
 package com.mycompany.marlenproject.userinterface.panelViews.workersSection;
 
 import com.mycompany.marlenproject.logic.CheckFields;
+import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.logic.request.requestWorker;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author willy
  */
 public class WorkersInformationView extends javax.swing.JPanel {
+    private final requestWorker RequestWorker = new requestWorker();
     private final List<Worker> workers = new requestWorker().getWorkers();
     private final CheckFields checker = new CheckFields();
     private int workerViewing = 0;
@@ -482,7 +488,23 @@ public class WorkersInformationView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnPreviousWorkerActionPerformed
 
     private void btnDeleteWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteWorkerActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            String bloodType = workers.get(workerViewing).getBloodType();
+            String bloodTypeCmpl = "";
+            String healthEntity = workers.get(workerViewing).getHealthEntity();
+            Timestamp dayLink = new Timestamp(workers.get(workerViewing).getDayLink().getTime());
+            String position = workers.get(workerViewing).getPosition();
+            boolean state = false;
+            Person person = workers.get(workerViewing).getPerson();
+            
+            RequestWorker.editWorkerInformation(workers.get(workerViewing).getWorkerId(), 
+                    String.valueOf(person.getIdentificationNumber()), bloodType, 
+                    bloodTypeCmpl, healthEntity, dayLink, position, state);
+        } catch (Exception ex) {
+            Logger.getLogger(WorkersInformationView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
     }//GEN-LAST:event_btnDeleteWorkerActionPerformed
 

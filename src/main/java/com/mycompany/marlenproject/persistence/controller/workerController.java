@@ -21,4 +21,8 @@ public class workerController {
     public List<Worker> getWorkersPersis(){
         return workerJpa.findWorkerEntities();
     }
+    
+    public void editWorkerPersis(Worker newWorker) throws Exception{
+        workerJpa.edit(newWorker);
+    }
 }

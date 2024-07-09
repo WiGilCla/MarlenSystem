@@ -37,4 +37,20 @@ public class requestWorker {
     public List<Worker> getWorkers(){
         return WorkerController.getWorkersPersis();
     }
+    
+    public void editWorkerInformation(int workerId,String personId, String workerBloodType, String workerBloodTypeCmplt, String workerHealthEntity, Date workerDayLink, String WorkerPosition, boolean workerState) throws Exception{
+        Person workerPerson = new Person();
+        workerPerson.setIdentificationNumber(Integer.parseInt(personId));
+        
+        String bloodType = workerBloodType.concat(workerBloodTypeCmplt);
+        String healthEntity = checker.capitalizedString(workerHealthEntity);
+        Timestamp dayLink = new Timestamp( workerDayLink.getTime());
+        String position = checker.capitalizedString(WorkerPosition);
+        boolean state = workerState;
+        Person person = workerPerson;
+
+        Worker newWorker = new Worker(bloodType, healthEntity, dayLink, position,state,person);
+        newWorker.setWorkerId(workerId);
+        WorkerController.editWorkerPersis(newWorker);    
+    }
 }
