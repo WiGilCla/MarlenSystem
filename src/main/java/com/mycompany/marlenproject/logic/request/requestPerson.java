@@ -36,4 +36,20 @@ public class requestPerson {
         PersonController.savePersonPersis(newPerson);
     }
     
+    public void editPerson(String personIdentificationNumber, String personFirstName, String personSecondName, 
+            String personFirstLastName, String personSecondLastName, String personIdentificationType, Date personBirthdate) throws Exception{
+        
+        String firstName = checker.capitalizedString(personFirstName);
+        String secondName = (personSecondName.isEmpty())? null:checker.capitalizedString(personSecondName);
+        String firstLastName = checker.capitalizedString(personFirstLastName);
+        String secondLastName = (personSecondLastName.isEmpty())? null:checker.capitalizedString(personSecondLastName);
+        String identificationType = checker.capitalizedString(personIdentificationType);
+        int identificationNumber = Integer.parseInt( personIdentificationNumber);
+        Timestamp birthdate = new Timestamp(personBirthdate.getTime());
+        
+        Person newPerson = new Person(firstName, secondName, firstLastName, secondLastName, identificationType, identificationNumber, birthdate);
+        
+        PersonController.editPersonPersis(newPerson);
+    }
+    
 }

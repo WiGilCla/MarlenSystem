@@ -16,4 +16,8 @@ public class personController {
     public void savePersonPersis(Person newPersona) throws Exception{
          personJpa.create(newPersona);
     }
+    
+    public void editPersonPersis(Person newPersona) throws Exception{
+        personJpa.edit(newPersona);
+    }
 }

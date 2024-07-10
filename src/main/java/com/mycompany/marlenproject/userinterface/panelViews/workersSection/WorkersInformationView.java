@@ -511,7 +511,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
             boolean state = false;
             Person person = workers.get(workerViewing).getPerson();
             
-            RequestWorker.editWorkerInformation(workers.get(workerViewing).getWorkerId(), 
+            RequestWorker.editWorker(workers.get(workerViewing).getWorkerId(), 
                     String.valueOf(person.getIdentificationNumber()), bloodType, 
                     bloodTypeCmpl, healthEntity, dayLink, position, state);
             

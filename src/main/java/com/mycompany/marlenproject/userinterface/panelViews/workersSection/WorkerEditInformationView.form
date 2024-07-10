@@ -390,14 +390,15 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="lbSecondLastName" pref="0" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lbSecondLastName" alignment="1" pref="0" max="32767" attributes="0"/>
                               <Component id="lbIdentificationNumber" alignment="0" pref="0" max="32767" attributes="0"/>
                               <Component id="lbHealthEntity" alignment="0" pref="0" max="32767" attributes="0"/>
                               <Component id="lbDayLink" alignment="0" pref="0" max="32767" attributes="0"/>
                               <Component id="lbSecondName" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="lbState" alignment="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -416,6 +417,8 @@
                           <Component id="lbHealthEntity" min="-2" pref="24" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                           <Component id="lbDayLink" min="-2" pref="24" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="lbState" min="-2" pref="24" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -477,6 +480,17 @@
                     </Property>
                   </Properties>
                 </Component>
+                <Component class="javax.swing.JLabel" name="lbState">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Yu Gothic UI" size="12" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Estado de trabajador:"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[176, 25]"/>
+                    </Property>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="jPanel3">
@@ -491,12 +505,13 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="sltHealthEntity" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtIdentificationNumber" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtSecondLastName" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtSecondName" alignment="0" max="32767" attributes="0"/>
-                              <Component id="dateDayLink" max="32767" attributes="0"/>
+                              <Component id="dateDayLink" alignment="1" max="32767" attributes="0"/>
+                              <Component id="sltState" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -515,6 +530,8 @@
                           <Component id="sltHealthEntity" min="-2" pref="24" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                           <Component id="dateDayLink" min="-2" pref="24" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="sltState" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -562,6 +579,19 @@
                     </Property>
                   </Properties>
                 </Component>
+                <Component class="javax.swing.JComboBox" name="sltState">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(comboBoxOptions.getStateOptions())" type="code"/>
+                    </Property>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[176, 25]"/>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
+                </Component>
               </SubComponents>
             </Container>
           </SubComponents>
@@ -578,11 +608,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace pref="73" max="32767" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnClean" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnSave" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -592,9 +622,9 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jButton1" alignment="2" max="32767" attributes="0"/>
-                          <Component id="jButton2" alignment="2" max="32767" attributes="0"/>
-                          <Component id="jButton3" alignment="2" max="32767" attributes="0"/>
+                          <Component id="btnCancel" alignment="2" max="32767" attributes="0"/>
+                          <Component id="btnClean" alignment="2" max="32767" attributes="0"/>
+                          <Component id="btnSave" alignment="2" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
@@ -602,7 +632,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="btnCancel">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Images/iconCancel.png"/>
@@ -613,7 +643,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton2">
+            <Component class="javax.swing.JButton" name="btnClean">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Images/iconDelete.png"/>
@@ -623,8 +653,11 @@
                   <Dimension value="[180, 60]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCleanActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton3">
+            <Component class="javax.swing.JButton" name="btnSave">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Images/iconSave.png"/>
@@ -634,6 +667,9 @@
                   <Dimension value="[180, 60]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

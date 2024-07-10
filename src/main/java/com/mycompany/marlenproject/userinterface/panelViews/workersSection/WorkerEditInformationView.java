@@ -4,8 +4,16 @@
  */
 package com.mycompany.marlenproject.userinterface.panelViews.workersSection;
 
+import com.mycompany.marlenproject.logic.CheckFields;
 import com.mycompany.marlenproject.logic.Worker;
+import com.mycompany.marlenproject.logic.request.requestPerson;
+import com.mycompany.marlenproject.logic.request.requestWorker;
+import com.mycompany.marlenproject.persistence.exceptions.PreexistingEntityException;
+import java.awt.Color;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,6 +22,11 @@ import java.util.Date;
 public class WorkerEditInformationView extends javax.swing.JFrame {
     private final ComboBoxWorkerOptions comboBoxOptions = new ComboBoxWorkerOptions();
     private final Worker worker;
+    private final requestPerson newRequestPerson = new requestPerson();
+    private final requestWorker newRequestWorker = new requestWorker();
+    private final CheckFields checker = new CheckFields();
+    private final Color colorRed = new Color(255,0,0);
+    private final Color colorWhite = new Color(255,255,255);
 
     private void setActualInformation(){
         String bloodGroup = (worker.getBloodType().length() == 3)? 
@@ -51,7 +64,112 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         
         sltPosition.setSelectedIndex(comboBoxOptions
                 .findIndexSelected(comboBoxOptions.getPositionOptions(), worker.getPosition()));
+        sltState.setSelectedIndex(worker.isState()? 1:0);
+        System.out.println("Stado: "+ worker.isState());
     }
+    
+    private boolean changeColorRequiredField(){
+        String personFirstName = checker.removeStringBlanks(txtFirstName.getText()); 
+        String personFirstLastName = checker.removeStringBlanks(txtFirstLastName.getText());
+        String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
+        String personIdentificationNumber = checker.removeStringBlanks(txtIdentificationNumber.getText());
+        //Worker information
+        String bloodType = sltBloodType.getSelectedItem().toString();
+        String bloodTypeCmplt = sltBloodTypeCmpl.getSelectedItem().toString();
+        String healthEntity = sltHealthEntity.getSelectedItem().toString();
+        String position = sltPosition.getSelectedItem().toString();
+        
+        if(!checker.checkStringField(personFirstName)){
+            txtFirstName.setBackground(colorRed);
+            return false;
+        }
+        if(!checker.checkStringField(personFirstLastName)){
+            txtFirstLastName.setBackground(colorRed);
+             return false;
+        }
+        if(!checker.checkComboBox(personIdentificationType)){
+            sltIdentificationType.setBackground(colorRed);
+            return false;
+        }
+        if(!checker.checkNumberField(personIdentificationNumber) 
+                || !(personIdentificationNumber.length() <= 10  
+                && personIdentificationNumber.length() >= 8)){
+            txtIdentificationNumber.setBackground(colorRed);
+            return false;
+        }
+        if(!checker.checkComboBox(bloodType)){
+            sltBloodType.setBackground(colorRed);
+            return false;
+        }
+        if(!checker.checkComboBox(bloodTypeCmplt)){
+            sltBloodTypeCmpl.setBackground(colorRed);
+            return false;
+        }
+        if(!checker.checkComboBox(healthEntity)){
+            sltHealthEntity.setBackground(colorRed);
+            return false;
+        }
+        if(null == dateBirthdate.getDate()){
+            dateBirthdate.setBackground(colorRed);
+            return false;
+        }
+        if(null == dateDayLink.getDate()){
+            dateDayLink.setBackground(colorRed);
+            return false;
+        }
+        if(!checker.checkComboBox(position)){
+            sltPosition.setBackground(colorRed);
+            return false;
+        }
+        
+        return true;
+    }
+    
+    private boolean changeColorNoRequiredField(){
+        String personSecondName = checker.removeStringBlanks(txtSecondName.getText()); 
+        String personSecondLastName = checker.removeStringBlanks(txtSecondLastName.getText());
+        
+        
+        if(!checker.checkStringField(personSecondName) && !personSecondName.equalsIgnoreCase("")){
+            txtSecondName.setBackground(colorRed);
+            return false;
+        }
+        if(!checker.checkStringField(personSecondLastName) && !personSecondLastName.equalsIgnoreCase("")){
+            txtSecondLastName.setBackground(colorRed);
+             return false;
+        }
+        
+        return true;
+    }
+    
+    private void personalizedMessage(String type, String message, String title){
+        int typeMessage = 0;
+        typeMessage = switch (type) {
+            case "Error" -> 0;
+            case "Information" -> 1;
+            case "Warning" -> 2;
+            case "Question" -> 3;
+            default -> 1;
+        };
+        JOptionPane.showMessageDialog(buttonsPanel, message,title,typeMessage);
+    }
+    
+    private void clearFields(){
+        txtFirstName.setText("");
+        txtSecondName.setText("");
+        txtFirstLastName.setText("");
+        txtSecondLastName.setText("");
+        sltIdentificationType.setSelectedIndex(0);
+        txtIdentificationNumber.setText("");
+        sltBloodType.setSelectedIndex(0);
+        sltBloodTypeCmpl.setSelectedIndex(0);
+        sltHealthEntity.setSelectedIndex(0);
+        dateBirthdate.setDate(null);
+        dateDayLink.setDate(null);
+        sltPosition.setSelectedIndex(0);
+        sltState.setSelectedIndex(worker.isState()? 1:0);
+    }
+    
     public WorkerEditInformationView(Worker worker) {
         this.worker = worker;
         initComponents();
@@ -91,16 +209,18 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         lbIdentificationNumber = new javax.swing.JLabel();
         lbHealthEntity = new javax.swing.JLabel();
         lbDayLink = new javax.swing.JLabel();
+        lbState = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         dateDayLink = new com.toedter.calendar.JDateChooser();
         sltHealthEntity = new javax.swing.JComboBox<>();
         txtIdentificationNumber = new javax.swing.JTextField();
         txtSecondLastName = new javax.swing.JTextField();
         txtSecondName = new javax.swing.JTextField();
+        sltState = new javax.swing.JComboBox<>();
         buttonsPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+        btnClean = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 500));
@@ -270,18 +390,23 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         lbDayLink.setText("Fecha vinculación:");
         lbDayLink.setPreferredSize(new java.awt.Dimension(176, 25));
 
+        lbState.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbState.setText("Estado de trabajador:");
+        lbState.setPreferredSize(new java.awt.Dimension(176, 25));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbSecondLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(lbIdentificationNumber, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(lbHealthEntity, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(lbDayLink, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(lbSecondName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbSecondLastName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(lbIdentificationNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(lbHealthEntity, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(lbDayLink, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(lbSecondName, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(lbState, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -297,6 +422,8 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
                 .addComponent(lbHealthEntity, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbDayLink, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbState, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -313,18 +440,22 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
 
         txtSecondName.setPreferredSize(new java.awt.Dimension(176, 25));
 
+        sltState.setModel(new javax.swing.DefaultComboBoxModel<>(comboBoxOptions.getStateOptions()));
+        sltState.setPreferredSize(new java.awt.Dimension(176, 25));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(sltHealthEntity, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtIdentificationNumber, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtSecondLastName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtSecondName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(dateDayLink, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sltHealthEntity, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtIdentificationNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtSecondLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtSecondName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dateDayLink, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sltState, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -340,6 +471,8 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
                 .addComponent(sltHealthEntity, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(dateDayLink, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(sltState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -361,17 +494,27 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
 
         buttonsPanel.setPreferredSize(new java.awt.Dimension(800, 100));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconCancel.png"))); // NOI18N
-        jButton1.setText("Cancelar");
-        jButton1.setPreferredSize(new java.awt.Dimension(180, 60));
+        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconCancel.png"))); // NOI18N
+        btnCancel.setText("Cancelar");
+        btnCancel.setPreferredSize(new java.awt.Dimension(180, 60));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconDelete.png"))); // NOI18N
-        jButton2.setText("Limpiar campos");
-        jButton2.setPreferredSize(new java.awt.Dimension(180, 60));
+        btnClean.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconDelete.png"))); // NOI18N
+        btnClean.setText("Limpiar campos");
+        btnClean.setPreferredSize(new java.awt.Dimension(180, 60));
+        btnClean.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCleanActionPerformed(evt);
+            }
+        });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconSave.png"))); // NOI18N
-        jButton3.setText("Guardar");
-        jButton3.setPreferredSize(new java.awt.Dimension(180, 60));
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconSave.png"))); // NOI18N
+        btnSave.setText("Guardar");
+        btnSave.setPreferredSize(new java.awt.Dimension(180, 60));
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout buttonsPanelLayout = new javax.swing.GroupLayout(buttonsPanel);
         buttonsPanel.setLayout(buttonsPanelLayout);
@@ -379,11 +522,11 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttonsPanelLayout.createSequentialGroup()
                 .addContainerGap(73, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnClean, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(73, 73, 73))
         );
         buttonsPanelLayout.setVerticalGroup(
@@ -391,9 +534,9 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             .addGroup(buttonsPanelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnClean, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(25, 25, 25))
         );
 
@@ -445,21 +588,61 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFirstNameActionPerformed
 
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        
+            String personFirstName = checker.removeStringBlanks(txtFirstName.getText()); 
+            String personSecondName = checker.removeStringBlanks(txtSecondName.getText());//
+            String personFirstLastName = checker.removeStringBlanks(txtFirstLastName.getText());
+            String personSecondLastName = checker.removeStringBlanks(txtSecondLastName.getText());//
+            String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
+            String personIdentificationNumber = checker.removeStringBlanks(txtIdentificationNumber.getText());
+            Date personBirthdate = dateBirthdate.getDate();
+            String bloodType = sltBloodType.getSelectedItem().toString();
+            String bloodTypeCmplt = sltBloodTypeCmpl.getSelectedItem().toString();
+            String healthEntity = sltHealthEntity.getSelectedItem().toString();
+            Date dayLink = dateDayLink.getDate();
+            String position = sltPosition.getSelectedItem().toString();
+            boolean state = (sltState.getSelectedIndex() != 0);
+            
+            
+            
+            if(changeColorRequiredField() && changeColorNoRequiredField()){
+                try {
+                    newRequestPerson.editPerson(personFirstName, personSecondName, personFirstLastName, personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
+                    newRequestWorker.editWorker(worker.getWorkerId(),personIdentificationNumber, bloodType, bloodTypeCmplt, healthEntity, dayLink, position, state);
+                    personalizedMessage("Information", "El trabajador ha sido agregado correctamente", "Operación exitosa");
+                    clearFields();
+                    
+                } catch (PreexistingEntityException ex) {
+                    personalizedMessage("Error", "El numero de identificación ya está asociado a alguien.", "Identificación duplicada");
+                    txtIdentificationNumber.setBackground(colorRed);
+                }  catch (Exception ex) {
+                    Logger.getLogger(AddWorkerView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                personalizedMessage("Warning", "Asegurese de que los campos en rojo estén correctamente diligenciados", "Error en Campos");
+            }
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanActionPerformed
+        clearFields();
+    }//GEN-LAST:event_btnCleanActionPerformed
+
     /**
      * @param args the command line arguments
      */
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnClean;
+    private javax.swing.JButton btnSave;
     private javax.swing.JPanel buttonsPanel;
     private com.toedter.calendar.JDateChooser dateBirthdate;
     private com.toedter.calendar.JDateChooser dateDayLink;
     private javax.swing.JPanel fields1Panel;
     private javax.swing.JPanel information1Panel;
     private javax.swing.JPanel information2Panel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -475,11 +658,13 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
     private javax.swing.JLabel lbPosition;
     private javax.swing.JLabel lbSecondLastName;
     private javax.swing.JLabel lbSecondName;
+    private javax.swing.JLabel lbState;
     private javax.swing.JComboBox<String> sltBloodType;
     private javax.swing.JComboBox<String> sltBloodTypeCmpl;
     private javax.swing.JComboBox<String> sltHealthEntity;
     private javax.swing.JComboBox<String> sltIdentificationType;
     private javax.swing.JComboBox<String> sltPosition;
+    private javax.swing.JComboBox<String> sltState;
     private javax.swing.JTextField txtFirstLastName;
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtIdentificationNumber;

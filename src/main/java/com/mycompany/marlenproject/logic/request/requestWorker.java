@@ -38,7 +38,7 @@ public class requestWorker {
         return WorkerController.getWorkerPersis();
     }
     
-    public void editWorkerInformation(int workerId,String personId, String workerBloodType, String workerBloodTypeCmplt, String workerHealthEntity, Date workerDayLink, String WorkerPosition, boolean workerState) throws Exception{
+    public void editWorker(int workerId,String personId, String workerBloodType, String workerBloodTypeCmplt, String workerHealthEntity, Date workerDayLink, String WorkerPosition, boolean workerState) throws Exception{
         Person workerPerson = new Person();
         workerPerson.setIdentificationNumber(Integer.parseInt(personId));
         

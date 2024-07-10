@@ -24,7 +24,8 @@ public class ComboBoxWorkerOptions {
         "EPS SANITAS", "EPS SURA", "FAMISANAR", "FONDO DE PASIVO SOCIAL DE FERROCARRILES NACIONALES DE COLOMBIA",
         "MALLAMAS EPSI", "MUTUAL SER", "NUEVA EPS", "PIJAOS SALUD EPSI", "SALUD BÓLIVAR EPS SAS", "SALUD MIA",
         "SALUD TOTAL EPS S.A.", "SAVIA SALUD EPS EPSS40", "SERVICIO OCCIDENTAL DE SALUD EPS SOS", "OTRO"};
-
+    private final String[] stateOptions = {"NO ACTIVO", "ACTIVO"};
+    
     public ComboBoxWorkerOptions() {
     }
 
@@ -48,6 +49,10 @@ public class ComboBoxWorkerOptions {
         return healthEntityOptions;
     }
 
+    public String[] getStateOptions() {
+        return stateOptions;
+    }
+    
     public int findIndexSelected(String[] list,String value) {
         for (int i = 0; i < list.length; i++) {
             if (list[i].equalsIgnoreCase(value)) {
