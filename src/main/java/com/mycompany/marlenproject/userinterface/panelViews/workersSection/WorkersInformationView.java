@@ -101,11 +101,14 @@ public class WorkersInformationView extends javax.swing.JPanel {
         txtEps = new javax.swing.JTextField();
         txtIdentificationNum = new javax.swing.JTextField();
         txtDateVinculation = new javax.swing.JTextField();
+        buttonListWorkersPanel = new javax.swing.JPanel();
+        btnAllWorkerList = new javax.swing.JButton();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "INFORMACIÓN DE TRABAJADOR", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
-        setPreferredSize(new java.awt.Dimension(800, 500));
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "INFORMACIÓN DEL TRABAJADOR", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        setPreferredSize(new java.awt.Dimension(982, 588));
 
         buttonsPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        buttonsPanel.setPreferredSize(new java.awt.Dimension(960, 150));
 
         btnDeleteWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconTrash.png"))); // NOI18N
         btnDeleteWorker.setText("Eliminar trabajador");
@@ -146,66 +149,70 @@ public class WorkersInformationView extends javax.swing.JPanel {
         buttonsPanelLayout.setHorizontalGroup(
             buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buttonsPanelLayout.createSequentialGroup()
-                .addGap(132, 132, 132)
+                .addGap(126, 126, 126)
                 .addComponent(btnPreviousWorker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnDeleteWorker, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                .addComponent(btnDeleteWorker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(49, 49, 49)
                 .addComponent(btnEditWorker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btnNextWorker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(133, 133, 133))
+                .addGap(139, 139, 139))
         );
         buttonsPanelLayout.setVerticalGroup(
             buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buttonsPanelLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(42, 42, 42)
                 .addGroup(buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(btnPreviousWorker, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDeleteWorker, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditWorker, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNextWorker, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                    .addComponent(btnPreviousWorker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDeleteWorker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditWorker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNextWorker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
-        information1Panel.setPreferredSize(new java.awt.Dimension(350, 300));
+        information1Panel.setPreferredSize(new java.awt.Dimension(472, 300));
 
-        lbsInformation1Panel.setPreferredSize(new java.awt.Dimension(150, 300));
+        lbsInformation1Panel.setPreferredSize(new java.awt.Dimension(150, 288));
 
         lbFirstName.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         lbFirstName.setText("Primer nombre:");
-        lbFirstName.setPreferredSize(new java.awt.Dimension(0, 25));
+        lbFirstName.setPreferredSize(new java.awt.Dimension(138, 25));
 
         lbFirstlastName.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         lbFirstlastName.setText("Primer apellido:");
-        lbFirstlastName.setPreferredSize(new java.awt.Dimension(0, 25));
+        lbFirstlastName.setPreferredSize(new java.awt.Dimension(138, 25));
 
         lbIdentificationType.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         lbIdentificationType.setText("Tipo de identificación:");
-        lbIdentificationType.setPreferredSize(new java.awt.Dimension(0, 25));
+        lbIdentificationType.setPreferredSize(new java.awt.Dimension(138, 25));
 
         lbBloodType.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         lbBloodType.setText("Tipo de sangre:");
-        lbBloodType.setPreferredSize(new java.awt.Dimension(0, 25));
+        lbBloodType.setPreferredSize(new java.awt.Dimension(138, 25));
 
         lbAge.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         lbAge.setText("Edad:");
-        lbAge.setPreferredSize(new java.awt.Dimension(0, 25));
+        lbAge.setPreferredSize(new java.awt.Dimension(138, 25));
 
         lbPosition.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         lbPosition.setText("Cargo:");
-        lbPosition.setPreferredSize(new java.awt.Dimension(0, 25));
+        lbPosition.setPreferredSize(new java.awt.Dimension(138, 25));
 
         javax.swing.GroupLayout lbsInformation1PanelLayout = new javax.swing.GroupLayout(lbsInformation1Panel);
         lbsInformation1Panel.setLayout(lbsInformation1PanelLayout);
         lbsInformation1PanelLayout.setHorizontalGroup(
             lbsInformation1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbFirstlastName, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-            .addComponent(lbIdentificationType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbBloodType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbAge, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbPosition, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lbsInformation1PanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(lbsInformation1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbIdentificationType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbFirstName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbFirstlastName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbAge, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbBloodType, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbPosition, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         lbsInformation1PanelLayout.setVerticalGroup(
             lbsInformation1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,13 +232,13 @@ public class WorkersInformationView extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        dataInformation1Panel.setPreferredSize(new java.awt.Dimension(230, 300));
+        dataInformation1Panel.setPreferredSize(new java.awt.Dimension(150, 288));
 
         txtFirstName.setEditable(false);
-        txtFirstName.setPreferredSize(new java.awt.Dimension(75, 25));
+        txtFirstName.setPreferredSize(new java.awt.Dimension(302, 25));
 
         txtFirstLastName.setEditable(false);
-        txtFirstLastName.setPreferredSize(new java.awt.Dimension(75, 25));
+        txtFirstLastName.setPreferredSize(new java.awt.Dimension(302, 25));
         txtFirstLastName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFirstLastNameActionPerformed(evt);
@@ -239,10 +246,10 @@ public class WorkersInformationView extends javax.swing.JPanel {
         });
 
         txtBloodType.setEditable(false);
-        txtBloodType.setPreferredSize(new java.awt.Dimension(75, 25));
+        txtBloodType.setPreferredSize(new java.awt.Dimension(302, 25));
 
         txtAge.setEditable(false);
-        txtAge.setPreferredSize(new java.awt.Dimension(75, 25));
+        txtAge.setPreferredSize(new java.awt.Dimension(302, 25));
         txtAge.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAgeActionPerformed(evt);
@@ -250,7 +257,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
         });
 
         txtIdentificationType.setEditable(false);
-        txtIdentificationType.setPreferredSize(new java.awt.Dimension(75, 25));
+        txtIdentificationType.setPreferredSize(new java.awt.Dimension(302, 25));
         txtIdentificationType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdentificationTypeActionPerformed(evt);
@@ -258,7 +265,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
         });
 
         txtPosition.setEditable(false);
-        txtPosition.setPreferredSize(new java.awt.Dimension(75, 25));
+        txtPosition.setPreferredSize(new java.awt.Dimension(302, 25));
         txtPosition.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPositionActionPerformed(evt);
@@ -272,12 +279,12 @@ public class WorkersInformationView extends javax.swing.JPanel {
             .addGroup(dataInformation1PanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(dataInformation1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtAge, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                    .addComponent(txtFirstLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtBloodType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtIdentificationType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtPosition, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
+                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(txtFirstLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(txtBloodType, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(txtIdentificationType, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(txtPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         dataInformation1PanelLayout.setVerticalGroup(
@@ -295,7 +302,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
                 .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout information1PanelLayout = new javax.swing.GroupLayout(information1Panel);
@@ -303,54 +310,64 @@ public class WorkersInformationView extends javax.swing.JPanel {
         information1PanelLayout.setHorizontalGroup(
             information1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(information1PanelLayout.createSequentialGroup()
-                .addComponent(lbsInformation1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(lbsInformation1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dataInformation1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE))
+                .addComponent(dataInformation1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                .addContainerGap())
         );
         information1PanelLayout.setVerticalGroup(
             information1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbsInformation1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-            .addComponent(dataInformation1Panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+            .addGroup(information1PanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(information1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dataInformation1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                    .addComponent(lbsInformation1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        information2Panel.setPreferredSize(new java.awt.Dimension(350, 300));
+        information2Panel.setPreferredSize(new java.awt.Dimension(472, 300));
 
-        lbsInformation2Panel.setPreferredSize(new java.awt.Dimension(150, 300));
+        lbsInformation2Panel.setPreferredSize(new java.awt.Dimension(150, 288));
 
         lbSecondName.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         lbSecondName.setText("Segundo nombre:");
-        lbSecondName.setPreferredSize(new java.awt.Dimension(0, 25));
+        lbSecondName.setPreferredSize(new java.awt.Dimension(138, 25));
 
         lbSecondLastName.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         lbSecondLastName.setText("Segundo apellido:");
-        lbSecondLastName.setPreferredSize(new java.awt.Dimension(0, 25));
+        lbSecondLastName.setPreferredSize(new java.awt.Dimension(138, 25));
 
         lbIdentificationNum.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         lbIdentificationNum.setText("Num. de identificación:");
-        lbIdentificationNum.setPreferredSize(new java.awt.Dimension(0, 25));
+        lbIdentificationNum.setPreferredSize(new java.awt.Dimension(138, 25));
 
         lbEps.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         lbEps.setText("Entidad de salud:");
-        lbEps.setPreferredSize(new java.awt.Dimension(0, 25));
+        lbEps.setPreferredSize(new java.awt.Dimension(138, 25));
 
         lbDateVinculation.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         lbDateVinculation.setText("Fecha vinculación:");
-        lbDateVinculation.setPreferredSize(new java.awt.Dimension(0, 25));
+        lbDateVinculation.setPreferredSize(new java.awt.Dimension(138, 25));
 
         javax.swing.GroupLayout lbsInformation2PanelLayout = new javax.swing.GroupLayout(lbsInformation2Panel);
         lbsInformation2Panel.setLayout(lbsInformation2PanelLayout);
         lbsInformation2PanelLayout.setHorizontalGroup(
             lbsInformation2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbDateVinculation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbEps, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbIdentificationNum, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-            .addComponent(lbSecondLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbSecondName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lbsInformation2PanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(lbsInformation2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbSecondLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbIdentificationNum, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbEps, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbDateVinculation, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbSecondName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         lbsInformation2PanelLayout.setVerticalGroup(
             lbsInformation2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lbsInformation2PanelLayout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
                 .addComponent(lbSecondName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbSecondLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -360,16 +377,16 @@ public class WorkersInformationView extends javax.swing.JPanel {
                 .addComponent(lbEps, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbDateVinculation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        dataInformation2Panel.setPreferredSize(new java.awt.Dimension(230, 300));
+        dataInformation2Panel.setPreferredSize(new java.awt.Dimension(150, 288));
 
         txtSecondName.setEditable(false);
-        txtSecondName.setPreferredSize(new java.awt.Dimension(75, 25));
+        txtSecondName.setPreferredSize(new java.awt.Dimension(302, 25));
 
         txtSecondLastName.setEditable(false);
-        txtSecondLastName.setPreferredSize(new java.awt.Dimension(75, 25));
+        txtSecondLastName.setPreferredSize(new java.awt.Dimension(302, 25));
         txtSecondLastName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSecondLastNameActionPerformed(evt);
@@ -377,10 +394,10 @@ public class WorkersInformationView extends javax.swing.JPanel {
         });
 
         txtEps.setEditable(false);
-        txtEps.setPreferredSize(new java.awt.Dimension(75, 25));
+        txtEps.setPreferredSize(new java.awt.Dimension(302, 25));
 
         txtIdentificationNum.setEditable(false);
-        txtIdentificationNum.setPreferredSize(new java.awt.Dimension(75, 25));
+        txtIdentificationNum.setPreferredSize(new java.awt.Dimension(302, 25));
         txtIdentificationNum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdentificationNumActionPerformed(evt);
@@ -388,7 +405,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
         });
 
         txtDateVinculation.setEditable(false);
-        txtDateVinculation.setPreferredSize(new java.awt.Dimension(75, 25));
+        txtDateVinculation.setPreferredSize(new java.awt.Dimension(302, 25));
 
         javax.swing.GroupLayout dataInformation2PanelLayout = new javax.swing.GroupLayout(dataInformation2Panel);
         dataInformation2Panel.setLayout(dataInformation2PanelLayout);
@@ -397,11 +414,11 @@ public class WorkersInformationView extends javax.swing.JPanel {
             .addGroup(dataInformation2PanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(dataInformation2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSecondName, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
-                    .addComponent(txtEps, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtSecondLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtIdentificationNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtDateVinculation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtSecondName, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(txtEps, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(txtSecondLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(txtIdentificationNum, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(txtDateVinculation, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         dataInformation2PanelLayout.setVerticalGroup(
@@ -425,14 +442,42 @@ public class WorkersInformationView extends javax.swing.JPanel {
         information2PanelLayout.setHorizontalGroup(
             information2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(information2PanelLayout.createSequentialGroup()
-                .addComponent(lbsInformation2Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(lbsInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dataInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))
+                .addComponent(dataInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                .addContainerGap())
         );
         information2PanelLayout.setVerticalGroup(
             information2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbsInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-            .addComponent(dataInformation2Panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+            .addGroup(information2PanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(information2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dataInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                    .addComponent(lbsInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        buttonListWorkersPanel.setPreferredSize(new java.awt.Dimension(960, 120));
+
+        btnAllWorkerList.setText("VER COMO LISTADO");
+        btnAllWorkerList.setPreferredSize(new java.awt.Dimension(180, 60));
+
+        javax.swing.GroupLayout buttonListWorkersPanelLayout = new javax.swing.GroupLayout(buttonListWorkersPanel);
+        buttonListWorkersPanel.setLayout(buttonListWorkersPanelLayout);
+        buttonListWorkersPanelLayout.setHorizontalGroup(
+            buttonListWorkersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(buttonListWorkersPanelLayout.createSequentialGroup()
+                .addGap(385, 385, 385)
+                .addComponent(btnAllWorkerList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(395, 395, 395))
+        );
+        buttonListWorkersPanelLayout.setVerticalGroup(
+            buttonListWorkersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(buttonListWorkersPanelLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(btnAllWorkerList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -441,21 +486,27 @@ public class WorkersInformationView extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(information1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(information2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(information1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(information2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE))
+                    .addComponent(buttonListWorkersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(buttonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(information1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(information2Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(information1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+                    .addComponent(information2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(120, 120, 120))
+                .addComponent(buttonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonListWorkersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -543,10 +594,12 @@ public class WorkersInformationView extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAllWorkerList;
     private javax.swing.JButton btnDeleteWorker;
     private javax.swing.JButton btnEditWorker;
     private javax.swing.JButton btnNextWorker;
     private javax.swing.JButton btnPreviousWorker;
+    private javax.swing.JPanel buttonListWorkersPanel;
     private javax.swing.JPanel buttonsPanel;
     private javax.swing.JPanel dataInformation1Panel;
     private javax.swing.JPanel dataInformation2Panel;

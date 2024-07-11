@@ -38,6 +38,7 @@ public class UserAccess extends javax.swing.JFrame {
         btnAccess = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         setSize(new java.awt.Dimension(0, 0));
 
         lbAccessIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconAccess.png"))); // NOI18N

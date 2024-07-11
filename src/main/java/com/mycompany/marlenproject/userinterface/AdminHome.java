@@ -80,7 +80,13 @@ public class AdminHome extends javax.swing.JFrame {
         jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1150, 512));
+        setPreferredSize(new java.awt.Dimension(1200, 600));
+
+        defaultPanel.setPreferredSize(new java.awt.Dimension(1200, 600));
+
+        optionsPanel.setPreferredSize(new java.awt.Dimension(200, 588));
+
+        accountingPanel.setPreferredSize(new java.awt.Dimension(188, 100));
 
         btnAccountingSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconCalculation.png"))); // NOI18N
         btnAccountingSection.setText("Contabilidad");
@@ -92,16 +98,18 @@ public class AdminHome extends javax.swing.JFrame {
             accountingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(accountingPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnAccountingSection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAccountingSection, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
                 .addContainerGap())
         );
         accountingPanelLayout.setVerticalGroup(
             accountingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(accountingPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnAccountingSection, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                .addComponent(btnAccountingSection, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        quotesPanel.setPreferredSize(new java.awt.Dimension(188, 100));
 
         btnQuotesSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconNewPage.png"))); // NOI18N
         btnQuotesSection.setText("Cotizaciones");
@@ -120,9 +128,11 @@ public class AdminHome extends javax.swing.JFrame {
             quotesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(quotesPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnQuotesSection, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                .addComponent(btnQuotesSection, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        workersPanel.setPreferredSize(new java.awt.Dimension(188, 100));
 
         btnWorkersSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconWorker.png"))); // NOI18N
         btnWorkersSection.setText("Trabajadores");
@@ -137,15 +147,16 @@ public class AdminHome extends javax.swing.JFrame {
         workersPanel.setLayout(workersPanelLayout);
         workersPanelLayout.setHorizontalGroup(
             workersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(workersPanelLayout.createSequentialGroup()
-                .addComponent(btnWorkersSection, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workersPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnWorkersSection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         workersPanelLayout.setVerticalGroup(
             workersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workersPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnWorkersSection, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                .addComponent(btnWorkersSection, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -159,12 +170,13 @@ public class AdminHome extends javax.swing.JFrame {
                     .addComponent(workersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(accountingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(quotesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(14, 14, 14))
+                .addContainerGap())
         );
         optionsPanelLayout.setVerticalGroup(
             optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(optionsPanelLayout.createSequentialGroup()
-                .addComponent(accountingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(accountingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(quotesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -172,27 +184,32 @@ public class AdminHome extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        viewPanel.setPreferredSize(new java.awt.Dimension(900, 512));
+        viewPanel.setPreferredSize(new java.awt.Dimension(982, 588));
+
+        welcomeMsgPanel.setPreferredSize(new java.awt.Dimension(970, 100));
 
         lbWelcome.setFont(new java.awt.Font("Yu Gothic UI", 1, 48)); // NOI18N
         lbWelcome.setText("¡Bienvenido!");
+        lbWelcome.setPreferredSize(new java.awt.Dimension(300, 70));
 
         javax.swing.GroupLayout welcomeMsgPanelLayout = new javax.swing.GroupLayout(welcomeMsgPanel);
         welcomeMsgPanel.setLayout(welcomeMsgPanelLayout);
         welcomeMsgPanelLayout.setHorizontalGroup(
             welcomeMsgPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(welcomeMsgPanelLayout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(lbWelcome)
+                .addGap(55, 55, 55)
+                .addComponent(lbWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         welcomeMsgPanelLayout.setVerticalGroup(
             welcomeMsgPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(welcomeMsgPanelLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(lbWelcome)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(15, 15, 15)
+                .addComponent(lbWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
+
+        timeZonePanel.setPreferredSize(new java.awt.Dimension(970, 75));
 
         lbTimeZone.setText("Hoy estamos a xxx, xxx de xxx de xxx ");
 
@@ -201,7 +218,7 @@ public class AdminHome extends javax.swing.JFrame {
         timeZonePanelLayout.setHorizontalGroup(
             timeZonePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(timeZonePanelLayout.createSequentialGroup()
-                .addGap(71, 71, 71)
+                .addGap(55, 55, 55)
                 .addComponent(lbTimeZone)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -210,8 +227,10 @@ public class AdminHome extends javax.swing.JFrame {
             .addGroup(timeZonePanelLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(lbTimeZone)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
+
+        ViewsPanel.setPreferredSize(new java.awt.Dimension(970, 389));
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -232,7 +251,7 @@ public class AdminHome extends javax.swing.JFrame {
             ViewsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ViewsPanelLayout.createSequentialGroup()
                 .addGap(53, 53, 53)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 864, Short.MAX_VALUE)
                 .addGap(53, 53, 53))
         );
         ViewsPanelLayout.setVerticalGroup(
@@ -240,7 +259,7 @@ public class AdminHome extends javax.swing.JFrame {
             .addGroup(ViewsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(197, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout viewPanelLayout = new javax.swing.GroupLayout(viewPanel);
@@ -272,21 +291,29 @@ public class AdminHome extends javax.swing.JFrame {
         defaultPanelLayout.setHorizontalGroup(
             defaultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(defaultPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(optionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE))
+                .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         defaultPanelLayout.setVerticalGroup(
             defaultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(optionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, defaultPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(defaultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(optionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(defaultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(defaultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
