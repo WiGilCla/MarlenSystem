@@ -18,19 +18,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author willy
- */
 public class WorkerEditInformationView extends javax.swing.JFrame {
     private final ComboBoxWorkerOptions comboBoxOptions = new ComboBoxWorkerOptions();
-    private  Worker worker;
+    private Worker worker;
     private final requestPerson newRequestPerson = new requestPerson();
     private final requestWorker newRequestWorker = new requestWorker();
     private final CheckFields checker = new CheckFields();
     private final Color colorRed = new Color(255,0,0);
     private final Color colorWhite = new Color(255,255,255);
-    private AdminHome principalJFrame; 
+    private final AdminHome principalJFrame; 
 
     private void setActualInformation(){
         String bloodGroup = (worker.getBloodType().length() == 3)? 
@@ -68,15 +64,15 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         
         sltPosition.setSelectedIndex(comboBoxOptions
                 .findIndexSelected(comboBoxOptions.getPositionOptions(), worker.getPosition()));
+        
         sltState.setSelectedIndex(worker.isIsActive()? 1:0);
     }
     
     private boolean changeColorRequiredField(){
-        String personFirstName = checker.removeStringBlanks(txtFirstName.getText()); 
+        String personFirstName = checker.removeStringBlanks(txtFirstName.getText());
         String personFirstLastName = checker.removeStringBlanks(txtFirstLastName.getText());
         String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
         String personIdentificationNumber = checker.removeStringBlanks(txtIdentificationNumber.getText());
-        //Worker information
         String bloodType = sltBloodType.getSelectedItem().toString();
         String bloodTypeCmplt = sltBloodTypeCmpl.getSelectedItem().toString();
         String healthEntity = sltHealthEntity.getSelectedItem().toString();
@@ -86,40 +82,49 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             txtFirstName.setBackground(colorRed);
             return false;
         }
+        
         if(!checker.checkStringField(personFirstLastName)){
             txtFirstLastName.setBackground(colorRed);
              return false;
         }
+        
         if(!checker.checkComboBox(personIdentificationType)){
             sltIdentificationType.setBackground(colorRed);
             return false;
         }
+        
         if(!checker.checkNumberField(personIdentificationNumber) 
                 || !(personIdentificationNumber.length() <= 10  
                 && personIdentificationNumber.length() >= 8)){
             txtIdentificationNumber.setBackground(colorRed);
             return false;
         }
+        
         if(!checker.checkComboBox(bloodType)){
             sltBloodType.setBackground(colorRed);
             return false;
         }
+        
         if(!checker.checkComboBox(bloodTypeCmplt)){
             sltBloodTypeCmpl.setBackground(colorRed);
             return false;
         }
+        
         if(!checker.checkComboBox(healthEntity)){
             sltHealthEntity.setBackground(colorRed);
             return false;
         }
+        
         if(null == dateBirthdate.getDate()){
             dateBirthdate.setBackground(colorRed);
             return false;
         }
+        
         if(null == dateDayLink.getDate()){
             dateDayLink.setBackground(colorRed);
             return false;
         }
+        
         if(!checker.checkComboBox(position)){
             sltPosition.setBackground(colorRed);
             return false;
@@ -137,6 +142,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             txtSecondName.setBackground(colorRed);
             return false;
         }
+        
         if(!checker.checkStringField(personSecondLastName) && !personSecondLastName.equalsIgnoreCase("")){
             txtSecondLastName.setBackground(colorRed);
              return false;
@@ -181,8 +187,6 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         }
         return 0;
     }
-    
-
     
     public WorkerEditInformationView(Worker worker, AdminHome principalJFrame) {
         this.principalJFrame = principalJFrame;
@@ -677,13 +681,14 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         boolean state = (sltState.getSelectedIndex() != 0);
 
 
-
         if(changeColorRequiredField() && changeColorNoRequiredField()){
             try {
                 if(worker.getPerson().getIdentificationNumber() == Integer.parseInt(personIdentificationNumber)){
-                    
-                    newRequestPerson.editPerson(personIdentificationNumber,personFirstName, personSecondName, personFirstLastName, personSecondLastName, personIdentificationType, personBirthdate);
-                    newRequestWorker.editWorker(worker.getWorkerId(),personIdentificationNumber, bloodType, bloodTypeCmplt, healthEntity, dayLink, position, state, false);
+                    newRequestPerson.editPerson(personIdentificationNumber,personFirstName, personSecondName, 
+                            personFirstLastName, personSecondLastName, personIdentificationType, personBirthdate);
+                    newRequestWorker.editWorker(worker.getWorkerId(),personIdentificationNumber, 
+                            bloodType, bloodTypeCmplt, healthEntity, 
+                            dayLink, position, state, false);
                 }else{
                     
                     Worker existingWorker = newRequestWorker.findWorkerByDNI(Integer.parseInt(personIdentificationNumber));
@@ -694,19 +699,25 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
                         txtIdentificationNumber.setBackground(colorRed);
                         return;
                     }else{
-                        newRequestPerson.savePerson(personFirstName, personSecondName, personFirstLastName, personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
-                        newRequestWorker.editWorker(worker.getWorkerId(),personIdentificationNumber, bloodType, bloodTypeCmplt, healthEntity, dayLink, position, state, false);
+                        newRequestPerson.savePerson(personFirstName, personSecondName, personFirstLastName, 
+                                personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
+                        newRequestWorker.editWorker(worker.getWorkerId(),personIdentificationNumber, 
+                                bloodType, bloodTypeCmplt, healthEntity, dayLink, position, state, false);
                         newRequestPerson.deletePerson(worker.getPerson().getIdentificationNumber());
                     }
                 }
                 
                 personalizedMessage("Information", "La información ha sido cambiada correctamente", "Operación exitosa");
             } catch (PreexistingEntityException ex) {
+                
                 personalizedMessage("Error", "El numero de identificación ya está asociado a alguien.", "Identificación duplicada");
                 txtIdentificationNumber.setBackground(colorRed);
+                
             }catch (NonexistentEntityException ex){
+                
                 personalizedMessage("Error", "El numero de identificación no existe", "Identificación no existente");
                 txtIdentificationNumber.setBackground(colorRed);
+                
             }
             catch (Exception ex) {
                 Logger.getLogger(AddWorkerView.class.getName()).log(Level.SEVERE, null, ex);
@@ -720,13 +731,16 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         List<Worker> newListworkers = new requestWorker().getNoDeletedWorker();
         
         if(!newListworkers.isEmpty()){
+            
             int index = findWorker(Integer.parseInt(txtIdentificationNumber.getText()), newListworkers);
             WorkersInformationView workersInformationView = new WorkersInformationView(this.principalJFrame,newListworkers, index);
             workersInformationView.setSize(800, 500);
             workersInformationView.setLocation(0, 0);
             principalJFrame.replacePanel(workersInformationView);
             principalJFrame.setVisible(true);
+            
         }else{
+            
             WorkersFirstView workersFirstView = new WorkersFirstView(principalJFrame);
             workersFirstView.setSize(982, 588);
             workersFirstView.setLocation(0, 0);
@@ -796,10 +810,6 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         sltState.setBackground(colorWhite);
     }//GEN-LAST:event_sltStateActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;

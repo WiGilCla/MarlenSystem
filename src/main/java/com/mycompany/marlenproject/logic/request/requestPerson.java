@@ -11,10 +11,7 @@ import com.mycompany.marlenproject.persistence.exceptions.NonexistentEntityExcep
 import java.sql.Timestamp;
 import java.util.Date;
 
-/**
- *
- * @author willy
- */
+
 public class requestPerson {
     private final personController PersonController = new personController();
     private final CheckFields checker = new CheckFields();
@@ -22,17 +19,19 @@ public class requestPerson {
     public void savePerson(String personFirstName, String personSecondName, 
         String personFirstLastName, String personSecondLastName, String personIdentificationType, 
         String personIdentificationNumber, Date personBirthdate) throws Exception{
-
+        
+        
         String firstName = checker.capitalizedString(personFirstName);
         String secondName = (personSecondName.isEmpty())? null:checker.capitalizedString(personSecondName);
         String firstLastName = checker.capitalizedString(personFirstLastName);
         String secondLastName = (personSecondLastName.isEmpty())? null:checker.capitalizedString(personSecondLastName);
         String identificationType = checker.capitalizedString(personIdentificationType);
         int identificationNumber = Integer.parseInt( personIdentificationNumber);
-        
         Timestamp birthdate = new Timestamp(personBirthdate.getTime());
         
+        
         Person newPerson = new Person(firstName, secondName, firstLastName, secondLastName, identificationType, identificationNumber, birthdate);
+        
         
         PersonController.savePersonPersis(newPerson);
     }
@@ -41,6 +40,7 @@ public class requestPerson {
             String personFirstLastName, String personSecondLastName, String personIdentificationType, 
             Date personBirthdate) throws Exception{
         
+        
         String firstName = checker.capitalizedString(personFirstName);
         String secondName = (personSecondName.isEmpty())? null:checker.capitalizedString(personSecondName);
         String firstLastName = checker.capitalizedString(personFirstLastName);
@@ -49,7 +49,9 @@ public class requestPerson {
         int identificationNumber = Integer.parseInt( personIdentificationNumber);
         Timestamp birthdate = new Timestamp(personBirthdate.getTime());
         
+        
         Person newPerson = new Person(firstName, secondName, firstLastName, secondLastName, identificationType, identificationNumber, birthdate);
+        
         
         PersonController.editPersonPersis(newPerson);
     }

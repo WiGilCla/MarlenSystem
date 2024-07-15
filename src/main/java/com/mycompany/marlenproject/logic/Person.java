@@ -9,10 +9,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-/**
- *
- * @author willy
- */
+
 @Entity
 public class Person implements Serializable {
     @Id
@@ -104,5 +101,4 @@ public class Person implements Serializable {
     public String toString() {
         return "Person{" + "identificationNumber=" + identificationNumber + ", firstName=" + firstName + ", secondName=" + secondName + ", firstLastName=" + firstLastName + ", secondLastName=" + secondLastName + ", identificationType=" + identificationType + ", birthdate=" + birthdate + '}';
     }
-    
 }

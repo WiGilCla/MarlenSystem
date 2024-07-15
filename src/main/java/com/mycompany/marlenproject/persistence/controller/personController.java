@@ -8,10 +8,6 @@ import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.persistence.PersonJpaController;
 import com.mycompany.marlenproject.persistence.exceptions.NonexistentEntityException;
 
-/**
- *
- * @author willy
- */
 public class personController {
     PersonJpaController personJpa = new PersonJpaController();
     public void savePersonPersis(Person newPersona) throws Exception{

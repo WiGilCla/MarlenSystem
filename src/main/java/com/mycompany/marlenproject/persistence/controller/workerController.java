@@ -8,14 +8,11 @@ import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.persistence.WorkerJpaController;
 import java.util.List;
 
-/**
- *
- * @author willy
- */
 public class workerController {
+    
     WorkerJpaController workerJpa = new WorkerJpaController();
+    
     public void saveWorkerPersis(Worker newWorker) throws Exception{
-        System.out.println("Accediendo a SAVE WORKER");
          workerJpa.create(newWorker);
     }
     
@@ -24,7 +21,6 @@ public class workerController {
     }
     
     public void editWorkerPersis(Worker newWorker) throws Exception{
-        System.out.println("TRABAJADOR: ".concat(newWorker.toString()));
         workerJpa.edit(newWorker);
     }
     

@@ -7,10 +7,6 @@ package com.mycompany.marlenproject.logic;
 
 import java.util.Date;
 
-/**
- *
- * @author willy
- */
 public class CheckFields {
     public boolean checkStringField(String text){
         return text.matches("[a-zA-ZÁ-Úá-úÑñ]+");

@@ -14,10 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-/**
- *
- * @author willy
- */
 @Entity
 public class Worker implements Serializable{
     

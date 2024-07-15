@@ -17,10 +17,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-/**
- *
- * @author willy
- */
+
 public class WorkerJpaController implements Serializable {
 
     public WorkerJpaController(EntityManagerFactory emf) {

@@ -13,10 +13,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-/**
- *
- * @author willy
- */
+
 public class AddWorkerView extends javax.swing.JPanel {
     private final requestPerson newRequestPerson = new requestPerson();
     private final requestWorker newRequestWorker = new requestWorker();
@@ -24,14 +21,10 @@ public class AddWorkerView extends javax.swing.JPanel {
     private final Color colorRed = new Color(255,0,0);
     private final Color colorWhite = new Color(255,255,255);
 
-    /**
-     * Creates new form SecondWorkersView
-     */
     public AddWorkerView() {
         initComponents();
     }
     
-
     private void personalizedMessage(String type, String message, String title){
         int typeMessage = 0;
         typeMessage = switch (type) {
@@ -110,6 +103,7 @@ public class AddWorkerView extends javax.swing.JPanel {
             txtSecondName.setBackground(colorRed);
             return false;
         }
+        
         if(!checker.checkStringField(personSecondLastName) && !personSecondLastName.equalsIgnoreCase("")){
             txtSecondLastName.setBackground(colorRed);
              return false;
@@ -627,7 +621,6 @@ public class AddWorkerView extends javax.swing.JPanel {
     private void btnSaveWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveWorkerActionPerformed
             
             
-            //Person information
             String personFirstName = checker.removeStringBlanks(txtFirstName.getText()); 
             String personSecondName = checker.removeStringBlanks(txtSecondName.getText());//
             String personFirstLastName = checker.removeStringBlanks(txtFirstLastName.getText());
@@ -643,16 +636,18 @@ public class AddWorkerView extends javax.swing.JPanel {
             String position = sltPosition.getSelectedItem().toString();
             
             
-            
             if(changeColorRequiredField() && changeColorNoRequiredField()){
                 try {
-                    newRequestPerson.savePerson(personFirstName, personSecondName, personFirstLastName, personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
-                    newRequestWorker.saveWorker(personIdentificationNumber, bloodType, bloodTypeCmplt, healthEntity, dayLink, position);
+                    newRequestPerson.savePerson(personFirstName, personSecondName, 
+                            personFirstLastName, personSecondLastName, personIdentificationType, 
+                            personIdentificationNumber, personBirthdate);
+                    newRequestWorker.saveWorker(personIdentificationNumber, bloodType, 
+                            bloodTypeCmplt, healthEntity, dayLink, position);
                     personalizedMessage("Information", "El trabajador ha sido agregado correctamente", "Operación exitosa");
                     clearFields();
-                    
                 } catch (PreexistingEntityException ex) {
-                    personalizedMessage("Error", "El numero de identificación ya está asociado a alguien.", "Identificación duplicada");
+                    personalizedMessage("Error", "El numero de identificación ya está asociado a alguien.", 
+                            "Identificación duplicada");
                     txtIdentificationNum.setBackground(colorRed);
                 }  catch (Exception ex) {
                     Logger.getLogger(AddWorkerView.class.getName()).log(Level.SEVERE, null, ex);
