@@ -2,11 +2,13 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
-    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-      <Connection code="javax.swing.BorderFactory.createTitledBorder(null, &quot;AGREGAR NUEVO TRABAJADOR&quot;, javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION)" type="code"/>
+    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+      <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+        <TitledBorder justification="2" title="AGREGAR NUEVO TRABAJADOR"/>
+      </Border>
     </Property>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[982, 588]"/>
+      <Dimension value="[970, 576]"/>
     </Property>
   </Properties>
   <AuxValues>
@@ -25,16 +27,16 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="buttonsPanel" max="32767" attributes="0"/>
+                  <Component id="buttonsPanel" pref="948" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="information1Panel" pref="494" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="information2Panel" pref="470" max="32767" attributes="0"/>
+                      <Component id="information1Panel" pref="471" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="information2Panel" pref="471" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -42,13 +44,13 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="information1Panel" max="32767" attributes="0"/>
-                  <Component id="information2Panel" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="information1Panel" pref="345" max="32767" attributes="0"/>
+                  <Component id="information2Panel" pref="345" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="buttonsPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="126" max="32767" attributes="0"/>
+              <Component id="buttonsPanel" pref="190" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -57,7 +59,7 @@
     <Container class="javax.swing.JPanel" name="buttonsPanel">
       <Properties>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[970, 100]"/>
+          <Dimension value="[958, 208]"/>
         </Property>
       </Properties>
 
@@ -65,23 +67,23 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="255" max="-2" attributes="0"/>
-                  <Component id="btnCleanFields" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="117" max="32767" attributes="0"/>
-                  <Component id="btnSaveWorker" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="238" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
+                  <Component id="btnCleanFields" pref="293" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
+                  <Component id="btnSaveWorker" pref="293" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnCleanFields" alignment="3" max="32767" attributes="0"/>
-                      <Component id="btnSaveWorker" alignment="3" max="32767" attributes="0"/>
+                      <Component id="btnCleanFields" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnSaveWorker" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -120,7 +122,7 @@
     <Container class="javax.swing.JPanel" name="information1Panel">
       <Properties>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[482, 350]"/>
+          <Dimension value="[476, 350]"/>
         </Property>
       </Properties>
 
@@ -128,23 +130,23 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lbsInformation1Panel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="dataInformation1Panel" pref="326" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Component id="lbsInformation1Panel" pref="148" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Component id="dataInformation1Panel" pref="305" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="dataInformation1Panel" max="32767" attributes="0"/>
-                      <Component id="lbsInformation1Panel" max="32767" attributes="0"/>
+                      <Component id="dataInformation1Panel" pref="333" max="32767" attributes="0"/>
+                      <Component id="lbsInformation1Panel" pref="333" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -161,14 +163,14 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lbAge" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbBloodType" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbIdentificationType" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbFirstlastName" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbFirstName" alignment="1" max="32767" attributes="0"/>
-                          <Component id="lbPosition" alignment="0" max="32767" attributes="0"/>
+                          <Component id="lbAge" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="lbBloodType" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="lbIdentificationType" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="lbFirstlastName" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="lbFirstName" alignment="1" pref="0" max="32767" attributes="0"/>
+                          <Component id="lbPosition" alignment="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -179,15 +181,15 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="lbFirstName" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Component id="lbFirstlastName" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Component id="lbIdentificationType" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="lbBloodType" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbBloodType" min="-2" pref="20" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Component id="lbAge" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Component id="lbPosition" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -202,7 +204,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Primer nombre:"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[132, 25]"/>
+                  <Dimension value="[138, 25]"/>
                 </Property>
               </Properties>
             </Component>
@@ -213,7 +215,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Primer apellido:"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[132, 25]"/>
+                  <Dimension value="[138, 25]"/>
                 </Property>
               </Properties>
             </Component>
@@ -224,7 +226,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Tipo de identificaci&#xf3;n:"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[132, 25]"/>
+                  <Dimension value="[138, 25]"/>
                 </Property>
               </Properties>
             </Component>
@@ -235,7 +237,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Tipo de sangre:"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[132, 25]"/>
+                  <Dimension value="[138, 25]"/>
                 </Property>
               </Properties>
             </Component>
@@ -246,7 +248,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Fecha de nacimiento:"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[132, 25]"/>
+                  <Dimension value="[138, 25]"/>
                 </Property>
               </Properties>
             </Component>
@@ -257,7 +259,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cargo:"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[132, 25]"/>
+                  <Dimension value="[138, 25]"/>
                 </Property>
               </Properties>
             </Component>
@@ -266,7 +268,7 @@
         <Container class="javax.swing.JPanel" name="dataInformation1Panel">
           <Properties>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[314, 338]"/>
+              <Dimension value="[308, 338]"/>
             </Property>
           </Properties>
 
@@ -274,21 +276,20 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="sltIdentificationType" max="32767" attributes="0"/>
-                          <Component id="txtFirstLastName" max="32767" attributes="0"/>
-                          <Component id="txtFirstName" max="32767" attributes="0"/>
-                          <Component id="sltPosition" alignment="0" max="32767" attributes="0"/>
+                          <Component id="sltIdentificationType" pref="0" max="32767" attributes="0"/>
+                          <Component id="txtFirstLastName" pref="0" max="32767" attributes="0"/>
+                          <Component id="txtFirstName" pref="0" max="32767" attributes="0"/>
+                          <Component id="sltPosition" alignment="0" pref="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="sltBloodType" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="sltBloodTypeCmplt" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="sltBloodType" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="sltBloodTypeCmplt" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="dateBirthdate" alignment="1" max="32767" attributes="0"/>
+                          <Component id="dateBirthdate" alignment="1" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -310,7 +311,7 @@
                       <Component id="dateBirthdate" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Component id="sltPosition" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="96" max="32767" attributes="0"/>
+                      <EmptySpace pref="91" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -319,7 +320,7 @@
             <Component class="javax.swing.JTextField" name="txtFirstName">
               <Properties>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[302, 25]"/>
+                  <Dimension value="[296, 25]"/>
                 </Property>
               </Properties>
               <Events>
@@ -330,7 +331,7 @@
             <Component class="javax.swing.JTextField" name="txtFirstLastName">
               <Properties>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[302, 25]"/>
+                  <Dimension value="[296, 25]"/>
                 </Property>
               </Properties>
               <Events>
@@ -350,7 +351,7 @@
                   </StringArray>
                 </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[302, 25]"/>
+                  <Dimension value="[296, 25]"/>
                 </Property>
               </Properties>
               <Events>
@@ -376,7 +377,7 @@
                   </StringArray>
                 </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[302, 25]"/>
+                  <Dimension value="[296, 25]"/>
                 </Property>
               </Properties>
               <Events>
@@ -399,7 +400,7 @@
                   </StringArray>
                 </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[148, 25]"/>
+                  <Dimension value="[136, 25]"/>
                 </Property>
               </Properties>
               <Events>
@@ -420,7 +421,7 @@
                   </StringArray>
                 </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[148, 25]"/>
+                  <Dimension value="[136, 25]"/>
                 </Property>
               </Properties>
               <Events>
@@ -438,7 +439,7 @@
                   <Connection code="new Date()" type="code"/>
                 </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[302, 25]"/>
+                  <Dimension value="[296, 25]"/>
                 </Property>
               </Properties>
             </Component>
@@ -449,7 +450,7 @@
     <Container class="javax.swing.JPanel" name="information2Panel">
       <Properties>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[482, 350]"/>
+          <Dimension value="[476, 350]"/>
         </Property>
       </Properties>
 
@@ -457,11 +458,11 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lbsInformation2Panel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="dataInformation2Panel" pref="302" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Component id="lbsInformation2Panel" pref="148" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Component id="dataInformation2Panel" pref="305" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -470,8 +471,8 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="dataInformation2Panel" max="32767" attributes="0"/>
-                      <Component id="lbsInformation2Panel" max="32767" attributes="0"/>
+                      <Component id="dataInformation2Panel" pref="333" max="32767" attributes="0"/>
+                      <Component id="lbsInformation2Panel" pref="333" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -490,13 +491,13 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lbDateVinculation" max="32767" attributes="0"/>
-                          <Component id="lbEps" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbIdentificationNum" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbSecondLastName" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbSecondName" max="32767" attributes="0"/>
+                          <Component id="lbDateVinculation" pref="0" max="32767" attributes="0"/>
+                          <Component id="lbEps" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="lbIdentificationNum" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="lbSecondLastName" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="lbSecondName" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -528,7 +529,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Segundo nombre:"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[132, 25]"/>
+                  <Dimension value="[138, 25]"/>
                 </Property>
               </Properties>
             </Component>
@@ -539,7 +540,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Segundo apellido:"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[132, 25]"/>
+                  <Dimension value="[138, 25]"/>
                 </Property>
               </Properties>
             </Component>
@@ -550,7 +551,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Num. de identificaci&#xf3;n:"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[132, 25]"/>
+                  <Dimension value="[138, 25]"/>
                 </Property>
               </Properties>
             </Component>
@@ -561,7 +562,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Entidad de salud:"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[132, 25]"/>
+                  <Dimension value="[138, 25]"/>
                 </Property>
               </Properties>
             </Component>
@@ -572,7 +573,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Fecha vinculaci&#xf3;n:"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[132, 25]"/>
+                  <Dimension value="[138, 25]"/>
                 </Property>
               </Properties>
             </Component>
@@ -581,7 +582,7 @@
         <Container class="javax.swing.JPanel" name="dataInformation2Panel">
           <Properties>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[314, 338]"/>
+              <Dimension value="[308, 338]"/>
             </Property>
           </Properties>
 
@@ -591,11 +592,11 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtSecondName" max="32767" attributes="0"/>
-                          <Component id="txtSecondLastName" max="32767" attributes="0"/>
-                          <Component id="txtIdentificationNum" alignment="0" max="32767" attributes="0"/>
-                          <Component id="dateVinculation" max="32767" attributes="0"/>
-                          <Component id="sltEPS" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtSecondName" pref="0" max="32767" attributes="0"/>
+                          <Component id="txtSecondLastName" pref="0" max="32767" attributes="0"/>
+                          <Component id="txtIdentificationNum" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="dateVinculation" pref="0" max="32767" attributes="0"/>
+                          <Component id="sltEPS" alignment="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -623,7 +624,7 @@
             <Component class="javax.swing.JTextField" name="txtSecondName">
               <Properties>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[302, 25]"/>
+                  <Dimension value="[296, 25]"/>
                 </Property>
               </Properties>
               <Events>
@@ -634,7 +635,7 @@
             <Component class="javax.swing.JTextField" name="txtSecondLastName">
               <Properties>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[302, 25]"/>
+                  <Dimension value="[296, 25]"/>
                 </Property>
               </Properties>
               <Events>
@@ -646,7 +647,7 @@
               <Properties>
                 <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[302, 25]"/>
+                  <Dimension value="[296, 25]"/>
                 </Property>
               </Properties>
               <Events>
@@ -656,7 +657,7 @@
             <Component class="javax.swing.JTextField" name="txtIdentificationNum">
               <Properties>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[302, 25]"/>
+                  <Dimension value="[296, 25]"/>
                 </Property>
               </Properties>
               <Events>
@@ -703,7 +704,7 @@
                   </StringArray>
                 </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[302, 25]"/>
+                  <Dimension value="[296, 25]"/>
                 </Property>
               </Properties>
               <Events>

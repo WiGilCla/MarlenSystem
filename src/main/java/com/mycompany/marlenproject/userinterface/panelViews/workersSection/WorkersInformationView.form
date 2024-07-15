@@ -27,7 +27,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="information1Panel" pref="471" max="32767" attributes="0"/>
@@ -46,11 +46,11 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="information2Panel" pref="289" max="32767" attributes="0"/>
-                  <Component id="information1Panel" pref="289" max="32767" attributes="0"/>
+                  <Component id="information2Panel" pref="295" max="32767" attributes="0"/>
+                  <Component id="information1Panel" pref="295" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="buttonsPanel" pref="138" max="32767" attributes="0"/>
+              <Component id="buttonsPanel" pref="132" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="buttonListWorkersPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -169,9 +169,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="lbsInformation1Panel" pref="148" max="32767" attributes="0"/>
+                  <Component id="lbsInformation1Panel" pref="147" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="dataInformation1Panel" pref="305" max="32767" attributes="0"/>
+                  <Component id="dataInformation1Panel" pref="306" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -181,8 +181,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="dataInformation1Panel" pref="277" max="32767" attributes="0"/>
-                      <Component id="lbsInformation1Panel" pref="277" max="32767" attributes="0"/>
+                      <Component id="dataInformation1Panel" pref="283" max="32767" attributes="0"/>
+                      <Component id="lbsInformation1Panel" pref="283" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -424,9 +424,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="lbsInformation2Panel" pref="148" max="32767" attributes="0"/>
+                  <Component id="lbsInformation2Panel" pref="147" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="dataInformation2Panel" pref="305" max="32767" attributes="0"/>
+                  <Component id="dataInformation2Panel" pref="306" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -436,8 +436,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="dataInformation2Panel" pref="277" max="32767" attributes="0"/>
-                      <Component id="lbsInformation2Panel" pref="277" max="32767" attributes="0"/>
+                      <Component id="dataInformation2Panel" pref="283" max="32767" attributes="0"/>
+                      <Component id="lbsInformation2Panel" pref="283" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
