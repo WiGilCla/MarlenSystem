@@ -6,10 +6,12 @@ package com.mycompany.marlenproject.logic;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.SEQUENCE;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 /**
@@ -21,13 +23,20 @@ public class Worker implements Serializable{
     
     @Id
     @GeneratedValue(strategy=SEQUENCE, generator="ID_SEQ")
+    @Column(name = "Id")
     private int workerId;
+    @Column(name = "BloodType", nullable = false, length = 50)
     private String bloodType;
+    @Column(name = "HealtEntity", nullable = false, length = 150)
     private String healthEntity;
+    @Column(name = "VinculationDate", nullable = false)
     private Date dayLink;
+    @Column(name = "Position", nullable = false, length = 150)
     private String position;
+    @Column(name = "Is_active", nullable = false)
     private boolean state;
     @OneToOne
+    @JoinColumn(name = "Person_IdentificationNumber")
     private Person person;
 
     public Worker(String bloodType, String healthEntity, Date dayLink, String position,boolean state, Person person) {
@@ -96,6 +105,11 @@ public class Worker implements Serializable{
 
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+    @Override
+    public String toString() {
+        return "Worker{" + "workerId=" + workerId + ", bloodType=" + bloodType + ", healthEntity=" + healthEntity + ", dayLink=" + dayLink + ", position=" + position + ", state=" + state + ", person=" + person + '}';
     }
     
     

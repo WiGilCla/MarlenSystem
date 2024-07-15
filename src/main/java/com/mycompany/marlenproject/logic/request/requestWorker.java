@@ -24,6 +24,7 @@ public class requestWorker {
         Person workerPerson = new Person();
         workerPerson.setIdentificationNumber(Integer.parseInt(personId));
         
+        
         String bloodType = workerBloodType.concat(workerBloodTypeCmplt);
         String healthEntity = checker.capitalizedString(workerHealthEntity);
         Timestamp dayLink = new Timestamp( workerDayLink.getTime());
@@ -56,5 +57,9 @@ public class requestWorker {
     
     public List<Worker> getActiveWorkers(){
         return WorkerController.getActiveWorkerPersis();
+    }
+    
+    public Worker findWorkerByDNI(int dni){
+        return WorkerController.getWorkerByDNIPersis(dni);
     }
 }

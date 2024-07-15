@@ -6,6 +6,7 @@ package com.mycompany.marlenproject.logic;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 /**
@@ -15,14 +16,21 @@ import javax.persistence.Id;
 @Entity
 public class Person implements Serializable {
     @Id
+    @Column(name = "IdentificationNumber")
     private int identificationNumber;
+    @Column(name = "FirstName", nullable = false, length = 150)
     private String firstName;
+    @Column(name = "SecondName", nullable = true, length = 150)
     private String secondName;
+    @Column(name = "FirstLastname", nullable = false, length = 150)
     private String firstLastName;
+    @Column(name = "SecondLastname", nullable = true, length = 50)
     private String secondLastName;
+    @Column(name = "IdentificationType", nullable = false, length = 50)
     private String identificationType;
+    @Column(name = "Birthdate", nullable = false)
     private Date  birthdate;
-
+    
     public Person(String firstName, String secondName, String firstLastName, String secondLastName, String identificationType, int identificationNumber, Date birthdate) {
         this.firstName = firstName;
         this.secondName = secondName;
@@ -92,4 +100,9 @@ public class Person implements Serializable {
         this.birthdate = birthdate;
     }
 
+    @Override
+    public String toString() {
+        return "Person{" + "identificationNumber=" + identificationNumber + ", firstName=" + firstName + ", secondName=" + secondName + ", firstLastName=" + firstLastName + ", secondLastName=" + secondLastName + ", identificationType=" + identificationType + ", birthdate=" + birthdate + '}';
+    }
+    
 }

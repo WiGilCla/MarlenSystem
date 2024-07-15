@@ -6,6 +6,7 @@ package com.mycompany.marlenproject.persistence.controller;
 
 import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.persistence.PersonJpaController;
+import com.mycompany.marlenproject.persistence.exceptions.NonexistentEntityException;
 
 /**
  *
@@ -19,5 +20,9 @@ public class personController {
     
     public void editPersonPersis(Person newPersona) throws Exception{
         personJpa.edit(newPersona);
+    }
+    
+    public void deletePersonPersis(int identificationNumber) throws NonexistentEntityException{
+        personJpa.destroy(identificationNumber);
     }
 }

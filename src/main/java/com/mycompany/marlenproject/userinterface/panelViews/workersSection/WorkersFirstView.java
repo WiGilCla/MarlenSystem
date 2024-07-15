@@ -40,15 +40,16 @@ public class WorkersFirstView extends javax.swing.JPanel {
         listWorkerbtnPanel = new javax.swing.JPanel();
         btnListWorkers = new javax.swing.JButton();
 
-        setPreferredSize(new java.awt.Dimension(982, 588));
+        setPreferredSize(new java.awt.Dimension(970, 576));
 
+        addWorkerbtnPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         addWorkerbtnPanel.setName(""); // NOI18N
-        addWorkerbtnPanel.setPreferredSize(new java.awt.Dimension(970, 285));
+        addWorkerbtnPanel.setPreferredSize(new java.awt.Dimension(958, 282));
 
         btnAddNewWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconAddWorker.png"))); // NOI18N
         btnAddNewWorker.setText("Agregar nuevo trabajador");
         btnAddNewWorker.setMaximumSize(new java.awt.Dimension(200, 50));
-        btnAddNewWorker.setPreferredSize(new java.awt.Dimension(250, 50));
+        btnAddNewWorker.setPreferredSize(new java.awt.Dimension(250, 60));
         btnAddNewWorker.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddNewWorkerActionPerformed(evt);
@@ -59,25 +60,26 @@ public class WorkersFirstView extends javax.swing.JPanel {
         addWorkerbtnPanel.setLayout(addWorkerbtnPanelLayout);
         addWorkerbtnPanelLayout.setHorizontalGroup(
             addWorkerbtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addWorkerbtnPanelLayout.createSequentialGroup()
-                .addGap(372, 372, 372)
-                .addComponent(btnAddNewWorker, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
-                .addGap(398, 398, 398))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addWorkerbtnPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAddNewWorker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         addWorkerbtnPanelLayout.setVerticalGroup(
             addWorkerbtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addWorkerbtnPanelLayout.createSequentialGroup()
-                .addGap(116, 116, 116)
-                .addComponent(btnAddNewWorker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(119, 119, 119))
+                .addContainerGap(109, Short.MAX_VALUE)
+                .addComponent(btnAddNewWorker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
-        listWorkerbtnPanel.setPreferredSize(new java.awt.Dimension(970, 285));
+        listWorkerbtnPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        listWorkerbtnPanel.setPreferredSize(new java.awt.Dimension(958, 282));
 
         btnListWorkers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconList.png"))); // NOI18N
         btnListWorkers.setText("Ver mis trabajadores");
         btnListWorkers.setMaximumSize(new java.awt.Dimension(200, 50));
-        btnListWorkers.setPreferredSize(new java.awt.Dimension(200, 50));
+        btnListWorkers.setPreferredSize(new java.awt.Dimension(200, 60));
         btnListWorkers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnListWorkersActionPerformed(evt);
@@ -89,16 +91,16 @@ public class WorkersFirstView extends javax.swing.JPanel {
         listWorkerbtnPanelLayout.setHorizontalGroup(
             listWorkerbtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(listWorkerbtnPanelLayout.createSequentialGroup()
-                .addGap(378, 378, 378)
-                .addComponent(btnListWorkers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(392, 392, 392))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnListWorkers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         listWorkerbtnPanelLayout.setVerticalGroup(
             listWorkerbtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(listWorkerbtnPanelLayout.createSequentialGroup()
-                .addGap(117, 117, 117)
-                .addComponent(btnListWorkers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(118, 118, 118))
+                .addContainerGap(108, Short.MAX_VALUE)
+                .addComponent(btnListWorkers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -108,17 +110,17 @@ public class WorkersFirstView extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(addWorkerbtnPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 987, Short.MAX_VALUE)
-                    .addComponent(listWorkerbtnPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 987, Short.MAX_VALUE))
+                    .addComponent(addWorkerbtnPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(listWorkerbtnPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(addWorkerbtnPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                .addComponent(addWorkerbtnPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(listWorkerbtnPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                .addComponent(listWorkerbtnPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -131,7 +133,7 @@ public class WorkersFirstView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddNewWorkerActionPerformed
 
     private void btnListWorkersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListWorkersActionPerformed
-        List<Worker> workers = new requestWorker().getActiveWorkers();
+        List<Worker> workers = new requestWorker().getWorkers();
         
         if(!workers.isEmpty()){
             WorkersInformationView workersInformationView = new WorkersInformationView(this.adminHome,workers, 0);

@@ -15,6 +15,7 @@ import java.util.List;
 public class workerController {
     WorkerJpaController workerJpa = new WorkerJpaController();
     public void saveWorkerPersis(Worker newWorker) throws Exception{
+        System.out.println("Accediendo a SAVE WORKER");
          workerJpa.create(newWorker);
     }
     
@@ -23,10 +24,15 @@ public class workerController {
     }
     
     public void editWorkerPersis(Worker newWorker) throws Exception{
+        System.out.println("TRABAJADOR: ".concat(newWorker.toString()));
         workerJpa.edit(newWorker);
     }
     
     public List<Worker> getActiveWorkerPersis(){
        return workerJpa.getActiveWorker();
+    }
+    
+    public Worker getWorkerByDNIPersis(int dni){
+        return workerJpa.findWorkerByDNI(dni);
     }
 }

@@ -7,6 +7,7 @@ package com.mycompany.marlenproject.logic.request;
 import com.mycompany.marlenproject.logic.CheckFields;
 import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.persistence.controller.personController;
+import com.mycompany.marlenproject.persistence.exceptions.NonexistentEntityException;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -37,7 +38,8 @@ public class requestPerson {
     }
     
     public void editPerson(String personIdentificationNumber, String personFirstName, String personSecondName, 
-            String personFirstLastName, String personSecondLastName, String personIdentificationType, Date personBirthdate) throws Exception{
+            String personFirstLastName, String personSecondLastName, String personIdentificationType, 
+            Date personBirthdate) throws Exception{
         
         String firstName = checker.capitalizedString(personFirstName);
         String secondName = (personSecondName.isEmpty())? null:checker.capitalizedString(personSecondName);
@@ -50,6 +52,10 @@ public class requestPerson {
         Person newPerson = new Person(firstName, secondName, firstLastName, secondLastName, identificationType, identificationNumber, birthdate);
         
         PersonController.editPersonPersis(newPerson);
+    }
+    
+    public void deletePerson(int identificationNumber) throws NonexistentEntityException{
+        PersonController.deletePersonPersis(identificationNumber);
     }
     
 }
