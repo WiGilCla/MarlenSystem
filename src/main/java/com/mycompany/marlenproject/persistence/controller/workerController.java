@@ -28,8 +28,8 @@ public class workerController {
         workerJpa.edit(newWorker);
     }
     
-    public List<Worker> getActiveWorkerPersis(){
-       return workerJpa.getActiveWorker();
+    public List<Worker> getNoDeletedWorkerPersis(){
+       return workerJpa.getNodeletedWorker();
     }
     
     public Worker getWorkerByDNIPersis(int dni){

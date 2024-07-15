@@ -68,7 +68,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         
         sltPosition.setSelectedIndex(comboBoxOptions
                 .findIndexSelected(comboBoxOptions.getPositionOptions(), worker.getPosition()));
-        sltState.setSelectedIndex(worker.isState()? 1:0);
+        sltState.setSelectedIndex(worker.isIsActive()? 1:0);
     }
     
     private boolean changeColorRequiredField(){
@@ -170,7 +170,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         dateBirthdate.setDate(null);
         dateDayLink.setDate(null);
         sltPosition.setSelectedIndex(0);
-        sltState.setSelectedIndex(worker.isState()? 1:0);
+        sltState.setSelectedIndex(worker.isIsActive()? 1:0);
     }
     
     private int findWorker(int dni, List<Worker> list){
@@ -683,7 +683,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
                 if(worker.getPerson().getIdentificationNumber() == Integer.parseInt(personIdentificationNumber)){
                     
                     newRequestPerson.editPerson(personIdentificationNumber,personFirstName, personSecondName, personFirstLastName, personSecondLastName, personIdentificationType, personBirthdate);
-                    newRequestWorker.editWorker(worker.getWorkerId(),personIdentificationNumber, bloodType, bloodTypeCmplt, healthEntity, dayLink, position, state);
+                    newRequestWorker.editWorker(worker.getWorkerId(),personIdentificationNumber, bloodType, bloodTypeCmplt, healthEntity, dayLink, position, state, false);
                 }else{
                     
                     Worker existingWorker = newRequestWorker.findWorkerByDNI(Integer.parseInt(personIdentificationNumber));
@@ -695,7 +695,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
                         return;
                     }else{
                         newRequestPerson.savePerson(personFirstName, personSecondName, personFirstLastName, personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
-                        newRequestWorker.editWorker(worker.getWorkerId(),personIdentificationNumber, bloodType, bloodTypeCmplt, healthEntity, dayLink, position, state);
+                        newRequestWorker.editWorker(worker.getWorkerId(),personIdentificationNumber, bloodType, bloodTypeCmplt, healthEntity, dayLink, position, state, false);
                         newRequestPerson.deletePerson(worker.getPerson().getIdentificationNumber());
                     }
                 }
@@ -717,7 +717,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         }
         
         this.dispose();
-        List<Worker> newListworkers = new requestWorker().getWorkers();
+        List<Worker> newListworkers = new requestWorker().getNoDeletedWorker();
         
         if(!newListworkers.isEmpty()){
             int index = findWorker(Integer.parseInt(txtIdentificationNumber.getText()), newListworkers);

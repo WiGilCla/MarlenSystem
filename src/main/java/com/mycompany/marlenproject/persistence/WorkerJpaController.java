@@ -139,12 +139,12 @@ public class WorkerJpaController implements Serializable {
         }
     }
     
-    public List<Worker> getActiveWorker(){
+    public List<Worker> getNodeletedWorker(){
         EntityManager em = null;
         try {
             em = getEntityManager();
             TypedQuery<Worker> query = em.createQuery(
-                "SELECT w FROM Worker w WHERE w.state = true", Worker.class);
+                "SELECT w FROM Worker w WHERE w.IsDelete = false", Worker.class);
             return query.getResultList();
         } catch (Exception e) {
             return null;
@@ -158,20 +158,14 @@ public class WorkerJpaController implements Serializable {
     public Worker findWorkerByDNI(int dni){
         EntityManager em = null;
         try {
-            System.out.println("xd1");
             em = getEntityManager();
-            System.out.println("xd2");
             TypedQuery<Worker> query = em.createQuery(
                 "SELECT w FROM Worker w WHERE w.person.identificationNumber = :dni", Worker.class);
-            System.out.println("xd3");
-            query.setParameter("dni", dni); // Establecer el parámetro dni
-            System.out.println("xd4");
+            query.setParameter("dni", dni);
             return query.getSingleResult();
         } catch (Exception e) {
-            System.out.println("Pene gordo");
             return null;
         }finally {
-            System.out.println("SAPOOOO");
             if (em != null) {
                 em.close();
             }

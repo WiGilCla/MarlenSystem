@@ -441,9 +441,6 @@
                   <Dimension value="[302, 25]"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="dateBirthdateMouseClicked"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -594,11 +591,11 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtSecondName" pref="0" max="32767" attributes="0"/>
-                          <Component id="txtSecondLastName" pref="0" max="32767" attributes="0"/>
-                          <Component id="txtIdentificationNum" alignment="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="dateVinculation" pref="0" max="32767" attributes="0"/>
-                          <Component id="sltEPS" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="txtSecondName" max="32767" attributes="0"/>
+                          <Component id="txtSecondLastName" max="32767" attributes="0"/>
+                          <Component id="txtIdentificationNum" alignment="0" max="32767" attributes="0"/>
+                          <Component id="dateVinculation" max="32767" attributes="0"/>
+                          <Component id="sltEPS" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>

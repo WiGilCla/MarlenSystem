@@ -564,12 +564,12 @@ public class WorkersInformationView extends javax.swing.JPanel {
             
             RequestWorker.editWorker(workers.get(workerViewing).getWorkerId(), 
                     String.valueOf(person.getIdentificationNumber()), bloodType, 
-                    bloodTypeCmpl, healthEntity, dayLink, position, state);
-            
+                    bloodTypeCmpl, healthEntity, dayLink, position, state, true);
+            JOptionPane.showMessageDialog(principalJFrame, "El trabajador ha sido eliminado exitosamente", "Eliminación exitosa", 1);
             workers.remove(workerViewing);
             if(!workers.isEmpty() && workerViewing != 0){
                 workerViewing --;
-            }else if (workers.isEmpty()){
+            }else if(workers.isEmpty()) {
                 JOptionPane.showMessageDialog(principalJFrame, "No tiene trabajadores registrados", "Sin registros", 0);
                 WorkersFirstView workersFirstView  = new WorkersFirstView(this.principalJFrame);
                 workersFirstView.setSize(800, 500);

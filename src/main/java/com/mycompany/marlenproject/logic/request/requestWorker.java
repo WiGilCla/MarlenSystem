@@ -30,8 +30,10 @@ public class requestWorker {
         Timestamp dayLink = new Timestamp( workerDayLink.getTime());
         String position = checker.capitalizedString(WorkerPosition);
         Person person = workerPerson;
+        boolean state = true;
+        boolean is_delete = false;
 
-        Worker newWorker = new Worker(bloodType, healthEntity, dayLink, position,true,person);
+        Worker newWorker = new Worker(bloodType, healthEntity, dayLink, position,state, is_delete,person);
         WorkerController.saveWorkerPersis(newWorker);    
     }
     
@@ -39,7 +41,7 @@ public class requestWorker {
         return WorkerController.getWorkerPersis();
     }
     
-    public void editWorker(int workerId,String personId, String workerBloodType, String workerBloodTypeCmplt, String workerHealthEntity, Date workerDayLink, String WorkerPosition, boolean workerState) throws Exception{
+    public void editWorker(int workerId,String personId, String workerBloodType, String workerBloodTypeCmplt, String workerHealthEntity, Date workerDayLink, String WorkerPosition, boolean workerState, boolean workerDelete) throws Exception{
         Person workerPerson = new Person();
         workerPerson.setIdentificationNumber(Integer.parseInt(personId));
         
@@ -48,15 +50,16 @@ public class requestWorker {
         Timestamp dayLink = new Timestamp( workerDayLink.getTime());
         String position = checker.capitalizedString(WorkerPosition);
         boolean state = workerState;
+        boolean is_delete = workerDelete;
         Person person = workerPerson;
 
-        Worker newWorker = new Worker(bloodType, healthEntity, dayLink, position,state,person);
+        Worker newWorker = new Worker(bloodType, healthEntity, dayLink, position,state,workerDelete,person);
         newWorker.setWorkerId(workerId);
         WorkerController.editWorkerPersis(newWorker);    
     }
     
-    public List<Worker> getActiveWorkers(){
-        return WorkerController.getActiveWorkerPersis();
+    public List<Worker> getNoDeletedWorker(){
+        return WorkerController.getNoDeletedWorkerPersis();
     }
     
     public Worker findWorkerByDNI(int dni){

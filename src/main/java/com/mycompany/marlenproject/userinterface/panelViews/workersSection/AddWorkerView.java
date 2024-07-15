@@ -41,7 +41,7 @@ public class AddWorkerView extends javax.swing.JPanel {
             case "Question" -> 3;
             default -> 1;
         };
-        JOptionPane.showMessageDialog(buttonsPanel, message,title,typeMessage);
+        JOptionPane.showMessageDialog(this, message,title,typeMessage);
     }
     
     private boolean changeColorRequiredField(){
@@ -355,11 +355,6 @@ public class AddWorkerView extends javax.swing.JPanel {
         dateBirthdate.setDateFormatString("dd/MM/yyyy");
         dateBirthdate.setMaxSelectableDate(new Date());
         dateBirthdate.setPreferredSize(new java.awt.Dimension(302, 25));
-        dateBirthdate.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                dateBirthdateMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout dataInformation1PanelLayout = new javax.swing.GroupLayout(dataInformation1Panel);
         dataInformation1Panel.setLayout(dataInformation1PanelLayout);
@@ -541,11 +536,11 @@ public class AddWorkerView extends javax.swing.JPanel {
             .addGroup(dataInformation2PanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(dataInformation2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSecondName, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(txtSecondLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(txtIdentificationNum, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(dateVinculation, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(sltEPS, 0, 0, Short.MAX_VALUE))
+                    .addComponent(txtSecondName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtSecondLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtIdentificationNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dateVinculation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sltEPS, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         dataInformation2PanelLayout.setVerticalGroup(
@@ -751,10 +746,6 @@ public class AddWorkerView extends javax.swing.JPanel {
         // TODO add your handling code here:
         sltPosition.setBackground(colorWhite);
     }//GEN-LAST:event_sltPositionMouseClicked
-
-    private void dateBirthdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateBirthdateMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dateBirthdateMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

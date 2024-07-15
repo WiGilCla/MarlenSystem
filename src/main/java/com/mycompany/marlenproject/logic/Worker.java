@@ -33,24 +33,27 @@ public class Worker implements Serializable{
     private Date dayLink;
     @Column(name = "Position", nullable = false, length = 150)
     private String position;
-    @Column(name = "Is_active", nullable = false)
-    private boolean state;
+    @Column(name = "IsActive", nullable = false)
+    private boolean IsActive;
+    @Column(name = "IsDelete", nullable = false)
+    private boolean IsDelete;
     @OneToOne
     @JoinColumn(name = "Person_IdentificationNumber")
     private Person person;
 
-    public Worker(String bloodType, String healthEntity, Date dayLink, String position,boolean state, Person person) {
+    public Worker(String bloodType, String healthEntity, Date dayLink, String position, boolean IsActive, boolean IsDelete, Person person) {
         this.bloodType = bloodType;
         this.healthEntity = healthEntity;
         this.dayLink = dayLink;
         this.position = position;
+        this.IsActive = IsActive;
+        this.IsDelete = IsDelete;
         this.person = person;
-        this.state = state;
     }
 
     public Worker() {
     }
-    
+
     public int getWorkerId() {
         return workerId;
     }
@@ -91,12 +94,20 @@ public class Worker implements Serializable{
         this.position = position;
     }
 
-    public boolean isState() {
-        return state;
+    public boolean isIsActive() {
+        return IsActive;
     }
 
-    public void setState(boolean state) {
-        this.state = state;
+    public void setIsActive(boolean IsActive) {
+        this.IsActive = IsActive;
+    }
+
+    public boolean isIsDelete() {
+        return IsDelete;
+    }
+
+    public void setIsDelete(boolean IsDelete) {
+        this.IsDelete = IsDelete;
     }
 
     public Person getPerson() {
@@ -109,7 +120,7 @@ public class Worker implements Serializable{
 
     @Override
     public String toString() {
-        return "Worker{" + "workerId=" + workerId + ", bloodType=" + bloodType + ", healthEntity=" + healthEntity + ", dayLink=" + dayLink + ", position=" + position + ", state=" + state + ", person=" + person + '}';
+        return "Worker{" + "workerId=" + workerId + ", bloodType=" + bloodType + ", healthEntity=" + healthEntity + ", dayLink=" + dayLink + ", position=" + position + ", IsActive=" + IsActive + ", IsDelete=" + IsDelete + ", person=" + person + '}';
     }
     
     
