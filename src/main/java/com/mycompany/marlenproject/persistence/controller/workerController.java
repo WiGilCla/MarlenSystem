@@ -28,7 +28,7 @@ public class workerController {
        return workerJpa.getNodeletedWorker();
     }
     
-    public Worker getWorkerByDNIPersis(int dni){
+    public Worker getWorkerByDNIPersis(String dni){
         return workerJpa.findWorkerByDNI(dni);
     }
 }

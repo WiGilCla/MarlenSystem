@@ -17,7 +17,10 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-
+/**
+ *
+ * @author willy
+ */
 public class WorkerJpaController implements Serializable {
 
     public WorkerJpaController(EntityManagerFactory emf) {
@@ -26,6 +29,7 @@ public class WorkerJpaController implements Serializable {
     public WorkerJpaController() { 
         this.emf = Persistence.createEntityManagerFactory("MarlenProjectPU"); 
     }
+
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
@@ -152,7 +156,7 @@ public class WorkerJpaController implements Serializable {
         }
     }
     
-    public Worker findWorkerByDNI(int dni){
+    public Worker findWorkerByDNI(String dni){
         EntityManager em = null;
         try {
             em = getEntityManager();

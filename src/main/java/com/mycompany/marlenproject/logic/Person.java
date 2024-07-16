@@ -8,13 +8,15 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.SEQUENCE;
 import javax.persistence.Id;
 
 @Entity
 public class Person implements Serializable {
     @Id
-    @Column(name = "IdentificationNumber")
-    private int identificationNumber;
+    @Column(name = "IdentificationNumber", length = 50)
+    private String identificationNumber;
     @Column(name = "FirstName", nullable = false, length = 150)
     private String firstName;
     @Column(name = "SecondName", nullable = true, length = 150)
@@ -28,7 +30,7 @@ public class Person implements Serializable {
     @Column(name = "Birthdate", nullable = false)
     private Date  birthdate;
     
-    public Person(String firstName, String secondName, String firstLastName, String secondLastName, String identificationType, int identificationNumber, Date birthdate) {
+    public Person(String firstName, String secondName, String firstLastName, String secondLastName, String identificationType, String identificationNumber, Date birthdate) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.firstLastName = firstLastName;
@@ -39,6 +41,14 @@ public class Person implements Serializable {
     }
 
     public Person() {
+    }
+
+    public String getIdentificationNumber() {
+        return identificationNumber;
+    }
+
+    public void setIdentificationNumber(String identificationNumber) {
+        this.identificationNumber = identificationNumber;
     }
 
     public String getFirstName() {
@@ -79,14 +89,6 @@ public class Person implements Serializable {
 
     public void setIdentificationType(String identificationType) {
         this.identificationType = identificationType;
-    }
-
-    public int getIdentificationNumber() {
-        return identificationNumber;
-    }
-
-    public void setIdentificationNumber(int identificationNumber) {
-        this.identificationNumber = identificationNumber;
     }
 
     public Date getBirthdate() {

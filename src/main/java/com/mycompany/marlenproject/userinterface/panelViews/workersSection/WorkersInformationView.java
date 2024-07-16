@@ -43,6 +43,8 @@ public class WorkersInformationView extends javax.swing.JPanel {
         txtAge.setText(String.valueOf(checker.timeElapsed(worker.getPerson().getBirthdate(), new Date())));
         txtDateVinculation.setText(sdf.format(worker.getDayLink()));
         txtPosition.setText(worker.getPosition());
+        String state = (worker.isIsActive())? "Activo":"Inactivo";
+        lbWorkerState.setText(state);
     }
     
     public WorkersInformationView(AdminHome principalJFrame, List<Worker> listWorker, int index) {
@@ -84,12 +86,14 @@ public class WorkersInformationView extends javax.swing.JPanel {
         lbIdentificationNum = new javax.swing.JLabel();
         lbEps = new javax.swing.JLabel();
         lbDateVinculation = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         dataInformation2Panel = new javax.swing.JPanel();
         txtSecondName = new javax.swing.JTextField();
         txtSecondLastName = new javax.swing.JTextField();
         txtEps = new javax.swing.JTextField();
         txtIdentificationNum = new javax.swing.JTextField();
         txtDateVinculation = new javax.swing.JTextField();
+        lbWorkerState = new javax.swing.JLabel();
         buttonListWorkersPanel = new javax.swing.JPanel();
         btnAllWorkerList = new javax.swing.JButton();
 
@@ -157,7 +161,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
                     .addComponent(btnDeleteWorker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEditWorker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNextWorker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         information1Panel.setPreferredSize(new java.awt.Dimension(476, 300));
@@ -339,18 +343,25 @@ public class WorkersInformationView extends javax.swing.JPanel {
         lbDateVinculation.setText("Fecha vinculación:");
         lbDateVinculation.setPreferredSize(new java.awt.Dimension(138, 25));
 
+        jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jLabel1.setText("Estado del trabajador:");
+        jLabel1.setPreferredSize(new java.awt.Dimension(138, 25));
+
         javax.swing.GroupLayout lbsInformation2PanelLayout = new javax.swing.GroupLayout(lbsInformation2Panel);
         lbsInformation2Panel.setLayout(lbsInformation2PanelLayout);
         lbsInformation2PanelLayout.setHorizontalGroup(
             lbsInformation2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lbsInformation2PanelLayout.createSequentialGroup()
+            .addGroup(lbsInformation2PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(lbsInformation2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbSecondLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(lbIdentificationNum, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(lbEps, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(lbDateVinculation, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(lbSecondName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGroup(lbsInformation2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbSecondLastName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbIdentificationNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbEps, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbDateVinculation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbSecondName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(lbsInformation2PanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         lbsInformation2PanelLayout.setVerticalGroup(
@@ -366,7 +377,9 @@ public class WorkersInformationView extends javax.swing.JPanel {
                 .addComponent(lbEps, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbDateVinculation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         dataInformation2Panel.setPreferredSize(new java.awt.Dimension(308, 288));
@@ -396,6 +409,9 @@ public class WorkersInformationView extends javax.swing.JPanel {
         txtDateVinculation.setEditable(false);
         txtDateVinculation.setPreferredSize(new java.awt.Dimension(296, 25));
 
+        lbWorkerState.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        lbWorkerState.setText("jLabel2");
+
         javax.swing.GroupLayout dataInformation2PanelLayout = new javax.swing.GroupLayout(dataInformation2Panel);
         dataInformation2Panel.setLayout(dataInformation2PanelLayout);
         dataInformation2PanelLayout.setHorizontalGroup(
@@ -407,7 +423,10 @@ public class WorkersInformationView extends javax.swing.JPanel {
                     .addComponent(txtEps, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(txtSecondLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(txtIdentificationNum, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(txtDateVinculation, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(txtDateVinculation, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(dataInformation2PanelLayout.createSequentialGroup()
+                        .addComponent(lbWorkerState)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         dataInformation2PanelLayout.setVerticalGroup(
@@ -423,6 +442,8 @@ public class WorkersInformationView extends javax.swing.JPanel {
                 .addComponent(txtEps, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtDateVinculation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbWorkerState)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -432,9 +453,9 @@ public class WorkersInformationView extends javax.swing.JPanel {
             information2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(information2PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbsInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                .addComponent(lbsInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dataInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                .addComponent(dataInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
                 .addContainerGap())
         );
         information2PanelLayout.setVerticalGroup(
@@ -595,6 +616,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
     private javax.swing.JPanel dataInformation2Panel;
     private javax.swing.JPanel information1Panel;
     private javax.swing.JPanel information2Panel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lbAge;
     private javax.swing.JLabel lbBloodType;
     private javax.swing.JLabel lbDateVinculation;
@@ -606,6 +628,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
     private javax.swing.JLabel lbPosition;
     private javax.swing.JLabel lbSecondLastName;
     private javax.swing.JLabel lbSecondName;
+    private javax.swing.JLabel lbWorkerState;
     private javax.swing.JPanel lbsInformation1Panel;
     private javax.swing.JPanel lbsInformation2Panel;
     private javax.swing.JTextField txtAge;

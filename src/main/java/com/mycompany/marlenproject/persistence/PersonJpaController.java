@@ -17,7 +17,10 @@ import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-
+/**
+ *
+ * @author willy
+ */
 public class PersonJpaController implements Serializable {
 
     public PersonJpaController(EntityManagerFactory emf) {
@@ -61,7 +64,7 @@ public class PersonJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                int id = person.getIdentificationNumber();
+                String id = person.getIdentificationNumber();
                 if (findPerson(id) == null) {
                     throw new NonexistentEntityException("The person with id " + id + " no longer exists.");
                 }
@@ -74,7 +77,7 @@ public class PersonJpaController implements Serializable {
         }
     }
 
-    public void destroy(int id) throws NonexistentEntityException {
+    public void destroy(String id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -119,7 +122,7 @@ public class PersonJpaController implements Serializable {
         }
     }
 
-    public Person findPerson(int id) {
+    public Person findPerson(String id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Person.class, id);

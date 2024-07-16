@@ -18,7 +18,7 @@ public class personController {
         personJpa.edit(newPersona);
     }
     
-    public void deletePersonPersis(int identificationNumber) throws NonexistentEntityException{
+    public void deletePersonPersis(String identificationNumber) throws NonexistentEntityException{
         personJpa.destroy(identificationNumber);
     }
 }

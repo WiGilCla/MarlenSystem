@@ -17,7 +17,7 @@ public class requestWorker {
     private final workerController WorkerController = new workerController();
     private final CheckFields checker = new CheckFields();
     
-    public void saveWorker(String personId, String workerBloodType, String workerBloodTypeCmplt, 
+    public void saveWorker(String identificationNumber, String workerBloodType, String workerBloodTypeCmplt, 
             String workerHealthEntity, Date workerDayLink, String WorkerPosition) throws Exception{
         
         
@@ -30,7 +30,7 @@ public class requestWorker {
         
         
         Person workerPerson = new Person();
-        workerPerson.setIdentificationNumber(Integer.parseInt(personId));
+        workerPerson.setIdentificationNumber(identificationNumber);
         Person person = workerPerson;
         
         
@@ -42,7 +42,7 @@ public class requestWorker {
         return WorkerController.getWorkerPersis();
     }
     
-    public void editWorker(int workerId,String personId, String workerBloodType, 
+    public void editWorker(int workerId,String identificationNumber, String workerBloodType, 
             String workerBloodTypeCmplt, String workerHealthEntity, Date workerDayLink, 
             String WorkerPosition, boolean workerState, boolean workerDelete) throws Exception{
         
@@ -57,7 +57,7 @@ public class requestWorker {
         
         
         Person workerPerson = new Person();
-        workerPerson.setIdentificationNumber(Integer.parseInt(personId));
+        workerPerson.setIdentificationNumber(identificationNumber);
         Person person = workerPerson;
 
         
@@ -70,7 +70,7 @@ public class requestWorker {
         return WorkerController.getNoDeletedWorkerPersis();
     }
     
-    public Worker findWorkerByDNI(int dni){
+    public Worker findWorkerByDNI(String dni){
         return WorkerController.getWorkerByDNIPersis(dni);
     }
 }

@@ -26,7 +26,7 @@ public class requestPerson {
         String firstLastName = checker.capitalizedString(personFirstLastName);
         String secondLastName = (personSecondLastName.isEmpty())? null:checker.capitalizedString(personSecondLastName);
         String identificationType = checker.capitalizedString(personIdentificationType);
-        int identificationNumber = Integer.parseInt( personIdentificationNumber);
+        String identificationNumber = personIdentificationNumber;
         Timestamp birthdate = new Timestamp(personBirthdate.getTime());
         
         
@@ -46,18 +46,17 @@ public class requestPerson {
         String firstLastName = checker.capitalizedString(personFirstLastName);
         String secondLastName = (personSecondLastName.isEmpty())? null:checker.capitalizedString(personSecondLastName);
         String identificationType = checker.capitalizedString(personIdentificationType);
-        int identificationNumber = Integer.parseInt( personIdentificationNumber);
+        String identificationNumber = personIdentificationNumber;
         Timestamp birthdate = new Timestamp(personBirthdate.getTime());
         
         
         Person newPerson = new Person(firstName, secondName, firstLastName, secondLastName, identificationType, identificationNumber, birthdate);
         
-        
         PersonController.editPersonPersis(newPerson);
     }
     
-    public void deletePerson(int identificationNumber) throws NonexistentEntityException{
-        PersonController.deletePersonPersis(identificationNumber);
+    public void deletePerson(String personId) throws NonexistentEntityException{
+        PersonController.deletePersonPersis(personId);
     }
     
 }

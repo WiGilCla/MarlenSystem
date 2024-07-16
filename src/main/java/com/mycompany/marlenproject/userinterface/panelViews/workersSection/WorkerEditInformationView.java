@@ -47,7 +47,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         sltIdentificationType.setSelectedIndex(comboBoxOptions
                 .findIndexSelected(comboBoxOptions.getIdentificationTypeOptions(), worker.getPerson().getIdentificationType()));
         
-        txtIdentificationNumber.setText(Integer.toString(worker.getPerson().getIdentificationNumber()));
+        txtIdentificationNumber.setText(worker.getPerson().getIdentificationNumber());
         
         sltBloodType.setSelectedIndex(comboBoxOptions
                 .findIndexSelected(comboBoxOptions.getBloodGroupOptions(), bloodGroup));
@@ -179,9 +179,9 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         sltState.setSelectedIndex(worker.isIsActive()? 1:0);
     }
     
-    private int findWorker(int dni, List<Worker> list){
+    private int findWorkerByDni(String dni, List<Worker> list){
         for(int i = 0; i < list.size();i++){
-            if(list.get(i).getPerson().getIdentificationNumber() == dni){
+            if(list.get(i).getPerson().getIdentificationNumber().equals(dni)){
                 return i;
             }
         }
@@ -683,7 +683,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
 
         if(changeColorRequiredField() && changeColorNoRequiredField()){
             try {
-                if(worker.getPerson().getIdentificationNumber() == Integer.parseInt(personIdentificationNumber)){
+                if(worker.getPerson().getIdentificationNumber().equals(personIdentificationNumber)){
                     newRequestPerson.editPerson(personIdentificationNumber,personFirstName, personSecondName, 
                             personFirstLastName, personSecondLastName, personIdentificationType, personBirthdate);
                     newRequestWorker.editWorker(worker.getWorkerId(),personIdentificationNumber, 
@@ -691,7 +691,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
                             dayLink, position, state, false);
                 }else{
                     
-                    Worker existingWorker = newRequestWorker.findWorkerByDNI(Integer.parseInt(personIdentificationNumber));
+                    Worker existingWorker = newRequestWorker.findWorkerByDNI(personIdentificationNumber);
                     if (existingWorker != null) {
                         personalizedMessage("Error", 
                                 "Esta identificación ya está asociada a un trabajador, ve y corrigelo para intentarlo nuevamente", 
@@ -732,7 +732,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         
         if(!newListworkers.isEmpty()){
             
-            int index = findWorker(Integer.parseInt(txtIdentificationNumber.getText()), newListworkers);
+            int index = findWorkerByDni(personIdentificationNumber, newListworkers);
             WorkersInformationView workersInformationView = new WorkersInformationView(this.principalJFrame,newListworkers, index);
             workersInformationView.setSize(800, 500);
             workersInformationView.setLocation(0, 0);
