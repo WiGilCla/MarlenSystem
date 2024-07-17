@@ -472,6 +472,11 @@ public class WorkersInformationView extends javax.swing.JPanel {
 
         btnAllWorkerList.setText("VER COMO LISTADO");
         btnAllWorkerList.setPreferredSize(new java.awt.Dimension(180, 60));
+        btnAllWorkerList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAllWorkerListActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout buttonListWorkersPanelLayout = new javax.swing.GroupLayout(buttonListWorkersPanel);
         buttonListWorkersPanel.setLayout(buttonListWorkersPanelLayout);
@@ -602,6 +607,13 @@ public class WorkersInformationView extends javax.swing.JPanel {
         workerEditInformation.setVisible(true);
         principalJFrame.setVisible(false);
     }//GEN-LAST:event_btnEditWorkerActionPerformed
+
+    private void btnAllWorkerListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllWorkerListActionPerformed
+        // TODO add your handling code here:
+        WorkersListView workerListView = new WorkersListView(principalJFrame,workers);
+        workerListView.setSize(970, 576);
+        principalJFrame.replacePanel(workerListView);
+    }//GEN-LAST:event_btnAllWorkerListActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

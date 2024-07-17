@@ -19,56 +19,78 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class WorkerEditInformationView extends javax.swing.JFrame {
+
     private final ComboBoxWorkerOptions comboBoxOptions = new ComboBoxWorkerOptions();
     private Worker worker;
     private final requestPerson newRequestPerson = new requestPerson();
     private final requestWorker newRequestWorker = new requestWorker();
     private final CheckFields checker = new CheckFields();
-    private final Color colorRed = new Color(255,0,0);
-    private final Color colorWhite = new Color(255,255,255);
-    private final AdminHome principalJFrame; 
+    private final Color colorRed = new Color(255, 0, 0);
+    private final Color colorWhite = new Color(255, 255, 255);
+    private final AdminHome principalJFrame;
 
-    private void setActualInformation(){
-        String bloodGroup = (worker.getBloodType().length() == 3)? 
-                worker.getBloodType().substring(0,2):worker.getBloodType().substring(0, 1);
-        
-        String bloodGroupRhd = (worker.getBloodType().length() == 3)? 
-                worker.getBloodType().substring(2):worker.getBloodType().substring(1);
-        
-        
+    private void backView(String personIdentificationNumber) {
+        List<Worker> newListworkers = new requestWorker().getNoDeletedWorker();
+
+        if (!newListworkers.isEmpty()) {
+
+            int index = findWorkerByDni(personIdentificationNumber, newListworkers);
+            WorkersInformationView workersInformationView = new WorkersInformationView(this.principalJFrame, newListworkers, index);
+            workersInformationView.setSize(800, 500);
+            workersInformationView.setLocation(0, 0);
+            principalJFrame.replacePanel(workersInformationView);
+            principalJFrame.setVisible(true);
+
+        } else {
+
+            WorkersFirstView workersFirstView = new WorkersFirstView(principalJFrame);
+            workersFirstView.setSize(982, 588);
+            workersFirstView.setLocation(0, 0);
+            principalJFrame.replacePanel(workersFirstView);
+            principalJFrame.setVisible(true);
+        }
+    }
+
+    private void setActualInformation() {
+        String bloodGroup = (worker.getBloodType().length() == 3)
+                ? worker.getBloodType().substring(0, 2) : worker.getBloodType().substring(0, 1);
+
+        String bloodGroupRhd = (worker.getBloodType().length() == 3)
+                ? worker.getBloodType().substring(2) : worker.getBloodType().substring(1);
+
         txtFirstName.setText(worker.getPerson().getFirstName());
-        
+
         txtSecondName.setText(worker.getPerson().getSecondName());
-        
+
         txtFirstLastName.setText(worker.getPerson().getFirstLastName());
-        
+
         txtSecondLastName.setText(worker.getPerson().getSecondLastName());
-        
+
         sltIdentificationType.setSelectedIndex(comboBoxOptions
                 .findIndexSelected(comboBoxOptions.getIdentificationTypeOptions(), worker.getPerson().getIdentificationType()));
-        
+
         txtIdentificationNumber.setText(worker.getPerson().getIdentificationNumber());
-        
+
         sltBloodType.setSelectedIndex(comboBoxOptions
                 .findIndexSelected(comboBoxOptions.getBloodGroupOptions(), bloodGroup));
-        
+
         sltBloodTypeCmpl.setSelectedIndex(comboBoxOptions.
                 findIndexSelected(comboBoxOptions.getBloodGroupRhdOptions(), bloodGroupRhd));
-        
+
         sltHealthEntity.setSelectedIndex(comboBoxOptions
                 .findIndexSelected(comboBoxOptions.getHealthEntityOptions(), worker.getHealthEntity()));
-        
+
         dateBirthdate.setDate(worker.getPerson().getBirthdate());
-        
+
         dateDayLink.setDate(worker.getDayLink());
-        
+
         sltPosition.setSelectedIndex(comboBoxOptions
                 .findIndexSelected(comboBoxOptions.getPositionOptions(), worker.getPosition()));
-        
-        sltState.setSelectedIndex(worker.isIsActive()? 1:0);
+
+        sltState.setSelectedIndex(worker.isIsActive() ? comboBoxOptions.getIndexStatusActive() : comboBoxOptions.getIndexStatusNoActive());
     }
-    
-    private boolean changeColorRequiredField(){
+
+    private boolean changeColorRequiredField() {
         String personFirstName = checker.removeStringBlanks(txtFirstName.getText());
         String personFirstLastName = checker.removeStringBlanks(txtFirstLastName.getText());
         String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
@@ -77,93 +99,102 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         String bloodTypeCmplt = sltBloodTypeCmpl.getSelectedItem().toString();
         String healthEntity = sltHealthEntity.getSelectedItem().toString();
         String position = sltPosition.getSelectedItem().toString();
-        
-        if(!checker.checkStringField(personFirstName)){
+        String state = sltState.getSelectedItem().toString();
+
+        if (!checker.checkStringField(personFirstName)) {
             txtFirstName.setBackground(colorRed);
             return false;
         }
-        
-        if(!checker.checkStringField(personFirstLastName)){
+
+        if (!checker.checkStringField(personFirstLastName)) {
             txtFirstLastName.setBackground(colorRed);
-             return false;
+            return false;
         }
-        
-        if(!checker.checkComboBox(personIdentificationType)){
+
+        if (!checker.checkComboBox(personIdentificationType)) {
             sltIdentificationType.setBackground(colorRed);
             return false;
         }
-        
-        if(!checker.checkNumberField(personIdentificationNumber) 
-                || !(personIdentificationNumber.length() <= 10  
-                && personIdentificationNumber.length() >= 8)){
+
+        if (!checker.checkNumberField(personIdentificationNumber)
+                || !(personIdentificationNumber.length() <= 10
+                && personIdentificationNumber.length() >= 8)) {
             txtIdentificationNumber.setBackground(colorRed);
             return false;
         }
-        
-        if(!checker.checkComboBox(bloodType)){
+
+        if (!checker.checkComboBox(bloodType)) {
             sltBloodType.setBackground(colorRed);
             return false;
         }
-        
-        if(!checker.checkComboBox(bloodTypeCmplt)){
+
+        if (!checker.checkComboBox(bloodTypeCmplt)) {
             sltBloodTypeCmpl.setBackground(colorRed);
             return false;
         }
-        
-        if(!checker.checkComboBox(healthEntity)){
+
+        if (!checker.checkComboBox(healthEntity)) {
             sltHealthEntity.setBackground(colorRed);
             return false;
         }
-        
-        if(null == dateBirthdate.getDate()){
+
+        if (null == dateBirthdate.getDate()) {
             dateBirthdate.setBackground(colorRed);
             return false;
         }
-        
-        if(null == dateDayLink.getDate()){
+
+        if (null == dateDayLink.getDate()) {
             dateDayLink.setBackground(colorRed);
             return false;
         }
-        
-        if(!checker.checkComboBox(position)){
+
+        if (!checker.checkComboBox(position)) {
             sltPosition.setBackground(colorRed);
             return false;
         }
-        
+        if (!checker.checkComboBox(state)) {
+            sltState.setBackground(colorRed);
+            return false;
+        }
+
         return true;
     }
-    
-    private boolean changeColorNoRequiredField(){
-        String personSecondName = checker.removeStringBlanks(txtSecondName.getText()); 
+
+    private boolean changeColorNoRequiredField() {
+        String personSecondName = checker.removeStringBlanks(txtSecondName.getText());
         String personSecondLastName = checker.removeStringBlanks(txtSecondLastName.getText());
-        
-        
-        if(!checker.checkStringField(personSecondName) && !personSecondName.equalsIgnoreCase("")){
+
+        if (!checker.checkStringField(personSecondName) && !personSecondName.equalsIgnoreCase("")) {
             txtSecondName.setBackground(colorRed);
             return false;
         }
-        
-        if(!checker.checkStringField(personSecondLastName) && !personSecondLastName.equalsIgnoreCase("")){
+
+        if (!checker.checkStringField(personSecondLastName) && !personSecondLastName.equalsIgnoreCase("")) {
             txtSecondLastName.setBackground(colorRed);
-             return false;
+            return false;
         }
-        
+
         return true;
     }
-    
-    private void personalizedMessage(String type, String message, String title){
+
+    private void personalizedMessage(String type, String message, String title) {
         int typeMessage = 0;
         typeMessage = switch (type) {
-            case "Error" -> 0;
-            case "Information" -> 1;
-            case "Warning" -> 2;
-            case "Question" -> 3;
-            default -> 1;
+            case "Error" ->
+                0;
+            case "Information" ->
+                1;
+            case "Warning" ->
+                2;
+            case "Question" ->
+                3;
+            default ->
+                1;
         };
-        JOptionPane.showMessageDialog(this.principalJFrame, message,title,typeMessage);
+        JOptionPane.showMessageDialog(this.principalJFrame, message, title, typeMessage);
     }
-    
-    private void clearFields(){
+
+    private void clearFields() {
         txtFirstName.setText("");
         txtSecondName.setText("");
         txtFirstLastName.setText("");
@@ -176,18 +207,18 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         dateBirthdate.setDate(null);
         dateDayLink.setDate(null);
         sltPosition.setSelectedIndex(0);
-        sltState.setSelectedIndex(worker.isIsActive()? 1:0);
+        sltState.setSelectedIndex(0);
     }
-    
-    private int findWorkerByDni(String dni, List<Worker> list){
-        for(int i = 0; i < list.size();i++){
-            if(list.get(i).getPerson().getIdentificationNumber().equals(dni)){
+
+    private int findWorkerByDni(String dni, List<Worker> list) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getPerson().getIdentificationNumber().equals(dni)) {
                 return i;
             }
         }
         return 0;
     }
-    
+
     public WorkerEditInformationView(Worker worker, AdminHome principalJFrame) {
         this.principalJFrame = principalJFrame;
         this.worker = worker;
@@ -665,89 +696,69 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFirstNameActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        
-        String personFirstName = checker.removeStringBlanks(txtFirstName.getText()); 
-        String personSecondName = checker.removeStringBlanks(txtSecondName.getText());//
-        String personFirstLastName = checker.removeStringBlanks(txtFirstLastName.getText());
-        String personSecondLastName = checker.removeStringBlanks(txtSecondLastName.getText());//
-        String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
-        String personIdentificationNumber = checker.removeStringBlanks(txtIdentificationNumber.getText());
-        Date personBirthdate = dateBirthdate.getDate();
-        String bloodType = sltBloodType.getSelectedItem().toString();
-        String bloodTypeCmplt = sltBloodTypeCmpl.getSelectedItem().toString();
-        String healthEntity = sltHealthEntity.getSelectedItem().toString();
-        Date dayLink = dateDayLink.getDate();
-        String position = sltPosition.getSelectedItem().toString();
-        boolean state = (sltState.getSelectedIndex() != 0);
 
-
-        if(changeColorRequiredField() && changeColorNoRequiredField()){
+        if (changeColorRequiredField() && changeColorNoRequiredField()) {
+            String personFirstName = checker.removeStringBlanks(txtFirstName.getText());
+            String personSecondName = checker.removeStringBlanks(txtSecondName.getText());//
+            String personFirstLastName = checker.removeStringBlanks(txtFirstLastName.getText());
+            String personSecondLastName = checker.removeStringBlanks(txtSecondLastName.getText());//
+            String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
+            String personIdentificationNumber = checker.removeStringBlanks(txtIdentificationNumber.getText());
+            Date personBirthdate = dateBirthdate.getDate();
+            String bloodType = sltBloodType.getSelectedItem().toString();
+            String bloodTypeCmplt = sltBloodTypeCmpl.getSelectedItem().toString();
+            String healthEntity = sltHealthEntity.getSelectedItem().toString();
+            Date dayLink = dateDayLink.getDate();
+            String position = sltPosition.getSelectedItem().toString();
+            boolean state = (sltState.getSelectedIndex() == comboBoxOptions.getIndexStatusActive())? true:false;
             try {
-                if(worker.getPerson().getIdentificationNumber().equals(personIdentificationNumber)){
-                    newRequestPerson.editPerson(personIdentificationNumber,personFirstName, personSecondName, 
+                if (worker.getPerson().getIdentificationNumber().equals(personIdentificationNumber)) {
+                    newRequestPerson.editPerson(personIdentificationNumber, personFirstName, personSecondName,
                             personFirstLastName, personSecondLastName, personIdentificationType, personBirthdate);
-                    newRequestWorker.editWorker(worker.getWorkerId(),personIdentificationNumber, 
-                            bloodType, bloodTypeCmplt, healthEntity, 
+                    newRequestWorker.editWorker(worker.getWorkerId(), personIdentificationNumber,
+                            bloodType, bloodTypeCmplt, healthEntity,
                             dayLink, position, state, false);
-                }else{
-                    
+                } else {
+
                     Worker existingWorker = newRequestWorker.findWorkerByDNI(personIdentificationNumber);
                     if (existingWorker != null) {
-                        personalizedMessage("Error", 
-                                "Esta identificación ya está asociada a un trabajador, ve y corrigelo para intentarlo nuevamente", 
+                        personalizedMessage("Error",
+                                "Esta identificación ya está asociada a un trabajador, ve y corrigelo para intentarlo nuevamente",
                                 "Registro ya existente");
                         txtIdentificationNumber.setBackground(colorRed);
                         return;
-                    }else{
-                        newRequestPerson.savePerson(personFirstName, personSecondName, personFirstLastName, 
+                    } else {
+                        newRequestPerson.savePerson(personFirstName, personSecondName, personFirstLastName,
                                 personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
-                        newRequestWorker.editWorker(worker.getWorkerId(),personIdentificationNumber, 
+                        newRequestWorker.editWorker(worker.getWorkerId(), personIdentificationNumber,
                                 bloodType, bloodTypeCmplt, healthEntity, dayLink, position, state, false);
                         newRequestPerson.deletePerson(worker.getPerson().getIdentificationNumber());
                     }
                 }
-                
+
                 personalizedMessage("Information", "La información ha sido cambiada correctamente", "Operación exitosa");
+                backView(personIdentificationNumber);
             } catch (PreexistingEntityException ex) {
-                
+
                 personalizedMessage("Error", "El numero de identificación ya está asociado a alguien.", "Identificación duplicada");
                 txtIdentificationNumber.setBackground(colorRed);
-                
-            }catch (NonexistentEntityException ex){
-                
+
+            } catch (NonexistentEntityException ex) {
+
                 personalizedMessage("Error", "El numero de identificación no existe", "Identificación no existente");
                 txtIdentificationNumber.setBackground(colorRed);
-                
-            }
-            catch (Exception ex) {
+
+            } catch (Exception ex) {
                 Logger.getLogger(AddWorkerView.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
+        } else {
             personalizedMessage("Warning", "Asegurese de que los campos en rojo estén correctamente diligenciados", "Error en Campos");
             return;
         }
-        
+
         this.dispose();
-        List<Worker> newListworkers = new requestWorker().getNoDeletedWorker();
-        
-        if(!newListworkers.isEmpty()){
-            
-            int index = findWorkerByDni(personIdentificationNumber, newListworkers);
-            WorkersInformationView workersInformationView = new WorkersInformationView(this.principalJFrame,newListworkers, index);
-            workersInformationView.setSize(800, 500);
-            workersInformationView.setLocation(0, 0);
-            principalJFrame.replacePanel(workersInformationView);
-            principalJFrame.setVisible(true);
-            
-        }else{
-            
-            WorkersFirstView workersFirstView = new WorkersFirstView(principalJFrame);
-            workersFirstView.setSize(982, 588);
-            workersFirstView.setLocation(0, 0);
-            principalJFrame.replacePanel(workersFirstView);
-            principalJFrame.setVisible(true);
-        }
-        
+
+
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanActionPerformed
