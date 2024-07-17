@@ -27,7 +27,7 @@ public class WorkersListView extends javax.swing.JPanel {
                 return false;
             }
         };
-        String tableHead[] = {"N°","Dni", "Position", "Name", "Last name", "Status"};
+        String tableHead[] = {"N°","Dni", "Nombre", "Apellido" , "Cargo","Estado"};
         workerTable.setColumnIdentifiers(tableHead);
         
         if(!workers.isEmpty() && workers != null){
@@ -37,8 +37,8 @@ public class WorkersListView extends javax.swing.JPanel {
                 String status = (worker.isIsActive())? 
                         options[ComboOptions.getIndexStatusActive()]:options[ComboOptions.getIndexStatusNoActive()];
                 
-                Object[] workersObject = {count, worker.getPerson().getIdentificationNumber(), worker.getPosition(),
-                worker.getPerson().getFirstName(), worker.getPerson().getFirstLastName(), Checker.capitalizedString(status)};
+                Object[] workersObject = {count, worker.getPerson().getIdentificationNumber(),worker.getPerson().getFirstName(), 
+                    worker.getPerson().getFirstLastName(), worker.getPosition(),Checker.capitalizedString(status)};
                 workerTable.addRow(workersObject);
                 count++;
             }
@@ -338,7 +338,7 @@ public class WorkersListView extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        WorkersTable.setAutoscrolls(false);
+        WorkersTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         WorkersTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 WorkersTableMouseClicked(evt);
@@ -409,15 +409,14 @@ public class WorkersListView extends javax.swing.JPanel {
 
     private void WorkersTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WorkersTableMouseClicked
         // TODO add your handling code here:
-        
+
         if(WorkersTable.getRowCount() > 0){
             if(WorkersTable.getSelectedRow() != -1){
-                System.out.println("Indice: "+WorkersTable.getValueAt(WorkersTable.getSelectedRow(),0));
-                System.out.println("Dni: "+WorkersTable.getValueAt(WorkersTable.getSelectedRow(),1));
-                System.out.println("Posición: "+WorkersTable.getValueAt(WorkersTable.getSelectedRow(),2));
-                System.out.println("Nombre: "+WorkersTable.getValueAt(WorkersTable.getSelectedRow(),3));
-                System.out.println("Apellido: "+WorkersTable.getValueAt(WorkersTable.getSelectedRow(),4));
-                System.out.println("Estado: "+WorkersTable.getValueAt(WorkersTable.getSelectedRow(),5));
+                WorkersInformationView workersInformationView = new WorkersInformationView(this.principalJFrame,this.workers,
+                    Integer.parseInt(String.valueOf(WorkersTable.getValueAt(WorkersTable.getSelectedRow(),0))));
+                workersInformationView.setSize(970, 576);
+                workersInformationView.setLocation(0, 0);
+                principalJFrame.replacePanel(workersInformationView);
             }
         }
     }//GEN-LAST:event_WorkersTableMouseClicked

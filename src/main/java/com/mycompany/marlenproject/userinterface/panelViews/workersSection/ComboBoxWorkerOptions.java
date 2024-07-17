@@ -67,7 +67,7 @@ public class ComboBoxWorkerOptions {
                 return i;
             }
         }
-        return -1;
+        return 0;
     }
     
 }

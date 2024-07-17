@@ -610,9 +610,20 @@ public class WorkersInformationView extends javax.swing.JPanel {
 
     private void btnAllWorkerListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllWorkerListActionPerformed
         // TODO add your handling code here:
-        WorkersListView workerListView = new WorkersListView(principalJFrame,workers);
-        workerListView.setSize(970, 576);
-        principalJFrame.replacePanel(workerListView);
+        List<Worker> workerList;
+        workerList = new requestWorker().getNoDeletedWorker();
+        
+        if(!workers.isEmpty()){
+            WorkersListView workerListView = new WorkersListView(this.principalJFrame,workerList);
+            workerListView.setSize(970, 576);
+            principalJFrame.replacePanel(workerListView);
+        }else{
+            JOptionPane.showMessageDialog(principalJFrame, "No tiene trabajadores registrados", "Sin registros", 0);
+            WorkersFirstView workersFirstView  = new WorkersFirstView(this.principalJFrame);
+            workersFirstView.setSize(800, 500);
+            workersFirstView.setLocation(0, 0);
+            principalJFrame.replacePanel(workersFirstView);
+        }
     }//GEN-LAST:event_btnAllWorkerListActionPerformed
 
 

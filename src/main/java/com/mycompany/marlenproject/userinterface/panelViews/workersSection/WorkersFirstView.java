@@ -126,7 +126,7 @@ public class WorkersFirstView extends javax.swing.JPanel {
         
         if(!workers.isEmpty()){
             WorkersInformationView workersInformationView = new WorkersInformationView(this.principalJFrame,workers, 0);
-            workersInformationView.setSize(800, 500);
+            workersInformationView.setSize(970, 576);
             workersInformationView.setLocation(0, 0);
             principalJFrame.replacePanel(workersInformationView);
         }else{
