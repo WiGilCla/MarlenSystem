@@ -40,7 +40,7 @@ public class WorkersListView extends javax.swing.JPanel {
                 String status = (worker.isIsActive())
                         ? options[ComboOptions.getIndexStatusActive()] : options[ComboOptions.getIndexStatusNoActive()];
 
-                Object[] workersObject = {count, worker.getPerson().getIdentificationNumber(), worker.getPerson().getFirstName(),
+                Object[] workersObject = {(count+1), worker.getPerson().getIdentificationNumber(), worker.getPerson().getFirstName(),
                     worker.getPerson().getFirstLastName(), worker.getPosition(), Checker.capitalizedString(status)};
                 modelTable.addRow(workersObject);
                 count++;
@@ -456,10 +456,10 @@ public class WorkersListView extends javax.swing.JPanel {
                 WorkersInformationView workersInformationView;
                 if(!this.filterWorkers.isEmpty()){
                     workersInformationView = new WorkersInformationView(this.principalJFrame,this.filterWorkers,
-                            Integer.parseInt(String.valueOf(WorkersTable.getValueAt(WorkersTable.getSelectedRow(),0))));
+                            (Integer.parseInt(String.valueOf(WorkersTable.getValueAt(WorkersTable.getSelectedRow(),0))))-1);
                 }else{
                     workersInformationView = new WorkersInformationView(this.principalJFrame,this.workers,
-                    Integer.parseInt(String.valueOf(WorkersTable.getValueAt(WorkersTable.getSelectedRow(),0))));
+                    (Integer.parseInt(String.valueOf(WorkersTable.getValueAt(WorkersTable.getSelectedRow(),0)))-1));
                 }
                 
 //                workersInformationView = new WorkersInformationView(this.principalJFrame,this.workers,

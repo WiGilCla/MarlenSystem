@@ -362,9 +362,9 @@ public class AddWorkerView extends javax.swing.JPanel {
                     .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(sltPosition, 0, 0, Short.MAX_VALUE)
                     .addGroup(dataInformation1PanelLayout.createSequentialGroup()
-                        .addComponent(sltBloodType, 0, 1, Short.MAX_VALUE)
+                        .addComponent(sltBloodType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(22, 22, 22)
-                        .addComponent(sltBloodTypeCmplt, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(sltBloodTypeCmplt, 0, 135, Short.MAX_VALUE))
                     .addComponent(dateBirthdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
