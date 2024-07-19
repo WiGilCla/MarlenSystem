@@ -16,6 +16,7 @@ public class WorkersListView extends javax.swing.JPanel {
 
     private final AdminHome principalJFrame;
     private final List<Worker> workers;
+    private List<Worker> filterWorkers = null;
     private final requestWorker RequestWorker = new requestWorker();
     private final ComboBoxWorkerOptions ComboOptions = new ComboBoxWorkerOptions();
     private final CheckFields Checker = new CheckFields();
@@ -410,7 +411,8 @@ public class WorkersListView extends javax.swing.JPanel {
         String positionFilter = sltPositionFilter.getSelectedItem().toString();
         String statusFilterActive = sltStatusFilter.getSelectedItem().toString();
         boolean statusFilter = sltStatusFilter.getSelectedIndex() == ComboOptions.getIndexStatusActive();
-        List<Worker> filterWorkers = new ArrayList<>();
+        //List<Worker> filterWorkers = new ArrayList<>();
+        this.filterWorkers = new ArrayList<>();
 
         
         if ((!textFilter.equalsIgnoreCase("")
@@ -423,6 +425,7 @@ public class WorkersListView extends javax.swing.JPanel {
                     filterWorkers.add(worker);
                 }
             }
+            uploadInfoToTable(this.filterWorkers);
         }else if(!textFilter.equalsIgnoreCase("")
                 || Checker.checkComboBox(positionFilter) || Checker.checkComboBox(statusFilterActive)){
             for (Worker worker : this.workers) {
@@ -434,10 +437,11 @@ public class WorkersListView extends javax.swing.JPanel {
                     filterWorkers.add(worker);
                 }
             }
+            uploadInfoToTable(this.filterWorkers);
         }else{
-            filterWorkers = this.workers;
+            filterWorkers.clear();
+            uploadInfoToTable(this.workers);
         }
-        uploadInfoToTable(filterWorkers);
         
         sltPositionFilter.setSelectedIndex(ComboOptions.getNoOneOptionSelected());
         sltStatusFilter.setSelectedIndex(ComboOptions.getNoOneOptionSelected());
@@ -449,8 +453,17 @@ public class WorkersListView extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(WorkersTable.getRowCount() > 0){
             if(WorkersTable.getSelectedRow() != -1){
-                WorkersInformationView workersInformationView = new WorkersInformationView(this.principalJFrame,this.workers,
+                WorkersInformationView workersInformationView;
+                if(!this.filterWorkers.isEmpty()){
+                    workersInformationView = new WorkersInformationView(this.principalJFrame,this.filterWorkers,
+                            Integer.parseInt(String.valueOf(WorkersTable.getValueAt(WorkersTable.getSelectedRow(),0))));
+                }else{
+                    workersInformationView = new WorkersInformationView(this.principalJFrame,this.workers,
                     Integer.parseInt(String.valueOf(WorkersTable.getValueAt(WorkersTable.getSelectedRow(),0))));
+                }
+                
+//                workersInformationView = new WorkersInformationView(this.principalJFrame,this.workers,
+//                    Integer.parseInt(String.valueOf(WorkersTable.getValueAt(WorkersTable.getSelectedRow(),0))));
                 workersInformationView.setSize(970, 576);
                 workersInformationView.setLocation(0, 0);
                 principalJFrame.replacePanel(workersInformationView);
