@@ -10,9 +10,9 @@ import com.mycompany.marlenproject.userinterface.AdminHome;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-
 public class WorkersFirstView extends javax.swing.JPanel {
-    private final AdminHome principalJFrame; 
+
+    private final AdminHome principalJFrame;
 
     public WorkersFirstView(AdminHome principalJFrame) {
         initComponents();
@@ -121,15 +121,27 @@ public class WorkersFirstView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddNewWorkerActionPerformed
 
     private void btnListWorkersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListWorkersActionPerformed
-        List<Worker> workers;
-        workers = new requestWorker().getNoDeletedWorker();
-        
-        if(!workers.isEmpty()){
-            WorkersInformationView workersInformationView = new WorkersInformationView(this.principalJFrame,workers, 0);
-            workersInformationView.setSize(970, 576);
-            workersInformationView.setLocation(0, 0);
-            principalJFrame.replacePanel(workersInformationView);
-        }else{
+//        List<Worker> workers;
+//        workers = new requestWorker().getNoDeletedWorker();
+
+//        if(!workers.isEmpty()){
+//            WorkersInformationView workersInformationView = new WorkersInformationView(this.principalJFrame,workers, 0);
+//            workersInformationView.setSize(970, 576);
+//            workersInformationView.setLocation(0, 0);
+//            principalJFrame.replacePanel(workersInformationView);
+//            
+//            
+//        }else{
+//            JOptionPane.showMessageDialog(principalJFrame, "No tiene trabajadores registrados", "Sin registros", 0);
+//        }
+        List<Worker> workerList;
+        workerList = new requestWorker().getNoDeletedWorker();
+
+        if (!workerList.isEmpty()) {
+            WorkersListView workerListView = new WorkersListView(this.principalJFrame, workerList);
+            workerListView.setSize(970, 576);
+            principalJFrame.replacePanel(workerListView);
+        } else {
             JOptionPane.showMessageDialog(principalJFrame, "No tiene trabajadores registrados", "Sin registros", 0);
         }
     }//GEN-LAST:event_btnListWorkersActionPerformed
