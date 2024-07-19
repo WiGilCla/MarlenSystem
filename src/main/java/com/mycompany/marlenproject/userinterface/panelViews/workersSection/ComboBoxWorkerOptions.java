@@ -28,6 +28,10 @@ public class ComboBoxWorkerOptions {
     
     public ComboBoxWorkerOptions() {
     }
+    
+    public int getNoOneOptionSelected(){
+        return 0;
+    }
 
     public String[] getIdentificationTypeOptions() {
         return identificationTypeOptions;

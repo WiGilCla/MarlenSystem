@@ -8,43 +8,48 @@ import com.mycompany.marlenproject.logic.CheckFields;
 import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.logic.request.requestWorker;
 import com.mycompany.marlenproject.userinterface.AdminHome;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
-
 public class WorkersListView extends javax.swing.JPanel {
-    private final AdminHome principalJFrame; 
+
+    private final AdminHome principalJFrame;
     private final List<Worker> workers;
     private final requestWorker RequestWorker = new requestWorker();
     private final ComboBoxWorkerOptions ComboOptions = new ComboBoxWorkerOptions();
     private final CheckFields Checker = new CheckFields();
-    
-    
-    private void uploadInfoToTable(List<Worker> ListWorker){
-        DefaultTableModel workerTable = new DefaultTableModel(){
+
+    private void uploadInfoToTable(List<Worker> ListWorker) {
+        DefaultTableModel modelTable = new DefaultTableModel() {
             @Override
-            public boolean isCellEditable(int row, int column){
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-        String tableHead[] = {"N°","Dni", "Nombre", "Apellido" , "Cargo","Estado"};
-        workerTable.setColumnIdentifiers(tableHead);
-        
-        if(!workers.isEmpty() && workers != null){
+        String tableHead[] = {"N°", "Dni", "Nombre", "Apellido", "Cargo", "Estado"};
+        modelTable.setColumnIdentifiers(tableHead);
+
+        if (!ListWorker.isEmpty() && ListWorker != null) {
+            
             int count = 0;
-            for(Worker worker: ListWorker){
+            for (Worker worker : ListWorker) {
+
                 String[] options = ComboOptions.getStateOptions();
-                String status = (worker.isIsActive())? 
-                        options[ComboOptions.getIndexStatusActive()]:options[ComboOptions.getIndexStatusNoActive()];
-                
-                Object[] workersObject = {count, worker.getPerson().getIdentificationNumber(),worker.getPerson().getFirstName(), 
-                    worker.getPerson().getFirstLastName(), worker.getPosition(),Checker.capitalizedString(status)};
-                workerTable.addRow(workersObject);
+                String status = (worker.isIsActive())
+                        ? options[ComboOptions.getIndexStatusActive()] : options[ComboOptions.getIndexStatusNoActive()];
+
+                Object[] workersObject = {count, worker.getPerson().getIdentificationNumber(), worker.getPerson().getFirstName(),
+                    worker.getPerson().getFirstLastName(), worker.getPosition(), Checker.capitalizedString(status)};
+                modelTable.addRow(workersObject);
                 count++;
+
             }
         }
-        WorkersTable.setModel(workerTable);
+        
+        WorkersTable.setModel(modelTable);
     }
+
     public WorkersListView(AdminHome principalJFrame, List<Worker> workers) {
         this.principalJFrame = principalJFrame;
         this.workers = workers;
@@ -73,7 +78,7 @@ public class WorkersListView extends javax.swing.JPanel {
         lbFilter3Panel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         TablePanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         WorkersTable = new javax.swing.JTable();
         ButtonsPanel = new javax.swing.JPanel();
 
@@ -97,7 +102,7 @@ public class WorkersListView extends javax.swing.JPanel {
             textFilter1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(textFilter1PanelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(txtSearchWorker, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                .addComponent(txtSearchWorker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(21, 21, 21))
         );
         textFilter1PanelLayout.setVerticalGroup(
@@ -125,7 +130,7 @@ public class WorkersListView extends javax.swing.JPanel {
             .addGroup(ButtonFilter1PanelLayout.createSequentialGroup()
                 .addContainerGap(21, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         ButtonFilter1PanelLayout.setVerticalGroup(
             ButtonFilter1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,9 +146,9 @@ public class WorkersListView extends javax.swing.JPanel {
             Filter1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Filter1PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(textFilter1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+                .addComponent(textFilter1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ButtonFilter1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ButtonFilter1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         Filter1PanelLayout.setVerticalGroup(
@@ -170,7 +175,7 @@ public class WorkersListView extends javax.swing.JPanel {
             CBoxFilter2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CBoxFilter2PanelLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addComponent(sltPositionFilter, 0, 102, Short.MAX_VALUE)
+                .addComponent(sltPositionFilter, 0, 0, Short.MAX_VALUE)
                 .addGap(6, 6, 6))
         );
         CBoxFilter2PanelLayout.setVerticalGroup(
@@ -193,7 +198,7 @@ public class WorkersListView extends javax.swing.JPanel {
             LbFilter2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LbFilter2PanelLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(6, 6, 6))
         );
         LbFilter2PanelLayout.setVerticalGroup(
@@ -210,7 +215,7 @@ public class WorkersListView extends javax.swing.JPanel {
             Filter2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Filter2PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(LbFilter2Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(LbFilter2Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CBoxFilter2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                 .addContainerGap())
@@ -239,7 +244,7 @@ public class WorkersListView extends javax.swing.JPanel {
             CBoxFilter3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CBoxFilter3PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(sltStatusFilter, 0, 102, Short.MAX_VALUE)
+                .addComponent(sltStatusFilter, 0, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
         CBoxFilter3PanelLayout.setVerticalGroup(
@@ -281,7 +286,7 @@ public class WorkersListView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lbFilter3Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CBoxFilter3Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                .addComponent(CBoxFilter3Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
                 .addContainerGap())
         );
         Filter3PanelLayout.setVerticalGroup(
@@ -302,9 +307,9 @@ public class WorkersListView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(Filter1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Filter2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                .addComponent(Filter2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Filter3Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                .addComponent(Filter3Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         FilterPanelLayout.setVerticalGroup(
@@ -324,9 +329,6 @@ public class WorkersListView extends javax.swing.JPanel {
         TablePanel.setMinimumSize(new java.awt.Dimension(958, 100));
         TablePanel.setPreferredSize(new java.awt.Dimension(958, 352));
 
-        jScrollPane1.setBorder(null);
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(946, 340));
-
         WorkersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -338,13 +340,12 @@ public class WorkersListView extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        WorkersTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         WorkersTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 WorkersTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(WorkersTable);
+        jScrollPane2.setViewportView(WorkersTable);
 
         javax.swing.GroupLayout TablePanelLayout = new javax.swing.GroupLayout(TablePanel);
         TablePanel.setLayout(TablePanelLayout);
@@ -352,15 +353,15 @@ public class WorkersListView extends javax.swing.JPanel {
             TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TablePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addGap(8, 8, 8))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 944, Short.MAX_VALUE)
+                .addContainerGap())
         );
         TablePanelLayout.setVerticalGroup(
             TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TablePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
-                .addGap(4, 4, 4))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         ButtonsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -405,11 +406,47 @@ public class WorkersListView extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String textFilter = Checker.removeStringBlanks(txtSearchWorker.getText()).toLowerCase();
+        String positionFilter = sltPositionFilter.getSelectedItem().toString();
+        String statusFilterActive = sltStatusFilter.getSelectedItem().toString();
+        boolean statusFilter = sltStatusFilter.getSelectedIndex() == ComboOptions.getIndexStatusActive();
+        List<Worker> filterWorkers = new ArrayList<>();
+
+        
+        if ((!textFilter.equalsIgnoreCase("")
+                || Checker.checkComboBox(positionFilter)) && Checker.checkComboBox(statusFilterActive) == false) {
+            for (Worker worker : this.workers) {
+                if ((textFilter.length() > 0 && (worker.getPerson().getIdentificationNumber().contains(textFilter)
+                        || worker.getPerson().getFirstName().toLowerCase().contains(textFilter)
+                        || worker.getPerson().getFirstLastName().toLowerCase().contains(textFilter)))
+                        || worker.getPosition().equalsIgnoreCase(positionFilter)) {
+                    filterWorkers.add(worker);
+                }
+            }
+        }else if(!textFilter.equalsIgnoreCase("")
+                || Checker.checkComboBox(positionFilter) || Checker.checkComboBox(statusFilterActive)){
+            for (Worker worker : this.workers) {
+                if ((textFilter.length() > 0 && (worker.getPerson().getIdentificationNumber().contains(textFilter)
+                        || worker.getPerson().getFirstName().toLowerCase().contains(textFilter)
+                        || worker.getPerson().getFirstLastName().toLowerCase().contains(textFilter)))
+                        || worker.getPosition().equalsIgnoreCase(positionFilter)
+                        || worker.isIsActive() == statusFilter) {
+                    filterWorkers.add(worker);
+                }
+            }
+        }else{
+            filterWorkers = this.workers;
+        }
+        uploadInfoToTable(filterWorkers);
+        
+        sltPositionFilter.setSelectedIndex(ComboOptions.getNoOneOptionSelected());
+        sltStatusFilter.setSelectedIndex(ComboOptions.getNoOneOptionSelected());
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void WorkersTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WorkersTableMouseClicked
         // TODO add your handling code here:
-
         if(WorkersTable.getRowCount() > 0){
             if(WorkersTable.getSelectedRow() != -1){
                 WorkersInformationView workersInformationView = new WorkersInformationView(this.principalJFrame,this.workers,
@@ -437,7 +474,7 @@ public class WorkersListView extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel lbFilter3Panel;
     private javax.swing.JComboBox<String> sltPositionFilter;
     private javax.swing.JComboBox<String> sltStatusFilter;
