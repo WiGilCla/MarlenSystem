@@ -16,7 +16,7 @@ public class WorkersListView extends javax.swing.JPanel {
 
     private final AdminHome principalJFrame;
     private final List<Worker> workers;
-    private List<Worker> filterWorkers = null;
+    private List<Worker> filterWorkers = new ArrayList<>();
     private final requestWorker RequestWorker = new requestWorker();
     private final ComboBoxWorkerOptions ComboOptions = new ComboBoxWorkerOptions();
     private final CheckFields Checker = new CheckFields();
@@ -412,7 +412,7 @@ public class WorkersListView extends javax.swing.JPanel {
         String statusFilterActive = sltStatusFilter.getSelectedItem().toString();
         boolean statusFilter = sltStatusFilter.getSelectedIndex() == ComboOptions.getIndexStatusActive();
         //List<Worker> filterWorkers = new ArrayList<>();
-        this.filterWorkers = new ArrayList<>();
+        this.filterWorkers.clear();
 
         
         if ((!textFilter.equalsIgnoreCase("")

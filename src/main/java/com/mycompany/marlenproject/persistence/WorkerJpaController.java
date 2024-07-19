@@ -145,7 +145,7 @@ public class WorkerJpaController implements Serializable {
         try {
             em = getEntityManager();
             TypedQuery<Worker> query = em.createQuery(
-                "SELECT w FROM Worker w WHERE w.IsDelete = false", Worker.class);
+                "SELECT w FROM Worker w WHERE w.IsDelete = false ORDER BY w.person.firstName", Worker.class);
             return query.getResultList();
         } catch (Exception e) {
             return null;
