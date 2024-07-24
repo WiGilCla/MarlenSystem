@@ -168,7 +168,7 @@ public class AddWorkerView extends javax.swing.JPanel {
 
         buttonsPanel.setPreferredSize(new java.awt.Dimension(958, 208));
 
-        btnCleanFields.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconDelete.png"))); // NOI18N
+        btnCleanFields.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconDelete.png"))); // NOI18N
         btnCleanFields.setText("Limpiar campos");
         btnCleanFields.setPreferredSize(new java.awt.Dimension(180, 60));
         btnCleanFields.addActionListener(new java.awt.event.ActionListener() {
@@ -177,7 +177,7 @@ public class AddWorkerView extends javax.swing.JPanel {
             }
         });
 
-        btnSaveWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconSave.png"))); // NOI18N
+        btnSaveWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconSave.png"))); // NOI18N
         btnSaveWorker.setText("Guardar");
         btnSaveWorker.setPreferredSize(new java.awt.Dimension(180, 60));
         btnSaveWorker.addActionListener(new java.awt.event.ActionListener() {

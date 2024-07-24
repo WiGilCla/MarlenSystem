@@ -81,7 +81,7 @@
         <Component class="javax.swing.JButton" name="btnAddNewWorker">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Images/iconAddWorker.png"/>
+              <Image iconType="3" name="/Images/Images48x48/iconAddWorker.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Agregar nuevo trabajador"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -133,7 +133,7 @@
         <Component class="javax.swing.JButton" name="btnListWorkers">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Images/iconList.png"/>
+              <Image iconType="3" name="/Images/Images48x48/iconList.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Ver mis trabajadores"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">

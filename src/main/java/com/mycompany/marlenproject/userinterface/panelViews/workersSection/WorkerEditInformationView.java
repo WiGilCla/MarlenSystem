@@ -595,7 +595,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
 
         buttonsPanel.setPreferredSize(new java.awt.Dimension(788, 100));
 
-        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconCancel.png"))); // NOI18N
+        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconCancel.png"))); // NOI18N
         btnCancel.setText("Cancelar");
         btnCancel.setPreferredSize(new java.awt.Dimension(180, 60));
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -604,7 +604,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             }
         });
 
-        btnClean.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconDelete.png"))); // NOI18N
+        btnClean.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconDelete.png"))); // NOI18N
         btnClean.setText("Limpiar campos");
         btnClean.setPreferredSize(new java.awt.Dimension(180, 60));
         btnClean.addActionListener(new java.awt.event.ActionListener() {
@@ -613,7 +613,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             }
         });
 
-        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconSave.png"))); // NOI18N
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconSave.png"))); // NOI18N
         btnSave.setText("Guardar");
         btnSave.setPreferredSize(new java.awt.Dimension(180, 60));
         btnSave.addActionListener(new java.awt.event.ActionListener() {

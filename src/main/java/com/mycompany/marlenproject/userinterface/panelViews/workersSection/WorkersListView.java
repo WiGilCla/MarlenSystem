@@ -116,7 +116,7 @@ public class WorkersListView extends javax.swing.JPanel {
 
         ButtonFilter1Panel.setPreferredSize(new java.awt.Dimension(99, 76));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconLupe.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconLupe.png"))); // NOI18N
         jButton1.setPreferredSize(new java.awt.Dimension(40, 40));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -4,6 +4,7 @@
  */
 package com.mycompany.marlenproject.userinterface;
 
+import com.mycompany.marlenproject.userinterface.panelViews.accountingSection.AccountingView;
 import com.mycompany.marlenproject.userinterface.panelViews.workersSection.WorkersFirstView;
 
 import javax.swing.JPanel;
@@ -75,9 +76,14 @@ public class AdminHome extends javax.swing.JFrame {
 
         accountingPanel.setPreferredSize(new java.awt.Dimension(188, 100));
 
-        btnAccountingSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconCalculation.png"))); // NOI18N
+        btnAccountingSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconCalculation.png"))); // NOI18N
         btnAccountingSection.setText("Contabilidad");
         btnAccountingSection.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAccountingSection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAccountingSectionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout accountingPanelLayout = new javax.swing.GroupLayout(accountingPanel);
         accountingPanel.setLayout(accountingPanelLayout);
@@ -98,7 +104,7 @@ public class AdminHome extends javax.swing.JFrame {
 
         quotesPanel.setPreferredSize(new java.awt.Dimension(188, 100));
 
-        btnQuotesSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconNewPage.png"))); // NOI18N
+        btnQuotesSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconNewPage.png"))); // NOI18N
         btnQuotesSection.setText("Cotizaciones");
         btnQuotesSection.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -121,7 +127,7 @@ public class AdminHome extends javax.swing.JFrame {
 
         workersPanel.setPreferredSize(new java.awt.Dimension(188, 100));
 
-        btnWorkersSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconWorker.png"))); // NOI18N
+        btnWorkersSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconWorker.png"))); // NOI18N
         btnWorkersSection.setText("Trabajadores");
         btnWorkersSection.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnWorkersSection.addActionListener(new java.awt.event.ActionListener() {
@@ -313,10 +319,19 @@ public class AdminHome extends javax.swing.JFrame {
 
     private void btnWorkersSectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWorkersSectionActionPerformed
         WorkersFirstView workersFirstView  = new WorkersFirstView(this);
-        workersFirstView.setSize(982, 588);
+        workersFirstView.setSize(970, 576);
         workersFirstView.setLocation(0, 0);
         replacePanel(workersFirstView);
     }//GEN-LAST:event_btnWorkersSectionActionPerformed
+
+    private void btnAccountingSectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccountingSectionActionPerformed
+        // TODO add your handling code here:
+        AccountingView accountingView = new AccountingView(this);
+        accountingView.setSize(970, 576);
+        accountingView.setLocation(0, 0);
+        replacePanel(accountingView);
+        System.out.println("xdxdxd");
+    }//GEN-LAST:event_btnAccountingSectionActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

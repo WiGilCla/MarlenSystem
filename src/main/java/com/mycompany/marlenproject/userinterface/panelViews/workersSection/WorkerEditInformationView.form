@@ -677,7 +677,7 @@
             <Component class="javax.swing.JButton" name="btnCancel">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Images/iconCancel.png"/>
+                  <Image iconType="3" name="/Images/Images48x48/iconCancel.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cancelar"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -691,7 +691,7 @@
             <Component class="javax.swing.JButton" name="btnClean">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Images/iconDelete.png"/>
+                  <Image iconType="3" name="/Images/Images48x48/iconDelete.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Limpiar campos"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -705,7 +705,7 @@
             <Component class="javax.swing.JButton" name="btnSave">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Images/iconSave.png"/>
+                  <Image iconType="3" name="/Images/Images48x48/iconSave.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">

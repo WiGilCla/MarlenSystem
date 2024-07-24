@@ -34,7 +34,7 @@ public class WorkersFirstView extends javax.swing.JPanel {
         addWorkerbtnPanel.setName(""); // NOI18N
         addWorkerbtnPanel.setPreferredSize(new java.awt.Dimension(958, 282));
 
-        btnAddNewWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconAddWorker.png"))); // NOI18N
+        btnAddNewWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconAddWorker.png"))); // NOI18N
         btnAddNewWorker.setText("Agregar nuevo trabajador");
         btnAddNewWorker.setMaximumSize(new java.awt.Dimension(200, 50));
         btnAddNewWorker.setPreferredSize(new java.awt.Dimension(250, 60));
@@ -64,7 +64,7 @@ public class WorkersFirstView extends javax.swing.JPanel {
         listWorkerbtnPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         listWorkerbtnPanel.setPreferredSize(new java.awt.Dimension(958, 282));
 
-        btnListWorkers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconList.png"))); // NOI18N
+        btnListWorkers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconList.png"))); // NOI18N
         btnListWorkers.setText("Ver mis trabajadores");
         btnListWorkers.setMaximumSize(new java.awt.Dimension(200, 50));
         btnListWorkers.setPreferredSize(new java.awt.Dimension(200, 60));

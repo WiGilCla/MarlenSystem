@@ -103,7 +103,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
         buttonsPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         buttonsPanel.setPreferredSize(new java.awt.Dimension(958, 150));
 
-        btnDeleteWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconTrash.png"))); // NOI18N
+        btnDeleteWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconTrash.png"))); // NOI18N
         btnDeleteWorker.setText("Eliminar trabajador");
         btnDeleteWorker.setPreferredSize(new java.awt.Dimension(180, 60));
         btnDeleteWorker.addActionListener(new java.awt.event.ActionListener() {
@@ -112,7 +112,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
             }
         });
 
-        btnEditWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconEdit.png"))); // NOI18N
+        btnEditWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconEdit.png"))); // NOI18N
         btnEditWorker.setText("Editar información");
         btnEditWorker.setPreferredSize(new java.awt.Dimension(180, 60));
         btnEditWorker.addActionListener(new java.awt.event.ActionListener() {
@@ -121,7 +121,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
             }
         });
 
-        btnNextWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconNext.png"))); // NOI18N
+        btnNextWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconNext.png"))); // NOI18N
         btnNextWorker.setPreferredSize(new java.awt.Dimension(38, 38));
         btnNextWorker.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,7 +129,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
             }
         });
 
-        btnPreviousWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconPrevious.png"))); // NOI18N
+        btnPreviousWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconPrevious.png"))); // NOI18N
         btnPreviousWorker.setPreferredSize(new java.awt.Dimension(38, 38));
         btnPreviousWorker.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
