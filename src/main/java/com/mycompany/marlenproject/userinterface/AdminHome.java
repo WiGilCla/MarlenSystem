@@ -330,7 +330,6 @@ public class AdminHome extends javax.swing.JFrame {
         accountingView.setSize(970, 576);
         accountingView.setLocation(0, 0);
         replacePanel(accountingView);
-        System.out.println("xdxdxd");
     }//GEN-LAST:event_btnAccountingSectionActionPerformed
 
     public static void main(String args[]) {

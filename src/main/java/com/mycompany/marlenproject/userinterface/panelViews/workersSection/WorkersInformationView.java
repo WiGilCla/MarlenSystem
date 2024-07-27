@@ -19,16 +19,16 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class WorkersInformationView extends javax.swing.JPanel {
-    private final requestWorker RequestWorker = new requestWorker();
-    private final List<Worker> workers;
-    private final CheckFields checker = new CheckFields();
+    private final requestWorker REQUEST_WORKER = new requestWorker();
+    private final List<Worker> WORKER_LIST;
+    private final CheckFields CHECKER = new CheckFields();
     private int workerViewing = 0;
     
-    private final AdminHome principalJFrame; 
+    private final AdminHome PRINCIPALJFRAME; 
     
 
     private void viewWorkerInformation(int index){
-        Worker worker = workers.get(index);
+        Worker worker = this.WORKER_LIST.get(index);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         
         
@@ -40,7 +40,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
         txtIdentificationNum.setText(String.valueOf(worker.getPerson().getIdentificationNumber()));
         txtBloodType.setText(worker.getBloodType());
         txtEps.setText(worker.getHealthEntity());
-        txtAge.setText(String.valueOf(checker.timeElapsed(worker.getPerson().getBirthdate(), new Date())));
+        txtAge.setText(String.valueOf(CHECKER.timeElapsed(worker.getPerson().getBirthdate(), new Date())));
         txtDateVinculation.setText(sdf.format(worker.getDayLink()));
         txtPosition.setText(worker.getPosition());
         String state = (worker.isIsActive())? "Activo":"Inactivo";
@@ -48,11 +48,11 @@ public class WorkersInformationView extends javax.swing.JPanel {
     }
     
     public WorkersInformationView(AdminHome principalJFrame, List<Worker> listWorker, int index) {
-        this.workers = listWorker;
+        this.WORKER_LIST = listWorker;
         this.workerViewing = index;
         initComponents();
         viewWorkerInformation(workerViewing);
-        this.principalJFrame = principalJFrame;
+        this.PRINCIPALJFRAME = principalJFrame;
     }
 
     @SuppressWarnings("unchecked")
@@ -551,7 +551,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
 
     private void btnNextWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextWorkerActionPerformed
         // TODO add your handling code here:
-        if(workerViewing < workers.size()-1){
+        if(workerViewing < this.WORKER_LIST.size()-1){
             workerViewing++;
             viewWorkerInformation(workerViewing);
         }
@@ -569,28 +569,28 @@ public class WorkersInformationView extends javax.swing.JPanel {
         try {
             boolean state = false;
             String bloodTypeCmpl = "";
-            Person person = workers.get(workerViewing).getPerson();
-            String position = workers.get(workerViewing).getPosition();
-            String bloodType = workers.get(workerViewing).getBloodType();
-            String healthEntity = workers.get(workerViewing).getHealthEntity();
-            Timestamp dayLink = new Timestamp(workers.get(workerViewing).getDayLink().getTime());
+            Person person = this.WORKER_LIST.get(workerViewing).getPerson();
+            String position = this.WORKER_LIST.get(workerViewing).getPosition();
+            String bloodType = this.WORKER_LIST.get(workerViewing).getBloodType();
+            String healthEntity = this.WORKER_LIST.get(workerViewing).getHealthEntity();
+            Timestamp dayLink = new Timestamp(this.WORKER_LIST.get(workerViewing).getDayLink().getTime());
             
             
-            RequestWorker.editWorker(workers.get(workerViewing).getWorkerId(), 
+            REQUEST_WORKER.editWorker(this.WORKER_LIST.get(workerViewing).getWorkerId(), 
                     String.valueOf(person.getIdentificationNumber()), bloodType, 
                     bloodTypeCmpl, healthEntity, dayLink, position, state, true);
-            JOptionPane.showMessageDialog(principalJFrame, "El trabajador ha sido eliminado exitosamente", "Eliminación exitosa", 1);
+            JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, "El trabajador ha sido eliminado exitosamente", "Eliminación exitosa", 1);
             
-            workers.remove(workerViewing);
+            this.WORKER_LIST.remove(workerViewing);
             
-            if(!workers.isEmpty() && workerViewing != 0){
+            if(!this.WORKER_LIST.isEmpty() && workerViewing != 0){
                 workerViewing --;
-            }else if(workers.isEmpty()) {
-                JOptionPane.showMessageDialog(principalJFrame, "No tiene trabajadores registrados", "Sin registros", 0);
-                WorkersFirstView workersFirstView  = new WorkersFirstView(this.principalJFrame);
+            }else if(this.WORKER_LIST.isEmpty()) {
+                JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, "No tiene trabajadores registrados", "Sin registros", 0);
+                WorkersFirstView workersFirstView  = new WorkersFirstView(this.PRINCIPALJFRAME);
                 workersFirstView.setSize(800, 500);
                 workersFirstView.setLocation(0, 0);
-                principalJFrame.replacePanel(workersFirstView);
+                this.PRINCIPALJFRAME.replacePanel(workersFirstView);
                 return;
             }
             
@@ -602,10 +602,10 @@ public class WorkersInformationView extends javax.swing.JPanel {
 
     private void btnEditWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditWorkerActionPerformed
         // TODO add your handling code here:
-        WorkerEditInformationView workerEditInformation = new WorkerEditInformationView(workers.get(workerViewing), this.principalJFrame);
+        WorkerEditInformationView workerEditInformation = new WorkerEditInformationView(this.WORKER_LIST.get(workerViewing), this.PRINCIPALJFRAME);
         workerEditInformation.setSize(800, 500);
         workerEditInformation.setVisible(true);
-        principalJFrame.setVisible(false);
+        this.PRINCIPALJFRAME.setVisible(false);
     }//GEN-LAST:event_btnEditWorkerActionPerformed
 
     private void btnAllWorkerListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllWorkerListActionPerformed
@@ -613,16 +613,16 @@ public class WorkersInformationView extends javax.swing.JPanel {
         List<Worker> workerList;
         workerList = new requestWorker().getNoDeletedWorker();
         
-        if(!workers.isEmpty()){
-            WorkersListView workerListView = new WorkersListView(this.principalJFrame,workerList);
+        if(!this.WORKER_LIST.isEmpty()){
+            WorkersListView workerListView = new WorkersListView(this.PRINCIPALJFRAME,workerList);
             workerListView.setSize(970, 576);
-            principalJFrame.replacePanel(workerListView);
+            this.PRINCIPALJFRAME.replacePanel(workerListView);
         }else{
-            JOptionPane.showMessageDialog(principalJFrame, "No tiene trabajadores registrados", "Sin registros", 0);
-            WorkersFirstView workersFirstView  = new WorkersFirstView(this.principalJFrame);
+            JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, "No tiene trabajadores registrados", "Sin registros", 0);
+            WorkersFirstView workersFirstView  = new WorkersFirstView(this.PRINCIPALJFRAME);
             workersFirstView.setSize(800, 500);
             workersFirstView.setLocation(0, 0);
-            principalJFrame.replacePanel(workersFirstView);
+            this.PRINCIPALJFRAME.replacePanel(workersFirstView);
         }
     }//GEN-LAST:event_btnAllWorkerListActionPerformed
 

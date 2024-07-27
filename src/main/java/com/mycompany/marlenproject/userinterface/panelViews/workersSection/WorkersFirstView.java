@@ -12,11 +12,11 @@ import javax.swing.JOptionPane;
 
 public class WorkersFirstView extends javax.swing.JPanel {
 
-    private final AdminHome principalJFrame;
+    private final AdminHome PRINCIPALJFRAME;
 
     public WorkersFirstView(AdminHome principalJFrame) {
         initComponents();
-        this.principalJFrame = principalJFrame;
+        this.PRINCIPALJFRAME = principalJFrame;
     }
 
     @SuppressWarnings("unchecked")
@@ -117,7 +117,7 @@ public class WorkersFirstView extends javax.swing.JPanel {
         AddWorkerView addWorkerView = new AddWorkerView();
         addWorkerView.setSize(800, 500);
         addWorkerView.setLocation(0, 0);
-        principalJFrame.replacePanel(addWorkerView);
+        PRINCIPALJFRAME.replacePanel(addWorkerView);
     }//GEN-LAST:event_btnAddNewWorkerActionPerformed
 
     private void btnListWorkersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListWorkersActionPerformed
@@ -138,11 +138,11 @@ public class WorkersFirstView extends javax.swing.JPanel {
         workerList = new requestWorker().getNoDeletedWorker();
 
         if (!workerList.isEmpty()) {
-            WorkersListView workerListView = new WorkersListView(this.principalJFrame, workerList);
+            WorkersListView workerListView = new WorkersListView(this.PRINCIPALJFRAME, workerList);
             workerListView.setSize(970, 576);
-            principalJFrame.replacePanel(workerListView);
+            PRINCIPALJFRAME.replacePanel(workerListView);
         } else {
-            JOptionPane.showMessageDialog(principalJFrame, "No tiene trabajadores registrados", "Sin registros", 0);
+            JOptionPane.showMessageDialog(PRINCIPALJFRAME, "No tiene trabajadores registrados", "Sin registros", 0);
         }
     }//GEN-LAST:event_btnListWorkersActionPerformed
 

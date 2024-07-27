@@ -5,9 +5,7 @@
 package com.mycompany.marlenproject.userinterface.panelViews.accountingSection;
 
 import com.mycompany.marlenproject.userinterface.AdminHome;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -17,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JPopupMenu.Separator;
 import javax.swing.JScrollPane;
-import javax.swing.JToolBar;
 
 /**
  *
@@ -25,10 +22,10 @@ import javax.swing.JToolBar;
  */
 public class AccountingView extends javax.swing.JPanel {
 
-    private final AdminHome principalJFrame;
+    private final AdminHome PRINCIPALJFRAME;
 
     public AccountingView(AdminHome principalJFrame) {
-        this.principalJFrame = principalJFrame;
+        this.PRINCIPALJFRAME = principalJFrame;
 
         initComponents();
         showAccountRecords();
@@ -149,7 +146,7 @@ public class AccountingView extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         tablePanel = new javax.swing.JPanel();
         OptionsPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnAddAccount = new javax.swing.JButton();
         RecordsPanel = new javax.swing.JPanel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 255, 0)));
@@ -292,7 +289,12 @@ public class AccountingView extends javax.swing.JPanel {
 
         OptionsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 255, 102)));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconNewPage.png"))); // NOI18N
+        btnAddAccount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconNewPage.png"))); // NOI18N
+        btnAddAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddAccountActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout OptionsPanelLayout = new javax.swing.GroupLayout(OptionsPanel);
         OptionsPanel.setLayout(OptionsPanelLayout);
@@ -300,14 +302,14 @@ public class AccountingView extends javax.swing.JPanel {
             OptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, OptionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                .addComponent(btnAddAccount, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
                 .addContainerGap())
         );
         OptionsPanelLayout.setVerticalGroup(
             OptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(OptionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(btnAddAccount)
                 .addContainerGap(331, Short.MAX_VALUE))
         );
 
@@ -360,14 +362,22 @@ public class AccountingView extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAddAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAccountActionPerformed
+        // TODO add your handling code here:
+        AccountBookView accountBookView = new AccountBookView(this.PRINCIPALJFRAME);
+        accountBookView.setSize(970, 576);
+        accountBookView.setLocation(0, 0);
+        this.PRINCIPALJFRAME.replacePanel(accountBookView);
+    }//GEN-LAST:event_btnAddAccountActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel FiltersPanel;
     private javax.swing.JPanel OptionsPanel;
     private javax.swing.JPanel RecordsPanel;
     private javax.swing.JPanel TitlePanel;
+    private javax.swing.JButton btnAddAccount;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;

@@ -15,11 +15,11 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class AddWorkerView extends javax.swing.JPanel {
-    private final requestPerson newRequestPerson = new requestPerson();
-    private final requestWorker newRequestWorker = new requestWorker();
-    private final CheckFields checker = new CheckFields();
-    private final Color colorRed = new Color(255,0,0);
-    private final Color colorWhite = new Color(255,255,255);
+    private final requestPerson NEW_REQUEST_PERSON = new requestPerson();
+    private final requestWorker NEW_REQUEST_WORKER = new requestWorker();
+    private final CheckFields CHECKER = new CheckFields();
+    private final Color COLOR_RED = new Color(255,0,0);
+    private final Color COLOR_WHITE = new Color(255,255,255);
 
     public AddWorkerView() {
         initComponents();
@@ -38,56 +38,56 @@ public class AddWorkerView extends javax.swing.JPanel {
     }
     
     private boolean changeColorRequiredField(){
-        String personFirstName = checker.removeStringBlanks(txtFirstName.getText()); 
-        String personFirstLastName = checker.removeStringBlanks(txtFirstLastName.getText());
+        String personFirstName = CHECKER.removeStringBlanks(txtFirstName.getText()); 
+        String personFirstLastName = CHECKER.removeStringBlanks(txtFirstLastName.getText());
         String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
-        String personIdentificationNumber = checker.removeStringBlanks(txtIdentificationNum.getText());
+        String personIdentificationNumber = CHECKER.removeStringBlanks(txtIdentificationNum.getText());
         //Worker information
         String bloodType = sltBloodType.getSelectedItem().toString();
         String bloodTypeCmplt = sltBloodTypeCmplt.getSelectedItem().toString();
         String healthEntity = sltEPS.getSelectedItem().toString();
         String position = sltPosition.getSelectedItem().toString();
         
-        if(!checker.checkStringField(personFirstName)){
-            txtFirstName.setBackground(colorRed);
+        if(!CHECKER.checkStringField(personFirstName)){
+            txtFirstName.setBackground(COLOR_RED);
             return false;
         }
-        if(!checker.checkStringField(personFirstLastName)){
-            txtFirstLastName.setBackground(colorRed);
+        if(!CHECKER.checkStringField(personFirstLastName)){
+            txtFirstLastName.setBackground(COLOR_RED);
              return false;
         }
-        if(!checker.checkComboBox(personIdentificationType)){
-            sltIdentificationType.setBackground(colorRed);
+        if(!CHECKER.checkComboBox(personIdentificationType)){
+            sltIdentificationType.setBackground(COLOR_RED);
             return false;
         }
-        if(!checker.checkNumberField(personIdentificationNumber) 
+        if(!CHECKER.checkNumberField(personIdentificationNumber) 
                 || !(personIdentificationNumber.length() <= 10  
                 && personIdentificationNumber.length() >= 8)){
-            txtIdentificationNum.setBackground(colorRed);
+            txtIdentificationNum.setBackground(COLOR_RED);
             return false;
         }
-        if(!checker.checkComboBox(bloodType)){
-            sltBloodType.setBackground(colorRed);
+        if(!CHECKER.checkComboBox(bloodType)){
+            sltBloodType.setBackground(COLOR_RED);
             return false;
         }
-        if(!checker.checkComboBox(bloodTypeCmplt)){
-            sltBloodTypeCmplt.setBackground(colorRed);
+        if(!CHECKER.checkComboBox(bloodTypeCmplt)){
+            sltBloodTypeCmplt.setBackground(COLOR_RED);
             return false;
         }
-        if(!checker.checkComboBox(healthEntity)){
-            sltEPS.setBackground(colorRed);
+        if(!CHECKER.checkComboBox(healthEntity)){
+            sltEPS.setBackground(COLOR_RED);
             return false;
         }
         if(null == dateBirthdate.getDate()){
-            dateBirthdate.setBackground(colorRed);
+            dateBirthdate.setBackground(COLOR_RED);
             return false;
         }
         if(null == dateVinculation.getDate()){
-            dateVinculation.setBackground(colorRed);
+            dateVinculation.setBackground(COLOR_RED);
             return false;
         }
-        if(!checker.checkComboBox(position)){
-            sltPosition.setBackground(colorRed);
+        if(!CHECKER.checkComboBox(position)){
+            sltPosition.setBackground(COLOR_RED);
             return false;
         }
         
@@ -95,17 +95,17 @@ public class AddWorkerView extends javax.swing.JPanel {
     }
     
     private boolean changeColorNoRequiredField(){
-        String personSecondName = checker.removeStringBlanks(txtSecondName.getText()); 
-        String personSecondLastName = checker.removeStringBlanks(txtSecondLastName.getText());
+        String personSecondName = CHECKER.removeStringBlanks(txtSecondName.getText()); 
+        String personSecondLastName = CHECKER.removeStringBlanks(txtSecondLastName.getText());
         
         
-        if(!checker.checkStringField(personSecondName) && !personSecondName.equalsIgnoreCase("")){
-            txtSecondName.setBackground(colorRed);
+        if(!CHECKER.checkStringField(personSecondName) && !personSecondName.equalsIgnoreCase("")){
+            txtSecondName.setBackground(COLOR_RED);
             return false;
         }
         
-        if(!checker.checkStringField(personSecondLastName) && !personSecondLastName.equalsIgnoreCase("")){
-            txtSecondLastName.setBackground(colorRed);
+        if(!CHECKER.checkStringField(personSecondLastName) && !personSecondLastName.equalsIgnoreCase("")){
+            txtSecondLastName.setBackground(COLOR_RED);
              return false;
         }
         
@@ -620,12 +620,12 @@ public class AddWorkerView extends javax.swing.JPanel {
     private void btnSaveWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveWorkerActionPerformed
             
             
-            String personFirstName = checker.removeStringBlanks(txtFirstName.getText()); 
-            String personSecondName = checker.removeStringBlanks(txtSecondName.getText());//
-            String personFirstLastName = checker.removeStringBlanks(txtFirstLastName.getText());
-            String personSecondLastName = checker.removeStringBlanks(txtSecondLastName.getText());//
+            String personFirstName = CHECKER.removeStringBlanks(txtFirstName.getText()); 
+            String personSecondName = CHECKER.removeStringBlanks(txtSecondName.getText());//
+            String personFirstLastName = CHECKER.removeStringBlanks(txtFirstLastName.getText());
+            String personSecondLastName = CHECKER.removeStringBlanks(txtSecondLastName.getText());//
             String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
-            String personIdentificationNumber = checker.removeStringBlanks(txtIdentificationNum.getText());
+            String personIdentificationNumber = CHECKER.removeStringBlanks(txtIdentificationNum.getText());
             Date personBirthdate = dateBirthdate.getDate();
             //Worker information
             String bloodType = sltBloodType.getSelectedItem().toString();
@@ -637,17 +637,17 @@ public class AddWorkerView extends javax.swing.JPanel {
             
             if(changeColorRequiredField() && changeColorNoRequiredField()){
                 try {
-                    newRequestPerson.savePerson(personFirstName, personSecondName, 
+                    NEW_REQUEST_PERSON.savePerson(personFirstName, personSecondName, 
                             personFirstLastName, personSecondLastName, personIdentificationType, 
                             personIdentificationNumber, personBirthdate);
-                    newRequestWorker.saveWorker(personIdentificationNumber, bloodType, 
+                    NEW_REQUEST_WORKER.saveWorker(personIdentificationNumber, bloodType, 
                             bloodTypeCmplt, healthEntity, dayLink, position);
                     personalizedMessage("Information", "El trabajador ha sido agregado correctamente", "Operación exitosa");
                     clearFields();
                 } catch (PreexistingEntityException ex) {
                     personalizedMessage("Error", "El numero de identificación ya está asociado a alguien.", 
                             "Identificación duplicada");
-                    txtIdentificationNum.setBackground(colorRed);
+                    txtIdentificationNum.setBackground(COLOR_RED);
                 }  catch (Exception ex) {
                     Logger.getLogger(AddWorkerView.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -688,57 +688,57 @@ public class AddWorkerView extends javax.swing.JPanel {
 
     private void txtFirstNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFirstNameMouseClicked
         // TODO add your handling code here:
-        txtFirstName.setBackground(colorWhite);
+        txtFirstName.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_txtFirstNameMouseClicked
 
     private void txtSecondNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSecondNameMouseClicked
         // TODO add your handling code here:
-        txtSecondName.setBackground(colorWhite);
+        txtSecondName.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_txtSecondNameMouseClicked
 
     private void txtFirstLastNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFirstLastNameMouseClicked
         // TODO add your handling code here:
-        txtFirstLastName.setBackground(colorWhite);
+        txtFirstLastName.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_txtFirstLastNameMouseClicked
 
     private void txtSecondLastNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSecondLastNameMouseClicked
         // TODO add your handling code here:
-        txtSecondLastName.setBackground(colorWhite);
+        txtSecondLastName.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_txtSecondLastNameMouseClicked
 
     private void sltIdentificationTypeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sltIdentificationTypeMouseClicked
         // TODO add your handling code here:
-        sltIdentificationType.setBackground(colorWhite);
+        sltIdentificationType.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_sltIdentificationTypeMouseClicked
 
     private void txtIdentificationNumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdentificationNumMouseClicked
         // TODO add your handling code here:
-        txtIdentificationNum.setBackground(colorWhite);
+        txtIdentificationNum.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_txtIdentificationNumMouseClicked
 
     private void sltBloodTypeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sltBloodTypeMouseClicked
         // TODO add your handling code here:
-        sltBloodType.setBackground(colorWhite);
+        sltBloodType.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_sltBloodTypeMouseClicked
 
     private void sltBloodTypeCmpltMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sltBloodTypeCmpltMouseClicked
         // TODO add your handling code here:
-        sltBloodTypeCmplt.setBackground(colorWhite);
+        sltBloodTypeCmplt.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_sltBloodTypeCmpltMouseClicked
 
     private void sltEPSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sltEPSMouseClicked
         // TODO add your handling code here:
-        sltEPS.setBackground(colorWhite);
+        sltEPS.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_sltEPSMouseClicked
 
     private void dateVinculationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateVinculationMouseClicked
         // TODO add your handling code here:
-        dateVinculation.setBackground(colorWhite);
+        dateVinculation.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_dateVinculationMouseClicked
 
     private void sltPositionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sltPositionMouseClicked
         // TODO add your handling code here:
-        sltPosition.setBackground(colorWhite);
+        sltPosition.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_sltPositionMouseClicked
 
 
