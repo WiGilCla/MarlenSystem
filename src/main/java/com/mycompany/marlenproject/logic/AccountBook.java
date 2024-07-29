@@ -12,11 +12,11 @@ import javax.persistence.OneToMany;
 
 public class AccountBook {
     @Id
-    @Column(name = "accountBookId")
+    @Column(name = "AccountBookId")
     private int accountBookId;
-    @Column(name = "FirstName", nullable = false)
+    @Column(name = "CreationDate", nullable = false)
     private Date creationDate;
-    @Column(name = "FirstName", nullable = false, length = 150)
+    @Column(name = "TitleBook", nullable = false, length = 150)
     private String titleBook;
     @OneToMany(mappedBy = "AccountBookId")
     private List<AccountBookRecords> listBookRecords;
