@@ -8,6 +8,8 @@ import com.mycompany.marlenproject.userinterface.AdminHome;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,6 +22,31 @@ public class AccountBookView extends javax.swing.JPanel {
     private long totalIncome = 0L;
     private long totalExpense = 0L;
     private boolean isUpdating = false;
+
+    private void updateCellValue(int editedRow, int editedColumn, ArrayList<Long> cells, boolean isExpense, DefaultTableModel modelTable) {
+        String newValue = modelTable.getValueAt(editedRow, editedColumn).toString();
+        int index = Integer.parseInt(modelTable.getValueAt(editedRow, 0).toString());
+
+        if (isIntegerOrLong(newValue)) {
+            long newValueLong = Long.parseLong(newValue);
+            Object newValueFormat = formatNumber(newValueLong);
+            modelTable.setValueAt(newValueFormat, editedRow, editedColumn);
+            if (isExpense) {
+                totalExpense -= cells.get(index - 1);
+                cells.set(index - 1, newValueLong);
+                totalExpense += cells.get(index - 1);
+            } else {
+                totalIncome -= cells.get(index - 1);
+                cells.set(index - 1, newValueLong);
+                totalIncome += cells.get(index - 1);
+            }
+        } else {
+            JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Solo se aceptan números, sin espacios ni comas.", "Error de número", JOptionPane.ERROR_MESSAGE);
+
+            Object oldValue = formatNumber(cells.get(index - 1));
+            modelTable.setValueAt(oldValue, editedRow, editedColumn);
+        }
+    }
 
     private String formatNumber(long number) {
         DecimalFormat decimalFormat = new DecimalFormat("#,###");
@@ -58,16 +85,17 @@ public class AccountBookView extends javax.swing.JPanel {
 
         modelTable.addTableModelListener((TableModelEvent e) -> {
             if (e.getType() == TableModelEvent.UPDATE) {
-                
-                if (isUpdating) return;
-                
+
+                if (isUpdating) {
+                    return;
+                }
+
                 isUpdating = true;
-                
-                
+
                 int editedRow = e.getFirstRow();
                 int editedColumn = e.getColumn();
                 int lastRow = modelTable.getRowCount() - 1;
-                
+
                 if (editedRow == lastRow) {
                     for (int col = 1; col < modelTable.getColumnCount(); col++) {
                         Object value = modelTable.getValueAt(lastRow, col);
@@ -79,47 +107,28 @@ public class AccountBookView extends javax.swing.JPanel {
                         }
                     }
                 }
-                
-                if (editedColumn == ((tableHead.length) - 1)) {
-                    String newValue = modelTable.getValueAt(editedRow, editedColumn).toString();
-                    int index = Integer.parseInt(modelTable.getValueAt(editedRow, 0).toString());
-                    
-                    if (isIntegerOrLong(newValue)) {
-                        Object newValueFormat = formatNumber(Long.parseLong(newValue));
-                        modelTable.setValueAt(newValueFormat, editedRow, editedColumn);
-                        
-                        totalExpense -= EXPENSES_CELLS.get(index - 1);
-                        EXPENSES_CELLS.set(index - 1, Long.valueOf(newValue));
-                        totalExpense += EXPENSES_CELLS.get(index - 1);
-                    } else {
-                        JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Solo se aceptan números, sin espacios ni comas.", "Error de numero", 1);
-                        
-                        Object oldValue = formatNumber(EXPENSES_CELLS.get(index - 1));
-                        modelTable.setValueAt(oldValue, editedRow, editedColumn);
-                    }
-                    
-                } else if (editedColumn == ((tableHead.length) - 2)) {
-                    String newValue = modelTable.getValueAt(editedRow, editedColumn).toString();
-                    int index = Integer.parseInt(modelTable.getValueAt(editedRow, 0).toString());
-                    
-                    if (isIntegerOrLong(newValue)) {
-                        Object newValueFormat = formatNumber(Long.parseLong(newValue));
-                        modelTable.setValueAt(newValueFormat, editedRow, editedColumn);
-                        
-                        totalIncome -= INCOME_CELLS.get(index - 1);
-                        INCOME_CELLS.set(index - 1, Long.valueOf(newValue));
-                        totalIncome += INCOME_CELLS.get(index - 1);
-                    } else {
-                        JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Solo se aceptan números, sin espacios ni comas.", "Error de numero", 1);
-                        
-                        Object oldValue = formatNumber(INCOME_CELLS.get(index - 1));
-                        modelTable.setValueAt(oldValue, editedRow, editedColumn);
-                    }
+
+                if (editedColumn == tableHead.length - 1) {
+                    updateCellValue(editedRow, editedColumn, EXPENSES_CELLS, true, modelTable);
+                } else if (editedColumn == tableHead.length - 2) {
+                    updateCellValue(editedRow, editedColumn, INCOME_CELLS, false, modelTable);
                 }
+
                 lbTotal_In.setText(formatNumber(totalIncome));
                 lbTotal_Ex.setText(formatNumber(totalExpense));
                 lbTotal_InEx.setText(formatNumber((totalIncome - totalExpense)));
                 isUpdating = false;
+            }
+        });
+
+        recordsAccountTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!recordsAccountTable.getSelectionModel().isSelectionEmpty()) {
+                    btnAddRow.setEnabled(true);
+                } else {
+                    btnAddRow.setEnabled(false);
+                }
             }
         });
         recordsAccountTable.setModel(modelTable);
@@ -151,6 +160,9 @@ public class AccountBookView extends javax.swing.JPanel {
         lbTotal_In = new javax.swing.JLabel();
         lbTotal_InEx = new javax.swing.JLabel();
         lbTotal_Ex = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        btnAddRow = new javax.swing.JButton();
+        btnDeleteRow = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         btnCancel = new javax.swing.JButton();
         BtnSave = new javax.swing.JButton();
@@ -283,12 +295,52 @@ public class AccountBookView extends javax.swing.JPanel {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
+        btnAddRow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconPlus.png"))); // NOI18N
+        btnAddRow.setText("Agregar fila");
+        btnAddRow.setEnabled(false);
+        btnAddRow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddRowActionPerformed(evt);
+            }
+        });
+
+        btnDeleteRow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconMinus.png"))); // NOI18N
+        btnDeleteRow.setText("Eliminar fila");
+        btnDeleteRow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteRowActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(btnAddRow)
+                .addGap(48, 48, 48)
+                .addComponent(btnDeleteRow)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddRow)
+                    .addComponent(btnDeleteRow))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -299,10 +351,11 @@ public class AccountBookView extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 4, Short.MAX_VALUE))
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -384,7 +437,6 @@ public class AccountBookView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lbTitleBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbTitleBookMouseClicked
-        // TODO add your handling code here:
         String newTitleBook = JOptionPane.showInputDialog(this.PRINCIPALJFRAME, "¿Qué titulo desea darle a este libro?",
                 "Cambiar titulo de libro", 1);
 
@@ -394,7 +446,6 @@ public class AccountBookView extends javax.swing.JPanel {
     }//GEN-LAST:event_lbTitleBookMouseClicked
 
     private void lbNumberBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNumberBookMouseClicked
-        // TODO add your handling code here:
         String newNumberBook = JOptionPane.showInputDialog(this.PRINCIPALJFRAME, "¿Qué numero tiene este libro?",
                 "Cambiar numero de libro", 1);
 
@@ -403,10 +454,52 @@ public class AccountBookView extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_lbNumberBookMouseClicked
 
+    private void btnAddRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddRowActionPerformed
+        int selectedRow = recordsAccountTable.getSelectedRow();
+        DefaultTableModel tableModel = (DefaultTableModel) recordsAccountTable.getModel();
+
+        if (selectedRow != -1) {
+            tableModel.insertRow(selectedRow + 1, new Object[]{"popo", "", "", ""});
+            for (int i = 0; i < tableModel.getRowCount(); i++) {
+                tableModel.setValueAt(i + 1, i, 0);
+            }
+            INCOME_CELLS.add(selectedRow + 1, 0L);
+            EXPENSES_CELLS.add(selectedRow + 1, 0L);
+        } else {
+            JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Selecciona una fila antes de agregar.", "Advertencia", 1);
+        }
+    }//GEN-LAST:event_btnAddRowActionPerformed
+
+    private void btnDeleteRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteRowActionPerformed
+        int selectedRow = recordsAccountTable.getSelectedRow();
+        DefaultTableModel tableModel = (DefaultTableModel) recordsAccountTable.getModel();
+
+        if (selectedRow != -1) {
+            tableModel.removeRow(selectedRow);
+            totalExpense -= EXPENSES_CELLS.get(selectedRow);
+            totalIncome -= INCOME_CELLS.get(selectedRow);
+            INCOME_CELLS.remove(selectedRow);
+            EXPENSES_CELLS.remove(selectedRow);
+            for (int i = 0; i < tableModel.getRowCount(); i++) {
+                tableModel.setValueAt(i + 1, i, 0);
+            }
+        } else {
+            JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Selecciona una fila antes de eliminar.", "Advertencia", 1);
+        }
+
+        if (tableModel.getRowCount() == 0) {
+            tableModel.addRow(new Object[]{1, "", "", ""});
+            INCOME_CELLS.add(0L);
+            EXPENSES_CELLS.add(0L);
+        }
+    }//GEN-LAST:event_btnDeleteRowActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnSave;
+    private javax.swing.JButton btnAddRow;
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnDeleteRow;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -416,6 +509,7 @@ public class AccountBookView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbNumberBook;
     private javax.swing.JLabel lbTitleBook;
