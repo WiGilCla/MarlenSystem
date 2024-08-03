@@ -14,9 +14,9 @@ public class AccountBookRecords {
     @Column(name = "Description", nullable = false, length = 200)
     private String description;
     @Column(name = "CashInflow", nullable = false)
-    private int cashInflow;
+    private long cashInflow;
     @Column(name = "CashExpenses", nullable = false)
-    private int cashExpenses;
+    private long cashExpenses;
 
     public AccountBookRecords() {
     }
@@ -44,7 +44,7 @@ public class AccountBookRecords {
         this.description = description;
     }
 
-    public int getCashInflow() {
+    public long getCashInflow() {
         return cashInflow;
     }
 
@@ -52,7 +52,7 @@ public class AccountBookRecords {
         this.cashInflow = cashInflow;
     }
 
-    public int getCashExpenses() {
+    public long getCashExpenses() {
         return cashExpenses;
     }
 

@@ -616,6 +616,9 @@
                   <Dimension value="[296, 25]"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="WorkersInformationView_txtSecondName"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="txtSecondLastName">
               <Properties>
