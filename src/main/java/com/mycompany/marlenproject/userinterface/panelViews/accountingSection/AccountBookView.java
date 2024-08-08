@@ -4,6 +4,8 @@
  */
 package com.mycompany.marlenproject.userinterface.panelViews.accountingSection;
 
+import com.mycompany.marlenproject.logic.AccountBook;
+import com.mycompany.marlenproject.logic.AccountBookRecords;
 import com.mycompany.marlenproject.userinterface.AdminHome;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -11,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import javax.swing.JOptionPane;
+import javax.swing.event.CellEditorListener;
+import javax.swing.event.ChangeEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
@@ -18,27 +22,34 @@ import javax.swing.table.DefaultTableModel;
 
 public class AccountBookView extends javax.swing.JPanel {
 
+    private ArrayList<AccountBookRecords> bookRecords = null;
+    private ArrayList<AccountBookRecords> bookRecordsDeleted = new ArrayList<>();
+
     private final AdminHome PRINCIPALJFRAME;
     private final int DEFAULT_ROWS = 10;
-    private final ArrayList<Long> INCOME_CELLS = new ArrayList<>(DEFAULT_ROWS);
-    private final ArrayList<Long> EXPENSES_CELLS = new ArrayList<>(DEFAULT_ROWS);
     private long totalIncome = 0L;
     private long totalExpense = 0L;
     private boolean isUpdating = false;
     private boolean titleBookChanged = false;
     private boolean NumberBookChanged = false;
-    private String[] header = {"N°", "Descripción", "Ingresos", "Gastos"};
+    private boolean isEditingABook = false;
+    private final String[] HEADER = {"N°", "Descripción", "Ingresos", "Gastos"};
+
+    private Object[] createEmptyRow(String indexRow) {
+        Object[] row = {indexRow, "", "", ""};
+        return row;
+    }
 
     private int getIndexFromHeader(String textHeader) {
-        for (int i = 0; i < this.header.length; i++) {
-            if (textHeader.equals(this.header[i])) {
+        for (int i = 0; i < this.HEADER.length; i++) {
+            if (textHeader.equals(this.HEADER[i])) {
                 return i;
             }
         }
         return -1;
     }
 
-    private void updateCellValue(int editedRow, int editedColumn, ArrayList<Long> cells, boolean isExpense, DefaultTableModel modelTable) {
+    private void updateCellValue(int editedRow, int editedColumn, boolean isExpense, DefaultTableModel modelTable) {
         String newValue = modelTable.getValueAt(editedRow, editedColumn).toString();
         int index = Integer.parseInt(modelTable.getValueAt(editedRow, 0).toString());
 
@@ -47,19 +58,24 @@ public class AccountBookView extends javax.swing.JPanel {
             Object newValueFormat = formatNumber(newValueLong);
             modelTable.setValueAt(newValueFormat, editedRow, editedColumn);
             if (isExpense) {
-                totalExpense -= cells.get(index - 1);
-                cells.set(index - 1, newValueLong);
-                totalExpense += cells.get(index - 1);
+                totalExpense -= bookRecords.get(index - 1).getCashExpenses();
+                bookRecords.get(index - 1).setCashExpenses(newValueLong);
+                totalExpense += bookRecords.get(index - 1).getCashExpenses();
             } else {
-                totalIncome -= cells.get(index - 1);
-                cells.set(index - 1, newValueLong);
-                totalIncome += cells.get(index - 1);
+                totalIncome -= bookRecords.get(index - 1).getCashInflow();
+                bookRecords.get(index - 1).setCashInflow(newValueLong);
+                totalIncome += bookRecords.get(index - 1).getCashInflow();
             }
         } else {
             JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Solo se aceptan números, sin espacios ni comas.", "Error de número", JOptionPane.ERROR_MESSAGE);
 
-            Object oldValue = formatNumber(cells.get(index - 1));
-            modelTable.setValueAt(oldValue, editedRow, editedColumn);
+            if (isExpense) {
+                Object oldValue = formatNumber(bookRecords.get(index - 1).getCashExpenses());
+                modelTable.setValueAt(oldValue, editedRow, editedColumn);
+            } else {
+                Object oldValue = formatNumber(bookRecords.get(index - 1).getCashInflow());
+                modelTable.setValueAt(oldValue, editedRow, editedColumn);
+            }
         }
     }
 
@@ -83,19 +99,24 @@ public class AccountBookView extends javax.swing.JPanel {
         }
     }
 
-    private void loadTable() {
+    private void loadTable(ArrayList<AccountBookRecords> list_records,
+            AccountBook book) {
         DefaultTableModel modelTable = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return true;
             }
         };
-        String[] tableHead = this.header;
+
+        String[] tableHead = this.HEADER;
         modelTable.setColumnIdentifiers(tableHead);
-        for (int i = 0; i < DEFAULT_ROWS; i++) {
-            modelTable.addRow(new Object[]{i + 1, "", "", ""});
-            INCOME_CELLS.add(0L);
-            EXPENSES_CELLS.add(0L);
+
+        if (bookRecords == null) {
+            this.bookRecords = new ArrayList<>();
+            for (int i = 0; i < DEFAULT_ROWS; i++) {
+                modelTable.addRow(createEmptyRow(String.valueOf(i + 1)));
+                this.bookRecords.add(new AccountBookRecords(null, "", 0L, 0L));
+            }
         }
 
         modelTable.addTableModelListener((TableModelEvent e) -> {
@@ -115,26 +136,20 @@ public class AccountBookView extends javax.swing.JPanel {
                     for (int col = 1; col < modelTable.getColumnCount(); col++) {
                         Object value = modelTable.getValueAt(lastRow, col);
                         if (value != null && !value.toString().trim().isEmpty()) {
-                            Object[] row = new Object[this.header.length];
-                            for (int i = 0; i < this.header.length; i++) {
-                                if (i == 0) {
-                                    row[i] = modelTable.getRowCount() + 1;
-                                } else {
-                                    row[i] = "";
-                                }
-                            }
+                            Object[] row = createEmptyRow(String.valueOf(modelTable.getRowCount() + 1));
                             modelTable.addRow(row);
-                            INCOME_CELLS.add(0L);
-                            EXPENSES_CELLS.add(0L);
+                            this.bookRecords.add(new AccountBookRecords(null, "", 0L, 0L));
                             break;
                         }
                     }
                 }
 
-                if (editedColumn == tableHead.length - 1) {
-                    updateCellValue(editedRow, editedColumn, EXPENSES_CELLS, true, modelTable);
-                } else if (editedColumn == tableHead.length - 2) {
-                    updateCellValue(editedRow, editedColumn, INCOME_CELLS, false, modelTable);
+                if (editedColumn == getIndexFromHeader("Ingresos")) {
+                    updateCellValue(editedRow, editedColumn, false, modelTable);
+                } else if (editedColumn == getIndexFromHeader("Gastos")) {
+                    updateCellValue(editedRow, editedColumn, true, modelTable);
+                } else if (editedColumn == getIndexFromHeader("Descripción")) {
+                    bookRecords.get(editedRow).setDescription((String) modelTable.getValueAt(editedRow, editedColumn));
                 }
 
                 lbTotal_In.setText(formatNumber(totalIncome));
@@ -149,19 +164,30 @@ public class AccountBookView extends javax.swing.JPanel {
             public void valueChanged(ListSelectionEvent e) {
                 if (!recordsAccountTable.getSelectionModel().isSelectionEmpty()) {
                     btnAddRow.setEnabled(true);
+                    btnDeleteRow.setEnabled(true);
+
                 } else {
                     btnAddRow.setEnabled(false);
+                    btnDeleteRow.setEnabled(false);
+
                 }
+
             }
         });
+        
+        
+
         recordsAccountTable.setModel(modelTable);
         recordsAccountTable.setRowHeight(25);
     }
 
-    public AccountBookView(AdminHome principalJFeame) {
-        this.PRINCIPALJFRAME = principalJFeame;
+    public AccountBookView(AdminHome principalJFrame, ArrayList<AccountBookRecords> list_records,
+            AccountBook book, boolean isEditingABook) {
+
+        this.PRINCIPALJFRAME = principalJFrame;
+        this.isEditingABook = isEditingABook;
         initComponents();
-        loadTable();
+        loadTable(list_records, book);
     }
 
     @SuppressWarnings("unchecked")
@@ -329,6 +355,7 @@ public class AccountBookView extends javax.swing.JPanel {
 
         btnDeleteRow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconMinus.png"))); // NOI18N
         btnDeleteRow.setText("Eliminar fila");
+        btnDeleteRow.setEnabled(false);
         btnDeleteRow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteRowActionPerformed(evt);
@@ -489,12 +516,14 @@ public class AccountBookView extends javax.swing.JPanel {
         DefaultTableModel tableModel = (DefaultTableModel) recordsAccountTable.getModel();
 
         if (selectedRow != -1) {
-            tableModel.insertRow(selectedRow + 1, new Object[]{"", "", "", ""});
-            for (int i = 0; i < tableModel.getRowCount(); i++) {
+            Object[] row = createEmptyRow(String.valueOf(selectedRow + 2));
+
+            tableModel.insertRow(selectedRow + 1, row);
+            for (int i = selectedRow + 2; i < tableModel.getRowCount(); i++) {
+
                 tableModel.setValueAt(i + 1, i, 0);
             }
-            INCOME_CELLS.add(selectedRow + 1, 0L);
-            EXPENSES_CELLS.add(selectedRow + 1, 0L);
+            bookRecords.add(selectedRow + 1, new AccountBookRecords(null, "", 0L, 0L));
         } else {
             JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Selecciona una fila antes de agregar.", "Advertencia", 1);
         }
@@ -506,11 +535,13 @@ public class AccountBookView extends javax.swing.JPanel {
 
         if (selectedRow != -1) {
             tableModel.removeRow(selectedRow);
-            totalExpense -= EXPENSES_CELLS.get(selectedRow);
-            totalIncome -= INCOME_CELLS.get(selectedRow);
-            INCOME_CELLS.remove(selectedRow);
-            EXPENSES_CELLS.remove(selectedRow);
-            for (int i = 0; i < tableModel.getRowCount(); i++) {
+            totalExpense -= bookRecords.get(selectedRow).getCashExpenses();
+            totalIncome -= bookRecords.get(selectedRow).getCashInflow();
+            if (isEditingABook) {
+                bookRecordsDeleted.add(bookRecords.get(selectedRow));
+            }
+            bookRecords.remove(selectedRow);
+            for (int i = selectedRow; i < tableModel.getRowCount(); i++) {
                 tableModel.setValueAt(i + 1, i, 0);
             }
         } else {
@@ -518,14 +549,17 @@ public class AccountBookView extends javax.swing.JPanel {
         }
 
         if (tableModel.getRowCount() == 0) {
-            tableModel.addRow(new Object[]{1, "", "", ""});
-            INCOME_CELLS.add(0L);
-            EXPENSES_CELLS.add(0L);
+            tableModel.addRow(createEmptyRow(String.valueOf(1)));
+            bookRecords.add(new AccountBookRecords(null, "", 0L, 0L));
         }
     }//GEN-LAST:event_btnDeleteRowActionPerformed
 
     private void BtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSaveActionPerformed
-        if (!titleBookChanged) {
+        if (recordsAccountTable.isEditing()) {
+            recordsAccountTable.getCellEditor().stopCellEditing();
+        }
+
+        if (!titleBookChanged && !isEditingABook) {
             String[] options = {"Continuar", "Volver"};
             int userChangeTitle = JOptionPane.showOptionDialog(PRINCIPALJFRAME, "No ha asignado nombre a este libro, se pondrá uno por DEFECTO "
                     + "¿desea CONTINUAR?", "Asignación de nombre", 0, 1, null, options, null);
@@ -535,6 +569,7 @@ public class AccountBookView extends javax.swing.JPanel {
 
                 String day = sdf.format(new Date());
                 lbTitleBook.setText("Libro - ".concat(day));
+                titleBookChanged = true;
             } else {
                 return;
             }
@@ -547,41 +582,34 @@ public class AccountBookView extends javax.swing.JPanel {
 
             if (userChangeNumber == 1) {
                 return;
+            } else {
+                lbNumberBook.setText("5555555");
+                NumberBookChanged = true;
             }
         }
 
-        
-        DefaultTableModel tableModel = (DefaultTableModel) recordsAccountTable.getModel();
-        if (tableModel.getRowCount() > 0) {
-            ArrayList<String> indexCorrection = new ArrayList<>();
-            for (int i = 0; i < tableModel.getRowCount(); i++) {
-                String description = (String) tableModel.getValueAt(i, getIndexFromHeader("Descripción"));
-                String incomeColunm = (String) tableModel.getValueAt(i, getIndexFromHeader("Ingresos"));
-                String expenseColunm = (String) tableModel.getValueAt(i, getIndexFromHeader("Gastos"));
-
-                if (!description.isBlank()) {
-
-                    long incomeValue = (incomeColunm.isBlank()) ? 0 : INCOME_CELLS.get(i);
-                    long expenseValue = (expenseColunm.isBlank()) ? 0 : EXPENSES_CELLS.get(i);
-                    
-                    System.out.println("Agregado: " + description + " - " + incomeValue + " - " + expenseValue);
+        if (!bookRecords.isEmpty()) {
+            ArrayList<String> listIndexToCorrect = new ArrayList<>();
+            int indexToCorrect = 0;
+            int emptyRecords = 0;
+            for (AccountBookRecords record : bookRecords) {
+                if (!record.getDescription().isBlank()) {
+                    System.out.println("Agredado para BD: " + record.toString());
+                } else if (record.getCashInflow() != 0 || record.getCashExpenses() != 0) {
+                    listIndexToCorrect.add(String.valueOf(indexToCorrect + 1));
                 } else {
-
-                    if (!incomeColunm.isBlank() || !expenseColunm.isBlank()) {
-                        indexCorrection.add(String.valueOf(i+1));
-                        System.out.println("Notificar en el indice " + i);
-                    }
+                    emptyRecords++;
                 }
-
+                indexToCorrect++;
             }
-            if(!indexCorrection.isEmpty()){
-                JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Debe agregar una descripción en los siguientes resgistros: "+indexCorrection.toString());
-            }else{
+            if (!listIndexToCorrect.isEmpty()) {
+                JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Debe agregar una descripción en los siguientes resgistros: " + listIndexToCorrect.toString());
+            } else if (emptyRecords == bookRecords.size()) {
+                JOptionPane.showMessageDialog(PRINCIPALJFRAME, "No tiene ningún registro", "Libro sin registros", 1);
+            } else {
                 JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Guardado xd");
             }
         }
-
-
     }//GEN-LAST:event_BtnSaveActionPerformed
 
 

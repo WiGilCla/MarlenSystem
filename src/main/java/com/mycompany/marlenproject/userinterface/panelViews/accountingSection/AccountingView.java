@@ -364,7 +364,7 @@ public class AccountingView extends javax.swing.JPanel {
 
     private void btnAddAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAccountActionPerformed
         // TODO add your handling code here:
-        AccountBookView accountBookView = new AccountBookView(this.PRINCIPALJFRAME);
+        AccountBookView accountBookView = new AccountBookView(this.PRINCIPALJFRAME, null, null, false);
         accountBookView.setSize(970, 576);
         accountBookView.setLocation(0, 0);
         this.PRINCIPALJFRAME.replacePanel(accountBookView);

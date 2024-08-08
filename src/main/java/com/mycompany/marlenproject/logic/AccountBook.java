@@ -4,13 +4,16 @@
  */
 package com.mycompany.marlenproject.logic;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-public class AccountBook {
+@Entity
+public class AccountBook implements Serializable {
     @Id
     @Column(name = "AccountBookId")
     private int accountBookId;

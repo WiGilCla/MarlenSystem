@@ -4,12 +4,23 @@
  */
 package com.mycompany.marlenproject.logic;
 
+import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.SEQUENCE;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-public class AccountBookRecords {
-    @ManyToOne
+@Entity
+public class AccountBookRecords implements Serializable {
+    
+    @Id
+    @GeneratedValue(strategy=SEQUENCE, generator="ID_SEQ")
+    @Column(name = "RecordId", nullable = false, length = 200)
+    private int recordId;
     @Column(name = "AccountBookId", nullable = false, length = 200)
+    @ManyToOne
     private AccountBook accountBookId;
     @Column(name = "Description", nullable = false, length = 200)
     private String description;
@@ -21,11 +32,19 @@ public class AccountBookRecords {
     public AccountBookRecords() {
     }
 
-    public AccountBookRecords(AccountBook accountBookId, String description, int cashInflow, int cashExpenses) {
+    public AccountBookRecords(AccountBook accountBookId, String description, long cashInflow, long cashExpenses) {
         this.accountBookId = accountBookId;
         this.description = description;
         this.cashInflow = cashInflow;
         this.cashExpenses = cashExpenses;
+    }
+
+    public int getRecordId() {
+        return recordId;
+    }
+
+    public void setRecordId(int recordId) {
+        this.recordId = recordId;
     }
 
     public AccountBook getAccountBookId() {
@@ -48,7 +67,7 @@ public class AccountBookRecords {
         return cashInflow;
     }
 
-    public void setCashInflow(int cashInflow) {
+    public void setCashInflow(long cashInflow) {
         this.cashInflow = cashInflow;
     }
 
@@ -56,7 +75,12 @@ public class AccountBookRecords {
         return cashExpenses;
     }
 
-    public void setCashExpenses(int cashExpenses) {
+    public void setCashExpenses(long cashExpenses) {
         this.cashExpenses = cashExpenses;
+    }
+
+    @Override
+    public String toString() {
+        return "AccountBookRecords{" + "recordId=" + recordId + ", accountBookId=" + accountBookId + ", description=" + description + ", cashInflow=" + cashInflow + ", cashExpenses=" + cashExpenses + '}';
     }
 }
