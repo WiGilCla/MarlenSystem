@@ -4,8 +4,11 @@
  */
 package com.mycompany.marlenproject.userinterface;
 
+import com.mycompany.marlenproject.logic.AccountBook;
+import com.mycompany.marlenproject.logic.request.RequestAccountBook;
 import com.mycompany.marlenproject.userinterface.panelViews.accountingSection.AccountingView;
 import com.mycompany.marlenproject.userinterface.panelViews.workersSection.WorkersFirstView;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -326,7 +329,9 @@ public class AdminHome extends javax.swing.JFrame {
 
     private void btnAccountingSectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccountingSectionActionPerformed
         // TODO add your handling code here:
-        AccountingView accountingView = new AccountingView(this);
+        RequestAccountBook requestBook = new RequestAccountBook();
+        List<AccountBook> listBooks = requestBook.getBooks();
+        AccountingView accountingView = new AccountingView(this,listBooks);
         accountingView.setSize(970, 576);
         accountingView.setLocation(0, 0);
         replacePanel(accountingView);

@@ -6,6 +6,7 @@ package com.mycompany.marlenproject.persistence.controller;
 
 import com.mycompany.marlenproject.logic.AccountBook;
 import com.mycompany.marlenproject.persistence.AccountBookJpaController;
+import java.util.List;
 
 /**
  *
@@ -32,5 +33,9 @@ public class AccountBookController {
     
     public AccountBook getBookByIdController(int bookId){
         return BookJPAController.findAccountBook(bookId);
+    }
+    
+    public List<AccountBook> getBooksController(){
+        return BookJPAController.findAccountBookEntities();
     }
 }

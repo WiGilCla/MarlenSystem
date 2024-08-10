@@ -35,4 +35,8 @@ public class RequestAccountBook {
     public AccountBook getBookById(int bookId){
         return accountBookController.getBookByIdController(bookId);
     }
+    
+    public List<AccountBook> getBooks(){
+        return accountBookController.getBooksController();
+    }
 }

@@ -13,6 +13,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -674,7 +675,9 @@ public class AccountBookView extends javax.swing.JPanel {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
-        AccountingView accountingView = new AccountingView(PRINCIPALJFRAME);
+        RequestAccountBook requestBook = new RequestAccountBook();
+        List<AccountBook> listBooks = requestBook.getBooks();
+        AccountingView accountingView = new AccountingView(PRINCIPALJFRAME, listBooks);
         accountingView.setSize(970, 576);
         accountingView.setLocation(0, 0);
         PRINCIPALJFRAME.replacePanel(accountingView);

@@ -4,9 +4,16 @@
  */
 package com.mycompany.marlenproject.userinterface.panelViews.accountingSection;
 
+import com.mycompany.marlenproject.logic.AccountBook;
+import com.mycompany.marlenproject.logic.request.RequestAccountBook;
 import com.mycompany.marlenproject.userinterface.AdminHome;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -24,21 +31,23 @@ public class AccountingView extends javax.swing.JPanel {
 
     private final AdminHome PRINCIPALJFRAME;
 
-    public AccountingView(AdminHome principalJFrame) {
+    public AccountingView(AdminHome principalJFrame, List<AccountBook> listBooks) {
         this.PRINCIPALJFRAME = principalJFrame;
 
         initComponents();
-        showAccountRecords();
+        showAccountRecords(listBooks);
 
     }
 
-    private void showAccountRecords() {
+    private void showAccountRecords(List<AccountBook> listBooks) {
+        
         
         JPanel contentPane = new JPanel();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
         contentPane.setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
-
-        for (int i = 0; i < 10; i++) {
+        
+        for (AccountBook book : listBooks) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
             
             JPanel panelExterior = new JPanel();
             panelExterior.setLayout(new BoxLayout(panelExterior, BoxLayout.X_AXIS));
@@ -50,7 +59,7 @@ public class AccountingView extends javax.swing.JPanel {
             JPanel numRecordPanel = new JPanel(new GridLayout(1, 1));
             numRecordPanel.setPreferredSize(new Dimension(100, 44));
             numRecordPanel.setMaximumSize(new Dimension(100, 44));
-            JLabel numRecordLabel = new JLabel("registro");
+            JLabel numRecordLabel = new JLabel(String.valueOf(book.getAccountBookId()));
             numRecordPanel.add(numRecordLabel);
             dataPanel.add(numRecordPanel);
             
@@ -61,7 +70,7 @@ public class AccountingView extends javax.swing.JPanel {
             JPanel dateRecordPanel = new JPanel(new GridLayout(1, 1));
             dateRecordPanel.setPreferredSize(new Dimension(100, 44));
             dateRecordPanel.setMaximumSize(new Dimension(100, 44));
-            JLabel dateRecordLabel = new JLabel("Date");
+            JLabel dateRecordLabel = new JLabel(sdf.format(book.getCreationDate()));
             dateRecordPanel.add(dateRecordLabel);
             dataPanel.add(dateRecordPanel);
             Separator separatorDate = new Separator();
@@ -70,7 +79,7 @@ public class AccountingView extends javax.swing.JPanel {
 
             JPanel titleRecordPanel = new JPanel(new GridLayout(1, 1));
             titleRecordPanel.setPreferredSize(new Dimension(350, 44));
-            JLabel titleRecordLabel = new JLabel("titulo");
+            JLabel titleRecordLabel = new JLabel(book.getTitleBook());
             titleRecordPanel.add(titleRecordLabel);
             dataPanel.add(titleRecordPanel);
             Separator separatorTitle = new Separator();
@@ -126,6 +135,95 @@ public class AccountingView extends javax.swing.JPanel {
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         RecordsPanel.add(scrollPane);
     }
+
+//        for (int i = 0; i < 10; i++) {
+//            
+//            JPanel panelExterior = new JPanel();
+//            panelExterior.setLayout(new BoxLayout(panelExterior, BoxLayout.X_AXIS));
+//            
+//            JPanel dataPanel = new JPanel();
+//            dataPanel.setLayout(new BoxLayout(dataPanel, BoxLayout.X_AXIS));
+//            dataPanel.setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
+//
+//            JPanel numRecordPanel = new JPanel(new GridLayout(1, 1));
+//            numRecordPanel.setPreferredSize(new Dimension(100, 44));
+//            numRecordPanel.setMaximumSize(new Dimension(100, 44));
+//            JLabel numRecordLabel = new JLabel("registro");
+//            numRecordPanel.add(numRecordLabel);
+//            dataPanel.add(numRecordPanel);
+//            
+//            Separator separatorNum = new Separator();
+//            separatorNum.setOrientation(1);
+//            dataPanel.add(separatorNum);
+//            
+//            JPanel dateRecordPanel = new JPanel(new GridLayout(1, 1));
+//            dateRecordPanel.setPreferredSize(new Dimension(100, 44));
+//            dateRecordPanel.setMaximumSize(new Dimension(100, 44));
+//            JLabel dateRecordLabel = new JLabel("Date");
+//            dateRecordPanel.add(dateRecordLabel);
+//            dataPanel.add(dateRecordPanel);
+//            Separator separatorDate = new Separator();
+//            separatorDate.setOrientation(1);
+//            dataPanel.add(separatorDate);
+//
+//            JPanel titleRecordPanel = new JPanel(new GridLayout(1, 1));
+//            titleRecordPanel.setPreferredSize(new Dimension(350, 44));
+//            JLabel titleRecordLabel = new JLabel("titulo");
+//            titleRecordPanel.add(titleRecordLabel);
+//            dataPanel.add(titleRecordPanel);
+//            Separator separatorTitle = new Separator();
+//            separatorTitle.setOrientation(1);
+//            dataPanel.add(separatorTitle);
+//            
+//            JPanel buttonPanel = new JPanel(new GridLayout(1, 4,6,6));            
+//            buttonPanel.setMaximumSize(new Dimension(158,44));
+//
+//            JPanel watchRecordPanel = new JPanel(new GridLayout(1, 1));
+//            watchRecordPanel.setPreferredSize(new Dimension(44, 44));
+//            JButton btnWatchRecord = new JButton();
+//            btnWatchRecord.setPreferredSize(new Dimension(32, 32));
+//            btnWatchRecord.setMaximumSize(new Dimension(32, 32));
+//            btnWatchRecord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconWatch.png")));
+//            watchRecordPanel.add(btnWatchRecord);
+//            buttonPanel.add(watchRecordPanel);
+//
+//            JPanel editRecordPanel = new JPanel(new GridLayout(1, 1));
+//            editRecordPanel.setPreferredSize(new Dimension(44, 44));
+//            JButton btnEditRecord = new JButton();
+//            btnEditRecord.setPreferredSize(new Dimension(32, 32));
+//            btnEditRecord.setMaximumSize(new Dimension(32, 32));
+//            btnEditRecord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconEdit.png")));
+//            editRecordPanel.add(btnEditRecord);
+//            buttonPanel.add(editRecordPanel);
+//
+//            JPanel deleteRecordPanel = new JPanel(new GridLayout(1, 1));
+//            deleteRecordPanel.setPreferredSize(new Dimension(44, 44));
+//            JButton btnDeleteRecord = new JButton();
+//            btnDeleteRecord.setPreferredSize(new Dimension(32, 32));
+//            btnDeleteRecord.setMaximumSize(new Dimension(32, 32));
+//            btnDeleteRecord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconTrash.png")));
+//            deleteRecordPanel.add(btnDeleteRecord);
+//            buttonPanel.add(deleteRecordPanel);
+//
+//            JPanel downloadRecordPanel = new JPanel(new GridLayout(1, 1));
+//            downloadRecordPanel.setPreferredSize(new Dimension(44, 44));
+//            JButton btnDownloadRecord = new JButton();
+//            btnDownloadRecord.setPreferredSize(new Dimension(32, 32));
+//            btnDownloadRecord.setMaximumSize(new Dimension(32, 32));
+//            btnDownloadRecord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconDownload.png")));
+//            downloadRecordPanel.add(btnDownloadRecord);
+//            buttonPanel.add(downloadRecordPanel);
+//            
+//            panelExterior.add(dataPanel);
+//            panelExterior.add(buttonPanel);
+//            
+//            contentPane.add(panelExterior);
+//            contentPane.add(new JPopupMenu.Separator());
+//        }
+//        JScrollPane scrollPane = new JScrollPane(contentPane);
+//        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+//        RecordsPanel.add(scrollPane);
+//    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
