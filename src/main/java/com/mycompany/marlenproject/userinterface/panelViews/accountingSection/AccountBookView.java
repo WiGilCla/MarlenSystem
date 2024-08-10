@@ -6,15 +6,17 @@ package com.mycompany.marlenproject.userinterface.panelViews.accountingSection;
 
 import com.mycompany.marlenproject.logic.AccountBook;
 import com.mycompany.marlenproject.logic.AccountBookRecords;
+import com.mycompany.marlenproject.logic.request.RequestAccountBook;
+import com.mycompany.marlenproject.logic.request.RequestAccountBookRecord;
 import com.mycompany.marlenproject.userinterface.AdminHome;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.event.CellEditorListener;
-import javax.swing.event.ChangeEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
@@ -67,7 +69,8 @@ public class AccountBookView extends javax.swing.JPanel {
                 totalIncome += bookRecords.get(index - 1).getCashInflow();
             }
         } else {
-            JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Solo se aceptan números, sin espacios ni comas.", "Error de número", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Solo se aceptan números, sin espacios ni comas.",
+                    "Error de número", JOptionPane.ERROR_MESSAGE);
 
             if (isExpense) {
                 Object oldValue = formatNumber(bookRecords.get(index - 1).getCashExpenses());
@@ -101,6 +104,7 @@ public class AccountBookView extends javax.swing.JPanel {
 
     private void loadTable(ArrayList<AccountBookRecords> list_records,
             AccountBook book) {
+
         DefaultTableModel modelTable = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -121,7 +125,6 @@ public class AccountBookView extends javax.swing.JPanel {
 
         modelTable.addTableModelListener((TableModelEvent e) -> {
             if (e.getType() == TableModelEvent.UPDATE) {
-
                 if (isUpdating) {
                     return;
                 }
@@ -165,17 +168,12 @@ public class AccountBookView extends javax.swing.JPanel {
                 if (!recordsAccountTable.getSelectionModel().isSelectionEmpty()) {
                     btnAddRow.setEnabled(true);
                     btnDeleteRow.setEnabled(true);
-
                 } else {
                     btnAddRow.setEnabled(false);
                     btnDeleteRow.setEnabled(false);
-
                 }
-
             }
         });
-        
-        
 
         recordsAccountTable.setModel(modelTable);
         recordsAccountTable.setRowHeight(25);
@@ -435,6 +433,11 @@ public class AccountBookView extends javax.swing.JPanel {
         btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconCancel.png"))); // NOI18N
         btnCancel.setText("Cancelar");
         btnCancel.setPreferredSize(new java.awt.Dimension(130, 60));
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         BtnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconSave.png"))); // NOI18N
         BtnSave.setText("Guardar");
@@ -492,23 +495,51 @@ public class AccountBookView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lbTitleBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbTitleBookMouseClicked
-        String newTitleBook = JOptionPane.showInputDialog(this.PRINCIPALJFRAME, "¿Qué titulo desea darle a este libro?",
-                "Cambiar titulo de libro", 1);
+        String newTitleBook = JOptionPane.showInputDialog(this.PRINCIPALJFRAME,
+                "¿Qué titulo desea darle a este libro?", "Cambiar titulo de libro", 1);
 
-        if (newTitleBook != null && !newTitleBook.isEmpty() && !newTitleBook.isBlank()) {
+        if (newTitleBook != null && !newTitleBook.isBlank()) {
             lbTitleBook.setText(newTitleBook.toUpperCase());
             titleBookChanged = true;
         }
     }//GEN-LAST:event_lbTitleBookMouseClicked
 
     private void lbNumberBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNumberBookMouseClicked
-        String newNumberBook = JOptionPane.showInputDialog(this.PRINCIPALJFRAME, "¿Qué numero tiene este libro?",
-                "Cambiar numero de libro", 1);
+        int messageType = 1;
+        int finalIndexBook = 0;
+        String Message = "¿Qué numero tiene este libro?";
+        String titleMessage = "Cambiar numero de libro";
+        RequestAccountBook bookRequest = new RequestAccountBook();
 
-        if (newNumberBook != null && !newNumberBook.isEmpty() && !newNumberBook.isBlank()) {
-            lbNumberBook.setText(newNumberBook.toUpperCase());
-            NumberBookChanged = true;
+        while (true) {
+            String newNumberBook = JOptionPane.showInputDialog(this.PRINCIPALJFRAME, Message,
+                    titleMessage, messageType);
+
+            if (newNumberBook == null) {
+                return;
+            }
+
+            if (!isIntegerOrLong(newNumberBook)) {
+                JOptionPane.showOptionDialog(PRINCIPALJFRAME,
+                        "Debe ingresar un numero, sin letras ni caracteres.",
+                        "Numero inválido", 2, 1, null, new String[]{"Continuar"}, null);
+                continue;
+            }
+
+            AccountBook isBookAlreadyExist = bookRequest.getBookById(Integer.parseInt(newNumberBook));
+
+            if (isBookAlreadyExist == null) {
+                finalIndexBook = Integer.parseInt(newNumberBook);
+                break;
+            } else {
+                Message = "Este numero ya está asignado a un libro, por favor, ingrese uno diferente.";
+                messageType = 2;
+                titleMessage = "Numero de registro repetido";
+            }
         }
+
+        lbNumberBook.setText(String.valueOf(finalIndexBook));
+        NumberBookChanged = true;
     }//GEN-LAST:event_lbNumberBookMouseClicked
 
     private void btnAddRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddRowActionPerformed
@@ -517,15 +548,14 @@ public class AccountBookView extends javax.swing.JPanel {
 
         if (selectedRow != -1) {
             Object[] row = createEmptyRow(String.valueOf(selectedRow + 2));
-
             tableModel.insertRow(selectedRow + 1, row);
             for (int i = selectedRow + 2; i < tableModel.getRowCount(); i++) {
-
                 tableModel.setValueAt(i + 1, i, 0);
             }
             bookRecords.add(selectedRow + 1, new AccountBookRecords(null, "", 0L, 0L));
         } else {
-            JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Selecciona una fila antes de agregar.", "Advertencia", 1);
+            JOptionPane.showMessageDialog(PRINCIPALJFRAME,
+                    "Selecciona una fila antes de agregar.", "Advertencia", 1);
         }
     }//GEN-LAST:event_btnAddRowActionPerformed
 
@@ -545,7 +575,8 @@ public class AccountBookView extends javax.swing.JPanel {
                 tableModel.setValueAt(i + 1, i, 0);
             }
         } else {
-            JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Selecciona una fila antes de eliminar.", "Advertencia", 1);
+            JOptionPane.showMessageDialog(PRINCIPALJFRAME,
+                    "Selecciona una fila antes de eliminar.", "Advertencia", 1);
         }
 
         if (tableModel.getRowCount() == 0) {
@@ -555,18 +586,21 @@ public class AccountBookView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDeleteRowActionPerformed
 
     private void BtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSaveActionPerformed
+        RequestAccountBook bookRequest = new RequestAccountBook();
+        RequestAccountBookRecord recordRequest = new RequestAccountBookRecord();
+
         if (recordsAccountTable.isEditing()) {
             recordsAccountTable.getCellEditor().stopCellEditing();
         }
 
         if (!titleBookChanged && !isEditingABook) {
-            String[] options = {"Continuar", "Volver"};
-            int userChangeTitle = JOptionPane.showOptionDialog(PRINCIPALJFRAME, "No ha asignado nombre a este libro, se pondrá uno por DEFECTO "
-                    + "¿desea CONTINUAR?", "Asignación de nombre", 0, 1, null, options, null);
+            int userChangeTitle = JOptionPane.showOptionDialog(PRINCIPALJFRAME,
+                    "No ha asignado nombre a este libro, se pondrá uno por DEFECTO ¿desea CONTINUAR?",
+                    "Asignación de nombre", 0, 1, null,
+                    new String[]{"Continuar", "Volver"}, null);
 
             if (userChangeTitle == 0) {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-
                 String day = sdf.format(new Date());
                 lbTitleBook.setText("Libro - ".concat(day));
                 titleBookChanged = true;
@@ -575,42 +609,76 @@ public class AccountBookView extends javax.swing.JPanel {
             }
         }
 
-        if (!NumberBookChanged) {
-            String[] options = {"Continuar", "Volver"};
-            int userChangeNumber = JOptionPane.showOptionDialog(PRINCIPALJFRAME, "No ha asignado número a este libro, se pondrá uno por DEFECTO "
-                    + "¿desea CONTINUAR?", "Asignación de numero", 0, 1, null, options, null);
+        if (!NumberBookChanged && !isEditingABook) {
+            int userChangeNumber = JOptionPane.showOptionDialog(PRINCIPALJFRAME,
+                    "No ha asignado número a este libro, se pondrá uno por DEFECTO ¿desea CONTINUAR?",
+                    "Asignación de numero", 0, 1, null,
+                    new String[]{"Continuar", "Volver"}, null);
 
-            if (userChangeNumber == 1) {
-                return;
-            } else {
-                lbNumberBook.setText("5555555");
+            if (userChangeNumber == 0) {
+                int numberBooks = bookRequest.countBook();
+                lbNumberBook.setText(String.valueOf(numberBooks + 1));
                 NumberBookChanged = true;
+            } else {
+                return;
             }
         }
 
-        if (!bookRecords.isEmpty()) {
-            ArrayList<String> listIndexToCorrect = new ArrayList<>();
-            int indexToCorrect = 0;
+        if (!bookRecords.isEmpty() && !isEditingABook) {
+            
             int emptyRecords = 0;
+            int indexToCorrect = 0;
+            ArrayList<String> listIndexToCorrect = new ArrayList<>();
             for (AccountBookRecords record : bookRecords) {
-                if (!record.getDescription().isBlank()) {
-                    System.out.println("Agredado para BD: " + record.toString());
-                } else if (record.getCashInflow() != 0 || record.getCashExpenses() != 0) {
+                if (record.getDescription().isBlank()
+                        && (record.getCashInflow() != 0 || record.getCashExpenses() != 0)) {
                     listIndexToCorrect.add(String.valueOf(indexToCorrect + 1));
-                } else {
+                } else if (record.getDescription().isBlank()) {
                     emptyRecords++;
                 }
                 indexToCorrect++;
             }
             if (!listIndexToCorrect.isEmpty()) {
-                JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Debe agregar una descripción en los siguientes resgistros: " + listIndexToCorrect.toString());
+                JOptionPane.showMessageDialog(PRINCIPALJFRAME,
+                        "Debe agregar una descripción en los siguientes resgistros: " + listIndexToCorrect.toString());
             } else if (emptyRecords == bookRecords.size()) {
-                JOptionPane.showMessageDialog(PRINCIPALJFRAME, "No tiene ningún registro", "Libro sin registros", 1);
+                JOptionPane.showMessageDialog(PRINCIPALJFRAME,
+                        "No tiene ningún registro", "Libro sin registros", 1);
             } else {
-                JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Guardado xd");
+                AccountBook book = new AccountBook(Integer.parseInt(lbNumberBook.getText()),
+                        new Date(), lbTitleBook.getText(), null);
+
+                try {
+                    bookRequest.saveBook(book.getAccountBookId(),
+                            book.getCreationDate(), book.getTitleBook(),
+                            null);
+                } catch (Exception ex) {
+                    Logger.getLogger(AccountBookView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                ArrayList<AccountBookRecords> records = new ArrayList<>();
+                for (AccountBookRecords record : bookRecords) {
+                    if (!record.getDescription().isBlank()) {
+                        records.add(record);
+                        try {
+                            recordRequest.saveBookRecord(book, record.getDescription(), record.getCashInflow(), record.getCashExpenses());
+                        } catch (Exception ex) {
+                            Logger.getLogger(AccountBookView.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
+                JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Los cambios se han guardado exitosamente.");
             }
         }
     }//GEN-LAST:event_BtnSaveActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        AccountingView accountingView = new AccountingView(PRINCIPALJFRAME);
+        accountingView.setSize(970, 576);
+        accountingView.setLocation(0, 0);
+        PRINCIPALJFRAME.replacePanel(accountingView);
+    }//GEN-LAST:event_btnCancelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

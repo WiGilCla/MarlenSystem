@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.SEQUENCE;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -19,7 +20,7 @@ public class AccountBookRecords implements Serializable {
     @GeneratedValue(strategy=SEQUENCE, generator="ID_SEQ")
     @Column(name = "RecordId", nullable = false, length = 200)
     private int recordId;
-    @Column(name = "AccountBookId", nullable = false, length = 200)
+    @JoinColumn(name = "AccountBookId",nullable = false)
     @ManyToOne
     private AccountBook accountBookId;
     @Column(name = "Description", nullable = false, length = 200)

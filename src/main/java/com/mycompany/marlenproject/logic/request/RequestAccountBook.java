@@ -24,7 +24,15 @@ public class RequestAccountBook {
         String bookTitle = CHECKER.capitalizedString(titleBook);
         List<AccountBookRecords> bookRecords = listBookRecords;
         
-        AccountBook book = new AccountBook(bookId, creationDate, titleBook, listBookRecords);
+        AccountBook book = new AccountBook(bookId, creationBook, bookTitle, bookRecords);
         accountBookController.saveBookController(book);
+    }
+    
+    public int countBook(){
+        return accountBookController.getCountBookController();
+    }
+    
+    public AccountBook getBookById(int bookId){
+        return accountBookController.getBookByIdController(bookId);
     }
 }

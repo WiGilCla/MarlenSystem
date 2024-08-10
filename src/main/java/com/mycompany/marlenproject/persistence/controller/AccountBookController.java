@@ -25,4 +25,12 @@ public class AccountBookController {
     public void deleteBookController(int bookId) throws Exception {
         BookJPAController.destroy(bookId);
     }
+    
+    public int getCountBookController(){
+        return BookJPAController.getAccountBookCount();
+    }
+    
+    public AccountBook getBookByIdController(int bookId){
+        return BookJPAController.findAccountBook(bookId);
+    }
 }
