@@ -5,13 +5,12 @@
 package com.mycompany.marlenproject.userinterface.panelViews.accountingSection;
 
 import com.mycompany.marlenproject.logic.AccountBook;
-import com.mycompany.marlenproject.logic.request.RequestAccountBook;
 import com.mycompany.marlenproject.userinterface.AdminHome;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.text.DecimalFormat;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.BorderFactory;
@@ -23,10 +22,6 @@ import javax.swing.JPopupMenu;
 import javax.swing.JPopupMenu.Separator;
 import javax.swing.JScrollPane;
 
-/**
- *
- * @author willy
- */
 public class AccountingView extends javax.swing.JPanel {
 
     private final AdminHome PRINCIPALJFRAME;
@@ -40,18 +35,17 @@ public class AccountingView extends javax.swing.JPanel {
     }
 
     private void showAccountRecords(List<AccountBook> listBooks) {
-        
-        
+
         JPanel contentPane = new JPanel();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
         contentPane.setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
-        
+
         for (AccountBook book : listBooks) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-            
+
             JPanel panelExterior = new JPanel();
             panelExterior.setLayout(new BoxLayout(panelExterior, BoxLayout.X_AXIS));
-            
+
             JPanel dataPanel = new JPanel();
             dataPanel.setLayout(new BoxLayout(dataPanel, BoxLayout.X_AXIS));
             dataPanel.setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
@@ -62,11 +56,11 @@ public class AccountingView extends javax.swing.JPanel {
             JLabel numRecordLabel = new JLabel(String.valueOf(book.getAccountBookId()));
             numRecordPanel.add(numRecordLabel);
             dataPanel.add(numRecordPanel);
-            
+
             Separator separatorNum = new Separator();
             separatorNum.setOrientation(1);
             dataPanel.add(separatorNum);
-            
+
             JPanel dateRecordPanel = new JPanel(new GridLayout(1, 1));
             dateRecordPanel.setPreferredSize(new Dimension(100, 44));
             dateRecordPanel.setMaximumSize(new Dimension(100, 44));
@@ -85,13 +79,22 @@ public class AccountingView extends javax.swing.JPanel {
             Separator separatorTitle = new Separator();
             separatorTitle.setOrientation(1);
             dataPanel.add(separatorTitle);
-            
-            JPanel buttonPanel = new JPanel(new GridLayout(1, 4,6,6));            
-            buttonPanel.setMaximumSize(new Dimension(158,44));
+
+            JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 6, 6));
+            buttonPanel.setMaximumSize(new Dimension(158, 44));
 
             JPanel watchRecordPanel = new JPanel(new GridLayout(1, 1));
             watchRecordPanel.setPreferredSize(new Dimension(44, 44));
             JButton btnWatchRecord = new JButton();
+            btnWatchRecord.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                    BookView bookView = new BookView(book.getListBookRecords(), book);
+                    bookView.setVisible(true);
+                    bookView.setLocationRelativeTo(null);
+                }
+            });
             btnWatchRecord.setPreferredSize(new Dimension(32, 32));
             btnWatchRecord.setMaximumSize(new Dimension(32, 32));
             btnWatchRecord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconWatch.png")));
@@ -124,10 +127,10 @@ public class AccountingView extends javax.swing.JPanel {
             btnDownloadRecord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconDownload.png")));
             downloadRecordPanel.add(btnDownloadRecord);
             buttonPanel.add(downloadRecordPanel);
-            
+
             panelExterior.add(dataPanel);
             panelExterior.add(buttonPanel);
-            
+
             contentPane.add(panelExterior);
             contentPane.add(new JPopupMenu.Separator());
         }
@@ -224,7 +227,6 @@ public class AccountingView extends javax.swing.JPanel {
 //        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 //        RecordsPanel.add(scrollPane);
 //    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

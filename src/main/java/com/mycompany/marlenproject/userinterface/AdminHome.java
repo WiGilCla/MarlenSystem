@@ -330,6 +330,8 @@ public class AdminHome extends javax.swing.JFrame {
     private void btnAccountingSectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccountingSectionActionPerformed
         // TODO add your handling code here:
         RequestAccountBook requestBook = new RequestAccountBook();
+
+
         List<AccountBook> listBooks = requestBook.getBooks();
         AccountingView accountingView = new AccountingView(this,listBooks);
         accountingView.setSize(970, 576);
