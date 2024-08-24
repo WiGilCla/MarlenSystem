@@ -691,7 +691,6 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFirstNameActionPerformed
-        // TODO add your handling code here:
         txtFirstName.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_txtFirstNameActionPerformed
 
@@ -710,7 +709,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             String healthEntity = sltHealthEntity.getSelectedItem().toString();
             Date dayLink = dateDayLink.getDate();
             String position = sltPosition.getSelectedItem().toString();
-            boolean state = (sltState.getSelectedIndex() == COMBO_BOX_OPTION.getIndexStatusActive())? true:false;
+            boolean state = (sltState.getSelectedIndex() == COMBO_BOX_OPTION.getIndexStatusActive());
             try {
                 if (worker.getPerson().getIdentificationNumber().equals(personIdentificationNumber)) {
                     NEW_REQUEST_PERSON.editPerson(personIdentificationNumber, personFirstName, personSecondName,
@@ -757,8 +756,6 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         }
 
         this.dispose();
-
-
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanActionPerformed
@@ -766,58 +763,47 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCleanActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        // TODO add your handling code here:
         this.dispose();
         this.PRINCIPALJFRAME.setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void txtFirstLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFirstLastNameActionPerformed
-        // TODO add your handling code here:
         txtFirstLastName.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_txtFirstLastNameActionPerformed
 
     private void sltIdentificationTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltIdentificationTypeActionPerformed
-        // TODO add your handling code here:
         sltIdentificationType.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_sltIdentificationTypeActionPerformed
 
     private void sltBloodTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltBloodTypeActionPerformed
-        // TODO add your handling code here:
         sltBloodType.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_sltBloodTypeActionPerformed
 
     private void sltBloodTypeCmplActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltBloodTypeCmplActionPerformed
-        // TODO add your handling code here:
         sltBloodTypeCmpl.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_sltBloodTypeCmplActionPerformed
 
     private void sltPositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltPositionActionPerformed
-        // TODO add your handling code here:
         sltPosition.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_sltPositionActionPerformed
 
     private void txtSecondNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSecondNameActionPerformed
-        // TODO add your handling code here:
         txtSecondName.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_txtSecondNameActionPerformed
 
     private void txtSecondLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSecondLastNameActionPerformed
-        // TODO add your handling code here:
         txtSecondLastName.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_txtSecondLastNameActionPerformed
 
     private void txtIdentificationNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdentificationNumberActionPerformed
-        // TODO add your handling code here:
         txtIdentificationNumber.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_txtIdentificationNumberActionPerformed
 
     private void sltHealthEntityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltHealthEntityActionPerformed
-        // TODO add your handling code here:
         sltHealthEntity.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_sltHealthEntityActionPerformed
 
     private void sltStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltStateActionPerformed
-        // TODO add your handling code here:
         sltState.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_sltStateActionPerformed
 

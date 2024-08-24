@@ -687,7 +687,6 @@ public class AccountBookView extends javax.swing.JPanel {
     }//GEN-LAST:event_BtnSaveActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        // TODO add your handling code here:
         RequestAccountBook requestBook = new RequestAccountBook();
         List<AccountBook> listBooks = requestBook.getBooks();
         AccountingView accountingView = new AccountingView(PRINCIPALJFRAME, listBooks);

@@ -276,21 +276,11 @@ public class AddWorkerView extends javax.swing.JPanel {
                 txtFirstNameMouseClicked(evt);
             }
         });
-        txtFirstName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFirstNameActionPerformed(evt);
-            }
-        });
 
         txtFirstLastName.setPreferredSize(new java.awt.Dimension(296, 25));
         txtFirstLastName.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtFirstLastNameMouseClicked(evt);
-            }
-        });
-        txtFirstLastName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFirstLastNameActionPerformed(evt);
             }
         });
 
@@ -301,22 +291,12 @@ public class AddWorkerView extends javax.swing.JPanel {
                 sltIdentificationTypeMouseClicked(evt);
             }
         });
-        sltIdentificationType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sltIdentificationTypeActionPerformed(evt);
-            }
-        });
 
         sltPosition.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE UNA ...", "Jefe", "Administrador", "Pintor", "Lijador", "Carpintero", "Seguridad", " " }));
         sltPosition.setPreferredSize(new java.awt.Dimension(296, 25));
         sltPosition.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 sltPositionMouseClicked(evt);
-            }
-        });
-        sltPosition.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sltPositionActionPerformed(evt);
             }
         });
 
@@ -327,22 +307,12 @@ public class AddWorkerView extends javax.swing.JPanel {
                 sltBloodTypeMouseClicked(evt);
             }
         });
-        sltBloodType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sltBloodTypeActionPerformed(evt);
-            }
-        });
 
         sltBloodTypeCmplt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE UNA ...", "+", "-" }));
         sltBloodTypeCmplt.setPreferredSize(new java.awt.Dimension(136, 25));
         sltBloodTypeCmplt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 sltBloodTypeCmpltMouseClicked(evt);
-            }
-        });
-        sltBloodTypeCmplt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sltBloodTypeCmpltActionPerformed(evt);
             }
         });
 
@@ -471,21 +441,11 @@ public class AddWorkerView extends javax.swing.JPanel {
                 txtSecondNameMouseClicked(evt);
             }
         });
-        txtSecondName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSecondNameActionPerformed(evt);
-            }
-        });
 
         txtSecondLastName.setPreferredSize(new java.awt.Dimension(296, 25));
         txtSecondLastName.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtSecondLastNameMouseClicked(evt);
-            }
-        });
-        txtSecondLastName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSecondLastNameActionPerformed(evt);
             }
         });
 
@@ -503,22 +463,12 @@ public class AddWorkerView extends javax.swing.JPanel {
                 txtIdentificationNumMouseClicked(evt);
             }
         });
-        txtIdentificationNum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdentificationNumActionPerformed(evt);
-            }
-        });
 
         sltEPS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE UNA ...", "NO POSEE", "ALIANSALUD EPS", "ANAS WAYUU EPSI", "ASMET SALUD", "ASOCIACION INDIGENA DEL CAUCA EPSI", "CAJACOPI ATLANTICO", "CAPRESOCA", "CAPITAL SALUD EPS-S", "COMFACHOCO", "COMFAORIENTE", "COMFENALCO VALLE", "COMPENSAR EPS", "COOSALUD EPS-S", "DUSAKAWI EPSI", "EMS SANITAS", "EMSSANAR E.S.S.", "EPS FAMILIAR DE COLOMBIA", "EPS SANITAS", "EPS SURA", "FAMISANAR", "FONDO DE PASIVO SOCIAL DE FERROCARRILES NACIONALES DE COLOMBIA", "MALLAMAS EPSI", "MUTUAL SER", "NUEVA EPS", "PIJAOS SALUD EPSI", "SALUD BÓLIVAR EPS SAS", "SALUD MIA", "SALUD TOTAL EPS S.A.", "SAVIA SALUD EPS EPSS40", "SERVICIO OCCIDENTAL DE SALUD EPS SOS", "OTRO" }));
         sltEPS.setPreferredSize(new java.awt.Dimension(296, 25));
         sltEPS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 sltEPSMouseClicked(evt);
-            }
-        });
-        sltEPS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sltEPSActionPerformed(evt);
             }
         });
 
@@ -600,20 +550,7 @@ public class AddWorkerView extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtFirstLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFirstLastNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFirstLastNameActionPerformed
-
-    private void txtSecondLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSecondLastNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSecondLastNameActionPerformed
-
-    private void txtIdentificationNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdentificationNumActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdentificationNumActionPerformed
-
     private void btnCleanFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanFieldsActionPerformed
-        // TODO add your handling code here:
         clearFields();
     }//GEN-LAST:event_btnCleanFieldsActionPerformed
 
@@ -658,86 +595,47 @@ public class AddWorkerView extends javax.swing.JPanel {
             
     }//GEN-LAST:event_btnSaveWorkerActionPerformed
 
-    private void txtFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFirstNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFirstNameActionPerformed
-
-    private void sltPositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltPositionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sltPositionActionPerformed
-
-    private void sltEPSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltEPSActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sltEPSActionPerformed
-
-    private void sltBloodTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltBloodTypeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sltBloodTypeActionPerformed
-
-    private void sltBloodTypeCmpltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltBloodTypeCmpltActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sltBloodTypeCmpltActionPerformed
-
-    private void sltIdentificationTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltIdentificationTypeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sltIdentificationTypeActionPerformed
-
-    private void txtSecondNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSecondNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSecondNameActionPerformed
-
     private void txtFirstNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFirstNameMouseClicked
-        // TODO add your handling code here:
         txtFirstName.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_txtFirstNameMouseClicked
 
     private void txtSecondNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSecondNameMouseClicked
-        // TODO add your handling code here:
         txtSecondName.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_txtSecondNameMouseClicked
 
     private void txtFirstLastNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFirstLastNameMouseClicked
-        // TODO add your handling code here:
         txtFirstLastName.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_txtFirstLastNameMouseClicked
 
     private void txtSecondLastNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSecondLastNameMouseClicked
-        // TODO add your handling code here:
         txtSecondLastName.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_txtSecondLastNameMouseClicked
 
     private void sltIdentificationTypeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sltIdentificationTypeMouseClicked
-        // TODO add your handling code here:
         sltIdentificationType.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_sltIdentificationTypeMouseClicked
 
     private void txtIdentificationNumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdentificationNumMouseClicked
-        // TODO add your handling code here:
         txtIdentificationNum.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_txtIdentificationNumMouseClicked
 
     private void sltBloodTypeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sltBloodTypeMouseClicked
-        // TODO add your handling code here:
         sltBloodType.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_sltBloodTypeMouseClicked
 
     private void sltBloodTypeCmpltMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sltBloodTypeCmpltMouseClicked
-        // TODO add your handling code here:
         sltBloodTypeCmplt.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_sltBloodTypeCmpltMouseClicked
 
     private void sltEPSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sltEPSMouseClicked
-        // TODO add your handling code here:
         sltEPS.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_sltEPSMouseClicked
 
     private void dateVinculationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateVinculationMouseClicked
-        // TODO add your handling code here:
         dateVinculation.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_dateVinculationMouseClicked
 
     private void sltPositionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sltPositionMouseClicked
-        // TODO add your handling code here:
         sltPosition.setBackground(COLOR_WHITE);
     }//GEN-LAST:event_sltPositionMouseClicked
 

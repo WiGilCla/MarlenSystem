@@ -6,7 +6,6 @@ package com.mycompany.marlenproject.userinterface.panelViews.workersSection;
 
 import com.mycompany.marlenproject.logic.CheckFields;
 import com.mycompany.marlenproject.logic.Worker;
-import com.mycompany.marlenproject.logic.request.requestWorker;
 import com.mycompany.marlenproject.userinterface.AdminHome;
 import java.util.ArrayList;
 import java.util.List;
@@ -405,7 +404,6 @@ public class WorkersListView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         String textFilter = Checker.removeStringBlanks(txtSearchWorker.getText()).toLowerCase();
         String positionFilter = sltPositionFilter.getSelectedItem().toString();
         String statusFilterActive = sltStatusFilter.getSelectedItem().toString();
@@ -443,12 +441,9 @@ public class WorkersListView extends javax.swing.JPanel {
         
         sltPositionFilter.setSelectedIndex(COMBO_BOX_OPTIONS.getNoOneOptionSelected());
         sltStatusFilter.setSelectedIndex(COMBO_BOX_OPTIONS.getNoOneOptionSelected());
-        
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void WorkersTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WorkersTableMouseClicked
-        // TODO add your handling code here:
         if(WorkersTable.getRowCount() > 0){
             if(WorkersTable.getSelectedRow() != -1){
                 WorkersInformationView workersInformationView;

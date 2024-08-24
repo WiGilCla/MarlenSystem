@@ -232,38 +232,18 @@ public class WorkersInformationView extends javax.swing.JPanel {
 
         txtFirstLastName.setEditable(false);
         txtFirstLastName.setPreferredSize(new java.awt.Dimension(296, 25));
-        txtFirstLastName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFirstLastNameActionPerformed(evt);
-            }
-        });
 
         txtBloodType.setEditable(false);
         txtBloodType.setPreferredSize(new java.awt.Dimension(296, 25));
 
         txtAge.setEditable(false);
         txtAge.setPreferredSize(new java.awt.Dimension(296, 25));
-        txtAge.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAgeActionPerformed(evt);
-            }
-        });
 
         txtIdentificationType.setEditable(false);
         txtIdentificationType.setPreferredSize(new java.awt.Dimension(296, 25));
-        txtIdentificationType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdentificationTypeActionPerformed(evt);
-            }
-        });
 
         txtPosition.setEditable(false);
         txtPosition.setPreferredSize(new java.awt.Dimension(296, 25));
-        txtPosition.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPositionActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout dataInformation1PanelLayout = new javax.swing.GroupLayout(dataInformation1Panel);
         dataInformation1Panel.setLayout(dataInformation1PanelLayout);
@@ -389,22 +369,12 @@ public class WorkersInformationView extends javax.swing.JPanel {
 
         txtSecondLastName.setEditable(false);
         txtSecondLastName.setPreferredSize(new java.awt.Dimension(296, 25));
-        txtSecondLastName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSecondLastNameActionPerformed(evt);
-            }
-        });
 
         txtEps.setEditable(false);
         txtEps.setPreferredSize(new java.awt.Dimension(296, 25));
 
         txtIdentificationNum.setEditable(false);
         txtIdentificationNum.setPreferredSize(new java.awt.Dimension(296, 25));
-        txtIdentificationNum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdentificationNumActionPerformed(evt);
-            }
-        });
 
         txtDateVinculation.setEditable(false);
         txtDateVinculation.setPreferredSize(new java.awt.Dimension(296, 25));
@@ -525,32 +495,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtFirstLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFirstLastNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFirstLastNameActionPerformed
-
-    private void txtAgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAgeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAgeActionPerformed
-
-    private void txtSecondLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSecondLastNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSecondLastNameActionPerformed
-
-    private void txtIdentificationNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdentificationNumActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdentificationNumActionPerformed
-
-    private void txtIdentificationTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdentificationTypeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdentificationTypeActionPerformed
-
-    private void txtPositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPositionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPositionActionPerformed
-
     private void btnNextWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextWorkerActionPerformed
-        // TODO add your handling code here:
         if(workerViewing < this.WORKER_LIST.size()-1){
             workerViewing++;
             viewWorkerInformation(workerViewing);
@@ -558,7 +503,6 @@ public class WorkersInformationView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNextWorkerActionPerformed
 
     private void btnPreviousWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousWorkerActionPerformed
-        // TODO add your handling code here:
         if(workerViewing > 0){
             workerViewing--;
             viewWorkerInformation(workerViewing);
@@ -601,7 +545,6 @@ public class WorkersInformationView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDeleteWorkerActionPerformed
 
     private void btnEditWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditWorkerActionPerformed
-        // TODO add your handling code here:
         WorkerEditInformationView workerEditInformation = new WorkerEditInformationView(this.WORKER_LIST.get(workerViewing), this.PRINCIPALJFRAME);
         workerEditInformation.setSize(800, 500);
         workerEditInformation.setVisible(true);
@@ -609,7 +552,6 @@ public class WorkersInformationView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditWorkerActionPerformed
 
     private void btnAllWorkerListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllWorkerListActionPerformed
-        // TODO add your handling code here:
         List<Worker> workerList;
         workerList = new requestWorker().getNoDeletedWorker();
         

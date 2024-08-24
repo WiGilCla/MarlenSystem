@@ -121,19 +121,6 @@ public class WorkersFirstView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddNewWorkerActionPerformed
 
     private void btnListWorkersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListWorkersActionPerformed
-//        List<Worker> workers;
-//        workers = new requestWorker().getNoDeletedWorker();
-
-//        if(!workers.isEmpty()){
-//            WorkersInformationView workersInformationView = new WorkersInformationView(this.principalJFrame,workers, 0);
-//            workersInformationView.setSize(970, 576);
-//            workersInformationView.setLocation(0, 0);
-//            principalJFrame.replacePanel(workersInformationView);
-//            
-//            
-//        }else{
-//            JOptionPane.showMessageDialog(principalJFrame, "No tiene trabajadores registrados", "Sin registros", 0);
-//        }
         List<Worker> workerList;
         workerList = new requestWorker().getNoDeletedWorker();
 

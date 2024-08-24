@@ -139,94 +139,7 @@ public class AccountingView extends javax.swing.JPanel {
         RecordsPanel.add(scrollPane);
     }
 
-//        for (int i = 0; i < 10; i++) {
-//            
-//            JPanel panelExterior = new JPanel();
-//            panelExterior.setLayout(new BoxLayout(panelExterior, BoxLayout.X_AXIS));
-//            
-//            JPanel dataPanel = new JPanel();
-//            dataPanel.setLayout(new BoxLayout(dataPanel, BoxLayout.X_AXIS));
-//            dataPanel.setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
-//
-//            JPanel numRecordPanel = new JPanel(new GridLayout(1, 1));
-//            numRecordPanel.setPreferredSize(new Dimension(100, 44));
-//            numRecordPanel.setMaximumSize(new Dimension(100, 44));
-//            JLabel numRecordLabel = new JLabel("registro");
-//            numRecordPanel.add(numRecordLabel);
-//            dataPanel.add(numRecordPanel);
-//            
-//            Separator separatorNum = new Separator();
-//            separatorNum.setOrientation(1);
-//            dataPanel.add(separatorNum);
-//            
-//            JPanel dateRecordPanel = new JPanel(new GridLayout(1, 1));
-//            dateRecordPanel.setPreferredSize(new Dimension(100, 44));
-//            dateRecordPanel.setMaximumSize(new Dimension(100, 44));
-//            JLabel dateRecordLabel = new JLabel("Date");
-//            dateRecordPanel.add(dateRecordLabel);
-//            dataPanel.add(dateRecordPanel);
-//            Separator separatorDate = new Separator();
-//            separatorDate.setOrientation(1);
-//            dataPanel.add(separatorDate);
-//
-//            JPanel titleRecordPanel = new JPanel(new GridLayout(1, 1));
-//            titleRecordPanel.setPreferredSize(new Dimension(350, 44));
-//            JLabel titleRecordLabel = new JLabel("titulo");
-//            titleRecordPanel.add(titleRecordLabel);
-//            dataPanel.add(titleRecordPanel);
-//            Separator separatorTitle = new Separator();
-//            separatorTitle.setOrientation(1);
-//            dataPanel.add(separatorTitle);
-//            
-//            JPanel buttonPanel = new JPanel(new GridLayout(1, 4,6,6));            
-//            buttonPanel.setMaximumSize(new Dimension(158,44));
-//
-//            JPanel watchRecordPanel = new JPanel(new GridLayout(1, 1));
-//            watchRecordPanel.setPreferredSize(new Dimension(44, 44));
-//            JButton btnWatchRecord = new JButton();
-//            btnWatchRecord.setPreferredSize(new Dimension(32, 32));
-//            btnWatchRecord.setMaximumSize(new Dimension(32, 32));
-//            btnWatchRecord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconWatch.png")));
-//            watchRecordPanel.add(btnWatchRecord);
-//            buttonPanel.add(watchRecordPanel);
-//
-//            JPanel editRecordPanel = new JPanel(new GridLayout(1, 1));
-//            editRecordPanel.setPreferredSize(new Dimension(44, 44));
-//            JButton btnEditRecord = new JButton();
-//            btnEditRecord.setPreferredSize(new Dimension(32, 32));
-//            btnEditRecord.setMaximumSize(new Dimension(32, 32));
-//            btnEditRecord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconEdit.png")));
-//            editRecordPanel.add(btnEditRecord);
-//            buttonPanel.add(editRecordPanel);
-//
-//            JPanel deleteRecordPanel = new JPanel(new GridLayout(1, 1));
-//            deleteRecordPanel.setPreferredSize(new Dimension(44, 44));
-//            JButton btnDeleteRecord = new JButton();
-//            btnDeleteRecord.setPreferredSize(new Dimension(32, 32));
-//            btnDeleteRecord.setMaximumSize(new Dimension(32, 32));
-//            btnDeleteRecord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconTrash.png")));
-//            deleteRecordPanel.add(btnDeleteRecord);
-//            buttonPanel.add(deleteRecordPanel);
-//
-//            JPanel downloadRecordPanel = new JPanel(new GridLayout(1, 1));
-//            downloadRecordPanel.setPreferredSize(new Dimension(44, 44));
-//            JButton btnDownloadRecord = new JButton();
-//            btnDownloadRecord.setPreferredSize(new Dimension(32, 32));
-//            btnDownloadRecord.setMaximumSize(new Dimension(32, 32));
-//            btnDownloadRecord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconDownload.png")));
-//            downloadRecordPanel.add(btnDownloadRecord);
-//            buttonPanel.add(downloadRecordPanel);
-//            
-//            panelExterior.add(dataPanel);
-//            panelExterior.add(buttonPanel);
-//            
-//            contentPane.add(panelExterior);
-//            contentPane.add(new JPopupMenu.Separator());
-//        }
-//        JScrollPane scrollPane = new JScrollPane(contentPane);
-//        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-//        RecordsPanel.add(scrollPane);
-//    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -463,7 +376,6 @@ public class AccountingView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAccountActionPerformed
-        // TODO add your handling code here:
         AccountBookView accountBookView = new AccountBookView(this.PRINCIPALJFRAME, null, null, false);
         accountBookView.setSize(970, 576);
         accountBookView.setLocation(0, 0);
