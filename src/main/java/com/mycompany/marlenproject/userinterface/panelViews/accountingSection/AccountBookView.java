@@ -623,9 +623,10 @@ public class AccountBookView extends javax.swing.JPanel {
                     new String[]{"Continuar", "Volver"}, null);
 
             if (userChangeNumber == 0) {
-                int numberBooks = bookRequest.countBook();
-                lbNumberBook.setText(String.valueOf(numberBooks + 1));
-                NumberBookChanged = true;
+                    SimpleDateFormat sdf = new SimpleDateFormat("HHmmss", Locale.getDefault());
+                    String timeSaved = sdf.format(new Date());
+                    lbNumberBook.setText(String.valueOf(timeSaved));
+                    NumberBookChanged = true;
             } else {
                 return;
             }

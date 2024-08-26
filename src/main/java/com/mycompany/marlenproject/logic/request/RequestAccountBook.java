@@ -28,6 +28,10 @@ public class RequestAccountBook {
         accountBookController.saveBookController(book);
     }
     
+    public void deleteBook(AccountBook book) throws Exception{
+        accountBookController.deleteBookController(book.getAccountBookId());
+    }
+    
     public int countBook(){
         return accountBookController.getCountBookController();
     }

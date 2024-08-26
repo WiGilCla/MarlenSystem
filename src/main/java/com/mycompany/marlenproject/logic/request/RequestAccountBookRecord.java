@@ -26,4 +26,8 @@ public class RequestAccountBookRecord {
         
         accountBookRecordsController.saveBookRecordController(bookRecord);
     }
+    
+    public void deleteBookRecord(AccountBookRecords record) throws Exception{
+        accountBookRecordsController.deleteBookRecordController(record.getRecordId());
+    }
 }
