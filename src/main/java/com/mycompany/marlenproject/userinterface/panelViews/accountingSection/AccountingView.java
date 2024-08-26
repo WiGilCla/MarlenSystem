@@ -6,6 +6,7 @@ package com.mycompany.marlenproject.userinterface.panelViews.accountingSection;
 
 import com.mycompany.marlenproject.logic.AccountBook;
 import com.mycompany.marlenproject.userinterface.AdminHome;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -18,9 +19,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JPopupMenu.Separator;
 import javax.swing.JScrollPane;
+import javax.swing.border.LineBorder;
 
 public class AccountingView extends javax.swing.JPanel {
 
@@ -38,53 +39,63 @@ public class AccountingView extends javax.swing.JPanel {
 
         JPanel contentPane = new JPanel();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
-        contentPane.setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
-
+        contentPane.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        
         for (AccountBook book : listBooks) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
             JPanel panelExterior = new JPanel();
             panelExterior.setLayout(new BoxLayout(panelExterior, BoxLayout.X_AXIS));
+            panelExterior.setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
 
-            JPanel dataPanel = new JPanel();
+            JPanel dataPanel = new JPanel(); 
             dataPanel.setLayout(new BoxLayout(dataPanel, BoxLayout.X_AXIS));
-            dataPanel.setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
+            dataPanel.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
 
-            JPanel numRecordPanel = new JPanel(new GridLayout(1, 1));
+            JPanel numRecordPanel = new JPanel(new GridLayout(1, 1, 6,6));
             numRecordPanel.setPreferredSize(new Dimension(100, 44));
             numRecordPanel.setMaximumSize(new Dimension(100, 44));
+            numRecordPanel.setBorder(new LineBorder(Color.GREEN));
             JLabel numRecordLabel = new JLabel(String.valueOf(book.getAccountBookId()));
             numRecordPanel.add(numRecordLabel);
             dataPanel.add(numRecordPanel);
 
             Separator separatorNum = new Separator();
             separatorNum.setOrientation(1);
+            separatorNum.setMaximumSize(new Dimension(1, 44));
+            separatorNum.setBorder(new LineBorder(Color.blue));
             dataPanel.add(separatorNum);
 
-            JPanel dateRecordPanel = new JPanel(new GridLayout(1, 1));
+            JPanel dateRecordPanel = new JPanel(new GridLayout(1, 1,6,6));
             dateRecordPanel.setPreferredSize(new Dimension(100, 44));
             dateRecordPanel.setMaximumSize(new Dimension(100, 44));
+            dateRecordPanel.setBorder(new LineBorder(Color.GREEN));
             JLabel dateRecordLabel = new JLabel(sdf.format(book.getCreationDate()));
             dateRecordPanel.add(dateRecordLabel);
             dataPanel.add(dateRecordPanel);
+            
             Separator separatorDate = new Separator();
             separatorDate.setOrientation(1);
+            separatorDate.setMaximumSize(new Dimension(1, 44));
+            separatorDate.setBorder(new LineBorder(Color.blue));
             dataPanel.add(separatorDate);
 
-            JPanel titleRecordPanel = new JPanel(new GridLayout(1, 1));
+            JPanel titleRecordPanel = new JPanel(new GridLayout(1, 1,6,6));
             titleRecordPanel.setPreferredSize(new Dimension(350, 44));
+            titleRecordPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 44));
+            titleRecordPanel.setBorder(new LineBorder(Color.GREEN));
             JLabel titleRecordLabel = new JLabel(book.getTitleBook());
             titleRecordPanel.add(titleRecordLabel);
             dataPanel.add(titleRecordPanel);
-            Separator separatorTitle = new Separator();
-            separatorTitle.setOrientation(1);
-            dataPanel.add(separatorTitle);
 
             JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 6, 6));
             buttonPanel.setMaximumSize(new Dimension(158, 44));
+            buttonPanel.setBorder(new LineBorder(Color.red));
 
-            JPanel watchRecordPanel = new JPanel(new GridLayout(1, 1));
+            JPanel watchRecordPanel = new JPanel(new GridLayout(1, 1, 6,6));
             watchRecordPanel.setPreferredSize(new Dimension(44, 44));
+            watchRecordPanel.setMaximumSize(new Dimension(44, 44));
+            watchRecordPanel.setBorder(new LineBorder(Color.yellow));
             JButton btnWatchRecord = new JButton();
             btnWatchRecord.addActionListener(new ActionListener() {
                 @Override
@@ -101,8 +112,10 @@ public class AccountingView extends javax.swing.JPanel {
             watchRecordPanel.add(btnWatchRecord);
             buttonPanel.add(watchRecordPanel);
 
-            JPanel editRecordPanel = new JPanel(new GridLayout(1, 1));
+            JPanel editRecordPanel = new JPanel(new GridLayout(1, 1,6,6));
             editRecordPanel.setPreferredSize(new Dimension(44, 44));
+            editRecordPanel.setMaximumSize(new Dimension(44, 44));
+            editRecordPanel.setBorder(new LineBorder(Color.yellow));
             JButton btnEditRecord = new JButton();
             btnEditRecord.setPreferredSize(new Dimension(32, 32));
             btnEditRecord.setMaximumSize(new Dimension(32, 32));
@@ -110,8 +123,10 @@ public class AccountingView extends javax.swing.JPanel {
             editRecordPanel.add(btnEditRecord);
             buttonPanel.add(editRecordPanel);
 
-            JPanel deleteRecordPanel = new JPanel(new GridLayout(1, 1));
+            JPanel deleteRecordPanel = new JPanel(new GridLayout(1, 1,6,6));
             deleteRecordPanel.setPreferredSize(new Dimension(44, 44));
+            deleteRecordPanel.setMaximumSize(new Dimension(44, 44));
+            deleteRecordPanel.setBorder(new LineBorder(Color.yellow));
             JButton btnDeleteRecord = new JButton();
             btnDeleteRecord.setPreferredSize(new Dimension(32, 32));
             btnDeleteRecord.setMaximumSize(new Dimension(32, 32));
@@ -119,8 +134,10 @@ public class AccountingView extends javax.swing.JPanel {
             deleteRecordPanel.add(btnDeleteRecord);
             buttonPanel.add(deleteRecordPanel);
 
-            JPanel downloadRecordPanel = new JPanel(new GridLayout(1, 1));
+            JPanel downloadRecordPanel = new JPanel(new GridLayout(1, 1,6,6));
             downloadRecordPanel.setPreferredSize(new Dimension(44, 44));
+            downloadRecordPanel.setMaximumSize(new Dimension(44, 44));
+            downloadRecordPanel.setBorder(new LineBorder(Color.yellow));
             JButton btnDownloadRecord = new JButton();
             btnDownloadRecord.setPreferredSize(new Dimension(32, 32));
             btnDownloadRecord.setMaximumSize(new Dimension(32, 32));
@@ -129,10 +146,21 @@ public class AccountingView extends javax.swing.JPanel {
             buttonPanel.add(downloadRecordPanel);
 
             panelExterior.add(dataPanel);
+            
+            Separator separatorTitle = new Separator();
+            separatorTitle.setOrientation(1);
+            separatorTitle.setMaximumSize(new Dimension(1, 44));
+            separatorTitle.setBorder(new LineBorder(Color.blue));
+            panelExterior.add(separatorTitle);
+            
             panelExterior.add(buttonPanel);
 
             contentPane.add(panelExterior);
-            contentPane.add(new JPopupMenu.Separator());
+            
+            Separator separatorRecord = new Separator();
+            separatorRecord.setMaximumSize(new Dimension(Integer.MAX_VALUE, 1));
+            separatorRecord.setBorder(new LineBorder(Color.blue));
+            contentPane.add(separatorRecord);
         }
         JScrollPane scrollPane = new JScrollPane(contentPane);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
