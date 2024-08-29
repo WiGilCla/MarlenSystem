@@ -5,32 +5,25 @@
 package com.mycompany.marlenproject.persistence;
 
 import com.mycompany.marlenproject.logic.AccountBook;
-import java.io.Serializable;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import com.mycompany.marlenproject.logic.AccountBookRecords;
-import com.mycompany.marlenproject.persistence.exceptions.IllegalOrphanException;
 import com.mycompany.marlenproject.persistence.exceptions.NonexistentEntityException;
 import com.mycompany.marlenproject.persistence.exceptions.PreexistingEntityException;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
-/**
- *
- * @author willy
- */
 public class AccountBookJpaController implements Serializable {
 
     public AccountBookJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    public AccountBookJpaController() { 
-        this.emf = Persistence.createEntityManagerFactory("MarlenProjectPU"); 
+    public AccountBookJpaController() {
+        this.emf = Persistence.createEntityManagerFactory("MarlenProjectPU");
     }
     private EntityManagerFactory emf = null;
 
@@ -39,29 +32,11 @@ public class AccountBookJpaController implements Serializable {
     }
 
     public void create(AccountBook accountBook) throws PreexistingEntityException, Exception {
-        if (accountBook.getListBookRecords() == null) {
-            accountBook.setListBookRecords(new ArrayList<AccountBookRecords>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<AccountBookRecords> attachedListBookRecords = new ArrayList<AccountBookRecords>();
-            for (AccountBookRecords listBookRecordsAccountBookRecordsToAttach : accountBook.getListBookRecords()) {
-                listBookRecordsAccountBookRecordsToAttach = em.getReference(listBookRecordsAccountBookRecordsToAttach.getClass(), listBookRecordsAccountBookRecordsToAttach.getRecordId());
-                attachedListBookRecords.add(listBookRecordsAccountBookRecordsToAttach);
-            }
-            accountBook.setListBookRecords(attachedListBookRecords);
             em.persist(accountBook);
-            for (AccountBookRecords listBookRecordsAccountBookRecords : accountBook.getListBookRecords()) {
-                AccountBook oldAccountBookIdOfListBookRecordsAccountBookRecords = listBookRecordsAccountBookRecords.getAccountBookId();
-                listBookRecordsAccountBookRecords.setAccountBookId(accountBook);
-                listBookRecordsAccountBookRecords = em.merge(listBookRecordsAccountBookRecords);
-                if (oldAccountBookIdOfListBookRecordsAccountBookRecords != null) {
-                    oldAccountBookIdOfListBookRecordsAccountBookRecords.getListBookRecords().remove(listBookRecordsAccountBookRecords);
-                    oldAccountBookIdOfListBookRecordsAccountBookRecords = em.merge(oldAccountBookIdOfListBookRecordsAccountBookRecords);
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findAccountBook(accountBook.getAccountBookId()) != null) {
@@ -75,45 +50,12 @@ public class AccountBookJpaController implements Serializable {
         }
     }
 
-    public void edit(AccountBook accountBook) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    public void edit(AccountBook accountBook) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            AccountBook persistentAccountBook = em.find(AccountBook.class, accountBook.getAccountBookId());
-            List<AccountBookRecords> listBookRecordsOld = persistentAccountBook.getListBookRecords();
-            List<AccountBookRecords> listBookRecordsNew = accountBook.getListBookRecords();
-            List<String> illegalOrphanMessages = null;
-            for (AccountBookRecords listBookRecordsOldAccountBookRecords : listBookRecordsOld) {
-                if (!listBookRecordsNew.contains(listBookRecordsOldAccountBookRecords)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain AccountBookRecords " + listBookRecordsOldAccountBookRecords + " since its accountBookId field is not nullable.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            List<AccountBookRecords> attachedListBookRecordsNew = new ArrayList<AccountBookRecords>();
-            for (AccountBookRecords listBookRecordsNewAccountBookRecordsToAttach : listBookRecordsNew) {
-                listBookRecordsNewAccountBookRecordsToAttach = em.getReference(listBookRecordsNewAccountBookRecordsToAttach.getClass(), listBookRecordsNewAccountBookRecordsToAttach.getRecordId());
-                attachedListBookRecordsNew.add(listBookRecordsNewAccountBookRecordsToAttach);
-            }
-            listBookRecordsNew = attachedListBookRecordsNew;
-            accountBook.setListBookRecords(listBookRecordsNew);
             accountBook = em.merge(accountBook);
-            for (AccountBookRecords listBookRecordsNewAccountBookRecords : listBookRecordsNew) {
-                if (!listBookRecordsOld.contains(listBookRecordsNewAccountBookRecords)) {
-                    AccountBook oldAccountBookIdOfListBookRecordsNewAccountBookRecords = listBookRecordsNewAccountBookRecords.getAccountBookId();
-                    listBookRecordsNewAccountBookRecords.setAccountBookId(accountBook);
-                    listBookRecordsNewAccountBookRecords = em.merge(listBookRecordsNewAccountBookRecords);
-                    if (oldAccountBookIdOfListBookRecordsNewAccountBookRecords != null && !oldAccountBookIdOfListBookRecordsNewAccountBookRecords.equals(accountBook)) {
-                        oldAccountBookIdOfListBookRecordsNewAccountBookRecords.getListBookRecords().remove(listBookRecordsNewAccountBookRecords);
-                        oldAccountBookIdOfListBookRecordsNewAccountBookRecords = em.merge(oldAccountBookIdOfListBookRecordsNewAccountBookRecords);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -131,7 +73,7 @@ public class AccountBookJpaController implements Serializable {
         }
     }
 
-    public void destroy(int id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(int id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -142,17 +84,6 @@ public class AccountBookJpaController implements Serializable {
                 accountBook.getAccountBookId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The accountBook with id " + id + " no longer exists.", enfe);
-            }
-            List<String> illegalOrphanMessages = null;
-            List<AccountBookRecords> listBookRecordsOrphanCheck = accountBook.getListBookRecords();
-            for (AccountBookRecords listBookRecordsOrphanCheckAccountBookRecords : listBookRecordsOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This AccountBook (" + accountBook + ") cannot be destroyed since the AccountBookRecords " + listBookRecordsOrphanCheckAccountBookRecords + " in its listBookRecords field has a non-nullable accountBookId field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             em.remove(accountBook);
             em.getTransaction().commit();
@@ -208,5 +139,5 @@ public class AccountBookJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

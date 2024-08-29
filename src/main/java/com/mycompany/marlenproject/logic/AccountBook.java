@@ -15,32 +15,32 @@ import javax.persistence.OneToMany;
 @Entity
 public class AccountBook implements Serializable {
     @Id
-    @Column(name = "AccountBookId")
-    private int accountBookId;
+    @Column(name = "Id")
+    private int id;
     @Column(name = "CreationDate", nullable = false)
     private Date creationDate;
     @Column(name = "TitleBook", nullable = false, length = 150)
     private String titleBook;
-    @OneToMany(mappedBy = "AccountBookId")
+    @OneToMany(mappedBy = "accountBook")
     private List<AccountBookRecords> listBookRecords;
 
     public AccountBook() {
         
     }
 
-    public AccountBook(int accountBookId, Date creationDate, String titleBook, List<AccountBookRecords> listBookRecords) {
-        this.accountBookId = accountBookId;
+    public AccountBook(int id, Date creationDate, String titleBook, List<AccountBookRecords> listBookRecords) {
+        this.id = id;
         this.creationDate = creationDate;
         this.titleBook = titleBook;
         this.listBookRecords = listBookRecords;
     }
     
     public int getAccountBookId() {
-        return accountBookId;
+        return id;
     }
 
-    public void setAccountBookId(int accountBookId) {
-        this.accountBookId = accountBookId;
+    public void setAccountBookId(int id) {
+        this.id = id;
     }
 
     public Date getCreationDate() {

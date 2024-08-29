@@ -18,11 +18,11 @@ public class AccountBookRecords implements Serializable {
     
     @Id
     @GeneratedValue(strategy=SEQUENCE, generator="ID_SEQ")
-    @Column(name = "RecordId", nullable = false, length = 200)
+    @Column(name = "Id", nullable = false, length = 200)
     private int recordId;
-    @JoinColumn(name = "AccountBookId",nullable = false)
+    @JoinColumn(name = "accountBookId",nullable = false)
     @ManyToOne
-    private AccountBook accountBookId;
+    private AccountBook accountBook;
     @Column(name = "Description", nullable = false, length = 200)
     private String description;
     @Column(name = "CashInflow", nullable = false)
@@ -33,8 +33,8 @@ public class AccountBookRecords implements Serializable {
     public AccountBookRecords() {
     }
 
-    public AccountBookRecords(AccountBook accountBookId, String description, long cashInflow, long cashExpenses) {
-        this.accountBookId = accountBookId;
+    public AccountBookRecords(AccountBook accountBook, String description, long cashInflow, long cashExpenses) {
+        this.accountBook = accountBook;
         this.description = description;
         this.cashInflow = cashInflow;
         this.cashExpenses = cashExpenses;
@@ -49,11 +49,11 @@ public class AccountBookRecords implements Serializable {
     }
 
     public AccountBook getAccountBookId() {
-        return accountBookId;
+        return accountBook;
     }
 
-    public void setAccountBookId(AccountBook accountBookId) {
-        this.accountBookId = accountBookId;
+    public void setAccountBookId(AccountBook accountBook) {
+        this.accountBook = accountBook;
     }
 
     public String getDescription() {
@@ -82,6 +82,6 @@ public class AccountBookRecords implements Serializable {
 
     @Override
     public String toString() {
-        return "AccountBookRecords{" + "recordId=" + recordId + ", accountBookId=" + accountBookId + ", description=" + description + ", cashInflow=" + cashInflow + ", cashExpenses=" + cashExpenses + '}';
+        return "AccountBookRecords{" + "recordId=" + recordId + ", accountBookId=" + accountBook + ", description=" + description + ", cashInflow=" + cashInflow + ", cashExpenses=" + cashExpenses + '}';
     }
 }

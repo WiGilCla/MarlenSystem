@@ -17,10 +17,6 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-/**
- *
- * @author willy
- */
 public class WorkerJpaController implements Serializable {
 
     public WorkerJpaController(EntityManagerFactory emf) {
@@ -161,7 +157,7 @@ public class WorkerJpaController implements Serializable {
         try {
             em = getEntityManager();
             TypedQuery<Worker> query = em.createQuery(
-                "SELECT w FROM Worker w WHERE w.person.identificationNumber = :dni", Worker.class);
+                    "SELECT w FROM Worker w WHERE w.person.identificationNumber = :dni", Worker.class);
             query.setParameter("dni", dni);
             return query.getSingleResult();
         } catch (Exception e) {

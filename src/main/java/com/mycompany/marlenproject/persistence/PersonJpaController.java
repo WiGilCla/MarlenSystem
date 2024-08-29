@@ -17,10 +17,6 @@ import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-/**
- *
- * @author willy
- */
 public class PersonJpaController implements Serializable {
 
     public PersonJpaController(EntityManagerFactory emf) {
@@ -142,6 +138,5 @@ public class PersonJpaController implements Serializable {
         } finally {
             em.close();
         }
-    }
-    
+    } 
 }

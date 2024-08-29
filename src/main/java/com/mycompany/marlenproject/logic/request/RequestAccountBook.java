@@ -28,6 +28,17 @@ public class RequestAccountBook {
         accountBookController.saveBookController(book);
     }
     
+    public void editBook(AccountBook book) throws Exception{
+        
+        int bookId = book.getAccountBookId();
+        Timestamp creationBook = new Timestamp(book.getCreationDate().getTime());
+        String bookTitle = CHECKER.capitalizedString(book.getTitleBook());
+        List<AccountBookRecords> bookRecords = book.getListBookRecords();
+        
+        AccountBook editedBook = new AccountBook(bookId, creationBook, bookTitle, bookRecords);
+        accountBookController.editBookController(editedBook);
+    }
+    
     public void deleteBook(AccountBook book) throws Exception{
         accountBookController.deleteBookController(book.getAccountBookId());
     }

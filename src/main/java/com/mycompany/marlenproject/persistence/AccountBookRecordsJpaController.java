@@ -4,30 +4,27 @@
  */
 package com.mycompany.marlenproject.persistence;
 
-import java.io.Serializable;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import com.mycompany.marlenproject.logic.AccountBook;
 import com.mycompany.marlenproject.logic.AccountBookRecords;
 import com.mycompany.marlenproject.persistence.exceptions.NonexistentEntityException;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
-/**
- *
- * @author willy
- */
 public class AccountBookRecordsJpaController implements Serializable {
 
     public AccountBookRecordsJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    public AccountBookRecordsJpaController() { 
-        this.emf = Persistence.createEntityManagerFactory("MarlenProjectPU"); 
+    public AccountBookRecordsJpaController() {
+        this.emf = Persistence.createEntityManagerFactory("MarlenProjectPU");
     }
     private EntityManagerFactory emf = null;
 
@@ -40,16 +37,7 @@ public class AccountBookRecordsJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            AccountBook accountBookId = accountBookRecords.getAccountBookId();
-            if (accountBookId != null) {
-                accountBookId = em.getReference(accountBookId.getClass(), accountBookId.getAccountBookId());
-                accountBookRecords.setAccountBookId(accountBookId);
-            }
             em.persist(accountBookRecords);
-            if (accountBookId != null) {
-                accountBookId.getListBookRecords().add(accountBookRecords);
-                accountBookId = em.merge(accountBookId);
-            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -63,22 +51,7 @@ public class AccountBookRecordsJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            AccountBookRecords persistentAccountBookRecords = em.find(AccountBookRecords.class, accountBookRecords.getRecordId());
-            AccountBook accountBookIdOld = persistentAccountBookRecords.getAccountBookId();
-            AccountBook accountBookIdNew = accountBookRecords.getAccountBookId();
-            if (accountBookIdNew != null) {
-                accountBookIdNew = em.getReference(accountBookIdNew.getClass(), accountBookIdNew.getAccountBookId());
-                accountBookRecords.setAccountBookId(accountBookIdNew);
-            }
             accountBookRecords = em.merge(accountBookRecords);
-            if (accountBookIdOld != null && !accountBookIdOld.equals(accountBookIdNew)) {
-                accountBookIdOld.getListBookRecords().remove(accountBookRecords);
-                accountBookIdOld = em.merge(accountBookIdOld);
-            }
-            if (accountBookIdNew != null && !accountBookIdNew.equals(accountBookIdOld)) {
-                accountBookIdNew.getListBookRecords().add(accountBookRecords);
-                accountBookIdNew = em.merge(accountBookIdNew);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -107,11 +80,6 @@ public class AccountBookRecordsJpaController implements Serializable {
                 accountBookRecords.getRecordId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The accountBookRecords with id " + id + " no longer exists.", enfe);
-            }
-            AccountBook accountBookId = accountBookRecords.getAccountBookId();
-            if (accountBookId != null) {
-                accountBookId.getListBookRecords().remove(accountBookRecords);
-                accountBookId = em.merge(accountBookId);
             }
             em.remove(accountBookRecords);
             em.getTransaction().commit();
@@ -167,5 +135,21 @@ public class AccountBookRecordsJpaController implements Serializable {
             em.close();
         }
     }
-    
+
+    public List<AccountBookRecords> findRecordsByBookId(AccountBook accountBook) {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            TypedQuery<AccountBookRecords> query = em.createQuery(
+                    "SELECT abr FROM AccountBookRecords abr WHERE abr.accountBook = :accountBook", AccountBookRecords.class);
+            query.setParameter("accountBook", accountBook);
+            return query.getResultList();
+        } catch (Exception e) {
+            return null; 
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
 }

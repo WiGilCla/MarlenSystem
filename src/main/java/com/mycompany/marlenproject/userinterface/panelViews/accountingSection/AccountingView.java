@@ -45,10 +45,21 @@ public class AccountingView extends javax.swing.JPanel {
         watchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 BookView bookView = new BookView(book.getListBookRecords(), book);
                 bookView.setVisible(true);
                 bookView.setLocationRelativeTo(null);
+            }
+        });
+    }
+
+    private void settingsBtnEditRecord(JButton editButton, AccountBook book) {
+        editButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AccountBookView accountBookView = new AccountBookView(PRINCIPALJFRAME, book, true);
+                accountBookView.setSize(970, 576);
+                accountBookView.setLocation(0, 0);
+                PRINCIPALJFRAME.replacePanel(accountBookView);
             }
         });
     }
@@ -65,14 +76,14 @@ public class AccountingView extends javax.swing.JPanel {
                     RequestAccountBook requestAccountBook = new RequestAccountBook();
                     RequestAccountBookRecord requestAccountBookRecord = new RequestAccountBookRecord();
                     try {
-                        for(AccountBookRecords record: book.getListBookRecords()){
+                        for (AccountBookRecords record : book.getListBookRecords()) {
                             requestAccountBookRecord.deleteBookRecord(record);
                         }
                         requestAccountBook.deleteBook(book);
                     } catch (Exception ex) {
                         Logger.getLogger(AccountingView.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    JOptionPane.showMessageDialog(PRINCIPALJFRAME, 
+                    JOptionPane.showMessageDialog(PRINCIPALJFRAME,
                             "El libro ha sido eliminado con exito", "Eliminación exitosa", 1);
 
                     List<AccountBook> listBooks = requestAccountBook.getBooks();
@@ -87,7 +98,9 @@ public class AccountingView extends javax.swing.JPanel {
     }
 
     private void showAccountRecords(List<AccountBook> listBooks) {
-
+        if(listBooks.isEmpty() || listBooks == null){
+            return;
+        }
         JPanel contentPane = new JPanel();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
         contentPane.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -160,7 +173,7 @@ public class AccountingView extends javax.swing.JPanel {
             editRecordPanel.setMaximumSize(new Dimension(44, 44));
             editRecordPanel.setBorder(new LineBorder(Color.yellow));
             JButton btnEditRecord = new JButton();
-            //settingsBtnEditRecord(btnEditRecord,book);
+            settingsBtnEditRecord(btnEditRecord, book);
             btnEditRecord.setPreferredSize(new Dimension(32, 32));
             btnEditRecord.setMaximumSize(new Dimension(32, 32));
             btnEditRecord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconEdit.png")));
@@ -449,7 +462,7 @@ public class AccountingView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAccountActionPerformed
-        AccountBookView accountBookView = new AccountBookView(this.PRINCIPALJFRAME, null, null, false);
+        AccountBookView accountBookView = new AccountBookView(this.PRINCIPALJFRAME, null, false);
         accountBookView.setSize(970, 576);
         accountBookView.setLocation(0, 0);
         this.PRINCIPALJFRAME.replacePanel(accountBookView);
