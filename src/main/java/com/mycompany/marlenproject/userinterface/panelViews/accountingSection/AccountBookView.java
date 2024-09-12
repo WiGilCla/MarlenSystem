@@ -43,7 +43,7 @@ public class AccountBookView extends javax.swing.JPanel {
         Object[] row = {indexRow, "", "", ""};
         return row;
     }
-    
+
     private void returnToAccountingView() {
         RequestAccountBook requestBook = new RequestAccountBook();
         List<AccountBook> listBooks = requestBook.getBooks();
@@ -112,7 +112,7 @@ public class AccountBookView extends javax.swing.JPanel {
             return false;
         }
     }
-    
+
     private boolean isInteger(String number) {
         try {
             Integer.valueOf(number);
@@ -123,7 +123,6 @@ public class AccountBookView extends javax.swing.JPanel {
     }
 
     private void loadTable(AccountBook book) {
-        //ArrayList<AccountBookRecords> list_records = (ArrayList<AccountBookRecords>) book.getListBookRecords();
 
         DefaultTableModel modelTable = new DefaultTableModel() {
             @Override
@@ -141,13 +140,25 @@ public class AccountBookView extends javax.swing.JPanel {
                 this.bookRecords.add(new AccountBookRecords(null, "", 0L, 0L));
             }
         } else {
+            int lastRecordAdded = 0;
             lbNumberBook.setText(String.valueOf(book.getAccountBookId()));
             lbNumberBook.setEnabled(false);
+
             lbTitleBook.setText(book.getTitleBook());
+            titleBookChanged = true;
 
             for (AccountBookRecords record : book.getListBookRecords()) {
-                this.bookRecords.add(new AccountBookRecords(null,
+                this.bookRecords.add(new AccountBookRecords(record.getAccountBookId(),
                         record.getDescription(), record.getCashInflow(), record.getCashExpenses()));
+                this.bookRecords.get(lastRecordAdded).setRecordId(record.getRecordId());
+                lastRecordAdded++;
+                totalIncome += record.getCashInflow();
+                totalExpense += record.getCashExpenses();
+
+                lbTotal_In.setText(formatNumber(totalIncome));
+                lbTotal_Ex.setText(formatNumber(totalExpense));
+                lbTotal_InEx.setText(formatNumber((totalIncome - totalExpense)));
+
             }
             this.bookInformation = new AccountBook(book.getAccountBookId(),
                     book.getCreationDate(), book.getTitleBook(), book.getListBookRecords());
@@ -537,10 +548,9 @@ public class AccountBookView extends javax.swing.JPanel {
         if (newTitleBook != null && !newTitleBook.isBlank()) {
             lbTitleBook.setText(newTitleBook.toUpperCase());
             titleBookChanged = true;
-        }
-
-        if (isEditingABook) {
-            this.bookInformation.setTitleBook(newTitleBook.toUpperCase());
+            if (isEditingABook) {
+                this.bookInformation.setTitleBook(newTitleBook.toUpperCase());
+            }
         }
     }//GEN-LAST:event_lbTitleBookMouseClicked
 
@@ -558,7 +568,7 @@ public class AccountBookView extends javax.swing.JPanel {
             if (newNumberBook == null) {
                 return;
             }
-            
+
             if (!isInteger(newNumberBook) || (newNumberBook.length() > 9)) {
                 JOptionPane.showOptionDialog(PRINCIPALJFRAME,
                         "Debe ingresar un numero de máximo 9 dígitos, sin letras ni caracteres.",
@@ -706,7 +716,7 @@ public class AccountBookView extends javax.swing.JPanel {
                     }
                     book.setListBookRecords(recordRequest.getRecordsByBookId(book));
                     bookRequest.editBook(book);
-                    JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Los cambios se han guardado exitosamente.");
+                    JOptionPane.showMessageDialog(PRINCIPALJFRAME, "El libro se guardado exitosamente.");
 
                 } catch (Exception ex) {
                     Logger.getLogger(AccountBookView.class.getName()).log(Level.SEVERE, null, ex);
@@ -715,10 +725,28 @@ public class AccountBookView extends javax.swing.JPanel {
                 returnToAccountingView();
 
             } else if (isEditingABook) {
-                for (AccountBookRecords record : recordRequest.getRecordsByBookId(bookInformation)) {
-                    System.out.println("Libro: " + record.getAccountBookId());
-                    System.out.println("Registro id: " + record.getRecordId());
+
+                try {
+                    for (AccountBookRecords deleteRecord : bookRecordsDeleted) {
+                        recordRequest.deleteBookRecord(deleteRecord);
+                    }
+
+                    for (AccountBookRecords editeRecord : bookRecords) {
+                        if (!editeRecord.getDescription().isBlank()) {
+                            if (editeRecord.getAccountBookId() == null) {
+                                editeRecord.setAccountBookId(bookInformation);
+                            }
+                            recordRequest.editBookRecord(editeRecord);
+                        }
+                    }
+                    bookInformation.setListBookRecords(recordRequest.getRecordsByBookId(bookInformation));
+                    bookRequest.editBook(bookInformation);
+                    JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Los cambios se han guardado exitosamente.");
+
+                } catch (Exception ex) {
+                    Logger.getLogger(AccountBookView.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                returnToAccountingView();
             }
         }
     }//GEN-LAST:event_BtnSaveActionPerformed
@@ -727,7 +755,6 @@ public class AccountBookView extends javax.swing.JPanel {
         returnToAccountingView();
     }//GEN-LAST:event_btnCancelActionPerformed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnSave;

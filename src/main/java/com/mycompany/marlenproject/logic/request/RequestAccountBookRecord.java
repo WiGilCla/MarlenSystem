@@ -27,6 +27,20 @@ public class RequestAccountBookRecord {
 
         accountBookRecordsController.saveBookRecordController(bookRecord);
     }
+    
+    public void editBookRecord(AccountBookRecords newBookRecord) throws Exception{
+        AccountBook book = newBookRecord.getAccountBookId();
+        String recordDescription = CHECKER.capitalizedString(newBookRecord.getDescription());
+        long income = newBookRecord.getCashInflow();
+        long expense = newBookRecord.getCashExpenses();
+        
+        AccountBookRecords bookRecord = new AccountBookRecords(book,
+                recordDescription, income, expense);
+        
+        bookRecord.setRecordId(newBookRecord.getRecordId());
+        
+        accountBookRecordsController.editBookRecordController(bookRecord);
+    }
 
     public void deleteBookRecord(AccountBookRecords record) throws Exception{
         accountBookRecordsController.deleteBookRecordController(record.getRecordId());
