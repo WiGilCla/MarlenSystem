@@ -15,6 +15,11 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -32,15 +37,33 @@ import javax.swing.border.LineBorder;
 public class AccountingView extends javax.swing.JPanel {
 
     private final AdminHome PRINCIPALJFRAME;
+    private List<AccountBook> Books = new ArrayList<>();
 
     public AccountingView(AdminHome principalJFrame, List<AccountBook> listBooks) {
         this.PRINCIPALJFRAME = principalJFrame;
 
         initComponents();
+        Books = listBooks;
         showAccountRecords(listBooks);
 
     }
+    
+    private boolean isDateInRange(Date starDate, Date endDate, Date dateToCheck){
+        return (dateToCheck.after(starDate) && dateToCheck.before(endDate));
+    }
 
+    private static Date setToStartOfDay(Date date) {
+        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDateTime startOfDay = localDate.atStartOfDay();
+        return Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
+    }
+    
+    private static Date setToendtOfDay(Date date) {
+        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDateTime endOfDay = localDate.atTime(23, 59, 59, 999_000_000);
+        return Date.from(endOfDay.atZone(ZoneId.systemDefault()).toInstant());
+    }
+    
     private void settingsBtnWatchRecord(JButton watchButton, AccountBook book) {
         watchButton.addActionListener(new ActionListener() {
             @Override
@@ -98,6 +121,9 @@ public class AccountingView extends javax.swing.JPanel {
     }
 
     private void showAccountRecords(List<AccountBook> listBooks) {
+        RecordsPanel.removeAll();
+        RecordsPanel.revalidate();
+        RecordsPanel.repaint();
         if(listBooks.isEmpty() || listBooks == null){
             return;
         }
@@ -224,6 +250,8 @@ public class AccountingView extends javax.swing.JPanel {
         JScrollPane scrollPane = new JScrollPane(contentPane);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         RecordsPanel.add(scrollPane);
+        RecordsPanel.revalidate();
+        RecordsPanel.repaint();
     }
 
     @SuppressWarnings("unchecked")
@@ -234,14 +262,14 @@ public class AccountingView extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         FiltersPanel = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtFilterText = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        dtStarDate = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        dtEndDate = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         tablePanel = new javax.swing.JPanel();
         OptionsPanel = new javax.swing.JPanel();
@@ -277,9 +305,14 @@ public class AccountingView extends javax.swing.JPanel {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 255)));
 
-        jTextField1.setText("jTextField1");
+        txtFilterText.setText("jTextField1");
 
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconLupe.png"))); // NOI18N
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
         jLabel1.setText("Titulo / N° de folio:");
@@ -292,7 +325,7 @@ public class AccountingView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1)
+                .addComponent(txtFilterText)
                 .addGap(18, 18, 18)
                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -303,12 +336,14 @@ public class AccountingView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFilterText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 255)));
+
+        dtStarDate.setMaxSelectableDate(new Date());
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
         jLabel2.setText("Desde:");
@@ -321,7 +356,7 @@ public class AccountingView extends javax.swing.JPanel {
                 .addGap(24, 24, 24)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dtStarDate, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -330,11 +365,13 @@ public class AccountingView extends javax.swing.JPanel {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel2)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dtStarDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 255)));
+
+        dtEndDate.setMaxSelectableDate(new Date());
 
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
         jLabel3.setText("Hasta:");
@@ -347,7 +384,7 @@ public class AccountingView extends javax.swing.JPanel {
                 .addGap(22, 22, 22)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dtEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -355,7 +392,7 @@ public class AccountingView extends javax.swing.JPanel {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dtEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -468,6 +505,43 @@ public class AccountingView extends javax.swing.JPanel {
         this.PRINCIPALJFRAME.replacePanel(accountBookView);
     }//GEN-LAST:event_btnAddAccountActionPerformed
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        List<AccountBook> filteredBooks = new ArrayList<>();
+        
+        String filterWord = txtFilterText.getText();
+        Date starDate = (dtStarDate.getDate() != null)? setToStartOfDay(dtStarDate.getDate()): null;
+        Date endDate = (dtEndDate.getDate() != null)? setToendtOfDay(dtEndDate.getDate()): null;
+        
+        if(starDate != null && endDate != null && !starDate.before(endDate)){
+            JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Error en el rango de fechas");
+            return;
+        }
+        
+        if(starDate == null && endDate == null && filterWord.isBlank()){
+            showAccountRecords(Books);
+            return;
+        }
+        
+        for(AccountBook book: this.Books){
+            if(!filterWord.isBlank() && (book.getTitleBook().toLowerCase().contains(filterWord) || 
+                    String.valueOf(book.getAccountBookId()).contains(filterWord))){
+                filteredBooks.add(book);
+            }else if(starDate != null && endDate != null){
+                if(isDateInRange(starDate, endDate, book.getCreationDate())){
+                    filteredBooks.add(book);
+                }
+            }else if(starDate == null && endDate != null){
+                if(book.getCreationDate().before(endDate)){
+                    filteredBooks.add(book);
+                }
+            }else if(endDate == null && starDate != null){
+                if(book.getCreationDate().after(starDate)){
+                    filteredBooks.add(book);
+                }
+            }
+        }
+        showAccountRecords(filteredBooks);
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel FiltersPanel;
@@ -476,8 +550,8 @@ public class AccountingView extends javax.swing.JPanel {
     private javax.swing.JPanel TitlePanel;
     private javax.swing.JButton btnAddAccount;
     private javax.swing.JButton btnSearch;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser dtEndDate;
+    private com.toedter.calendar.JDateChooser dtStarDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -485,7 +559,7 @@ public class AccountingView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel tablePanel;
+    private javax.swing.JTextField txtFilterText;
     // End of variables declaration//GEN-END:variables
 }
