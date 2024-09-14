@@ -237,7 +237,9 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/Images/Images48x48/iconWorker.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Trabajadores"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;&lt;html&gt;&lt;center&gt;Trabajadores y &lt;p&gt;clientes&lt;html&gt;&quot;" type="code"/>
+                    </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
                         <BevelBorder/>

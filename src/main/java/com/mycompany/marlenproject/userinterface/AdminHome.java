@@ -131,7 +131,7 @@ public class AdminHome extends javax.swing.JFrame {
         workersPanel.setPreferredSize(new java.awt.Dimension(188, 100));
 
         btnWorkersSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconWorker.png"))); // NOI18N
-        btnWorkersSection.setText("Trabajadores");
+        btnWorkersSection.setText("<html><center>Trabajadores y <p>clientes<html>");
         btnWorkersSection.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnWorkersSection.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

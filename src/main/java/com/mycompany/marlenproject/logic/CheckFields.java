@@ -23,6 +23,13 @@ public class CheckFields {
         return text;
     }
     
+    public boolean checkEmail(String email) {
+        if (email == null || email.isEmpty()) {
+            return false;
+        }
+        return email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    }
+    
     public boolean checkComboBox(String text){
         return !text.equalsIgnoreCase("SELECCIONE UNA ...");
     }
