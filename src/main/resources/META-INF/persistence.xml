@@ -6,6 +6,7 @@
     <class>com.mycompany.marlenproject.logic.Worker</class>
     <class>com.mycompany.marlenproject.logic.AccountBook</class>
     <class>com.mycompany.marlenproject.logic.AccountBookRecords</class>
+    <class>com.mycompany.marlenproject.logic.Customer</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/marlenproject?serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

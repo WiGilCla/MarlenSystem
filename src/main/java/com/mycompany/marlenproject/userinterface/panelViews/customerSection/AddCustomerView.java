@@ -5,8 +5,9 @@
 package com.mycompany.marlenproject.userinterface.panelViews.customerSection;
 
 import com.mycompany.marlenproject.logic.CheckFields;
+import com.mycompany.marlenproject.logic.Person;
+import com.mycompany.marlenproject.logic.request.RequestCustomer;
 import com.mycompany.marlenproject.logic.request.requestPerson;
-import com.mycompany.marlenproject.logic.request.requestWorker;
 import com.mycompany.marlenproject.persistence.exceptions.PreexistingEntityException;
 import java.awt.Color;
 import java.util.Date;
@@ -15,93 +16,92 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class AddCustomerView extends javax.swing.JPanel {
+
     private final requestPerson NEW_REQUEST_PERSON = new requestPerson();
-    private final requestWorker NEW_REQUEST_WORKER = new requestWorker();
+    private final RequestCustomer NEW_REQUEST_CUSTOMER = new RequestCustomer();
     private final CheckFields CHECKER = new CheckFields();
-    private final Color COLOR_RED = new Color(255,0,0);
-    private final Color COLOR_WHITE = new Color(255,255,255);
+    private final Color COLOR_RED = new Color(255, 0, 0);
+    private final Color COLOR_WHITE = new Color(255, 255, 255);
 
     public AddCustomerView() {
         initComponents();
     }
-    
-    private void personalizedMessage(String type, String message, String title){
+
+    private void personalizedMessage(String type, String message, String title) {
         int typeMessage = 0;
         typeMessage = switch (type) {
-            case "Error" -> 0;
-            case "Information" -> 1;
-            case "Warning" -> 2;
-            case "Question" -> 3;
-            default -> 1;
+            case "Error" ->
+                0;
+            case "Information" ->
+                1;
+            case "Warning" ->
+                2;
+            case "Question" ->
+                3;
+            default ->
+                1;
         };
-        JOptionPane.showMessageDialog(this, message,title,typeMessage);
+        JOptionPane.showMessageDialog(this, message, title, typeMessage);
     }
-    
-    private boolean changeColorRequiredField(){
-        String personFirstName = CHECKER.removeStringBlanks(txtFirstName.getText()); 
+
+    private boolean changeColorRequiredField() {
+        String personFirstName = CHECKER.removeStringBlanks(txtFirstName.getText());
         String personFirstLastName = CHECKER.removeStringBlanks(txtFirstLastName.getText());
         String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
         String personIdentificationNumber = CHECKER.removeStringBlanks(txtIdentificationNum.getText());
-        
-        
-        if(!CHECKER.checkStringField(personFirstName)){
+
+        if (!CHECKER.checkStringField(personFirstName)) {
             txtFirstName.setBackground(COLOR_RED);
             return false;
         }
-        if(!CHECKER.checkStringField(personFirstLastName)){
+        if (!CHECKER.checkStringField(personFirstLastName)) {
             txtFirstLastName.setBackground(COLOR_RED);
-             return false;
+            return false;
         }
-        if(!CHECKER.checkComboBox(personIdentificationType)){
+        if (!CHECKER.checkComboBox(personIdentificationType)) {
             sltIdentificationType.setBackground(COLOR_RED);
             return false;
         }
-        if(!CHECKER.checkNumberField(personIdentificationNumber) 
-                || !(personIdentificationNumber.length() <= 10  
-                && personIdentificationNumber.length() >= 8)){
+        if (!CHECKER.checkNumberField(personIdentificationNumber)
+                || !(personIdentificationNumber.length() <= 10
+                && personIdentificationNumber.length() >= 8)) {
             txtIdentificationNum.setBackground(COLOR_RED);
             return false;
         }
         return true;
     }
-    
-    private boolean changeColorNoRequiredField(){
-        String personSecondName = CHECKER.removeStringBlanks(txtSecondName.getText()); 
+
+    private boolean changeColorNoRequiredField() {
+        String personSecondName = CHECKER.removeStringBlanks(txtSecondName.getText());
         String personSecondLastName = CHECKER.removeStringBlanks(txtSecondLastName.getText());
         String personEmail = txtEmail.getText();
         String personPhone = txtPhoneNumber.getText();
         String personAddress = txtAddress.getText();
-        
-        
-        if(!CHECKER.checkStringField(personSecondName) && !personSecondName.equalsIgnoreCase("")){
+
+        if (!CHECKER.checkStringField(personSecondName) && !personSecondName.equalsIgnoreCase("")) {
             txtSecondName.setBackground(COLOR_RED);
             return false;
         }
-        
-        if(!CHECKER.checkStringField(personSecondLastName) && !personSecondLastName.equalsIgnoreCase("")){
+
+        if (!CHECKER.checkStringField(personSecondLastName) && !personSecondLastName.equalsIgnoreCase("")) {
             txtSecondLastName.setBackground(COLOR_RED);
-             return false;
+            return false;
         }
-        
-        if(!CHECKER.checkEmail(personEmail) && !personEmail.equalsIgnoreCase("")){
+
+        if (!CHECKER.checkEmail(personEmail) && !personEmail.equalsIgnoreCase("")) {
             txtEmail.setBackground(COLOR_RED);
-             return false;
+            return false;
         }
-        
-        if(!CHECKER.checkNumberField(personPhone) && !personPhone.equalsIgnoreCase("")){
-            txtEmail.setBackground(COLOR_RED);
-             return false;
+
+        if (!CHECKER.checkNumberField(personPhone) && !personPhone.equalsIgnoreCase("")) {
+            txtPhoneNumber.setBackground(COLOR_RED);
+            return false;
         }
-        
-        if(!CHECKER.checkStringField(personAddress) && !personAddress.equalsIgnoreCase("")){
-            txtSecondLastName.setBackground(COLOR_RED);
-             return false;
-        }
-        
+
         return true;
     }
-    
-    private void clearFields(){
+
+    private void clearFields() {
         txtFirstName.setText("");
         txtSecondName.setText("");
         txtFirstLastName.setText("");
@@ -113,6 +113,7 @@ public class AddCustomerView extends javax.swing.JPanel {
         txtAddress.setText("");
         txtPhoneNumber.setText("");
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -490,58 +491,42 @@ public class AddCustomerView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCleanFieldsActionPerformed
 
     private void btnSaveWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveWorkerActionPerformed
-            
-            
-            String personFirstName = CHECKER.removeStringBlanks(txtFirstName.getText()); 
-            String personSecondName = CHECKER.removeStringBlanks(txtSecondName.getText());//
-            String personFirstLastName = CHECKER.removeStringBlanks(txtFirstLastName.getText());
-            String personSecondLastName = CHECKER.removeStringBlanks(txtSecondLastName.getText());//
-            String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
-            String personIdentificationNumber = CHECKER.removeStringBlanks(txtIdentificationNum.getText());
-            Date personBirthdate = dateBirthdate.getDate();
-            //Customer information
-            String customerPhone = CHECKER.removeStringBlanks(txtPhoneNumber.getText());
-            String customerAddress = CHECKER.removeStringBlanks(txtAddress.getText());
-            String customerEmail = CHECKER.removeStringBlanks(txtEmail.getText());
-            
-            if(changeColorRequiredField() && changeColorNoRequiredField()){
-                System.out.println("Nombre: "+personFirstName);
-                System.out.println("Segundo Nombre: "+personSecondName);
-                System.out.println("Apellido: "+personFirstLastName);
-                System.out.println("Segundo apellido: "+personSecondLastName);
-                System.out.println("Tipo identificación: "+personIdentificationType);
-                System.out.println("Numero identificación: "+personIdentificationNumber);
-                System.out.println("Nacimiento: "+personBirthdate);
-                System.out.println("Telefono: "+customerPhone);
-                System.out.println("Dirección: "+customerAddress);
-                System.out.println("Email: "+customerEmail);
+
+        String personFirstName = CHECKER.removeStringBlanks(txtFirstName.getText());
+        String personSecondName = CHECKER.removeStringBlanks(txtSecondName.getText());//
+        String personFirstLastName = CHECKER.removeStringBlanks(txtFirstLastName.getText());
+        String personSecondLastName = CHECKER.removeStringBlanks(txtSecondLastName.getText());//
+        String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
+        String personIdentificationNumber = CHECKER.removeStringBlanks(txtIdentificationNum.getText());
+        Date personBirthdate = dateBirthdate.getDate();
+        //Customer information
+        String customerPhone = CHECKER.removeStringBlanks(txtPhoneNumber.getText());
+        String customerAddress = CHECKER.removeStringBlanks(txtAddress.getText());
+        String customerEmail = CHECKER.removeStringBlanks(txtEmail.getText());
+
+        try {
+            if (changeColorRequiredField() && changeColorNoRequiredField()) {
+                NEW_REQUEST_PERSON.savePerson(personFirstName, personSecondName, personFirstLastName,
+                        personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
+
+                Person person = new Person(personFirstName, personSecondName,
+                        personFirstLastName, personSecondLastName,
+                        personIdentificationType, personIdentificationNumber, personBirthdate);
+
+                NEW_REQUEST_CUSTOMER.saveCustomer(person, customerPhone, customerAddress, customerEmail, false);
+
+                personalizedMessage("Information", "El cliente ha sido agregado correctamente", "Operación exitosa");
+                clearFields();
             }
-            
-            
-            
-            
-            
-//            if(changeColorRequiredField() && changeColorNoRequiredField()){
-//                try {
-//                    NEW_REQUEST_PERSON.savePerson(personFirstName, personSecondName, 
-//                            personFirstLastName, personSecondLastName, personIdentificationType, 
-//                            personIdentificationNumber, personBirthdate);
-//                    NEW_REQUEST_WORKER.saveWorker(personIdentificationNumber, bloodType, 
-//                            bloodTypeCmplt, healthEntity, dayLink, position);
-//                    personalizedMessage("Information", "El trabajador ha sido agregado correctamente", "Operación exitosa");
-//                    clearFields();
-//                } catch (PreexistingEntityException ex) {
-//                    personalizedMessage("Error", "El numero de identificación ya está asociado a alguien.", 
-//                            "Identificación duplicada");
-//                    txtIdentificationNum.setBackground(COLOR_RED);
-//                }  catch (Exception ex) {
-//                    Logger.getLogger(AddCustomerView.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }else{
-//                personalizedMessage("Warning", "Asegurese de que los campos en rojo estén correctamente diligenciados", "Error en Campos");
-//            }
-            
-            
+
+        } catch (PreexistingEntityException ex) {
+            personalizedMessage("Error", "El numero de identificación ya está asociado a alguien.",
+                    "Identificación duplicada");
+            txtIdentificationNum.setBackground(COLOR_RED);
+        } catch (Exception e) {
+            Logger.getLogger(AddCustomerView.class.getName()).log(Level.SEVERE, null, e);
+        }
+
     }//GEN-LAST:event_btnSaveWorkerActionPerformed
 
     private void txtFirstNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFirstNameMouseClicked
