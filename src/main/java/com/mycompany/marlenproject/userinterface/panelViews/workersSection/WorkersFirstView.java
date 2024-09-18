@@ -4,10 +4,13 @@
  */
 package com.mycompany.marlenproject.userinterface.panelViews.workersSection;
 
+import com.mycompany.marlenproject.logic.Customer;
 import com.mycompany.marlenproject.logic.Worker;
+import com.mycompany.marlenproject.logic.request.RequestCustomer;
 import com.mycompany.marlenproject.logic.request.requestWorker;
 import com.mycompany.marlenproject.userinterface.AdminHome;
 import com.mycompany.marlenproject.userinterface.panelViews.customerSection.AddCustomerView;
+import com.mycompany.marlenproject.userinterface.panelViews.customerSection.CustomerListView;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -34,7 +37,7 @@ public class WorkersFirstView extends javax.swing.JPanel {
         jPanel5 = new javax.swing.JPanel();
         btnAddCustomer = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btnCustomerList = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(970, 576));
 
@@ -161,9 +164,14 @@ public class WorkersFirstView extends javax.swing.JPanel {
         jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel6.setPreferredSize(new java.awt.Dimension(226, 264));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconList.png"))); // NOI18N
-        jButton2.setText("Clientes");
-        jButton2.setPreferredSize(new java.awt.Dimension(170, 60));
+        btnCustomerList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconList.png"))); // NOI18N
+        btnCustomerList.setText("Clientes");
+        btnCustomerList.setPreferredSize(new java.awt.Dimension(170, 60));
+        btnCustomerList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCustomerListActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -171,14 +179,14 @@ public class WorkersFirstView extends javax.swing.JPanel {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCustomerList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(81, 81, 81)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCustomerList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(84, Short.MAX_VALUE))
         );
 
@@ -269,12 +277,23 @@ public class WorkersFirstView extends javax.swing.JPanel {
         PRINCIPALJFRAME.replacePanel(addCustomerView);
     }//GEN-LAST:event_btnAddCustomerActionPerformed
 
+    private void btnCustomerListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerListActionPerformed
+        List<Customer> customerList = new RequestCustomer().getCustomerList();
+
+        if (!customerList.isEmpty()) {
+            CustomerListView customerListView = new CustomerListView(this.PRINCIPALJFRAME, customerList);
+            PRINCIPALJFRAME.replacePanel(customerListView);
+        } else {
+            JOptionPane.showMessageDialog(PRINCIPALJFRAME, "No tiene trabajadores registrados", "Sin registros", 0);
+        }
+    }//GEN-LAST:event_btnCustomerListActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addWorkerbtnPanel;
     private javax.swing.JButton btnAddCustomer;
     private javax.swing.JButton btnAddNewWorker;
+    private javax.swing.JButton btnCustomerList;
     private javax.swing.JButton btnListWorkers;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
