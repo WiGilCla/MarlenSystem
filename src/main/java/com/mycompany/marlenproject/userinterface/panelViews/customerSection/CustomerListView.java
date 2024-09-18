@@ -29,17 +29,17 @@ public class CustomerListView extends javax.swing.JPanel {
         modelTable.setColumnIdentifiers(tableHead);
 
         if (!ListCustomer.isEmpty() && ListCustomer != null) {
-            
+
             int count = 0;
             for (Customer customer : ListCustomer) {
-                
-                Object[] workersObject = {(count+1), customer.getPerson().getIdentificationNumber(), customer.getPerson().getFirstName(),
+
+                Object[] workersObject = {(count + 1), customer.getPerson().getIdentificationNumber(), customer.getPerson().getFirstName(),
                     customer.getPerson().getFirstLastName(), customer.getEmail(), customer.getPhone()};
                 modelTable.addRow(workersObject);
                 count++;
             }
         }
-        
+
         CustomerTable.setModel(modelTable);
     }
 
@@ -282,24 +282,36 @@ public class CustomerListView extends javax.swing.JPanel {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         String textFilter = Checker.removeStringBlanks(txtSearchCustomer.getText()).toLowerCase();
         this.CUSTOMER_LIST_FILTER.clear();
-        
-        if(!textFilter.equalsIgnoreCase("") && textFilter.length() > 0){
-            for(Customer customer: this.CUSTOMER_LIST){
-                if(customer.getPerson().getIdentificationNumber().toLowerCase().contains(textFilter) || 
-                        customer.getPerson().getFirstName().toLowerCase().contains(textFilter) ||
-                        customer.getPerson().getFirstLastName().toLowerCase().contains(textFilter) ){
+
+        if (!textFilter.equalsIgnoreCase("") && textFilter.length() > 0) {
+            for (Customer customer : this.CUSTOMER_LIST) {
+                if (customer.getPerson().getIdentificationNumber().toLowerCase().contains(textFilter)
+                        || customer.getPerson().getFirstName().toLowerCase().contains(textFilter)
+                        || customer.getPerson().getFirstLastName().toLowerCase().contains(textFilter)) {
                     CUSTOMER_LIST_FILTER.add(customer);
                 }
             }
             uploadInfoToTable(this.CUSTOMER_LIST_FILTER);
-        }else{
+        } else {
             CUSTOMER_LIST_FILTER.clear();
             uploadInfoToTable(this.CUSTOMER_LIST);
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void CustomerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CustomerTableMouseClicked
-
+        if (CustomerTable.getRowCount() > 0) {
+            if (CustomerTable.getSelectedRow() != -1) {
+                CustomerInformationView customerInformationView;
+                if (!this.CUSTOMER_LIST_FILTER.isEmpty()) {
+                    customerInformationView = new CustomerInformationView(this.PRINCIPALJFRAME, this.CUSTOMER_LIST_FILTER,
+                            (Integer.parseInt(String.valueOf(CustomerTable.getValueAt(CustomerTable.getSelectedRow(), 0)))) - 1);
+                } else {
+                    customerInformationView = new CustomerInformationView(this.PRINCIPALJFRAME, this.CUSTOMER_LIST,
+                            (Integer.parseInt(String.valueOf(CustomerTable.getValueAt(CustomerTable.getSelectedRow(), 0))) - 1));
+                }
+                PRINCIPALJFRAME.replacePanel(customerInformationView);
+            }
+        }
     }//GEN-LAST:event_CustomerTableMouseClicked
 
 

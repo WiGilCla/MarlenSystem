@@ -209,7 +209,7 @@ public class AddCustomerView extends javax.swing.JPanel {
         lbIdentificationType.setPreferredSize(new java.awt.Dimension(138, 25));
 
         lbEmail.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
-        lbEmail.setText("Correo electronico:");
+        lbEmail.setText("Correo electrónico:");
         lbEmail.setPreferredSize(new java.awt.Dimension(138, 25));
 
         lbAge.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
