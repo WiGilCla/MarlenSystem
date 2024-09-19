@@ -5,6 +5,7 @@
 package com.mycompany.marlenproject.userinterface.panelViews.customerSection;
 
 import com.mycompany.marlenproject.logic.CheckFields;
+import com.mycompany.marlenproject.logic.Customer;
 import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.logic.request.RequestCustomer;
 import com.mycompany.marlenproject.logic.request.requestPerson;
@@ -498,22 +499,43 @@ public class AddCustomerView extends javax.swing.JPanel {
         String personSecondLastName = CHECKER.removeStringBlanks(txtSecondLastName.getText());//
         String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
         String personIdentificationNumber = CHECKER.removeStringBlanks(txtIdentificationNum.getText());
-        Date personBirthdate = (dateBirthdate.getDate() != null)? dateBirthdate.getDate(): null;
+        Date personBirthdate = (dateBirthdate.getDate() != null) ? dateBirthdate.getDate() : null;
         //Customer information
         String customerPhone = CHECKER.removeStringBlanks(txtPhoneNumber.getText());
         String customerAddress = CHECKER.removeStringBlanks(txtAddress.getText());
         String customerEmail = CHECKER.removeStringBlanks(txtEmail.getText());
-
+        
         try {
             if (changeColorRequiredField() && changeColorNoRequiredField()) {
-                NEW_REQUEST_PERSON.savePerson(personFirstName, personSecondName, personFirstLastName,
-                        personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
+                Customer findCustomer = NEW_REQUEST_CUSTOMER.getCustomerByDNI(personIdentificationNumber);
+                
+                if (findCustomer != null && findCustomer.isIsDelete()) {
+                    NEW_REQUEST_PERSON.editPerson(personIdentificationNumber, personFirstName, personSecondName,
+                            personFirstLastName, personSecondLastName, personIdentificationType, personBirthdate);
+                    
+                    Person editPerson = new Person(personFirstName, personSecondName,
+                            personFirstLastName, personSecondLastName,
+                            personIdentificationType, personIdentificationNumber, personBirthdate);
+                    
+                    Customer editCustomer = new Customer(customerPhone, customerAddress, customerEmail, false, editPerson);
+                    editCustomer.setCustomerId(findCustomer.getCustomerId());
+                    
+                    NEW_REQUEST_CUSTOMER.editCustomer(editCustomer);
 
-                Person person = new Person(personFirstName, personSecondName,
-                        personFirstLastName, personSecondLastName,
-                        personIdentificationType, personIdentificationNumber, personBirthdate);
+                } else if (findCustomer != null && !findCustomer.isIsDelete()) {
+                    personalizedMessage("Error", "El numero de identificación ya está asociado a alguien.",
+                            "Identificación duplicada");
+                    return;
+                } else {
+                    NEW_REQUEST_PERSON.savePerson(personFirstName, personSecondName, personFirstLastName,
+                            personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
 
-                NEW_REQUEST_CUSTOMER.saveCustomer(person, customerPhone, customerAddress, customerEmail, false);
+                    Person person = new Person(personFirstName, personSecondName,
+                            personFirstLastName, personSecondLastName,
+                            personIdentificationType, personIdentificationNumber, personBirthdate);
+
+                    NEW_REQUEST_CUSTOMER.saveCustomer(person, customerPhone, customerAddress, customerEmail, false);
+                }
 
                 personalizedMessage("Information", "El cliente ha sido agregado correctamente", "Operación exitosa");
                 clearFields();
