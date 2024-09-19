@@ -498,7 +498,7 @@ public class AddCustomerView extends javax.swing.JPanel {
         String personSecondLastName = CHECKER.removeStringBlanks(txtSecondLastName.getText());//
         String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
         String personIdentificationNumber = CHECKER.removeStringBlanks(txtIdentificationNum.getText());
-        Date personBirthdate = dateBirthdate.getDate();
+        Date personBirthdate = (dateBirthdate.getDate() != null)? dateBirthdate.getDate(): null;
         //Customer information
         String customerPhone = CHECKER.removeStringBlanks(txtPhoneNumber.getText());
         String customerAddress = CHECKER.removeStringBlanks(txtAddress.getText());

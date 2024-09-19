@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class CustomerInformationView extends javax.swing.JPanel {
@@ -473,7 +475,27 @@ public class CustomerInformationView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnPreviousWorkerActionPerformed
 
     private void btnDeleteCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCustomerActionPerformed
-
+        try {
+            
+            this.CUSTOMER_LIST.get(customerIndex).setIsDelete(true);
+            
+            REQUEST_CUSTOMER.editCustomer(this.CUSTOMER_LIST.get(customerIndex));
+            
+            this.CUSTOMER_LIST.remove(customerIndex);
+            
+            JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, "El cliente ha sido eliminado exitosamente", "Eliminación exitosa", 1);
+            if(!this.CUSTOMER_LIST.isEmpty() && customerIndex != 0){
+                customerIndex --;
+            }else if(this.CUSTOMER_LIST.isEmpty()) {
+                JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, "No tiene clientes registrados", "Sin registros", 0);
+                WorkersFirstView workersFirstView  = new WorkersFirstView(this.PRINCIPALJFRAME);
+                this.PRINCIPALJFRAME.replacePanel(workersFirstView);
+                return;
+            }
+            viewWorkerInformation(customerIndex);
+        } catch (Exception ex) {
+            Logger.getLogger(WorkersInformationView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnDeleteCustomerActionPerformed
 
     private void btnEditCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditCustomerActionPerformed
@@ -481,13 +503,13 @@ public class CustomerInformationView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditCustomerActionPerformed
 
     private void btnSeeAllCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeeAllCustomersActionPerformed
-        List<Customer> customerList = REQUEST_CUSTOMER.getCustomerList();
+        List<Customer> customerList = REQUEST_CUSTOMER.getNoDeleteCustomer();
         
         if(!this.CUSTOMER_LIST.isEmpty()){
             CustomerListView customerListView = new CustomerListView(PRINCIPALJFRAME, customerList);
             this.PRINCIPALJFRAME.replacePanel(customerListView);
         }else{
-            JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, "No tiene trabajadores registrados", "Sin registros", 0);
+            JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, "No tiene clientes registrados", "Sin registros", 0);
             WorkersFirstView workersFirstView  = new WorkersFirstView(this.PRINCIPALJFRAME);
             this.PRINCIPALJFRAME.replacePanel(workersFirstView);
         }

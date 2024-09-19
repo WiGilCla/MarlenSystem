@@ -27,7 +27,7 @@ public class Person implements Serializable {
     private String secondLastName;
     @Column(name = "IdentificationType", nullable = false, length = 50)
     private String identificationType;
-    @Column(name = "Birthdate", nullable = false)
+    @Column(name = "Birthdate")
     private Date  birthdate;
     
     public Person(String firstName, String secondName, String firstLastName, String secondLastName, String identificationType, String identificationNumber, Date birthdate) {

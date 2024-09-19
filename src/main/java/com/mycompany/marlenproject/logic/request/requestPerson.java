@@ -27,7 +27,7 @@ public class requestPerson {
         String secondLastName = (personSecondLastName.isEmpty())? null:checker.capitalizedString(personSecondLastName);
         String identificationType = checker.capitalizedString(personIdentificationType);
         String identificationNumber = personIdentificationNumber;
-        Timestamp birthdate = new Timestamp(personBirthdate.getTime());
+        Timestamp birthdate = (personBirthdate != null)? new Timestamp(personBirthdate.getTime()): null;
         
         
         Person newPerson = new Person(firstName, secondName, firstLastName, secondLastName, identificationType, identificationNumber, birthdate);

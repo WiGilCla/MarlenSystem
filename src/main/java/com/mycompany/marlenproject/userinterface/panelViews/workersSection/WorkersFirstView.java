@@ -278,13 +278,13 @@ public class WorkersFirstView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddCustomerActionPerformed
 
     private void btnCustomerListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerListActionPerformed
-        List<Customer> customerList = new RequestCustomer().getCustomerList();
+        List<Customer> customerList = new RequestCustomer().getNoDeleteCustomer();
 
         if (!customerList.isEmpty()) {
             CustomerListView customerListView = new CustomerListView(this.PRINCIPALJFRAME, customerList);
             PRINCIPALJFRAME.replacePanel(customerListView);
         } else {
-            JOptionPane.showMessageDialog(PRINCIPALJFRAME, "No tiene trabajadores registrados", "Sin registros", 0);
+            JOptionPane.showMessageDialog(PRINCIPALJFRAME, "No tiene clientes registrados", "Sin registros", 0);
         }
     }//GEN-LAST:event_btnCustomerListActionPerformed
 

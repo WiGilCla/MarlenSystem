@@ -30,6 +30,7 @@ public class RequestCustomer {
         
         Customer newCustomer = new Customer(editCustomer.getPhone(),editCustomer.getAddress(), 
                 customerEmail, editCustomer.isIsDelete(), editCustomer.getPerson());
+        newCustomer.setCustomerId(editCustomer.getCustomerId());
         
         customerController.editCustomerPersis(newCustomer);
     }
@@ -38,6 +39,9 @@ public class RequestCustomer {
         return customerController.getCustomerPersis();
     }
     
+    public List<Customer> getNoDeleteCustomer(){
+        return customerController.getNoDeletedCustomerPersis();
+    }
     public Customer getCustomerByDNI(String dni){
         return customerController.getCustomerByDNIPersis(dni);
     }
