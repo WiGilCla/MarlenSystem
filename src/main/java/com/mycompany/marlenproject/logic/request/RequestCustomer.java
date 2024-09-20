@@ -45,4 +45,8 @@ public class RequestCustomer {
     public Customer getCustomerByDNI(String dni){
         return customerController.getCustomerByDNIPersis(dni);
     }
+    
+    public void deleteCustomer(int customerId) throws Exception{
+        customerController.deleteCustomerPersis(customerId);
+    }
 }

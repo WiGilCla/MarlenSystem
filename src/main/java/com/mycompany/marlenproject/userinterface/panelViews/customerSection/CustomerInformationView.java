@@ -499,7 +499,9 @@ public class CustomerInformationView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDeleteCustomerActionPerformed
 
     private void btnEditCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditCustomerActionPerformed
-
+        CustomerEditInformationView customerEditInformation = new CustomerEditInformationView(this.CUSTOMER_LIST.get(customerIndex), this.PRINCIPALJFRAME);
+        customerEditInformation.setVisible(true);
+        this.PRINCIPALJFRAME.setVisible(false);
     }//GEN-LAST:event_btnEditCustomerActionPerformed
 
     private void btnSeeAllCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeeAllCustomersActionPerformed

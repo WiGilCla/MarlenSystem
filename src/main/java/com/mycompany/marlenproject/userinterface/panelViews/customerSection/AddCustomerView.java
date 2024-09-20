@@ -502,8 +502,8 @@ public class AddCustomerView extends javax.swing.JPanel {
         Date personBirthdate = (dateBirthdate.getDate() != null) ? dateBirthdate.getDate() : null;
         //Customer information
         String customerPhone = CHECKER.removeStringBlanks(txtPhoneNumber.getText());
-        String customerAddress = CHECKER.removeStringBlanks(txtAddress.getText());
-        String customerEmail = CHECKER.removeStringBlanks(txtEmail.getText());
+        String customerAddress = txtAddress.getText();
+        String customerEmail = txtEmail.getText();
         
         try {
             if (changeColorRequiredField() && changeColorNoRequiredField()) {
