@@ -5,9 +5,12 @@
 package com.mycompany.marlenproject.userinterface;
 
 import com.mycompany.marlenproject.logic.AccountBook;
+import com.mycompany.marlenproject.logic.Product;
 import com.mycompany.marlenproject.logic.request.RequestAccountBook;
+import com.mycompany.marlenproject.userinterface.panelViews.ProductsSection.ProductView;
 import com.mycompany.marlenproject.userinterface.panelViews.accountingSection.AccountingView;
 import com.mycompany.marlenproject.userinterface.panelViews.workersSection.WorkersFirstView;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -59,6 +62,8 @@ public class AdminHome extends javax.swing.JFrame {
         btnQuotesSection = new javax.swing.JButton();
         workersPanel = new javax.swing.JPanel();
         btnWorkersSection = new javax.swing.JButton();
+        productsPanel = new javax.swing.JPanel();
+        btnProductsSection = new javax.swing.JButton();
         viewPanel = new javax.swing.JPanel();
         welcomeMsgPanel = new javax.swing.JPanel();
         lbWelcome = new javax.swing.JLabel();
@@ -156,16 +161,45 @@ public class AdminHome extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        productsPanel.setPreferredSize(new java.awt.Dimension(188, 100));
+
+        btnProductsSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconProduct.png"))); // NOI18N
+        btnProductsSection.setText("Mis productos");
+        btnProductsSection.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnProductsSection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProductsSectionActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout productsPanelLayout = new javax.swing.GroupLayout(productsPanel);
+        productsPanel.setLayout(productsPanelLayout);
+        productsPanelLayout.setHorizontalGroup(
+            productsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, productsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnProductsSection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        productsPanelLayout.setVerticalGroup(
+            productsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, productsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnProductsSection, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout optionsPanelLayout = new javax.swing.GroupLayout(optionsPanel);
         optionsPanel.setLayout(optionsPanelLayout);
         optionsPanelLayout.setHorizontalGroup(
             optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, optionsPanelLayout.createSequentialGroup()
+            .addGroup(optionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(workersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(accountingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(quotesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(workersPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(accountingPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(quotesPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(productsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         optionsPanelLayout.setVerticalGroup(
@@ -177,6 +211,8 @@ public class AdminHome extends javax.swing.JFrame {
                 .addComponent(quotesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(workersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(productsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -339,6 +375,13 @@ public class AdminHome extends javax.swing.JFrame {
         replacePanel(accountingView);
     }//GEN-LAST:event_btnAccountingSectionActionPerformed
 
+    private void btnProductsSectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductsSectionActionPerformed
+        List<Product> productList = new ArrayList<>();
+        
+        ProductView productView = new ProductView(this,productList);
+        replacePanel(productView);
+    }//GEN-LAST:event_btnProductsSectionActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -376,6 +419,7 @@ public class AdminHome extends javax.swing.JFrame {
     private javax.swing.JPanel ViewsPanel;
     private javax.swing.JPanel accountingPanel;
     private javax.swing.JButton btnAccountingSection;
+    private javax.swing.JButton btnProductsSection;
     private javax.swing.JButton btnQuotesSection;
     private javax.swing.JButton btnWorkersSection;
     private javax.swing.JPanel defaultPanel;
@@ -385,6 +429,7 @@ public class AdminHome extends javax.swing.JFrame {
     private javax.swing.JLabel lbTimeZone;
     private javax.swing.JLabel lbWelcome;
     private javax.swing.JPanel optionsPanel;
+    private javax.swing.JPanel productsPanel;
     private javax.swing.JPanel quotesPanel;
     private javax.swing.JPanel timeZonePanel;
     private javax.swing.JPanel viewPanel;
