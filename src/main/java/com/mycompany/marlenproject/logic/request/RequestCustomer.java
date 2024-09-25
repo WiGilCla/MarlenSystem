@@ -7,6 +7,7 @@ package com.mycompany.marlenproject.logic.request;
 import com.mycompany.marlenproject.logic.Customer;
 import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.persistence.controller.CustomerController;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RequestCustomer {
@@ -36,11 +37,15 @@ public class RequestCustomer {
     }
     
     public List<Customer> getCustomerList(){
-        return customerController.getCustomerPersis();
+        List<Customer> customerList = new ArrayList<>();
+        List<Customer> bdCustomerList = customerController.getCustomerPersis();
+        return (bdCustomerList == null)? customerList : bdCustomerList;
     }
     
     public List<Customer> getNoDeleteCustomer(){
-        return customerController.getNoDeletedCustomerPersis();
+        List<Customer> customerList = new ArrayList<>();
+        List<Customer> bdCustomerList = customerController.getNoDeletedCustomerPersis();
+        return (bdCustomerList == null)? customerList : bdCustomerList;
     }
     public Customer getCustomerByDNI(String dni){
         return customerController.getCustomerByDNIPersis(dni);

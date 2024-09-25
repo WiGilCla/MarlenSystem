@@ -29,7 +29,7 @@ public class WorkersListView extends javax.swing.JPanel {
         String tableHead[] = {"N°", "Dni", "Nombre", "Apellido", "Cargo", "Estado"};
         modelTable.setColumnIdentifiers(tableHead);
 
-        if (!ListWorker.isEmpty() && ListWorker != null) {
+        if (!ListWorker.isEmpty()) {
             
             int count = 0;
             for (Worker worker : ListWorker) {

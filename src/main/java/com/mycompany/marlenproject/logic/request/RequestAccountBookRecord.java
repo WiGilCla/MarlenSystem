@@ -8,6 +8,7 @@ import com.mycompany.marlenproject.logic.AccountBook;
 import com.mycompany.marlenproject.logic.AccountBookRecords;
 import com.mycompany.marlenproject.logic.CheckFields;
 import com.mycompany.marlenproject.persistence.controller.AccountBookRecordsController;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RequestAccountBookRecord {
@@ -47,6 +48,8 @@ public class RequestAccountBookRecord {
     }
     
     public List<AccountBookRecords> getRecordsByBookId(AccountBook bookId){
-        return accountBookRecordsController.getRecordsByBookIdController(bookId);
+        List<AccountBookRecords> bookRecordList = new ArrayList<>();
+        List<AccountBookRecords> bdBookRecordList = accountBookRecordsController.getRecordsByBookIdController(bookId);
+        return (bdBookRecordList == null)? bookRecordList:bdBookRecordList;
     }
 }

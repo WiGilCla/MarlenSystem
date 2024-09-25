@@ -9,6 +9,7 @@ import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.persistence.controller.workerController;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,7 +40,9 @@ public class requestWorker {
     }
     
     public List<Worker> getWorkers(){
-        return WorkerController.getWorkerPersis();
+        List<Worker> workerList = new ArrayList<>();
+        List<Worker> bdWorkerList = WorkerController.getWorkerPersis();
+        return (bdWorkerList == null)? workerList : bdWorkerList;
     }
     
     public void editWorker(int workerId,String identificationNumber, String workerBloodType, 
@@ -67,7 +70,9 @@ public class requestWorker {
     }
     
     public List<Worker> getNoDeletedWorker(){
-        return WorkerController.getNoDeletedWorkerPersis();
+        List<Worker> workerList = new ArrayList<>();
+        List<Worker> bdWorkerList = WorkerController.getNoDeletedWorkerPersis();
+        return (bdWorkerList == null)? workerList : bdWorkerList;
     }
     
     public Worker findWorkerByDNI(String dni){

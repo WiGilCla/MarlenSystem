@@ -9,6 +9,7 @@ import com.mycompany.marlenproject.logic.AccountBookRecords;
 import com.mycompany.marlenproject.logic.CheckFields;
 import com.mycompany.marlenproject.persistence.controller.AccountBookController;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -52,6 +53,8 @@ public class RequestAccountBook {
     }
     
     public List<AccountBook> getBooks(){
-        return accountBookController.getBooksController();
+        List<AccountBook> bookList = new ArrayList<>();
+        List<AccountBook> bdBookList = accountBookController.getBooksController();
+        return (bdBookList == null)? bookList : bdBookList;
     }
 }

@@ -28,7 +28,7 @@ public class CustomerListView extends javax.swing.JPanel {
         String tableHead[] = {"N°", "Dni", "Nombre", "Apellido", "Correo", "Telefono"};
         modelTable.setColumnIdentifiers(tableHead);
 
-        if (!ListCustomer.isEmpty() && ListCustomer != null) {
+        if (!ListCustomer.isEmpty()) {
 
             int count = 0;
             for (Customer customer : ListCustomer) {

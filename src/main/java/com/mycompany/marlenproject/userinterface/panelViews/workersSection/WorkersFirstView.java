@@ -253,8 +253,7 @@ public class WorkersFirstView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnListWorkersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListWorkersActionPerformed
-        List<Worker> workerList;
-        workerList = new requestWorker().getNoDeletedWorker();
+        List<Worker> workerList = new requestWorker().getNoDeletedWorker();
 
         if (!workerList.isEmpty()) {
             WorkersListView workerListView = new WorkersListView(this.PRINCIPALJFRAME, workerList);

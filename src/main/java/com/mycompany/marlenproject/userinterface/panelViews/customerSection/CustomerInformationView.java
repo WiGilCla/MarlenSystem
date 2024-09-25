@@ -507,7 +507,7 @@ public class CustomerInformationView extends javax.swing.JPanel {
     private void btnSeeAllCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeeAllCustomersActionPerformed
         List<Customer> customerList = REQUEST_CUSTOMER.getNoDeleteCustomer();
         
-        if(!this.CUSTOMER_LIST.isEmpty()){
+        if(!customerList.isEmpty()){
             CustomerListView customerListView = new CustomerListView(PRINCIPALJFRAME, customerList);
             this.PRINCIPALJFRAME.replacePanel(customerListView);
         }else{

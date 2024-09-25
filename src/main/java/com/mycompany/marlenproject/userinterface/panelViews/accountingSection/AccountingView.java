@@ -124,7 +124,7 @@ public class AccountingView extends javax.swing.JPanel {
         RecordsPanel.removeAll();
         RecordsPanel.revalidate();
         RecordsPanel.repaint();
-        if(listBooks.isEmpty() || listBooks == null){
+        if(listBooks.isEmpty()){
             return;
         }
         JPanel contentPane = new JPanel();
