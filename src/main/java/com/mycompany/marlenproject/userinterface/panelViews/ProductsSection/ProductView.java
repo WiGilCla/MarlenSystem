@@ -5,15 +5,18 @@
 package com.mycompany.marlenproject.userinterface.panelViews.ProductsSection;
 
 import com.mycompany.marlenproject.logic.Product;
+import com.mycompany.marlenproject.logic.request.RequestProduct;
 import com.mycompany.marlenproject.userinterface.AdminHome;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-
 public class ProductView extends javax.swing.JPanel {
+
     private final AdminHome PRINCIPALJFRAME;
-    
+
     private void uploadInfoToTable(List<Product> ListProducts) {
         DefaultTableModel modelTable = new DefaultTableModel() {
             @Override
@@ -21,35 +24,48 @@ public class ProductView extends javax.swing.JPanel {
                 return false;
             }
         };
-        String tableHead[] = {"N°", "Nombre", "Descripción" };
+        String tableHead[] = {"N°", "identificador", "Nombre", "Descripción"};
         modelTable.setColumnIdentifiers(tableHead);
 
         if (ListProducts.isEmpty()) {
             JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, "No tiene productos registrados", "Sin registros", 0);
-        }else{
+        } else {
             int count = 0;
             for (Product product : ListProducts) {
-                Object[] productsObject = {(count+1), product.getName(), product.getDescription()};
+                Object[] productsObject = {(count + 1), product.getId(), product.getName(), product.getDescription()};
                 modelTable.addRow(productsObject);
                 count++;
             }
         }
-        
+
+        productsTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!productsTable.getSelectionModel().isSelectionEmpty()) {
+                    btnEditProduct.setEnabled(true);
+                    btnDeleteProduct.setEnabled(true);
+                } else {
+                    btnEditProduct.setEnabled(false);
+                    btnDeleteProduct.setEnabled(false);
+                }
+            }
+        });
+
         productsTable.setModel(modelTable);
-        productsTable.getColumnModel().getColumn(0).setMinWidth(50);
-        productsTable.getColumnModel().getColumn(0).setMaxWidth(50);
-        productsTable.getColumnModel().getColumn(1).setMinWidth(150);
-        productsTable.getColumnModel().getColumn(1).setMaxWidth(150);
-        
+        productsTable.getColumnModel().getColumn(0).setMinWidth(25);
+        productsTable.getColumnModel().getColumn(0).setMaxWidth(25);
+        productsTable.getColumnModel().getColumn(1).setMinWidth(0);
+        productsTable.getColumnModel().getColumn(1).setMaxWidth(0);
+        productsTable.getColumnModel().getColumn(2).setMinWidth(150);
+        productsTable.getColumnModel().getColumn(2).setMaxWidth(150);
+
     }
 
-    
     public ProductView(AdminHome principalJFrame, List<Product> productList) {
         this.PRINCIPALJFRAME = principalJFrame;
         initComponents();
         uploadInfoToTable(productList);
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -59,9 +75,9 @@ public class ProductView extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnAddProduct = new javax.swing.JButton();
+        btnEditProduct = new javax.swing.JButton();
+        btnDeleteProduct = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         productsTable = new javax.swing.JTable();
@@ -93,16 +109,23 @@ public class ProductView extends javax.swing.JPanel {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconAddProduct.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAddProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconAddProduct.png"))); // NOI18N
+        btnAddProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAddProductActionPerformed(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconEdit.png"))); // NOI18N
+        btnEditProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconEdit.png"))); // NOI18N
+        btnEditProduct.setEnabled(false);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconTrash.png"))); // NOI18N
+        btnDeleteProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconTrash.png"))); // NOI18N
+        btnDeleteProduct.setEnabled(false);
+        btnDeleteProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteProductActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -111,20 +134,20 @@ public class ProductView extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
+                    .addComponent(btnAddProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEditProduct, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                    .addComponent(btnDeleteProduct, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEditProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDeleteProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -204,18 +227,57 @@ public class ProductView extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
         AddProductView addProductView = new AddProductView(PRINCIPALJFRAME);
         addProductView.setVisible(true);
         addProductView.setLocationRelativeTo(PRINCIPALJFRAME);
         PRINCIPALJFRAME.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAddProductActionPerformed
 
+    private void btnDeleteProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteProductActionPerformed
+        if (productsTable.getSelectedRow() != -1) {
+            try {
+                RequestProduct requestProduct = new RequestProduct();
+
+                Product deleteProduct = new Product("", "");
+                deleteProduct.setId((Integer.parseInt(String.valueOf(productsTable.getValueAt(productsTable.getSelectedRow(), 1)))));
+
+                requestProduct.deteleProduct(deleteProduct);
+                personalizedMessage("Information", "El producto ha sido eliminado.", "Eliminación exitosa");
+                backProductListView();
+            } catch (Exception ex) {
+                personalizedMessage("Error", "Ha ocurrido un error durante la eliminación", "Error inesperado");
+            }
+        }
+    }//GEN-LAST:event_btnDeleteProductActionPerformed
+
+    private void personalizedMessage(String type, String message, String title) {
+        int typeMessage = 0;
+        typeMessage = switch (type) {
+            case "Error" ->
+                0;
+            case "Information" ->
+                1;
+            case "Warning" ->
+                2;
+            case "Question" ->
+                3;
+            default ->
+                1;
+        };
+        JOptionPane.showMessageDialog(this, message, title, typeMessage);
+    }
+
+    private void backProductListView() {
+        List<Product> productList = new RequestProduct().getAllProducts();
+        ProductView productView = new ProductView(PRINCIPALJFRAME, productList);
+        PRINCIPALJFRAME.replacePanel(productView);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnAddProduct;
+    private javax.swing.JButton btnDeleteProduct;
+    private javax.swing.JButton btnEditProduct;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
