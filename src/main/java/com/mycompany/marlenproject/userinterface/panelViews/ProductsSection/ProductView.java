@@ -118,6 +118,11 @@ public class ProductView extends javax.swing.JPanel {
 
         btnEditProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconEdit.png"))); // NOI18N
         btnEditProduct.setEnabled(false);
+        btnEditProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditProductActionPerformed(evt);
+            }
+        });
 
         btnDeleteProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconTrash.png"))); // NOI18N
         btnDeleteProduct.setEnabled(false);
@@ -250,6 +255,21 @@ public class ProductView extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnDeleteProductActionPerformed
+
+    private void btnEditProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditProductActionPerformed
+        
+        String productName = String.valueOf(productsTable.getValueAt(productsTable.getSelectedRow(), 2));
+        
+        String productDescription = String.valueOf(productsTable.getValueAt(productsTable.getSelectedRow(), 3));
+        
+        Product editProduct = new Product(productName,productDescription);
+        editProduct.setId((Integer.parseInt(String.valueOf(productsTable.getValueAt(productsTable.getSelectedRow(), 1)))));
+        
+        EditProductView editProductView = new EditProductView(PRINCIPALJFRAME, editProduct);
+        editProductView.setVisible(true);
+        editProductView.setLocationRelativeTo(PRINCIPALJFRAME);
+        PRINCIPALJFRAME.setVisible(false);
+    }//GEN-LAST:event_btnEditProductActionPerformed
 
     private void personalizedMessage(String type, String message, String title) {
         int typeMessage = 0;

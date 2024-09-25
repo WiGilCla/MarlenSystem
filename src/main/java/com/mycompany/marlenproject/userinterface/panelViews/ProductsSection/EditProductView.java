@@ -12,18 +12,21 @@ import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-public class AddProductView extends javax.swing.JFrame {
+public class EditProductView extends javax.swing.JFrame {
 
     private AdminHome PRINCIPALFRAME;
+    private Product product;
     private final Color COLOR_RED = new Color(255, 0, 0);
     private final Color COLOR_WHITE = new Color(255, 255, 255);
     private final CheckFields CHECKER = new CheckFields();
 
-    public AddProductView(AdminHome principalFrame) {
+    public EditProductView(AdminHome principalFrame, Product product) {
         this.PRINCIPALFRAME = principalFrame;
+        this.product = product;
         initComponents();
+        loadProductInformation(product);
         setResizable(false);
-        setTitle("Agregar nuevo producto");
+        setTitle("Editar producto");
     }
 
     @SuppressWarnings("unchecked")
@@ -165,6 +168,11 @@ public class AddProductView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void loadProductInformation(Product product){
+        txtProductName.setText(product.getName());
+        txtADescriptionProduct.setText(product.getDescription());
+    };
+    
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         List<Product> productList = new RequestProduct().getAllProducts();
         ProductView productView = new ProductView(PRINCIPALFRAME, productList);
@@ -180,13 +188,15 @@ public class AddProductView extends javax.swing.JFrame {
 
                 String productName = txtProductName.getText();
                 String productDescription = txtADescriptionProduct.getText();
-
-                Product newProduct = new Product(productName, productDescription);
-                requestProduct.saveProduct(newProduct);
-                personalizedMessage("Information", "Se ha guardado el producto con exito.", "Operación exitosa");
+                
+                this.product.setName(productName);
+                this.product.setDescription(productDescription);
+                requestProduct.editProduct(this.product);
+                
+                personalizedMessage("Information", "Se ha editado el producto con exito.", "Operación exitosa");
                 backProductListView();
             } catch (Exception ex) {
-                personalizedMessage("Error", "Ha ocurrido un error durante el guardado de producto",
+                personalizedMessage("Error", "Ha ocurrido un error durante la edición del producto",
                         "Error de guardado");
             }
         }
