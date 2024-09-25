@@ -7,6 +7,7 @@ package com.mycompany.marlenproject.userinterface;
 import com.mycompany.marlenproject.logic.AccountBook;
 import com.mycompany.marlenproject.logic.Product;
 import com.mycompany.marlenproject.logic.request.RequestAccountBook;
+import com.mycompany.marlenproject.logic.request.RequestProduct;
 import com.mycompany.marlenproject.userinterface.panelViews.ProductsSection.ProductView;
 import com.mycompany.marlenproject.userinterface.panelViews.accountingSection.AccountingView;
 import com.mycompany.marlenproject.userinterface.panelViews.workersSection.WorkersFirstView;
@@ -376,8 +377,8 @@ public class AdminHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAccountingSectionActionPerformed
 
     private void btnProductsSectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductsSectionActionPerformed
-        List<Product> productList = new ArrayList<>();
-        
+        RequestProduct requestProduct = new RequestProduct();
+        List<Product> productList = requestProduct.getAllProducts();
         ProductView productView = new ProductView(this,productList);
         replacePanel(productView);
     }//GEN-LAST:event_btnProductsSectionActionPerformed
