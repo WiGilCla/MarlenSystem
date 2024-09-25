@@ -21,7 +21,7 @@ public class ProductView extends javax.swing.JPanel {
                 return false;
             }
         };
-        String tableHead[] = {"N°","Identificador", "Nombre", "Descripción" };
+        String tableHead[] = {"N°", "Nombre", "Descripción" };
         modelTable.setColumnIdentifiers(tableHead);
 
         if (ListProducts.isEmpty()) {
@@ -29,12 +29,18 @@ public class ProductView extends javax.swing.JPanel {
         }else{
             int count = 0;
             for (Product product : ListProducts) {
-                Object[] productsObject = {(count+1), product.getId(), product.getName(), product.getDescription()};
+                Object[] productsObject = {(count+1), product.getName(), product.getDescription()};
                 modelTable.addRow(productsObject);
                 count++;
             }
         }
+        
         productsTable.setModel(modelTable);
+        productsTable.getColumnModel().getColumn(0).setMinWidth(50);
+        productsTable.getColumnModel().getColumn(0).setMaxWidth(50);
+        productsTable.getColumnModel().getColumn(1).setMinWidth(150);
+        productsTable.getColumnModel().getColumn(1).setMaxWidth(150);
+        
     }
 
     
@@ -88,6 +94,11 @@ public class ProductView extends javax.swing.JPanel {
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconAddProduct.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconEdit.png"))); // NOI18N
 
@@ -130,6 +141,7 @@ public class ProductView extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        productsTable.setRowHeight(30);
         jScrollPane1.setViewportView(productsTable);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -191,6 +203,13 @@ public class ProductView extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        AddProductView addProductView = new AddProductView(PRINCIPALJFRAME);
+        addProductView.setVisible(true);
+        addProductView.setLocationRelativeTo(PRINCIPALJFRAME);
+        PRINCIPALJFRAME.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
