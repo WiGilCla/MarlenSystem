@@ -703,19 +703,18 @@ public class AccountBookView extends javax.swing.JPanel {
                         "No tiene ningún registro", "Libro sin registros", 1);
             } else if (!isEditingABook) {
                 try {
-                    AccountBook book = new AccountBook(Integer.parseInt(lbNumberBook.getText()),
+                    AccountBook newBook = new AccountBook(Integer.parseInt(lbNumberBook.getText()),
                             new Date(), lbTitleBook.getText(), null);
-                    bookRequest.saveBook(book.getAccountBookId(),
-                            book.getCreationDate(), book.getTitleBook(),
-                            null);
+                    bookRequest.saveBook(newBook);
+                    
                     for (AccountBookRecords record : bookRecords) {
                         if (!record.getDescription().isBlank()) {
-                            recordRequest.saveBookRecord(book, record.getDescription(),
+                            recordRequest.saveBookRecord(newBook, record.getDescription(),
                                     record.getCashInflow(), record.getCashExpenses());
                         }
                     }
-                    book.setListBookRecords(recordRequest.getRecordsByBookId(book));
-                    bookRequest.editBook(book);
+                    newBook.setListBookRecords(recordRequest.getRecordsByBookId(newBook));
+                    bookRequest.editBook(newBook);
                     JOptionPane.showMessageDialog(PRINCIPALJFRAME, "El libro se guardado exitosamente.");
 
                 } catch (Exception ex) {

@@ -5,39 +5,37 @@
 package com.mycompany.marlenproject.logic.request;
 
 import com.mycompany.marlenproject.logic.AccountBook;
-import com.mycompany.marlenproject.logic.AccountBookRecords;
 import com.mycompany.marlenproject.logic.CheckFields;
 import com.mycompany.marlenproject.persistence.controller.AccountBookController;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class RequestAccountBook {
     private final AccountBookController accountBookController = new AccountBookController();
     private final CheckFields CHECKER = new CheckFields();
     
-    public void saveBook(int accountBookId,Date creationDate, String titleBook, 
-            List<AccountBookRecords> listBookRecords) throws Exception{
+    public void saveBook(AccountBook newBook) throws Exception{
         
-        int bookId = accountBookId;
-        Timestamp creationBook = new Timestamp(creationDate.getTime());
-        String bookTitle = CHECKER.capitalizedString(titleBook);
-        List<AccountBookRecords> bookRecords = listBookRecords;
+        Timestamp creationBook = new Timestamp(newBook.getCreationDate().getTime());
+        String bookTitle = CHECKER.capitalizedString(newBook.getTitleBook());
         
-        AccountBook book = new AccountBook(bookId, creationBook, bookTitle, bookRecords);
-        accountBookController.saveBookController(book);
+        newBook.setCreationDate(creationBook);
+        newBook.setTitleBook(bookTitle);
+        
+        accountBookController.saveBookController(newBook);
     }
     
-    public void editBook(AccountBook book) throws Exception{
+    public void editBook(AccountBook editBook) throws Exception{
         
-        int bookId = book.getAccountBookId();
-        Timestamp creationBook = new Timestamp(book.getCreationDate().getTime());
-        String bookTitle = CHECKER.capitalizedString(book.getTitleBook());
-        List<AccountBookRecords> bookRecords = book.getListBookRecords();
         
-        AccountBook editedBook = new AccountBook(bookId, creationBook, bookTitle, bookRecords);
-        accountBookController.editBookController(editedBook);
+        Timestamp creationBook = new Timestamp(editBook.getCreationDate().getTime());
+        String bookTitle = CHECKER.capitalizedString(editBook.getTitleBook());
+        
+        editBook.setCreationDate(creationBook);
+        editBook.setTitleBook(bookTitle);
+        
+        accountBookController.editBookController(editBook);
     }
     
     public void deleteBook(AccountBook book) throws Exception{
