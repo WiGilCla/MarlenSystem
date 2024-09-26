@@ -709,8 +709,8 @@ public class AccountBookView extends javax.swing.JPanel {
                     
                     for (AccountBookRecords record : bookRecords) {
                         if (!record.getDescription().isBlank()) {
-                            recordRequest.saveBookRecord(newBook, record.getDescription(),
-                                    record.getCashInflow(), record.getCashExpenses());
+                            record.setAccountBookId(newBook);
+                            recordRequest.saveBookRecord(record);
                         }
                     }
                     newBook.setListBookRecords(recordRequest.getRecordsByBookId(newBook));

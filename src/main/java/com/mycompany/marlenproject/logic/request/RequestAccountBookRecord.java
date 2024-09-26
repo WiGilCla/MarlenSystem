@@ -15,32 +15,20 @@ public class RequestAccountBookRecord {
     private final AccountBookRecordsController accountBookRecordsController = new AccountBookRecordsController();
     private final CheckFields CHECKER = new CheckFields();
 
-    public void saveBookRecord(AccountBook accountBookId,String description,
-            long cashInflow,long cashExpenses) throws Exception{
-
-        AccountBook book = accountBookId;
-        String recordDescription = CHECKER.capitalizedString(description);
-        long income = cashInflow;
-        long expense = cashExpenses;
-
-        AccountBookRecords bookRecord = new AccountBookRecords(book,
-                recordDescription, income, expense);
-
-        accountBookRecordsController.saveBookRecordController(bookRecord);
+    public void saveBookRecord(AccountBookRecords newRecordsBook) throws Exception{
+        
+        String recordDescription = CHECKER.capitalizedString(newRecordsBook.getDescription());
+        newRecordsBook.setDescription(recordDescription);
+        
+        accountBookRecordsController.saveBookRecordController(newRecordsBook);
     }
     
-    public void editBookRecord(AccountBookRecords newBookRecord) throws Exception{
-        AccountBook book = newBookRecord.getAccountBookId();
-        String recordDescription = CHECKER.capitalizedString(newBookRecord.getDescription());
-        long income = newBookRecord.getCashInflow();
-        long expense = newBookRecord.getCashExpenses();
+    public void editBookRecord(AccountBookRecords editRecordsBook) throws Exception{
         
-        AccountBookRecords bookRecord = new AccountBookRecords(book,
-                recordDescription, income, expense);
+        String recordDescription = CHECKER.capitalizedString(editRecordsBook.getDescription());
+        editRecordsBook.setDescription(recordDescription);
         
-        bookRecord.setRecordId(newBookRecord.getRecordId());
-        
-        accountBookRecordsController.editBookRecordController(bookRecord);
+        accountBookRecordsController.editBookRecordController(editRecordsBook);
     }
 
     public void deleteBookRecord(AccountBookRecords record) throws Exception{
