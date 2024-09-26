@@ -533,8 +533,9 @@ public class AddCustomerView extends javax.swing.JPanel {
                     Person person = new Person(personFirstName, personSecondName,
                             personFirstLastName, personSecondLastName,
                             personIdentificationType, personIdentificationNumber, personBirthdate);
+                    Customer customer = new Customer(customerPhone, customerAddress, customerEmail, false, person);
 
-                    NEW_REQUEST_CUSTOMER.saveCustomer(person, customerPhone, customerAddress, customerEmail, false);
+                    NEW_REQUEST_CUSTOMER.saveCustomer(customer);
                 }
 
                 personalizedMessage("Information", "El cliente ha sido agregado correctamente", "Operación exitosa");

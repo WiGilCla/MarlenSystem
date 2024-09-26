@@ -4,23 +4,23 @@
  */
 package com.mycompany.marlenproject.logic.request;
 
+import com.mycompany.marlenproject.logic.CheckFields;
 import com.mycompany.marlenproject.logic.Customer;
-import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.persistence.controller.CustomerController;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RequestCustomer {
-    CustomerController customerController = new CustomerController();
+    private final CustomerController customerController = new CustomerController();
+    private final CheckFields CHECKER = new CheckFields();
     
-    public void saveCustomer(Person person, String phone, String address, String email, boolean isDelete){
-        String customerPhone = phone;
-        String customerAddress = address;
-        String customerEmail = email;
-        boolean customerIsDelete = isDelete;
+    public void saveCustomer(Customer newCustomer){
         
-        Customer newCustomer = new Customer(customerPhone, customerAddress, 
-                customerEmail, customerIsDelete, person);
+        String customerAddress = CHECKER.capitalizedString(newCustomer.getAddress());
+        String customerEmail = newCustomer.getEmail().toLowerCase();
+        
+        newCustomer.setAddress(customerAddress);
+        newCustomer.setEmail(customerEmail);
         
         customerController.saveCustomerPersis(newCustomer);
     }
@@ -28,12 +28,9 @@ public class RequestCustomer {
     public void editCustomer(Customer editCustomer) throws Exception{
         
         String customerEmail = editCustomer.getEmail().toLowerCase();
+        editCustomer.setEmail(customerEmail);
         
-        Customer newCustomer = new Customer(editCustomer.getPhone(),editCustomer.getAddress(), 
-                customerEmail, editCustomer.isIsDelete(), editCustomer.getPerson());
-        newCustomer.setCustomerId(editCustomer.getCustomerId());
-        
-        customerController.editCustomerPersis(newCustomer);
+        customerController.editCustomerPersis(editCustomer);
     }
     
     public List<Customer> getCustomerList(){
