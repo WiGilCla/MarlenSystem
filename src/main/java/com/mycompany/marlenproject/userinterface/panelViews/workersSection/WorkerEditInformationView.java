@@ -5,6 +5,7 @@
 package com.mycompany.marlenproject.userinterface.panelViews.workersSection;
 
 import com.mycompany.marlenproject.logic.CheckFields;
+import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.logic.request.requestPerson;
 import com.mycompany.marlenproject.logic.request.requestWorker;
@@ -704,31 +705,38 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
             String personIdentificationNumber = CHECKER.removeStringBlanks(txtIdentificationNumber.getText());
             Date personBirthdate = dateBirthdate.getDate();
+            
             String bloodType = sltBloodType.getSelectedItem().toString();
             String bloodTypeCmplt = sltBloodTypeCmpl.getSelectedItem().toString();
             String healthEntity = sltHealthEntity.getSelectedItem().toString();
             Date dayLink = dateDayLink.getDate();
             String position = sltPosition.getSelectedItem().toString();
             boolean state = (sltState.getSelectedIndex() == COMBO_BOX_OPTION.getIndexStatusActive());
+            
+            Person Person = new Person(personFirstName, personSecondName, personFirstLastName, personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
+            
+            
             try {
                 if (worker.getPerson().getIdentificationNumber().equals(personIdentificationNumber)) {
-                    NEW_REQUEST_PERSON.editPerson(personIdentificationNumber, personFirstName, personSecondName,
-                            personFirstLastName, personSecondLastName, personIdentificationType, personBirthdate);
+                    
+                    NEW_REQUEST_PERSON.editPerson(Person);
                     NEW_REQUEST_WORKER.editWorker(worker.getWorkerId(), personIdentificationNumber,
                             bloodType, bloodTypeCmplt, healthEntity,
                             dayLink, position, state, false);
                 } else {
-
+                    
                     Worker existingWorker = NEW_REQUEST_WORKER.findWorkerByDNI(personIdentificationNumber);
+                    
                     if (existingWorker != null) {
+                        
                         personalizedMessage("Error",
                                 "Esta identificación ya está asociada a un trabajador, ve y corrigelo para intentarlo nuevamente",
                                 "Registro ya existente");
                         txtIdentificationNumber.setBackground(COLOR_RED);
                         return;
                     } else {
-                        NEW_REQUEST_PERSON.savePerson(personFirstName, personSecondName, personFirstLastName,
-                                personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
+                        
+                        NEW_REQUEST_PERSON.savePerson(Person);
                         NEW_REQUEST_WORKER.editWorker(worker.getWorkerId(), personIdentificationNumber,
                                 bloodType, bloodTypeCmplt, healthEntity, dayLink, position, state, false);
                         NEW_REQUEST_PERSON.deletePerson(worker.getPerson().getIdentificationNumber());
@@ -754,7 +762,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             personalizedMessage("Warning", "Asegurese de que los campos en rojo estén correctamente diligenciados", "Error en Campos");
             return;
         }
-
+        this.PRINCIPALJFRAME.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnSaveActionPerformed
 

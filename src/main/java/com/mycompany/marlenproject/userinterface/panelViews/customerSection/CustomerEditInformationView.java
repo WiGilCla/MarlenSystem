@@ -590,28 +590,27 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
             String personIdentificationType = sltCustomerIdentificationType.getSelectedItem().toString();
             String personIdentificationNumber = CHECKER.removeStringBlanks(txtCustomerIdentificationNumber.getText());
             Date personBirthdate = dtCustomerBirthdate.getDate();
+            
             String customerPhone = CHECKER.removeStringBlanks(txtCustomerPhone.getText());
             String customerAddress = txtCustomerAddress.getText();
             String customerEmail = txtCustomerEmail.getText();
+            
+            Person person = new Person(personFirstName, personSecondName, personFirstLastName, personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
 
             try {
-                Person editPerson = new Person(personFirstName, personSecondName,
-                        personFirstLastName, personSecondLastName,
-                        personIdentificationType, personIdentificationNumber, personBirthdate);
+                
                 Customer editCustomer = new Customer(customerPhone, customerAddress, customerEmail,
-                        customer.isIsDelete(), editPerson);
+                        customer.isIsDelete(), person);
                 editCustomer.setCustomerId(this.customer.getCustomerId());
 
                 if (this.customer.getPerson().getIdentificationNumber().equals(personIdentificationNumber)) {
-                    NEW_REQUEST_PERSON.editPerson(personIdentificationNumber, personFirstName, personSecondName,
-                            personFirstLastName, personSecondLastName, personIdentificationType, personBirthdate);
+                    NEW_REQUEST_PERSON.editPerson(person);
                     NEW_REQUEST_CUSTOMER.editCustomer(editCustomer);
                 } else {
                     Customer findCustomer = NEW_REQUEST_CUSTOMER.getCustomerByDNI(personIdentificationNumber);
 
                     if(findCustomer == null){
-                        NEW_REQUEST_PERSON.savePerson(personFirstName, personSecondName, personFirstLastName,
-                                personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
+                        NEW_REQUEST_PERSON.savePerson(person);
                         NEW_REQUEST_CUSTOMER.editCustomer(editCustomer);
                         
                         NEW_REQUEST_PERSON.deletePerson(customer.getPerson().getIdentificationNumber());
@@ -625,8 +624,7 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
                         NEW_REQUEST_CUSTOMER.deleteCustomer(this.customer.getCustomerId());
                         NEW_REQUEST_PERSON.deletePerson(this.customer.getPerson().getIdentificationNumber());
                         
-                        NEW_REQUEST_PERSON.editPerson(personIdentificationNumber, personFirstName, personSecondName,
-                            personFirstLastName, personSecondLastName, personIdentificationType, personBirthdate);
+                        NEW_REQUEST_PERSON.editPerson(person);
                         editCustomer.setCustomerId(findCustomer.getCustomerId());
                         NEW_REQUEST_CUSTOMER.editCustomer(editCustomer);
                     }

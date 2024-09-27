@@ -16,43 +16,43 @@ public class requestPerson {
     private final personController PersonController = new personController();
     private final CheckFields checker = new CheckFields();
     
-    public void savePerson(String personFirstName, String personSecondName, 
-        String personFirstLastName, String personSecondLastName, String personIdentificationType, 
-        String personIdentificationNumber, Date personBirthdate) throws Exception{
+    public void savePerson(Person newPerson) throws Exception{
         
+        String firstName = checker.capitalizedString(newPerson.getFirstName());
+        String secondName = (newPerson.getSecondName().isEmpty())? null:checker.capitalizedString(newPerson.getSecondName());
+        String firstLastName = checker.capitalizedString(newPerson.getFirstLastName());
+        String secondLastName = (newPerson.getSecondLastName().isEmpty())? null:checker.capitalizedString(newPerson.getSecondLastName());
+        String identificationType = checker.capitalizedString(newPerson.getIdentificationType());
+        Timestamp birthdate = (newPerson.getBirthdate() != null)? new Timestamp(newPerson.getBirthdate().getTime()): null;
         
-        String firstName = checker.capitalizedString(personFirstName);
-        String secondName = (personSecondName.isEmpty())? null:checker.capitalizedString(personSecondName);
-        String firstLastName = checker.capitalizedString(personFirstLastName);
-        String secondLastName = (personSecondLastName.isEmpty())? null:checker.capitalizedString(personSecondLastName);
-        String identificationType = checker.capitalizedString(personIdentificationType);
-        String identificationNumber = personIdentificationNumber;
-        Timestamp birthdate = (personBirthdate != null)? new Timestamp(personBirthdate.getTime()): null;
-        
-        
-        Person newPerson = new Person(firstName, secondName, firstLastName, secondLastName, identificationType, identificationNumber, birthdate);
-        
+        newPerson.setFirstName(firstName);
+        newPerson.setSecondName(secondName);
+        newPerson.setFirstLastName(firstLastName);
+        newPerson.setSecondLastName(secondLastName);
+        newPerson.setIdentificationType(identificationType);
+        newPerson.setBirthdate(birthdate);
         
         PersonController.savePersonPersis(newPerson);
     }
     
-    public void editPerson(String personIdentificationNumber, String personFirstName, String personSecondName, 
-            String personFirstLastName, String personSecondLastName, String personIdentificationType, 
-            Date personBirthdate) throws Exception{
+    public void editPerson(Person editPerson) throws Exception{
         
         
-        String firstName = checker.capitalizedString(personFirstName);
-        String secondName = (personSecondName.isEmpty())? null:checker.capitalizedString(personSecondName);
-        String firstLastName = checker.capitalizedString(personFirstLastName);
-        String secondLastName = (personSecondLastName.isEmpty())? null:checker.capitalizedString(personSecondLastName);
-        String identificationType = checker.capitalizedString(personIdentificationType);
-        String identificationNumber = personIdentificationNumber;
-        Timestamp birthdate = (personBirthdate != null)? new Timestamp(personBirthdate.getTime()): null;
+        String firstName = checker.capitalizedString(editPerson.getFirstName());
+        String secondName = (editPerson.getSecondName().isEmpty())? null:checker.capitalizedString(editPerson.getSecondName());
+        String firstLastName = checker.capitalizedString(editPerson.getFirstLastName());
+        String secondLastName = (editPerson.getSecondLastName().isEmpty())? null:checker.capitalizedString(editPerson.getSecondLastName());
+        String identificationType = checker.capitalizedString(editPerson.getIdentificationType());
+        Timestamp birthdate = (editPerson.getBirthdate() != null)? new Timestamp(editPerson.getBirthdate().getTime()): null;
         
+        editPerson.setFirstName(firstName);
+        editPerson.setSecondName(secondName);
+        editPerson.setFirstLastName(firstLastName);
+        editPerson.setSecondLastName(secondLastName);
+        editPerson.setIdentificationType(identificationType);
+        editPerson.setBirthdate(birthdate);
         
-        Person newPerson = new Person(firstName, secondName, firstLastName, secondLastName, identificationType, identificationNumber, birthdate);
-        
-        PersonController.editPersonPersis(newPerson);
+        PersonController.editPersonPersis(editPerson);
     }
     
     public void deletePerson(String personId) throws NonexistentEntityException{

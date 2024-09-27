@@ -493,33 +493,28 @@ public class AddCustomerView extends javax.swing.JPanel {
 
     private void btnSaveWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveWorkerActionPerformed
 
-        String personFirstName = CHECKER.removeStringBlanks(txtFirstName.getText());
-        String personSecondName = CHECKER.removeStringBlanks(txtSecondName.getText());//
-        String personFirstLastName = CHECKER.removeStringBlanks(txtFirstLastName.getText());
-        String personSecondLastName = CHECKER.removeStringBlanks(txtSecondLastName.getText());//
-        String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
-        String personIdentificationNumber = CHECKER.removeStringBlanks(txtIdentificationNum.getText());
-        Date personBirthdate = (dateBirthdate.getDate() != null) ? dateBirthdate.getDate() : null;
-        //Customer information
-        String customerPhone = CHECKER.removeStringBlanks(txtPhoneNumber.getText());
-        String customerAddress = txtAddress.getText();
-        String customerEmail = txtEmail.getText();
-        
-        try {
-            if (changeColorRequiredField() && changeColorNoRequiredField()) {
+        if (changeColorRequiredField() && changeColorNoRequiredField()) {
+            String personFirstName = CHECKER.removeStringBlanks(txtFirstName.getText());
+            String personSecondName = CHECKER.removeStringBlanks(txtSecondName.getText());//
+            String personFirstLastName = CHECKER.removeStringBlanks(txtFirstLastName.getText());
+            String personSecondLastName = CHECKER.removeStringBlanks(txtSecondLastName.getText());//
+            String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
+            String personIdentificationNumber = CHECKER.removeStringBlanks(txtIdentificationNum.getText());
+            Date personBirthdate = (dateBirthdate.getDate() != null) ? dateBirthdate.getDate() : null;
+            //Customer information
+            String customerPhone = CHECKER.removeStringBlanks(txtPhoneNumber.getText());
+            String customerAddress = txtAddress.getText();
+            String customerEmail = txtEmail.getText();
+            
+            Person person = new Person(personFirstName, personSecondName, personFirstLastName, personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
+            try {
                 Customer findCustomer = NEW_REQUEST_CUSTOMER.getCustomerByDNI(personIdentificationNumber);
-                
+
                 if (findCustomer != null && findCustomer.isIsDelete()) {
-                    NEW_REQUEST_PERSON.editPerson(personIdentificationNumber, personFirstName, personSecondName,
-                            personFirstLastName, personSecondLastName, personIdentificationType, personBirthdate);
-                    
-                    Person editPerson = new Person(personFirstName, personSecondName,
-                            personFirstLastName, personSecondLastName,
-                            personIdentificationType, personIdentificationNumber, personBirthdate);
-                    
-                    Customer editCustomer = new Customer(customerPhone, customerAddress, customerEmail, false, editPerson);
+                    NEW_REQUEST_PERSON.editPerson(person);
+                    Customer editCustomer = new Customer(customerPhone, customerAddress, customerEmail, false, person);
                     editCustomer.setCustomerId(findCustomer.getCustomerId());
-                    
+
                     NEW_REQUEST_CUSTOMER.editCustomer(editCustomer);
 
                 } else if (findCustomer != null && !findCustomer.isIsDelete()) {
@@ -527,12 +522,7 @@ public class AddCustomerView extends javax.swing.JPanel {
                             "Identificación duplicada");
                     return;
                 } else {
-                    NEW_REQUEST_PERSON.savePerson(personFirstName, personSecondName, personFirstLastName,
-                            personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
-
-                    Person person = new Person(personFirstName, personSecondName,
-                            personFirstLastName, personSecondLastName,
-                            personIdentificationType, personIdentificationNumber, personBirthdate);
+                    NEW_REQUEST_PERSON.savePerson(person);
                     Customer customer = new Customer(customerPhone, customerAddress, customerEmail, false, person);
 
                     NEW_REQUEST_CUSTOMER.saveCustomer(customer);
@@ -540,15 +530,16 @@ public class AddCustomerView extends javax.swing.JPanel {
 
                 personalizedMessage("Information", "El cliente ha sido agregado correctamente", "Operación exitosa");
                 clearFields();
-            }
 
-        } catch (PreexistingEntityException ex) {
-            personalizedMessage("Error", "El numero de identificación ya está asociado a alguien.",
-                    "Identificación duplicada");
-            txtIdentificationNum.setBackground(COLOR_RED);
-        } catch (Exception e) {
-            Logger.getLogger(AddCustomerView.class.getName()).log(Level.SEVERE, null, e);
+            } catch (PreexistingEntityException ex) {
+                personalizedMessage("Error", "El numero de identificación ya está asociado a alguien.",
+                        "Identificación duplicada");
+                txtIdentificationNum.setBackground(COLOR_RED);
+            } catch (Exception e) {
+                Logger.getLogger(AddCustomerView.class.getName()).log(Level.SEVERE, null, e);
+            }
         }
+
 
     }//GEN-LAST:event_btnSaveWorkerActionPerformed
 
