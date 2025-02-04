@@ -12,7 +12,6 @@ import com.mycompany.marlenproject.userinterface.panelViews.ProductsSection.Prod
 import com.mycompany.marlenproject.userinterface.panelViews.accountingSection.AccountingView;
 import com.mycompany.marlenproject.userinterface.panelViews.workersSection.WorkersFirstView;
 import java.util.List;
-
 import javax.swing.JPanel;
 
 public class AdminHome extends javax.swing.JFrame {
