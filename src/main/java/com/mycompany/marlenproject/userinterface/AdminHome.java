@@ -11,7 +11,6 @@ import com.mycompany.marlenproject.logic.request.RequestProduct;
 import com.mycompany.marlenproject.userinterface.panelViews.ProductsSection.ProductView;
 import com.mycompany.marlenproject.userinterface.panelViews.accountingSection.AccountingView;
 import com.mycompany.marlenproject.userinterface.panelViews.workersSection.WorkersFirstView;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -23,29 +22,29 @@ public class AdminHome extends javax.swing.JFrame {
         setTitle("Administrador");
         setLocationRelativeTo(null);
     }
-    
-    public void replacePanel(JPanel newPanel){
-        javax.swing.GroupLayout viewPanelLayout = new javax.swing.GroupLayout(viewPanel);
+
+    public void replacePanel(JPanel newPanel) {
         viewPanel.removeAll();
-        viewPanel.setLayout(viewPanelLayout);
+        javax.swing.GroupLayout viewPanelLayout = new javax.swing.GroupLayout(viewPanel);
+
         viewPanelLayout.setHorizontalGroup(
-            viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(newPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(viewPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(newPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())
         );
         viewPanelLayout.setVerticalGroup(
-            viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(newPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                
-                .addContainerGap())
+                viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(viewPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(newPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addContainerGap())
         );
-        
+
+        viewPanel.setLayout(viewPanelLayout);
         viewPanel.revalidate();
         viewPanel.repaint();
     }
@@ -358,28 +357,21 @@ public class AdminHome extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnWorkersSectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWorkersSectionActionPerformed
-        WorkersFirstView workersFirstView  = new WorkersFirstView(this);
-        workersFirstView.setSize(970, 576);
-        workersFirstView.setLocation(0, 0);
+        WorkersFirstView workersFirstView = new WorkersFirstView(this);
         replacePanel(workersFirstView);
     }//GEN-LAST:event_btnWorkersSectionActionPerformed
 
     private void btnAccountingSectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccountingSectionActionPerformed
-        // TODO add your handling code here:
-        RequestAccountBook requestBook = new RequestAccountBook();
-
-
-        List<AccountBook> listBooks = requestBook.getBooks();
-        AccountingView accountingView = new AccountingView(this,listBooks);
-        accountingView.setSize(970, 576);
-        accountingView.setLocation(0, 0);
+        List<AccountBook> listBooks = new RequestAccountBook().getBooks();
+        
+        AccountingView accountingView = new AccountingView(this, listBooks);
         replacePanel(accountingView);
     }//GEN-LAST:event_btnAccountingSectionActionPerformed
 
     private void btnProductsSectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductsSectionActionPerformed
-        RequestProduct requestProduct = new RequestProduct();
-        List<Product> productList = requestProduct.getAllProducts();
-        ProductView productView = new ProductView(this,productList);
+        List<Product> productList = new RequestProduct().getAllProducts();
+        
+        ProductView productView = new ProductView(this, productList);
         replacePanel(productView);
     }//GEN-LAST:event_btnProductsSectionActionPerformed
 
