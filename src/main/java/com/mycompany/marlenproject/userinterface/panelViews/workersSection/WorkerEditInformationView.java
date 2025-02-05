@@ -30,34 +30,27 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
     private final Color COLOR_WHITE = new Color(255, 255, 255);
     private final AdminHome PRINCIPALJFRAME;
 
-    private void backView(String personIdentificationNumber) {
-        List<Worker> newListworkers = new requestWorker().getNoDeletedWorker();
+    private void returnWorkerView(String personIdentificationNumber) {
+        List<Worker> workers = new requestWorker().getNoDeletedWorker();
 
-        if (!newListworkers.isEmpty()) {
-
-            int index = findWorkerByDni(personIdentificationNumber, newListworkers);
-            WorkersInformationView workersInformationView = new WorkersInformationView(this.PRINCIPALJFRAME, newListworkers, index);
-            workersInformationView.setSize(800, 500);
-            workersInformationView.setLocation(0, 0);
+        if (!workers.isEmpty()) {
+            int index = findWorkerByDni(personIdentificationNumber, workers);
+            WorkersInformationView workersInformationView = new WorkersInformationView(this.PRINCIPALJFRAME, workers, index);
             PRINCIPALJFRAME.replacePanel(workersInformationView);
             PRINCIPALJFRAME.setVisible(true);
 
         } else {
 
             WorkersFirstView workersFirstView = new WorkersFirstView(PRINCIPALJFRAME);
-            workersFirstView.setSize(982, 588);
-            workersFirstView.setLocation(0, 0);
             PRINCIPALJFRAME.replacePanel(workersFirstView);
             PRINCIPALJFRAME.setVisible(true);
         }
     }
 
     private void setActualInformation() {
-        String bloodGroup = (worker.getBloodType().length() == 3)
-                ? worker.getBloodType().substring(0, 2) : worker.getBloodType().substring(0, 1);
+        String bloodGroup = worker.getBloodGroup();
 
-        String bloodGroupRhd = (worker.getBloodType().length() == 3)
-                ? worker.getBloodType().substring(2) : worker.getBloodType().substring(1);
+        String bloodGroupRhd = worker.getBloodGroupRhd();
 
         txtFirstName.setText(worker.getPerson().getFirstName());
 
@@ -744,7 +737,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
                 }
 
                 personalizedMessage("Information", "La información ha sido cambiada correctamente", "Operación exitosa");
-                backView(personIdentificationNumber);
+                returnWorkerView(personIdentificationNumber);
             } catch (PreexistingEntityException ex) {
 
                 personalizedMessage("Error", "El numero de identificación ya está asociado a alguien.", "Identificación duplicada");

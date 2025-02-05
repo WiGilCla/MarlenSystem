@@ -577,9 +577,9 @@ public class AddWorkerView extends javax.swing.JPanel {
             String healthEntity = sltEPS.getSelectedItem().toString();
             Date dayLink = dateVinculation.getDate();
             String position = sltPosition.getSelectedItem().toString();
-            
+
             Person person = new Person(personFirstName, personSecondName, personFirstLastName, personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
-            
+
             try {
                 NEW_REQUEST_PERSON.savePerson(person);
                 NEW_REQUEST_WORKER.saveWorker(personIdentificationNumber, bloodType,

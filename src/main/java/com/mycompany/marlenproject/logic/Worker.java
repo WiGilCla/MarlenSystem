@@ -61,6 +61,20 @@ public class Worker implements Serializable{
     public String getBloodType() {
         return bloodType;
     }
+    
+    public String getBloodGroup() {
+        String bloodGroup = (bloodType.length() == 3)
+                ? bloodType.substring(0, 2) : bloodType.substring(0, 1);
+
+        return bloodGroup;
+    }
+    
+    public String getBloodGroupRhd() {
+        String bloodGroupRhd = (bloodType.length() == 3)
+                ? bloodType.substring(2) : bloodType.substring(1);
+        
+        return bloodGroupRhd;
+    }
 
     public void setBloodType(String bloodType) {
         this.bloodType = bloodType;
