@@ -18,25 +18,19 @@ public class requestWorker {
     private final workerController WorkerController = new workerController();
     private final CheckFields checker = new CheckFields();
     
-    public void saveWorker(String identificationNumber, String workerBloodType, String workerBloodTypeCmplt, 
-            String workerHealthEntity, Date workerDayLink, String WorkerPosition) throws Exception{
+    public void saveWorker(Worker worker) throws Exception{
         
+        String bloodType = worker.getBloodType();
+        String healthEntity = checker.capitalizedString(worker.getHealthEntity());
+        Timestamp dayLink = new Timestamp( worker.getDayLink().getTime());
+        String position = checker.capitalizedString(worker.getPosition());
         
-        String bloodType = workerBloodType.concat(workerBloodTypeCmplt);
-        String healthEntity = checker.capitalizedString(workerHealthEntity);
-        Timestamp dayLink = new Timestamp( workerDayLink.getTime());
-        String position = checker.capitalizedString(WorkerPosition);
-        boolean state = true;
-        boolean is_delete = false;
+        worker.setBloodType(bloodType);
+        worker.setHealthEntity(healthEntity);
+        worker.setDayLink(dayLink);
+        worker.setPosition(position);
         
-        
-        Person workerPerson = new Person();
-        workerPerson.setIdentificationNumber(identificationNumber);
-        Person person = workerPerson;
-        
-        
-        Worker newWorker = new Worker(bloodType, healthEntity, dayLink, position,state, is_delete,person);
-        WorkerController.saveWorkerPersis(newWorker);
+        WorkerController.saveWorkerPersis(worker);
     }
     
     public List<Worker> getWorkers(){

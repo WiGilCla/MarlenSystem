@@ -6,6 +6,7 @@ package com.mycompany.marlenproject.userinterface.panelViews.workersSection;
 
 import com.mycompany.marlenproject.logic.CheckFields;
 import com.mycompany.marlenproject.logic.Person;
+import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.logic.request.requestPerson;
 import com.mycompany.marlenproject.logic.request.requestWorker;
 import com.mycompany.marlenproject.persistence.exceptions.PreexistingEntityException;
@@ -558,14 +559,15 @@ public class AddWorkerView extends javax.swing.JPanel {
             String healthEntity = sltEPS.getSelectedItem().toString();
             Date dayLink = dateVinculation.getDate();
             String position = sltPosition.getSelectedItem().toString();
+            boolean state = true;
+            boolean is_delete = false;
 
             Person person = new Person(personFirstName, personSecondName, personFirstLastName, personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
-
+            Worker worker = new Worker(bloodType.concat(bloodTypeCmplt), healthEntity, dayLink, position, state, is_delete, person);
+            
             try {
                 NEW_REQUEST_PERSON.savePerson(person);
-                NEW_REQUEST_WORKER.saveWorker(personIdentificationNumber, bloodType,
-                        bloodTypeCmplt, healthEntity, dayLink, position);
-                
+                NEW_REQUEST_WORKER.saveWorker(worker);
                 JOptionPane.showMessageDialog(this, "El trabajador ha sido agregado correctamente", "Information", 1);
                 clearFields();
             } catch (PreexistingEntityException ex) {
