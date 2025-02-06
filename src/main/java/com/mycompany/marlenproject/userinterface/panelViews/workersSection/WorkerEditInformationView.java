@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 
 public class WorkerEditInformationView extends javax.swing.JFrame {
 
+    
     private final ComboBoxWorkerOptions COMBO_BOX_OPTION = new ComboBoxWorkerOptions();
     private Worker worker;
     private final requestPerson NEW_REQUEST_PERSON = new requestPerson();
@@ -81,7 +82,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         sltPosition.setSelectedIndex(COMBO_BOX_OPTION
                 .findIndexSelected(COMBO_BOX_OPTION.getPositionOptions(), worker.getPosition()));
 
-        sltState.setSelectedIndex(worker.isIsActive() ? COMBO_BOX_OPTION.getIndexStatusActive() : COMBO_BOX_OPTION.getIndexStatusNoActive());
+        sltState.setSelectedIndex(worker.isIsActive() ? COMBO_BOX_OPTION.getIndexStateActive() : COMBO_BOX_OPTION.getIndexStateNoActive());
     }
 
     private boolean changeColorRequiredField() {
@@ -704,7 +705,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             String healthEntity = sltHealthEntity.getSelectedItem().toString();
             Date dayLink = dateDayLink.getDate();
             String position = sltPosition.getSelectedItem().toString();
-            boolean state = (sltState.getSelectedIndex() == COMBO_BOX_OPTION.getIndexStatusActive());
+            boolean state = (sltState.getSelectedIndex() == COMBO_BOX_OPTION.getIndexStateActive());
             
             Person Person = new Person(personFirstName, personSecondName, personFirstLastName, personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
             

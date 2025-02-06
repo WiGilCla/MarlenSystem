@@ -36,7 +36,7 @@ public class WorkersListView extends javax.swing.JPanel {
 
                 String[] options = COMBO_BOX_OPTIONS.getStateOptions();
                 String status = (worker.isIsActive())
-                        ? options[COMBO_BOX_OPTIONS.getIndexStatusActive()] : options[COMBO_BOX_OPTIONS.getIndexStatusNoActive()];
+                        ? options[COMBO_BOX_OPTIONS.getIndexStateActive()] : options[COMBO_BOX_OPTIONS.getIndexStateNoActive()];
 
                 Object[] workersObject = {(count+1), worker.getPerson().getIdentificationNumber(), worker.getPerson().getFirstName(),
                     worker.getPerson().getFirstLastName(), worker.getPosition(), Checker.capitalizedString(status)};
@@ -407,7 +407,7 @@ public class WorkersListView extends javax.swing.JPanel {
         String textFilter = Checker.removeStringBlanks(txtSearchWorker.getText()).toLowerCase();
         String positionFilter = sltPositionFilter.getSelectedItem().toString();
         String statusFilterActive = sltStatusFilter.getSelectedItem().toString();
-        boolean statusFilter = sltStatusFilter.getSelectedIndex() == COMBO_BOX_OPTIONS.getIndexStatusActive();
+        boolean statusFilter = sltStatusFilter.getSelectedIndex() == COMBO_BOX_OPTIONS.getIndexStateActive();
         this.WORKER_LIST_FILTER.clear();
 
         

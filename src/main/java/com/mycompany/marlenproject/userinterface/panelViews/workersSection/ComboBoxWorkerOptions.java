@@ -11,7 +11,7 @@ package com.mycompany.marlenproject.userinterface.panelViews.workersSection;
 public class ComboBoxWorkerOptions {
 
     private final String[] identificationTypeOptions = {"SELECCIONE UNA ...", "Cédula de ciudadanía",
-        "Cédula de extranjería", "Tarjeta pasaporte", "Sin identificación"};
+        "Cédula de extranjería", "Tarjeta pasaporte"};
     private final String[] bloodGroupOptions = {"SELECCIONE UNA ...", "A", "B", "O", "AB"};
     private final String[] bloodGroupRhdOptions = {"SELECCIONE UNA ...", "+", "-"};
     private final String[] positionOptions = {"SELECCIONE UNA ...", "Jefe", "Administrador",
@@ -23,13 +23,13 @@ public class ComboBoxWorkerOptions {
         "DUSAKAWI EPSI", "EMS SANITAS", "EMSSANAR E.S.S.", "EPS FAMILIAR DE COLOMBIA",
         "EPS SANITAS", "EPS SURA", "FAMISANAR", "FONDO DE PASIVO SOCIAL DE FERROCARRILES NACIONALES DE COLOMBIA",
         "MALLAMAS EPSI", "MUTUAL SER", "NUEVA EPS", "PIJAOS SALUD EPSI", "SALUD BÓLIVAR EPS SAS", "SALUD MIA",
-        "SALUD TOTAL EPS S.A.", "SAVIA SALUD EPS EPSS40", "SERVICIO OCCIDENTAL DE SALUD EPS SOS", "OTRO"};
-    private final String[] stateOptions = {"SELECCIONE UNA ...","NO ACTIVO", "ACTIVO"};
-    
+        "SALUD TOTAL EPS S.A.", "SAVIA SALUD EPS EPSS40", "SERVICIO OCCIDENTAL DE SALUD EPS SOS"};
+    private final String[] stateOptions = {"SELECCIONE UNA ...", "NO ACTIVO", "ACTIVO"};
+
     public ComboBoxWorkerOptions() {
     }
-    
-    public int getNoOneOptionSelected(){
+
+    public int getNoOneOptionSelected() {
         return 0;
     }
 
@@ -56,16 +56,16 @@ public class ComboBoxWorkerOptions {
     public String[] getStateOptions() {
         return stateOptions;
     }
-    
-    public int getIndexStatusActive(){
+
+    public int getIndexStateActive() {
         return 2;
     }
-    
-    public int getIndexStatusNoActive(){
+
+    public int getIndexStateNoActive() {
         return 1;
     }
-    
-    public int findIndexSelected(String[] list,String value) {
+
+    public int findIndexSelected(String[] list, String value) {
         for (int i = 0; i < list.length; i++) {
             if (list[i].equalsIgnoreCase(value)) {
                 return i;
@@ -73,5 +73,5 @@ public class ComboBoxWorkerOptions {
         }
         return 0;
     }
-    
+
 }

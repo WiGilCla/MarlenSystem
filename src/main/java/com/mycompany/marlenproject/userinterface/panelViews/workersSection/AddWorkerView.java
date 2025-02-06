@@ -553,6 +553,7 @@ public class AddWorkerView extends javax.swing.JPanel {
             String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
             String personIdentificationNumber = CHECKER.removeStringBlanks(txtIdentificationNum.getText());
             Date personBirthdate = dateBirthdate.getDate();
+            
             //Worker information
             String bloodType = sltBloodType.getSelectedItem().toString();
             String bloodTypeCmplt = sltBloodTypeCmplt.getSelectedItem().toString();

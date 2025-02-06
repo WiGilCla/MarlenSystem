@@ -21,14 +21,14 @@ public class requestWorker {
     public void saveWorker(Worker worker) throws Exception{
         
         String bloodType = worker.getBloodType();
-        String healthEntity = checker.capitalizedString(worker.getHealthEntity());
         Timestamp dayLink = new Timestamp( worker.getDayLink().getTime());
         String position = checker.capitalizedString(worker.getPosition());
+        String healthEntity = checker.capitalizedString(worker.getHealthEntity());
         
-        worker.setBloodType(bloodType);
-        worker.setHealthEntity(healthEntity);
         worker.setDayLink(dayLink);
         worker.setPosition(position);
+        worker.setBloodType(bloodType);
+        worker.setHealthEntity(healthEntity);
         
         WorkerController.saveWorkerPersis(worker);
     }
