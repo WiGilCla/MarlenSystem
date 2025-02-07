@@ -5,11 +5,9 @@
 package com.mycompany.marlenproject.userinterface.panelViews.workersSection;
 
 import com.mycompany.marlenproject.logic.CheckFields;
-import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.logic.request.requestWorker;
 import com.mycompany.marlenproject.userinterface.AdminHome;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -19,40 +17,38 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class WorkersInformationView extends javax.swing.JPanel {
-    private final requestWorker REQUEST_WORKER = new requestWorker();
+
+    private int workerObserved = 0;
+    private final AdminHome PRINCIPALJFRAME;
     private final List<Worker> WORKER_LIST;
     private final CheckFields CHECKER = new CheckFields();
-    private int workerViewing = 0;
-    
-    private final AdminHome PRINCIPALJFRAME; 
-    
+    private final requestWorker REQUEST_WORKER = new requestWorker();
 
-    private void viewWorkerInformation(int index){
+    private void viewWorkerInformation(int index) {
         Worker worker = this.WORKER_LIST.get(index);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        
-        
+
         txtFirstName.setText(worker.getPerson().getFirstName());
         txtSecondName.setText(worker.getPerson().getSecondName());
-        txtFirstLastName.setText(worker.getPerson().getFirstLastName());
-        txtSecondLastName.setText(worker.getPerson().getSecondLastName());
-        txtIdentificationType.setText(worker.getPerson().getIdentificationType());
-        txtIdentificationNum.setText(String.valueOf(worker.getPerson().getIdentificationNumber()));
         txtBloodType.setText(worker.getBloodType());
         txtEps.setText(worker.getHealthEntity());
-        txtAge.setText(String.valueOf(CHECKER.timeElapsed(worker.getPerson().getBirthdate(), new Date())));
-        txtDateVinculation.setText(sdf.format(worker.getDayLink()));
         txtPosition.setText(worker.getPosition());
-        String state = (worker.isIsActive())? "Activo":"Inactivo";
-        lbWorkerState.setText(state);
+        lbWorkerState.setText((worker.isIsActive()) ? "Activo" : "Inactivo");
+        txtSecondLastName.setText(worker.getPerson().getSecondLastName());
+        txtIdentificationType.setText(worker.getPerson().getIdentificationType());
+        txtFirstLastName.setText(worker.getPerson().getFirstLastName());
+        txtDateVinculation.setText(sdf.format(worker.getDayLink()));
+        txtIdentificationNum.setText(String.valueOf(worker.getPerson().getIdentificationNumber()));
+        txtAge.setText(String.valueOf(CHECKER.timeElapsed(worker.getPerson().getBirthdate(), new Date())));
     }
-    
+
     public WorkersInformationView(AdminHome principalJFrame, List<Worker> listWorker, int index) {
         this.WORKER_LIST = listWorker;
-        this.workerViewing = index;
-        initComponents();
-        viewWorkerInformation(workerViewing);
+        this.workerObserved = index;
         this.PRINCIPALJFRAME = principalJFrame;
+        initComponents();
+        viewWorkerInformation(workerObserved);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -496,83 +492,59 @@ public class WorkersInformationView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNextWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextWorkerActionPerformed
-        if(workerViewing < this.WORKER_LIST.size()-1){
-            workerViewing++;
-            viewWorkerInformation(workerViewing);
+        if (workerObserved < this.WORKER_LIST.size() - 1) {
+            workerObserved++;
+            viewWorkerInformation(workerObserved);
         }
     }//GEN-LAST:event_btnNextWorkerActionPerformed
 
     private void btnPreviousWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousWorkerActionPerformed
-        if(workerViewing > 0){
-            workerViewing--;
-            viewWorkerInformation(workerViewing);
+        if (workerObserved > 0) {
+            workerObserved--;
+            viewWorkerInformation(workerObserved);
         }
     }//GEN-LAST:event_btnPreviousWorkerActionPerformed
 
     private void btnDeleteWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteWorkerActionPerformed
         try {
-            Worker worker = this.WORKER_LIST.get(workerViewing);
+            Worker worker = this.WORKER_LIST.get(workerObserved);
             worker.setIsActive(false);
             worker.setIsDelete(true);
-            worker.setWorkerId(this.WORKER_LIST.get(workerViewing).getWorkerId());
-            
-            
-//            boolean state = false;
-//            String bloodTypeCmpl = "";
-//            Person person = this.WORKER_LIST.get(workerViewing).getPerson();
-//            String position = this.WORKER_LIST.get(workerViewing).getPosition();
-//            String bloodType = this.WORKER_LIST.get(workerViewing).getBloodType();
-//            String healthEntity = this.WORKER_LIST.get(workerViewing).getHealthEntity();
-//            Timestamp dayLink = new Timestamp(this.WORKER_LIST.get(workerViewing).getDayLink().getTime());
-            
-            
-//            REQUEST_WORKER.editWorker(this.WORKER_LIST.get(workerViewing).getWorkerId(), 
-//                    String.valueOf(person.getIdentificationNumber()), bloodType, 
-//                    bloodTypeCmpl, healthEntity, dayLink, position, state, true);
+            worker.setWorkerId(this.WORKER_LIST.get(workerObserved).getWorkerId());
+
             REQUEST_WORKER.editWorker(worker);
-            JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, "El trabajador ha sido eliminado exitosamente", "Eliminación exitosa", 1);
-            
-            this.WORKER_LIST.remove(workerViewing);
-            
-            if(!this.WORKER_LIST.isEmpty() && workerViewing != 0){
-                workerViewing --;
-            }else if(this.WORKER_LIST.isEmpty()) {
-                JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, "No tiene trabajadores registrados", "Sin registros", 0);
-                WorkersFirstView workersFirstView  = new WorkersFirstView(this.PRINCIPALJFRAME);
-                workersFirstView.setSize(800, 500);
+            this.WORKER_LIST.remove(workerObserved);
+
+            if (this.WORKER_LIST.isEmpty()) {
+                WorkersFirstView workersFirstView = new WorkersFirstView(this.PRINCIPALJFRAME);
                 workersFirstView.setLocation(0, 0);
                 this.PRINCIPALJFRAME.replacePanel(workersFirstView);
                 return;
             }
-            
-            viewWorkerInformation(workerViewing);
+
+            if (workerObserved == (this.WORKER_LIST.size())) {
+                workerObserved--;
+            }
+
+            viewWorkerInformation(workerObserved);
+            JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, "El trabajador ha sido eliminado exitosamente", "Eliminación exitosa", 1);
+
         } catch (Exception ex) {
             Logger.getLogger(WorkersInformationView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnDeleteWorkerActionPerformed
 
     private void btnEditWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditWorkerActionPerformed
-        WorkerEditInformationView workerEditInformation = new WorkerEditInformationView(this.WORKER_LIST.get(workerViewing), this.PRINCIPALJFRAME);
-        workerEditInformation.setSize(800, 500);
+        WorkerEditInformationView workerEditInformation = new WorkerEditInformationView(this.WORKER_LIST.get(workerObserved), this.PRINCIPALJFRAME);
         workerEditInformation.setVisible(true);
         this.PRINCIPALJFRAME.setVisible(false);
     }//GEN-LAST:event_btnEditWorkerActionPerformed
 
     private void btnAllWorkerListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllWorkerListActionPerformed
-        List<Worker> workerList;
-        workerList = new requestWorker().getNoDeletedWorker();
-        
-        if(!this.WORKER_LIST.isEmpty()){
-            WorkersListView workerListView = new WorkersListView(this.PRINCIPALJFRAME,workerList);
-            workerListView.setSize(970, 576);
-            this.PRINCIPALJFRAME.replacePanel(workerListView);
-        }else{
-            JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, "No tiene trabajadores registrados", "Sin registros", 0);
-            WorkersFirstView workersFirstView  = new WorkersFirstView(this.PRINCIPALJFRAME);
-            workersFirstView.setSize(800, 500);
-            workersFirstView.setLocation(0, 0);
-            this.PRINCIPALJFRAME.replacePanel(workersFirstView);
-        }
+        List<Worker> workerList = REQUEST_WORKER.getNoDeletedWorker();
+
+        WorkersListView workerListView = new WorkersListView(this.PRINCIPALJFRAME, workerList);
+        this.PRINCIPALJFRAME.replacePanel(workerListView);
     }//GEN-LAST:event_btnAllWorkerListActionPerformed
 
 
