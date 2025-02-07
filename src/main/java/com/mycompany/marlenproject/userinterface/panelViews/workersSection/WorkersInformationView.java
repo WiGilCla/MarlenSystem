@@ -511,18 +511,25 @@ public class WorkersInformationView extends javax.swing.JPanel {
 
     private void btnDeleteWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteWorkerActionPerformed
         try {
-            boolean state = false;
-            String bloodTypeCmpl = "";
-            Person person = this.WORKER_LIST.get(workerViewing).getPerson();
-            String position = this.WORKER_LIST.get(workerViewing).getPosition();
-            String bloodType = this.WORKER_LIST.get(workerViewing).getBloodType();
-            String healthEntity = this.WORKER_LIST.get(workerViewing).getHealthEntity();
-            Timestamp dayLink = new Timestamp(this.WORKER_LIST.get(workerViewing).getDayLink().getTime());
+            Worker worker = this.WORKER_LIST.get(workerViewing);
+            worker.setIsActive(false);
+            worker.setIsDelete(true);
+            worker.setWorkerId(this.WORKER_LIST.get(workerViewing).getWorkerId());
             
             
-            REQUEST_WORKER.editWorker(this.WORKER_LIST.get(workerViewing).getWorkerId(), 
-                    String.valueOf(person.getIdentificationNumber()), bloodType, 
-                    bloodTypeCmpl, healthEntity, dayLink, position, state, true);
+//            boolean state = false;
+//            String bloodTypeCmpl = "";
+//            Person person = this.WORKER_LIST.get(workerViewing).getPerson();
+//            String position = this.WORKER_LIST.get(workerViewing).getPosition();
+//            String bloodType = this.WORKER_LIST.get(workerViewing).getBloodType();
+//            String healthEntity = this.WORKER_LIST.get(workerViewing).getHealthEntity();
+//            Timestamp dayLink = new Timestamp(this.WORKER_LIST.get(workerViewing).getDayLink().getTime());
+            
+            
+//            REQUEST_WORKER.editWorker(this.WORKER_LIST.get(workerViewing).getWorkerId(), 
+//                    String.valueOf(person.getIdentificationNumber()), bloodType, 
+//                    bloodTypeCmpl, healthEntity, dayLink, position, state, true);
+            REQUEST_WORKER.editWorker(worker);
             JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, "El trabajador ha sido eliminado exitosamente", "Eliminación exitosa", 1);
             
             this.WORKER_LIST.remove(workerViewing);

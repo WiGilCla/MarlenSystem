@@ -5,12 +5,10 @@
 package com.mycompany.marlenproject.logic.request;
 
 import com.mycompany.marlenproject.logic.CheckFields;
-import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.persistence.controller.workerController;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -20,14 +18,12 @@ public class requestWorker {
     
     public void saveWorker(Worker worker) throws Exception{
         
-        String bloodType = worker.getBloodType();
         Timestamp dayLink = new Timestamp( worker.getDayLink().getTime());
         String position = checker.capitalizedString(worker.getPosition());
         String healthEntity = checker.capitalizedString(worker.getHealthEntity());
         
         worker.setDayLink(dayLink);
         worker.setPosition(position);
-        worker.setBloodType(bloodType);
         worker.setHealthEntity(healthEntity);
         
         WorkerController.saveWorkerPersis(worker);
@@ -39,28 +35,15 @@ public class requestWorker {
         return (bdWorkerList == null)? workerList : bdWorkerList;
     }
     
-    public void editWorker(int workerId,String identificationNumber, String workerBloodType, 
-            String workerBloodTypeCmplt, String workerHealthEntity, Date workerDayLink, 
-            String WorkerPosition, boolean workerState, boolean workerDelete) throws Exception{
+    public void editWorker(Worker worker) throws Exception{
         
+        String healthEntity = checker.capitalizedString(worker.getHealthEntity());
+        Timestamp dayLink = new Timestamp( worker.getDayLink().getTime());
         
+        worker.setHealthEntity(healthEntity);
+        worker.setDayLink(dayLink);
         
-        String bloodType = workerBloodType.concat(workerBloodTypeCmplt);
-        String healthEntity = checker.capitalizedString(workerHealthEntity);
-        Timestamp dayLink = new Timestamp( workerDayLink.getTime());
-        String position = checker.capitalizedString(WorkerPosition);
-        boolean state = workerState;
-        boolean is_delete = workerDelete;
-        
-        
-        Person workerPerson = new Person();
-        workerPerson.setIdentificationNumber(identificationNumber);
-        Person person = workerPerson;
-
-        
-        Worker newWorker = new Worker(bloodType, healthEntity, dayLink, position,state,is_delete,person);
-        newWorker.setWorkerId(workerId);
-        WorkerController.editWorkerPersis(newWorker);    
+        WorkerController.editWorkerPersis(worker);    
     }
     
     public List<Worker> getNoDeletedWorker(){

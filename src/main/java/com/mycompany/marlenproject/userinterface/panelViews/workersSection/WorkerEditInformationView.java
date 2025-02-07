@@ -12,7 +12,7 @@ import com.mycompany.marlenproject.logic.request.requestWorker;
 import com.mycompany.marlenproject.persistence.exceptions.NonexistentEntityException;
 import com.mycompany.marlenproject.persistence.exceptions.PreexistingEntityException;
 import com.mycompany.marlenproject.userinterface.AdminHome;
-import java.awt.Color;
+import com.mycompany.marlenproject.utils.colors.Colors;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,23 +20,20 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class WorkerEditInformationView extends javax.swing.JFrame {
-
     
-    private final ComboBoxWorkerOptions COMBO_BOX_OPTION = new ComboBoxWorkerOptions();
-    private Worker worker;
     private final requestPerson NEW_REQUEST_PERSON = new requestPerson();
     private final requestWorker NEW_REQUEST_WORKER = new requestWorker();
     private final CheckFields CHECKER = new CheckFields();
-    private final Color COLOR_RED = new Color(255, 0, 0);
-    private final Color COLOR_WHITE = new Color(255, 255, 255);
+    private final ComboBoxWorkerOptions CBO = new ComboBoxWorkerOptions();
     private final AdminHome PRINCIPALJFRAME;
+    private Worker workerInfo = new Worker();
 
-    private void returnWorkerView(String personIdentificationNumber) {
-        List<Worker> workers = new requestWorker().getNoDeletedWorker();
+    private void returnWorkerInfo(String personIdentificationNumber) {
+        List<Worker> workers = NEW_REQUEST_WORKER.getNoDeletedWorker();
 
         if (!workers.isEmpty()) {
-            int index = findWorkerByDni(personIdentificationNumber, workers);
-            WorkersInformationView workersInformationView = new WorkersInformationView(this.PRINCIPALJFRAME, workers, index);
+            int indexActualWorker = findWorkerByDni(personIdentificationNumber, workers);
+            WorkersInformationView workersInformationView = new WorkersInformationView(PRINCIPALJFRAME, workers, indexActualWorker);
             PRINCIPALJFRAME.replacePanel(workersInformationView);
             PRINCIPALJFRAME.setVisible(true);
 
@@ -49,42 +46,42 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
     }
 
     private void setActualInformation() {
-        String bloodGroup = worker.getBloodGroup();
+        String bloodGroup = workerInfo.getBloodGroup();
 
-        String bloodGroupRhd = worker.getBloodGroupRhd();
+        String bloodGroupRhd = workerInfo.getBloodGroupRhd();
 
-        txtFirstName.setText(worker.getPerson().getFirstName());
+        txtFirstName.setText(workerInfo.getPerson().getFirstName());
 
-        txtSecondName.setText(worker.getPerson().getSecondName());
+        txtSecondName.setText(workerInfo.getPerson().getSecondName());
 
-        txtFirstLastName.setText(worker.getPerson().getFirstLastName());
+        txtFirstLastName.setText(workerInfo.getPerson().getFirstLastName());
 
-        txtSecondLastName.setText(worker.getPerson().getSecondLastName());
+        txtSecondLastName.setText(workerInfo.getPerson().getSecondLastName());
 
-        sltIdentificationType.setSelectedIndex(COMBO_BOX_OPTION
-                .findIndexSelected(COMBO_BOX_OPTION.getIdentificationTypeOptions(), worker.getPerson().getIdentificationType()));
+        sltIdentificationType.setSelectedIndex(CBO
+                .findIndexSelected(CBO.getIdentificationTypeOptions(), workerInfo.getPerson().getIdentificationType()));
 
-        txtIdentificationNumber.setText(worker.getPerson().getIdentificationNumber());
+        txtIdentificationNumber.setText(workerInfo.getPerson().getIdentificationNumber());
 
-        sltBloodType.setSelectedIndex(COMBO_BOX_OPTION
-                .findIndexSelected(COMBO_BOX_OPTION.getBloodGroupOptions(), bloodGroup));
+        sltBloodType.setSelectedIndex(CBO
+                .findIndexSelected(CBO.getBloodGroupOptions(), bloodGroup));
 
-        sltBloodTypeCmpl.setSelectedIndex(COMBO_BOX_OPTION.
-                findIndexSelected(COMBO_BOX_OPTION.getBloodGroupRhdOptions(), bloodGroupRhd));
+        sltBloodTypeCmpl.setSelectedIndex(CBO.
+                findIndexSelected(CBO.getBloodGroupRhdOptions(), bloodGroupRhd));
 
-        sltHealthEntity.setSelectedIndex(COMBO_BOX_OPTION
-                .findIndexSelected(COMBO_BOX_OPTION.getHealthEntityOptions(), worker.getHealthEntity()));
+        sltHealthEntity.setSelectedIndex(CBO
+                .findIndexSelected(CBO.getHealthEntityOptions(), workerInfo.getHealthEntity()));
 
-        dateBirthdate.setDate(worker.getPerson().getBirthdate());
+        dateBirthdate.setDate(workerInfo.getPerson().getBirthdate());
 
-        dateDayLink.setDate(worker.getDayLink());
+        dateDayLink.setDate(workerInfo.getDayLink());
 
-        sltPosition.setSelectedIndex(COMBO_BOX_OPTION
-                .findIndexSelected(COMBO_BOX_OPTION.getPositionOptions(), worker.getPosition()));
+        sltPosition.setSelectedIndex(CBO
+                .findIndexSelected(CBO.getPositionOptions(), workerInfo.getPosition()));
 
-        sltState.setSelectedIndex(worker.isIsActive() ? COMBO_BOX_OPTION.getIndexStateActive() : COMBO_BOX_OPTION.getIndexStateNoActive());
+        sltState.setSelectedIndex(workerInfo.isIsActive() ? CBO.getIndexStateActive() : CBO.getIndexStateNoActive());
     }
-
+    
     private boolean changeColorRequiredField() {
         String personFirstName = CHECKER.removeStringBlanks(txtFirstName.getText());
         String personFirstLastName = CHECKER.removeStringBlanks(txtFirstLastName.getText());
@@ -97,58 +94,58 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         String state = sltState.getSelectedItem().toString();
 
         if (!CHECKER.checkStringField(personFirstName)) {
-            txtFirstName.setBackground(COLOR_RED);
+            txtFirstName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
         if (!CHECKER.checkStringField(personFirstLastName)) {
-            txtFirstLastName.setBackground(COLOR_RED);
+            txtFirstLastName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
         if (!CHECKER.checkComboBox(personIdentificationType)) {
-            sltIdentificationType.setBackground(COLOR_RED);
+            sltIdentificationType.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
         if (!CHECKER.checkNumberField(personIdentificationNumber)
                 || !(personIdentificationNumber.length() <= 10
                 && personIdentificationNumber.length() >= 8)) {
-            txtIdentificationNumber.setBackground(COLOR_RED);
+            txtIdentificationNumber.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
         if (!CHECKER.checkComboBox(bloodType)) {
-            sltBloodType.setBackground(COLOR_RED);
+            sltBloodType.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
         if (!CHECKER.checkComboBox(bloodTypeCmplt)) {
-            sltBloodTypeCmpl.setBackground(COLOR_RED);
+            sltBloodTypeCmpl.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
         if (!CHECKER.checkComboBox(healthEntity)) {
-            sltHealthEntity.setBackground(COLOR_RED);
+            sltHealthEntity.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
         if (null == dateBirthdate.getDate()) {
-            dateBirthdate.setBackground(COLOR_RED);
+            dateBirthdate.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
         if (null == dateDayLink.getDate()) {
-            dateDayLink.setBackground(COLOR_RED);
+            dateDayLink.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
         if (!CHECKER.checkComboBox(position)) {
-            sltPosition.setBackground(COLOR_RED);
+            sltPosition.setBackground(Colors.IncorrectColorFields());
             return false;
         }
         if (!CHECKER.checkComboBox(state)) {
-            sltState.setBackground(COLOR_RED);
+            sltState.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
@@ -160,33 +157,16 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         String personSecondLastName = CHECKER.removeStringBlanks(txtSecondLastName.getText());
 
         if (!CHECKER.checkStringField(personSecondName) && !personSecondName.equalsIgnoreCase("")) {
-            txtSecondName.setBackground(COLOR_RED);
+            txtSecondName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
         if (!CHECKER.checkStringField(personSecondLastName) && !personSecondLastName.equalsIgnoreCase("")) {
-            txtSecondLastName.setBackground(COLOR_RED);
+            txtSecondLastName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
         return true;
-    }
-
-    private void personalizedMessage(String type, String message, String title) {
-        int typeMessage = 0;
-        typeMessage = switch (type) {
-            case "Error" ->
-                0;
-            case "Information" ->
-                1;
-            case "Warning" ->
-                2;
-            case "Question" ->
-                3;
-            default ->
-                1;
-        };
-        JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, message, title, typeMessage);
     }
 
     private void clearFields() {
@@ -216,8 +196,9 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
 
     public WorkerEditInformationView(Worker worker, AdminHome principalJFrame) {
         this.PRINCIPALJFRAME = principalJFrame;
-        this.worker = worker;
+        this.workerInfo = worker;
         initComponents();
+        setLocationRelativeTo(null);
         setActualInformation();
     }
 
@@ -348,7 +329,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             }
         });
 
-        sltIdentificationType.setModel(new javax.swing.DefaultComboBoxModel<>(COMBO_BOX_OPTION.getIdentificationTypeOptions()));
+        sltIdentificationType.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getIdentificationTypeOptions()));
         sltIdentificationType.setPreferredSize(new java.awt.Dimension(211, 25));
         sltIdentificationType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -356,7 +337,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             }
         });
 
-        sltBloodType.setModel(new javax.swing.DefaultComboBoxModel<>(COMBO_BOX_OPTION.getBloodGroupOptions()));
+        sltBloodType.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getBloodGroupOptions()));
         sltBloodType.setPreferredSize(new java.awt.Dimension(102, 25));
         sltBloodType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -364,7 +345,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             }
         });
 
-        sltBloodTypeCmpl.setModel(new javax.swing.DefaultComboBoxModel<>(COMBO_BOX_OPTION.getBloodGroupRhdOptions()));
+        sltBloodTypeCmpl.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getBloodGroupRhdOptions()));
         sltBloodTypeCmpl.setPreferredSize(new java.awt.Dimension(102, 25));
         sltBloodTypeCmpl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -375,7 +356,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         dateBirthdate.setMaxSelectableDate(new Date());
         dateBirthdate.setPreferredSize(new java.awt.Dimension(211, 25));
 
-        sltPosition.setModel(new javax.swing.DefaultComboBoxModel<>(COMBO_BOX_OPTION.getPositionOptions()));
+        sltPosition.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getPositionOptions()));
         sltPosition.setPreferredSize(new java.awt.Dimension(211, 25));
         sltPosition.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -502,7 +483,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
 
         dateDayLink.setPreferredSize(new java.awt.Dimension(211, 25));
 
-        sltHealthEntity.setModel(new javax.swing.DefaultComboBoxModel<>(COMBO_BOX_OPTION.getHealthEntityOptions()));
+        sltHealthEntity.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getHealthEntityOptions()));
         sltHealthEntity.setPreferredSize(new java.awt.Dimension(211, 25));
         sltHealthEntity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -531,7 +512,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             }
         });
 
-        sltState.setModel(new javax.swing.DefaultComboBoxModel<>(COMBO_BOX_OPTION.getStateOptions()));
+        sltState.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getStateOptions()));
         sltState.setPreferredSize(new java.awt.Dimension(211, 25));
         sltState.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -686,7 +667,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFirstNameActionPerformed
-        txtFirstName.setBackground(COLOR_WHITE);
+        txtFirstName.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_txtFirstNameActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
@@ -705,59 +686,64 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             String healthEntity = sltHealthEntity.getSelectedItem().toString();
             Date dayLink = dateDayLink.getDate();
             String position = sltPosition.getSelectedItem().toString();
-            boolean state = (sltState.getSelectedIndex() == COMBO_BOX_OPTION.getIndexStateActive());
+            boolean state = (sltState.getSelectedIndex() == CBO.getIndexStateActive());
             
-            Person Person = new Person(personFirstName, personSecondName, personFirstLastName, personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
-            
+            Person person = new Person(personFirstName, personSecondName, personFirstLastName, personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
+            Worker worker = new Worker(bloodType.concat(bloodTypeCmplt), healthEntity, dayLink, position, state, false, person);
+            worker.setWorkerId(this.workerInfo.getWorkerId());
             
             try {
-                if (worker.getPerson().getIdentificationNumber().equals(personIdentificationNumber)) {
+                
+                if (workerInfo.getPerson().getIdentificationNumber().equals(personIdentificationNumber)) {
                     
-                    NEW_REQUEST_PERSON.editPerson(Person);
-                    NEW_REQUEST_WORKER.editWorker(worker.getWorkerId(), personIdentificationNumber,
-                            bloodType, bloodTypeCmplt, healthEntity,
-                            dayLink, position, state, false);
+                    NEW_REQUEST_PERSON.editPerson(person);
+                    NEW_REQUEST_WORKER.editWorker(worker);
+                    
                 } else {
                     
                     Worker existingWorker = NEW_REQUEST_WORKER.findWorkerByDNI(personIdentificationNumber);
                     
                     if (existingWorker != null) {
                         
-                        personalizedMessage("Error",
-                                "Esta identificación ya está asociada a un trabajador, ve y corrigelo para intentarlo nuevamente",
-                                "Registro ya existente");
-                        txtIdentificationNumber.setBackground(COLOR_RED);
+                        JOptionPane.showMessageDialog(this,"Esta identificación ya está asociada a un trabajador, ve y corrigelo para intentarlo nuevamente.", "Registro ya existente",0);
+                        txtIdentificationNumber.setBackground(Colors.IncorrectColorFields());
                         return;
+                        
                     } else {
                         
-                        NEW_REQUEST_PERSON.savePerson(Person);
-                        NEW_REQUEST_WORKER.editWorker(worker.getWorkerId(), personIdentificationNumber,
-                                bloodType, bloodTypeCmplt, healthEntity, dayLink, position, state, false);
-                        NEW_REQUEST_PERSON.deletePerson(worker.getPerson().getIdentificationNumber());
+                        NEW_REQUEST_PERSON.savePerson(person);
+                        NEW_REQUEST_WORKER.editWorker(worker);
+                        NEW_REQUEST_PERSON.deletePerson(workerInfo.getPerson().getIdentificationNumber());
+                        
                     }
                 }
-
-                personalizedMessage("Information", "La información ha sido cambiada correctamente", "Operación exitosa");
-                returnWorkerView(personIdentificationNumber);
+                
+                JOptionPane.showMessageDialog(this, "La información ha sido cambiada correctamente.","Operación exitosa",1);
+                returnWorkerInfo(personIdentificationNumber);
+                
             } catch (PreexistingEntityException ex) {
 
-                personalizedMessage("Error", "El numero de identificación ya está asociado a alguien.", "Identificación duplicada");
-                txtIdentificationNumber.setBackground(COLOR_RED);
+                JOptionPane.showMessageDialog(this, "El numero de identificación ya está asociado a alguien.","Identificación duplicada",0);
+                txtIdentificationNumber.setBackground(Colors.IncorrectColorFields());
 
             } catch (NonexistentEntityException ex) {
 
-                personalizedMessage("Error", "El numero de identificación no existe", "Identificación no existente");
-                txtIdentificationNumber.setBackground(COLOR_RED);
+                JOptionPane.showMessageDialog(this,"El numero de identificación no existe.","Identificación no existente",0);
+                txtIdentificationNumber.setBackground(Colors.IncorrectColorFields());
 
             } catch (Exception ex) {
+                
                 Logger.getLogger(AddWorkerView.class.getName()).log(Level.SEVERE, null, ex);
+            
             }
         } else {
-            personalizedMessage("Warning", "Asegurese de que los campos en rojo estén correctamente diligenciados", "Error en Campos");
+            
+            JOptionPane.showMessageDialog(this,"Asegurese de que los campos en rojo estén correctamente diligenciados","Error en Campos",2);
             return;
+            
         }
-        this.PRINCIPALJFRAME.setVisible(true);
         this.dispose();
+        this.PRINCIPALJFRAME.setVisible(true);
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanActionPerformed
@@ -770,43 +756,43 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void txtFirstLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFirstLastNameActionPerformed
-        txtFirstLastName.setBackground(COLOR_WHITE);
+        txtFirstLastName.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_txtFirstLastNameActionPerformed
 
     private void sltIdentificationTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltIdentificationTypeActionPerformed
-        sltIdentificationType.setBackground(COLOR_WHITE);
+        sltIdentificationType.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_sltIdentificationTypeActionPerformed
 
     private void sltBloodTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltBloodTypeActionPerformed
-        sltBloodType.setBackground(COLOR_WHITE);
+        sltBloodType.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_sltBloodTypeActionPerformed
 
     private void sltBloodTypeCmplActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltBloodTypeCmplActionPerformed
-        sltBloodTypeCmpl.setBackground(COLOR_WHITE);
+        sltBloodTypeCmpl.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_sltBloodTypeCmplActionPerformed
 
     private void sltPositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltPositionActionPerformed
-        sltPosition.setBackground(COLOR_WHITE);
+        sltPosition.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_sltPositionActionPerformed
 
     private void txtSecondNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSecondNameActionPerformed
-        txtSecondName.setBackground(COLOR_WHITE);
+        txtSecondName.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_txtSecondNameActionPerformed
 
     private void txtSecondLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSecondLastNameActionPerformed
-        txtSecondLastName.setBackground(COLOR_WHITE);
+        txtSecondLastName.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_txtSecondLastNameActionPerformed
 
     private void txtIdentificationNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdentificationNumberActionPerformed
-        txtIdentificationNumber.setBackground(COLOR_WHITE);
+        txtIdentificationNumber.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_txtIdentificationNumberActionPerformed
 
     private void sltHealthEntityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltHealthEntityActionPerformed
-        sltHealthEntity.setBackground(COLOR_WHITE);
+        sltHealthEntity.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_sltHealthEntityActionPerformed
 
     private void sltStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltStateActionPerformed
-        sltState.setBackground(COLOR_WHITE);
+        sltState.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_sltStateActionPerformed
 
 

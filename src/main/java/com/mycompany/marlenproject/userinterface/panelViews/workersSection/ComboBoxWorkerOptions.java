@@ -4,10 +4,6 @@
  */
 package com.mycompany.marlenproject.userinterface.panelViews.workersSection;
 
-/**
- *
- * @author willy
- */
 public class ComboBoxWorkerOptions {
 
     private final String[] identificationTypeOptions = {"SELECCIONE UNA ...", "Cédula de ciudadanía",
