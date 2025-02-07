@@ -256,17 +256,19 @@ public class WorkersFirstView extends javax.swing.JPanel {
         List<Worker> workerList = new requestWorker().getNoDeletedWorker();
 
         if (!workerList.isEmpty()) {
+            
             WorkersListView workerListView = new WorkersListView(this.PRINCIPALJFRAME, workerList);
-            workerListView.setSize(970, 576);
             PRINCIPALJFRAME.replacePanel(workerListView);
+        
         } else {
+        
             JOptionPane.showMessageDialog(PRINCIPALJFRAME, "No tiene trabajadores registrados", "Sin registros", 0);
+        
         }
     }//GEN-LAST:event_btnListWorkersActionPerformed
 
     private void btnAddNewWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewWorkerActionPerformed
         AddWorkerView addWorkerView = new AddWorkerView();
-        addWorkerView.setSize(800, 500);
         addWorkerView.setLocation(0, 0);
         PRINCIPALJFRAME.replacePanel(addWorkerView);
     }//GEN-LAST:event_btnAddNewWorkerActionPerformed
@@ -280,10 +282,14 @@ public class WorkersFirstView extends javax.swing.JPanel {
         List<Customer> customerList = new RequestCustomer().getNoDeleteCustomer();
 
         if (!customerList.isEmpty()) {
+            
             CustomerListView customerListView = new CustomerListView(this.PRINCIPALJFRAME, customerList);
             PRINCIPALJFRAME.replacePanel(customerListView);
+        
         } else {
+        
             JOptionPane.showMessageDialog(PRINCIPALJFRAME, "No tiene clientes registrados", "Sin registros", 0);
+        
         }
     }//GEN-LAST:event_btnCustomerListActionPerformed
 
