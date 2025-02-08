@@ -10,6 +10,7 @@ import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.logic.request.RequestCustomer;
 import com.mycompany.marlenproject.logic.request.requestPerson;
 import com.mycompany.marlenproject.persistence.exceptions.PreexistingEntityException;
+import com.mycompany.marlenproject.utils.colors.Colors;
 import java.awt.Color;
 import java.util.Date;
 import java.util.logging.Level;
@@ -21,8 +22,6 @@ public class AddCustomerView extends javax.swing.JPanel {
     private final requestPerson NEW_REQUEST_PERSON = new requestPerson();
     private final RequestCustomer NEW_REQUEST_CUSTOMER = new RequestCustomer();
     private final CheckFields CHECKER = new CheckFields();
-    private final Color COLOR_RED = new Color(255, 0, 0);
-    private final Color COLOR_WHITE = new Color(255, 255, 255);
 
     public AddCustomerView() {
         initComponents();
@@ -52,21 +51,21 @@ public class AddCustomerView extends javax.swing.JPanel {
         String personIdentificationNumber = CHECKER.removeStringBlanks(txtIdentificationNum.getText());
 
         if (!CHECKER.checkStringField(personFirstName)) {
-            txtFirstName.setBackground(COLOR_RED);
+            txtFirstName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
         if (!CHECKER.checkStringField(personFirstLastName)) {
-            txtFirstLastName.setBackground(COLOR_RED);
+            txtFirstLastName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
         if (!CHECKER.checkComboBox(personIdentificationType)) {
-            sltIdentificationType.setBackground(COLOR_RED);
+            sltIdentificationType.setBackground(Colors.IncorrectColorFields());
             return false;
         }
         if (!CHECKER.checkNumberField(personIdentificationNumber)
                 || !(personIdentificationNumber.length() <= 10
                 && personIdentificationNumber.length() >= 8)) {
-            txtIdentificationNum.setBackground(COLOR_RED);
+            txtIdentificationNum.setBackground(Colors.IncorrectColorFields());
             return false;
         }
         return true;
@@ -80,22 +79,22 @@ public class AddCustomerView extends javax.swing.JPanel {
         String personAddress = txtAddress.getText();
 
         if (!CHECKER.checkStringField(personSecondName) && !personSecondName.equalsIgnoreCase("")) {
-            txtSecondName.setBackground(COLOR_RED);
+            txtSecondName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
         if (!CHECKER.checkStringField(personSecondLastName) && !personSecondLastName.equalsIgnoreCase("")) {
-            txtSecondLastName.setBackground(COLOR_RED);
+            txtSecondLastName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
         if (!CHECKER.checkEmail(personEmail) && !personEmail.equalsIgnoreCase("")) {
-            txtEmail.setBackground(COLOR_RED);
+            txtEmail.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
         if (!CHECKER.checkNumberField(personPhone) && !personPhone.equalsIgnoreCase("")) {
-            txtPhoneNumber.setBackground(COLOR_RED);
+            txtPhoneNumber.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
@@ -534,7 +533,7 @@ public class AddCustomerView extends javax.swing.JPanel {
             } catch (PreexistingEntityException ex) {
                 personalizedMessage("Error", "El numero de identificación ya está asociado a alguien.",
                         "Identificación duplicada");
-                txtIdentificationNum.setBackground(COLOR_RED);
+                txtIdentificationNum.setBackground(Colors.IncorrectColorFields());
             } catch (Exception e) {
                 Logger.getLogger(AddCustomerView.class.getName()).log(Level.SEVERE, null, e);
             }
@@ -544,27 +543,27 @@ public class AddCustomerView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSaveWorkerActionPerformed
 
     private void txtFirstNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFirstNameMouseClicked
-        txtFirstName.setBackground(COLOR_WHITE);
+        txtFirstName.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_txtFirstNameMouseClicked
 
     private void txtSecondNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSecondNameMouseClicked
-        txtSecondName.setBackground(COLOR_WHITE);
+        txtSecondName.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_txtSecondNameMouseClicked
 
     private void txtFirstLastNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFirstLastNameMouseClicked
-        txtFirstLastName.setBackground(COLOR_WHITE);
+        txtFirstLastName.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_txtFirstLastNameMouseClicked
 
     private void txtSecondLastNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSecondLastNameMouseClicked
-        txtSecondLastName.setBackground(COLOR_WHITE);
+        txtSecondLastName.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_txtSecondLastNameMouseClicked
 
     private void sltIdentificationTypeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sltIdentificationTypeMouseClicked
-        sltIdentificationType.setBackground(COLOR_WHITE);
+        sltIdentificationType.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_sltIdentificationTypeMouseClicked
 
     private void txtIdentificationNumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdentificationNumMouseClicked
-        txtIdentificationNum.setBackground(COLOR_WHITE);
+        txtIdentificationNum.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_txtIdentificationNumMouseClicked
 
 
