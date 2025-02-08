@@ -16,7 +16,7 @@ public class WorkersListView extends javax.swing.JPanel {
     private final AdminHome PRINCIPALJFRAME;
     private final List<Worker> WORKER_LIST;
     private final List<Worker> WORKER_LIST_FILTER = new ArrayList<>();
-    private final ComboBoxWorkerOptions COMBO_BOX_OPTIONS = new ComboBoxWorkerOptions();
+    private final ComboBoxWorkerOptions CBO = new ComboBoxWorkerOptions();
     private final CheckFields Checker = new CheckFields();
 
     private void uploadInfoToTable(List<Worker> ListWorker) {
@@ -26,26 +26,29 @@ public class WorkersListView extends javax.swing.JPanel {
                 return false;
             }
         };
+
         String tableHead[] = {"N°", "Dni", "Nombre", "Apellido", "Cargo", "Estado"};
         modelTable.setColumnIdentifiers(tableHead);
 
         if (!ListWorker.isEmpty()) {
-            
+
             int count = 0;
             for (Worker worker : ListWorker) {
 
-                String[] options = COMBO_BOX_OPTIONS.getStateOptions();
-                String status = (worker.isIsActive())
-                        ? options[COMBO_BOX_OPTIONS.getIndexStateActive()] : options[COMBO_BOX_OPTIONS.getIndexStateNoActive()];
+                String status = (worker.isIsActive()) ? CBO.getStateOptions()[CBO.getIndexStateActive()] : CBO.getStateOptions()[CBO.getIndexStateNoActive()];
 
-                Object[] workersObject = {(count+1), worker.getPerson().getIdentificationNumber(), worker.getPerson().getFirstName(),
-                    worker.getPerson().getFirstLastName(), worker.getPosition(), Checker.capitalizedString(status)};
+                Object[] workersObject = {(count + 1),
+                    worker.getPerson().getIdentificationNumber(),
+                    worker.getPerson().getFirstName(),
+                    worker.getPerson().getFirstLastName(),
+                    worker.getPosition(),
+                    Checker.capitalizedString(status)};
+
                 modelTable.addRow(workersObject);
                 count++;
-
             }
         }
-        
+
         WorkersTable.setModel(modelTable);
     }
 
@@ -65,7 +68,7 @@ public class WorkersListView extends javax.swing.JPanel {
         textFilter1Panel = new javax.swing.JPanel();
         txtSearchWorker = new javax.swing.JTextField();
         ButtonFilter1Panel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
         Filter2Panel = new javax.swing.JPanel();
         CBoxFilter2Panel = new javax.swing.JPanel();
         sltPositionFilter = new javax.swing.JComboBox<>();
@@ -114,11 +117,11 @@ public class WorkersListView extends javax.swing.JPanel {
 
         ButtonFilter1Panel.setPreferredSize(new java.awt.Dimension(99, 76));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconLupe.png"))); // NOI18N
-        jButton1.setPreferredSize(new java.awt.Dimension(40, 40));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconLupe.png"))); // NOI18N
+        btnSearch.setPreferredSize(new java.awt.Dimension(40, 40));
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
 
@@ -128,14 +131,14 @@ public class WorkersListView extends javax.swing.JPanel {
             ButtonFilter1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ButtonFilter1PanelLayout.createSequentialGroup()
                 .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         ButtonFilter1PanelLayout.setVerticalGroup(
             ButtonFilter1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ButtonFilter1PanelLayout.createSequentialGroup()
                 .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -165,7 +168,7 @@ public class WorkersListView extends javax.swing.JPanel {
 
         CBoxFilter2Panel.setPreferredSize(new java.awt.Dimension(116, 76));
 
-        sltPositionFilter.setModel(new javax.swing.DefaultComboBoxModel<>(COMBO_BOX_OPTIONS.getPositionOptions()));
+        sltPositionFilter.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getPositionOptions()));
         sltPositionFilter.setPreferredSize(new java.awt.Dimension(104, 25));
 
         javax.swing.GroupLayout CBoxFilter2PanelLayout = new javax.swing.GroupLayout(CBoxFilter2Panel);
@@ -234,7 +237,7 @@ public class WorkersListView extends javax.swing.JPanel {
 
         CBoxFilter3Panel.setPreferredSize(new java.awt.Dimension(115, 76));
 
-        sltStatusFilter.setModel(new javax.swing.DefaultComboBoxModel<>(COMBO_BOX_OPTIONS.getStateOptions()));
+        sltStatusFilter.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getStateOptions()));
         sltStatusFilter.setPreferredSize(new java.awt.Dimension(103, 25));
 
         javax.swing.GroupLayout CBoxFilter3PanelLayout = new javax.swing.GroupLayout(CBoxFilter3Panel);
@@ -403,59 +406,46 @@ public class WorkersListView extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         String textFilter = Checker.removeStringBlanks(txtSearchWorker.getText()).toLowerCase();
         String positionFilter = sltPositionFilter.getSelectedItem().toString();
         String statusFilterActive = sltStatusFilter.getSelectedItem().toString();
-        boolean statusFilter = sltStatusFilter.getSelectedIndex() == COMBO_BOX_OPTIONS.getIndexStateActive();
+        boolean statusFilter = sltStatusFilter.getSelectedIndex() == CBO.getIndexStateActive();
         this.WORKER_LIST_FILTER.clear();
 
-        
-        if ((!textFilter.equalsIgnoreCase("")
-                || Checker.checkComboBox(positionFilter)) && Checker.checkComboBox(statusFilterActive) == false) {
-            for (Worker worker : this.WORKER_LIST) {
-                if ((textFilter.length() > 0 && (worker.getPerson().getIdentificationNumber().contains(textFilter)
-                        || worker.getPerson().getFirstName().toLowerCase().contains(textFilter)
-                        || worker.getPerson().getFirstLastName().toLowerCase().contains(textFilter)))
-                        || worker.getPosition().equalsIgnoreCase(positionFilter)) {
-                    WORKER_LIST_FILTER.add(worker);
-                }
+        for (Worker worker : this.WORKER_LIST) {
+
+            boolean matchesText = textFilter.isEmpty()
+                    || worker.getPerson().getIdentificationNumber().toLowerCase().contains(textFilter)
+                    || worker.getPerson().getFirstName().toLowerCase().contains(textFilter)
+                    || worker.getPerson().getFirstLastName().toLowerCase().contains(textFilter);
+
+            boolean matchesPosition = !Checker.checkComboBox(positionFilter) || worker.getPosition().equalsIgnoreCase(positionFilter);
+
+            boolean matchesStatus = !Checker.checkComboBox(statusFilterActive) || worker.isIsActive() == statusFilter;
+
+            if (matchesText && matchesPosition && matchesStatus) {
+                WORKER_LIST_FILTER.add(worker);
             }
-            uploadInfoToTable(this.WORKER_LIST_FILTER);
-        }else if(!textFilter.equalsIgnoreCase("")
-                || Checker.checkComboBox(positionFilter) || Checker.checkComboBox(statusFilterActive)){
-            for (Worker worker : this.WORKER_LIST) {
-                if ((textFilter.length() > 0 && (worker.getPerson().getIdentificationNumber().contains(textFilter)
-                        || worker.getPerson().getFirstName().toLowerCase().contains(textFilter)
-                        || worker.getPerson().getFirstLastName().toLowerCase().contains(textFilter)))
-                        || worker.getPosition().equalsIgnoreCase(positionFilter)
-                        || worker.isIsActive() == statusFilter) {
-                    WORKER_LIST_FILTER.add(worker);
-                }
-            }
-            uploadInfoToTable(this.WORKER_LIST_FILTER);
-        }else{
-            WORKER_LIST_FILTER.clear();
-            uploadInfoToTable(this.WORKER_LIST);
         }
-        
-        sltPositionFilter.setSelectedIndex(COMBO_BOX_OPTIONS.getNoOneOptionSelected());
-        sltStatusFilter.setSelectedIndex(COMBO_BOX_OPTIONS.getNoOneOptionSelected());
-    }//GEN-LAST:event_jButton1ActionPerformed
+
+        uploadInfoToTable(this.WORKER_LIST_FILTER.isEmpty() ? this.WORKER_LIST : this.WORKER_LIST_FILTER);
+        sltPositionFilter.setSelectedIndex(CBO.getNoOneOptionSelected());
+        sltStatusFilter.setSelectedIndex(CBO.getNoOneOptionSelected());
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     private void WorkersTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WorkersTableMouseClicked
-        if(WorkersTable.getRowCount() > 0){
-            if(WorkersTable.getSelectedRow() != -1){
-                WorkersInformationView workersInformationView;
-                if(!this.WORKER_LIST_FILTER.isEmpty()){
-                    workersInformationView = new WorkersInformationView(this.PRINCIPALJFRAME,this.WORKER_LIST_FILTER,
-                            (Integer.parseInt(String.valueOf(WorkersTable.getValueAt(WorkersTable.getSelectedRow(),0))))-1);
-                }else{
-                    workersInformationView = new WorkersInformationView(this.PRINCIPALJFRAME,this.WORKER_LIST,
-                    (Integer.parseInt(String.valueOf(WorkersTable.getValueAt(WorkersTable.getSelectedRow(),0)))-1));
+        if (WorkersTable.getRowCount() > 0) {
+            if (WorkersTable.getSelectedRow() != -1) {
+                List<Worker> workers = new ArrayList<>();
+                if (!this.WORKER_LIST_FILTER.isEmpty()) {
+                    workers = this.WORKER_LIST_FILTER;
+                } else {
+                    workers = this.WORKER_LIST;
                 }
-                
-                workersInformationView.setSize(970, 576);
+                WorkersInformationView workersInformationView = new WorkersInformationView(this.PRINCIPALJFRAME, workers,
+                        (Integer.parseInt(String.valueOf(WorkersTable.getValueAt(WorkersTable.getSelectedRow(), 0))) - 1));
+
                 workersInformationView.setLocation(0, 0);
                 PRINCIPALJFRAME.replacePanel(workersInformationView);
             }
@@ -475,7 +465,7 @@ public class WorkersListView extends javax.swing.JPanel {
     private javax.swing.JPanel LbFilter2Panel;
     private javax.swing.JPanel TablePanel;
     private javax.swing.JTable WorkersTable;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
