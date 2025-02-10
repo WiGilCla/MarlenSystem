@@ -517,8 +517,8 @@ public class AddCustomerView extends javax.swing.JPanel {
                     NEW_REQUEST_CUSTOMER.editCustomer(editCustomer);
 
                 } else if (findCustomer != null && !findCustomer.isIsDelete()) {
-                    personalizedMessage("Error", "El numero de identificación ya está asociado a alguien.",
-                            "Identificación duplicada");
+                    
+                    JOptionPane.showMessageDialog(this, "El numero de identificación ya está asociado a alguien.","Identificación duplicada",0);
                     return;
                 } else {
                     NEW_REQUEST_PERSON.savePerson(person);
@@ -526,13 +526,11 @@ public class AddCustomerView extends javax.swing.JPanel {
 
                     NEW_REQUEST_CUSTOMER.saveCustomer(customer);
                 }
-
-                personalizedMessage("Information", "El cliente ha sido agregado correctamente", "Operación exitosa");
+                JOptionPane.showMessageDialog(this, "El cliente ha sido agregado correctamente","Operación exitosa",1);
                 clearFields();
 
             } catch (PreexistingEntityException ex) {
-                personalizedMessage("Error", "El numero de identificación ya está asociado a alguien.",
-                        "Identificación duplicada");
+                JOptionPane.showMessageDialog(this, "El numero de identificación ya está asociado a alguien.","Identificación duplicada",0);
                 txtIdentificationNum.setBackground(Colors.IncorrectColorFields());
             } catch (Exception e) {
                 Logger.getLogger(AddCustomerView.class.getName()).log(Level.SEVERE, null, e);
