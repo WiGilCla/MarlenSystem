@@ -27,23 +27,6 @@ public class AddCustomerView extends javax.swing.JPanel {
         initComponents();
     }
 
-    private void personalizedMessage(String type, String message, String title) {
-        int typeMessage = 0;
-        typeMessage = switch (type) {
-            case "Error" ->
-                0;
-            case "Information" ->
-                1;
-            case "Warning" ->
-                2;
-            case "Question" ->
-                3;
-            default ->
-                1;
-        };
-        JOptionPane.showMessageDialog(this, message, title, typeMessage);
-    }
-
     private boolean changeColorRequiredField() {
         String personFirstName = CHECKER.removeStringBlanks(txtFirstName.getText());
         String personFirstLastName = CHECKER.removeStringBlanks(txtFirstLastName.getText());
@@ -504,33 +487,38 @@ public class AddCustomerView extends javax.swing.JPanel {
             String customerPhone = CHECKER.removeStringBlanks(txtPhoneNumber.getText());
             String customerAddress = txtAddress.getText();
             String customerEmail = txtEmail.getText();
-            
+
             Person person = new Person(personFirstName, personSecondName, personFirstLastName, personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
+
             try {
                 Customer findCustomer = NEW_REQUEST_CUSTOMER.getCustomerByDNI(personIdentificationNumber);
 
                 if (findCustomer != null && findCustomer.isIsDelete()) {
                     NEW_REQUEST_PERSON.editPerson(person);
-                    Customer editCustomer = new Customer(customerPhone, customerAddress, customerEmail, false, person);
-                    editCustomer.setCustomerId(findCustomer.getCustomerId());
+                    findCustomer.setPhone(customerPhone);
+                    findCustomer.setAddress(customerAddress);
+                    findCustomer.setEmail(customerEmail);
+                    findCustomer.setIsDelete(false);
 
-                    NEW_REQUEST_CUSTOMER.editCustomer(editCustomer);
+//                    Customer editCustomer = new Customer(customerPhone, customerAddress, customerEmail, false, person);
+//                    editCustomer.setCustomerId(findCustomer.getCustomerId());
+//                    NEW_REQUEST_CUSTOMER.editCustomer(editCustomer);
+                    NEW_REQUEST_CUSTOMER.editCustomer(findCustomer);
 
                 } else if (findCustomer != null && !findCustomer.isIsDelete()) {
-                    
-                    JOptionPane.showMessageDialog(this, "El numero de identificación ya está asociado a alguien.","Identificación duplicada",0);
+
+                    JOptionPane.showMessageDialog(this, "El numero de identificación ya está asociado a alguien.", "Identificación duplicada", 0);
                     return;
                 } else {
                     NEW_REQUEST_PERSON.savePerson(person);
                     Customer customer = new Customer(customerPhone, customerAddress, customerEmail, false, person);
-
                     NEW_REQUEST_CUSTOMER.saveCustomer(customer);
                 }
-                JOptionPane.showMessageDialog(this, "El cliente ha sido agregado correctamente","Operación exitosa",1);
+                JOptionPane.showMessageDialog(this, "El cliente ha sido agregado correctamente", "Operación exitosa", 1);
                 clearFields();
 
             } catch (PreexistingEntityException ex) {
-                JOptionPane.showMessageDialog(this, "El numero de identificación ya está asociado a alguien.","Identificación duplicada",0);
+                JOptionPane.showMessageDialog(this, "El numero de identificación ya está asociado a alguien.", "Identificación duplicada", 0);
                 txtIdentificationNum.setBackground(Colors.IncorrectColorFields());
             } catch (Exception e) {
                 Logger.getLogger(AddCustomerView.class.getName()).log(Level.SEVERE, null, e);
