@@ -7,6 +7,10 @@ package com.mycompany.marlenproject.logic;
 import java.util.Date;
 
 public class CheckFields {
+    
+    public boolean checkAddress(String address) {        
+        return address.matches("^[a-zA-Z0-9\\s#-]*$");
+    }
 
     public boolean checkStringField(String text) {
         return text.matches("[a-zA-ZÁ-Úá-úÑñ]+");

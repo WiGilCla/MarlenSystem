@@ -11,7 +11,6 @@ import com.mycompany.marlenproject.logic.request.RequestCustomer;
 import com.mycompany.marlenproject.logic.request.requestPerson;
 import com.mycompany.marlenproject.persistence.exceptions.PreexistingEntityException;
 import com.mycompany.marlenproject.utils.colors.Colors;
-import java.awt.Color;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +24,7 @@ public class AddCustomerView extends javax.swing.JPanel {
 
     public AddCustomerView() {
         initComponents();
+        
     }
 
     private boolean changeColorRequiredField() {
@@ -78,6 +78,11 @@ public class AddCustomerView extends javax.swing.JPanel {
 
         if (!CHECKER.checkNumberField(personPhone) && !personPhone.equalsIgnoreCase("")) {
             txtPhoneNumber.setBackground(Colors.IncorrectColorFields());
+            return false;
+        }
+        
+        if (!CHECKER.checkAddress(personAddress) && !personAddress.equalsIgnoreCase("")) {
+            txtAddress.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
@@ -499,10 +504,6 @@ public class AddCustomerView extends javax.swing.JPanel {
                     findCustomer.setAddress(customerAddress);
                     findCustomer.setEmail(customerEmail);
                     findCustomer.setIsDelete(false);
-
-//                    Customer editCustomer = new Customer(customerPhone, customerAddress, customerEmail, false, person);
-//                    editCustomer.setCustomerId(findCustomer.getCustomerId());
-//                    NEW_REQUEST_CUSTOMER.editCustomer(editCustomer);
                     NEW_REQUEST_CUSTOMER.editCustomer(findCustomer);
 
                 } else if (findCustomer != null && !findCustomer.isIsDelete()) {
@@ -523,6 +524,8 @@ public class AddCustomerView extends javax.swing.JPanel {
             } catch (Exception e) {
                 Logger.getLogger(AddCustomerView.class.getName()).log(Level.SEVERE, null, e);
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Asegurese de que los campos en rojo estén correctamente diligenciados", "Error en Campos", 0);
         }
 
 

@@ -275,6 +275,7 @@ public class WorkersFirstView extends javax.swing.JPanel {
 
     private void btnAddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustomerActionPerformed
         AddCustomerView addCustomerView = new AddCustomerView();
+        addCustomerView.setLocation(0, 0);
         PRINCIPALJFRAME.replacePanel(addCustomerView);
     }//GEN-LAST:event_btnAddCustomerActionPerformed
 
