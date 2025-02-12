@@ -4,7 +4,7 @@
  */
 package com.mycompany.marlenproject.logic.request;
 
-import com.mycompany.marlenproject.logic.CheckFields;
+import com.mycompany.marlenproject.utils.fields.CheckFields;
 import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.persistence.controller.workerController;
 import java.sql.Timestamp;

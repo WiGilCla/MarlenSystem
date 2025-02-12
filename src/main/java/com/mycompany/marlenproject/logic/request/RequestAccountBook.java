@@ -5,7 +5,7 @@
 package com.mycompany.marlenproject.logic.request;
 
 import com.mycompany.marlenproject.logic.AccountBook;
-import com.mycompany.marlenproject.logic.CheckFields;
+import com.mycompany.marlenproject.utils.fields.CheckFields;
 import com.mycompany.marlenproject.persistence.controller.AccountBookController;
 import java.sql.Timestamp;
 import java.util.ArrayList;

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.marlenproject.logic;
+package com.mycompany.marlenproject.utils.fields;
 
 import java.util.Date;
 
@@ -22,6 +22,10 @@ public class CheckFields {
 
     public boolean checkNumberField(String number) {
         return number.matches("[0-9]+");
+    }
+    
+    public boolean checkDNILength(String personDNI){
+        return personDNI.length() >= 8 && personDNI.length() <=10; 
     }
 
     public String removeStringBlanks(String text) {

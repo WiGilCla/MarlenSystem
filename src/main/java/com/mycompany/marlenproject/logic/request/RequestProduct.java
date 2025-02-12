@@ -4,7 +4,7 @@
  */
 package com.mycompany.marlenproject.logic.request;
 
-import com.mycompany.marlenproject.logic.CheckFields;
+import com.mycompany.marlenproject.utils.fields.CheckFields;
 import com.mycompany.marlenproject.logic.Product;
 import com.mycompany.marlenproject.persistence.controller.ProductController;
 import java.util.ArrayList;

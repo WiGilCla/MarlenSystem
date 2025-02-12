@@ -4,7 +4,7 @@
  */
 package com.mycompany.marlenproject.userinterface.panelViews.workersSection;
 
-import com.mycompany.marlenproject.logic.CheckFields;
+import com.mycompany.marlenproject.utils.fields.CheckFields;
 import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.logic.request.requestPerson;
@@ -50,8 +50,7 @@ public class AddWorkerView extends javax.swing.JPanel {
             return false;
         }
         if (!CHECKER.checkNumberField(personIdentificationNumber)
-                || !(personIdentificationNumber.length() <= 10
-                && personIdentificationNumber.length() >= 8)) {
+                || !CHECKER.checkDNILength(personIdentificationNumber)) {
             txtIdentificationNum.setBackground(Colors.NormalColorFields());
             return false;
         }
@@ -113,6 +112,19 @@ public class AddWorkerView extends javax.swing.JPanel {
         dateBirthdate.setDate(null);
         dateVinculation.setDate(null);
         sltPosition.setSelectedIndex(0);
+        
+        txtFirstName.setBackground(Colors.NormalColorFields());
+        txtSecondName.setBackground(Colors.NormalColorFields());
+        txtFirstLastName.setBackground(Colors.NormalColorFields());
+        txtSecondLastName.setBackground(Colors.NormalColorFields());
+        sltIdentificationType.setBackground(Colors.NormalColorFields());
+        txtIdentificationNum.setBackground(Colors.NormalColorFields());
+        sltBloodType.setBackground(Colors.NormalColorFields());
+        sltBloodTypeCmplt.setBackground(Colors.NormalColorFields());
+        sltEPS.setBackground(Colors.NormalColorFields());
+        dateBirthdate.setBackground(Colors.NormalColorFields());
+        dateVinculation.setBackground(Colors.NormalColorFields());
+        sltPosition.setBackground(Colors.NormalColorFields());
     }
 
     @SuppressWarnings("unchecked")

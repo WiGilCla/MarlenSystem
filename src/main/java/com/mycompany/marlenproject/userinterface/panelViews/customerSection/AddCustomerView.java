@@ -4,7 +4,7 @@
  */
 package com.mycompany.marlenproject.userinterface.panelViews.customerSection;
 
-import com.mycompany.marlenproject.logic.CheckFields;
+import com.mycompany.marlenproject.utils.fields.CheckFields;
 import com.mycompany.marlenproject.logic.Customer;
 import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.logic.request.RequestCustomer;
@@ -24,7 +24,7 @@ public class AddCustomerView extends javax.swing.JPanel {
 
     public AddCustomerView() {
         initComponents();
-        
+
     }
 
     private boolean changeColorRequiredField() {
@@ -46,8 +46,7 @@ public class AddCustomerView extends javax.swing.JPanel {
             return false;
         }
         if (!CHECKER.checkNumberField(personIdentificationNumber)
-                || !(personIdentificationNumber.length() <= 10
-                && personIdentificationNumber.length() >= 8)) {
+                || !CHECKER.checkDNILength(personIdentificationNumber)) {
             txtIdentificationNum.setBackground(Colors.IncorrectColorFields());
             return false;
         }
@@ -80,7 +79,7 @@ public class AddCustomerView extends javax.swing.JPanel {
             txtPhoneNumber.setBackground(Colors.IncorrectColorFields());
             return false;
         }
-        
+
         if (!CHECKER.checkAddress(personAddress) && !personAddress.equalsIgnoreCase("")) {
             txtAddress.setBackground(Colors.IncorrectColorFields());
             return false;
@@ -100,6 +99,17 @@ public class AddCustomerView extends javax.swing.JPanel {
         txtEmail.setText("");
         txtAddress.setText("");
         txtPhoneNumber.setText("");
+        
+        txtFirstName.setBackground(Colors.NormalColorFields());
+        txtSecondName.setBackground(Colors.NormalColorFields());
+        txtFirstLastName.setBackground(Colors.NormalColorFields());
+        txtSecondLastName.setBackground(Colors.NormalColorFields());
+        sltIdentificationType.setBackground(Colors.NormalColorFields());
+        txtIdentificationNum.setBackground(Colors.NormalColorFields());
+        dateBirthdate.setBackground(Colors.NormalColorFields());
+        txtEmail.setBackground(Colors.NormalColorFields());
+        txtAddress.setBackground(Colors.NormalColorFields());
+        txtPhoneNumber.setBackground(Colors.NormalColorFields());
     }
 
     @SuppressWarnings("unchecked")
@@ -263,6 +273,11 @@ public class AddCustomerView extends javax.swing.JPanel {
         dateBirthdate.setPreferredSize(new java.awt.Dimension(296, 25));
 
         txtEmail.setPreferredSize(new java.awt.Dimension(71, 25));
+        txtEmail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtEmailMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout dataInformation1PanelLayout = new javax.swing.GroupLayout(dataInformation1Panel);
         dataInformation1Panel.setLayout(dataInformation1PanelLayout);
@@ -393,8 +408,18 @@ public class AddCustomerView extends javax.swing.JPanel {
         });
 
         txtPhoneNumber.setPreferredSize(new java.awt.Dimension(71, 25));
+        txtPhoneNumber.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtPhoneNumberMouseClicked(evt);
+            }
+        });
 
         txtAddress.setPreferredSize(new java.awt.Dimension(71, 25));
+        txtAddress.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtAddressMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout dataInformation2PanelLayout = new javax.swing.GroupLayout(dataInformation2Panel);
         dataInformation2Panel.setLayout(dataInformation2PanelLayout);
@@ -554,6 +579,18 @@ public class AddCustomerView extends javax.swing.JPanel {
     private void txtIdentificationNumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdentificationNumMouseClicked
         txtIdentificationNum.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_txtIdentificationNumMouseClicked
+
+    private void txtEmailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEmailMouseClicked
+        txtEmail.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_txtEmailMouseClicked
+
+    private void txtPhoneNumberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPhoneNumberMouseClicked
+        txtPhoneNumber.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_txtPhoneNumberMouseClicked
+
+    private void txtAddressMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAddressMouseClicked
+        txtAddress.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_txtAddressMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

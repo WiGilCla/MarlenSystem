@@ -352,6 +352,9 @@
                   <Dimension value="[71, 25]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtEmailMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -567,6 +570,9 @@
                   <Dimension value="[71, 25]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtPhoneNumberMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtAddress">
               <Properties>
@@ -574,6 +580,9 @@
                   <Dimension value="[71, 25]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtAddressMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

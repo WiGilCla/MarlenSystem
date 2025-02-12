@@ -5,7 +5,7 @@
 package com.mycompany.marlenproject.userinterface.panelViews.customerSection;
 
 import com.mycompany.marlenproject.userinterface.panelViews.workersSection.*;
-import com.mycompany.marlenproject.logic.CheckFields;
+import com.mycompany.marlenproject.utils.fields.CheckFields;
 import com.mycompany.marlenproject.logic.Customer;
 import com.mycompany.marlenproject.logic.request.RequestCustomer;
 import com.mycompany.marlenproject.userinterface.AdminHome;
