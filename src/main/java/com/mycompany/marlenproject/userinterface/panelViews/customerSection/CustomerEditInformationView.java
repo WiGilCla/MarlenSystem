@@ -12,8 +12,9 @@ import com.mycompany.marlenproject.logic.request.RequestCustomer;
 import com.mycompany.marlenproject.logic.request.requestPerson;
 import com.mycompany.marlenproject.persistence.exceptions.NonexistentEntityException;
 import com.mycompany.marlenproject.persistence.exceptions.PreexistingEntityException;
+import com.mycompany.marlenproject.utils.colors.Colors;
 import com.mycompany.marlenproject.userinterface.AdminHome;
-import java.awt.Color;
+
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,27 +23,22 @@ import javax.swing.JOptionPane;
 
 public class CustomerEditInformationView extends javax.swing.JFrame {
 
-    private final ComboBoxWorkerOptions COMBO_BOX_OPTION = new ComboBoxWorkerOptions();
-    private Customer customer;
     private final requestPerson NEW_REQUEST_PERSON = new requestPerson();
     private final RequestCustomer NEW_REQUEST_CUSTOMER = new RequestCustomer();
+    private final ComboBoxWorkerOptions CBO = new ComboBoxWorkerOptions();
     private final CheckFields CHECKER = new CheckFields();
-    private final Color COLOR_RED = new Color(255, 0, 0);
-    private final Color COLOR_WHITE = new Color(255, 255, 255);
+    private final Customer customerInfo;
     private final AdminHome PRINCIPALJFRAME;
 
-    private void backView(String personIdentificationNumber) {
+    private void returnCustomerList(String personIdentificationNumber) {
         List<Customer> CustomerList = NEW_REQUEST_CUSTOMER.getNoDeleteCustomer();
 
         if (!CustomerList.isEmpty()) {
-
-            int customerIndex = findWorkerByDni(personIdentificationNumber, CustomerList);
-            CustomerInformationView customerInformationView = new CustomerInformationView(PRINCIPALJFRAME, CustomerList, customerIndex);
+            int indexActualCustomer = findWorkerByDni(personIdentificationNumber, CustomerList);
+            CustomerInformationView customerInformationView = new CustomerInformationView(PRINCIPALJFRAME, CustomerList, indexActualCustomer);
             PRINCIPALJFRAME.replacePanel(customerInformationView);
             PRINCIPALJFRAME.setVisible(true);
-
         } else {
-
             WorkersFirstView workersFirstView = new WorkersFirstView(PRINCIPALJFRAME);
             PRINCIPALJFRAME.replacePanel(workersFirstView);
             PRINCIPALJFRAME.setVisible(true);
@@ -59,8 +55,8 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
 
         txtCustomerSecondLastName.setText(customer.getPerson().getSecondLastName());
 
-        sltCustomerIdentificationType.setSelectedIndex(COMBO_BOX_OPTION
-                .findIndexSelected(COMBO_BOX_OPTION.getIdentificationTypeOptions(), customer.getPerson().getIdentificationType()));
+        sltCustomerIdentificationType.setSelectedIndex(CBO
+                .findIndexSelected(CBO.getIdentificationTypeOptions(), customer.getPerson().getIdentificationType()));
 
         txtCustomerIdentificationNumber.setText(customer.getPerson().getIdentificationNumber());
 
@@ -80,24 +76,23 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
         String personIdentificationNumber = CHECKER.removeStringBlanks(txtCustomerIdentificationNumber.getText());
 
         if (!CHECKER.checkStringField(personFirstName)) {
-            txtCustomerFirstName.setBackground(COLOR_RED);
+            txtCustomerFirstName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
         if (!CHECKER.checkStringField(personFirstLastName)) {
-            txtCustomerFirstLastName.setBackground(COLOR_RED);
+            txtCustomerFirstLastName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
         if (!CHECKER.checkComboBox(personIdentificationType)) {
-            sltCustomerIdentificationType.setBackground(COLOR_RED);
+            sltCustomerIdentificationType.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
         if (!CHECKER.checkNumberField(personIdentificationNumber)
-                || !(personIdentificationNumber.length() <= 10
-                && personIdentificationNumber.length() >= 8)) {
-            txtCustomerIdentificationNumber.setBackground(COLOR_RED);
+                || !CHECKER.checkDNILength(personIdentificationNumber)) {
+            txtCustomerIdentificationNumber.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
@@ -112,43 +107,31 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
         String customerEmail = txtCustomerEmail.getText();
 
         if (!personSecondName.isBlank() && !CHECKER.checkStringField(personSecondName)) {
-            txtCustomerSecondName.setBackground(COLOR_RED);
+            txtCustomerSecondName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
         if (!personSecondLastName.isBlank() && !CHECKER.checkStringField(personSecondLastName)) {
-            txtCustomerSecondLastName.setBackground(COLOR_RED);
+            txtCustomerSecondLastName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
         if (!customerPhone.isBlank() && !CHECKER.checkNumberField(customerPhone)) {
-            txtCustomerPhone.setBackground(COLOR_RED);
+            txtCustomerPhone.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
         if (!customerEmail.isBlank() && !CHECKER.checkEmail(customerEmail)) {
-            txtCustomerEmail.setBackground(COLOR_RED);
+            txtCustomerEmail.setBackground(Colors.IncorrectColorFields());
+            return false;
+        }
+
+        if (!CHECKER.checkAddress(customerAddress) && !customerAddress.equalsIgnoreCase("")) {
+            txtCustomerAddress.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
         return true;
-    }
-
-    private void personalizedMessage(String type, String message, String title) {
-        int typeMessage = 0;
-        typeMessage = switch (type) {
-            case "Error" ->
-                0;
-            case "Information" ->
-                1;
-            case "Warning" ->
-                2;
-            case "Question" ->
-                3;
-            default ->
-                1;
-        };
-        JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, message, title, typeMessage);
     }
 
     private void clearFields() {
@@ -162,6 +145,17 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
         txtCustomerEmail.setText("");
         txtCustomerPhone.setText("");
         txtCustomerAddress.setText("");
+
+        txtCustomerFirstName.setBackground(Colors.NormalColorFields());
+        txtCustomerSecondName.setBackground(Colors.NormalColorFields());
+        txtCustomerFirstLastName.setBackground(Colors.NormalColorFields());
+        txtCustomerSecondLastName.setBackground(Colors.NormalColorFields());
+        sltCustomerIdentificationType.setBackground(Colors.NormalColorFields());
+        txtCustomerIdentificationNumber.setBackground(Colors.NormalColorFields());
+        dtCustomerBirthdate.setBackground(Colors.NormalColorFields());
+        txtCustomerEmail.setBackground(Colors.NormalColorFields());
+        txtCustomerPhone.setBackground(Colors.NormalColorFields());
+        txtCustomerAddress.setBackground(Colors.NormalColorFields());
     }
 
     private int findWorkerByDni(String dni, List<Customer> customerList) {
@@ -175,9 +169,10 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
 
     public CustomerEditInformationView(Customer customer, AdminHome principalJFrame) {
         this.PRINCIPALJFRAME = principalJFrame;
-        this.customer = customer;
+        this.customerInfo = customer;
         initComponents();
-        setActualInformation(customer);
+        setLocationRelativeTo(null);
+        setActualInformation(customerInfo);
     }
 
     @SuppressWarnings("unchecked")
@@ -281,30 +276,35 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
         fields1Panel.setPreferredSize(new java.awt.Dimension(223, 338));
 
         txtCustomerFirstName.setPreferredSize(new java.awt.Dimension(211, 25));
-        txtCustomerFirstName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCustomerFirstNameActionPerformed(evt);
+        txtCustomerFirstName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCustomerFirstNameMouseClicked(evt);
             }
         });
 
         txtCustomerFirstLastName.setPreferredSize(new java.awt.Dimension(211, 25));
-        txtCustomerFirstLastName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCustomerFirstLastNameActionPerformed(evt);
+        txtCustomerFirstLastName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCustomerFirstLastNameMouseClicked(evt);
             }
         });
 
-        sltCustomerIdentificationType.setModel(new javax.swing.DefaultComboBoxModel<>(COMBO_BOX_OPTION.getIdentificationTypeOptions()));
+        sltCustomerIdentificationType.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getIdentificationTypeOptions()));
         sltCustomerIdentificationType.setPreferredSize(new java.awt.Dimension(211, 25));
-        sltCustomerIdentificationType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sltCustomerIdentificationTypeActionPerformed(evt);
+        sltCustomerIdentificationType.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sltCustomerIdentificationTypeMouseClicked(evt);
             }
         });
 
         dtCustomerBirthdate.setPreferredSize(new java.awt.Dimension(0, 25));
 
         txtCustomerEmail.setPreferredSize(new java.awt.Dimension(0, 25));
+        txtCustomerEmail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCustomerEmailMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout fields1PanelLayout = new javax.swing.GroupLayout(fields1Panel);
         fields1Panel.setLayout(fields1PanelLayout);
@@ -409,29 +409,39 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
         jPanel3.setPreferredSize(new java.awt.Dimension(223, 338));
 
         txtCustomerIdentificationNumber.setPreferredSize(new java.awt.Dimension(211, 25));
-        txtCustomerIdentificationNumber.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCustomerIdentificationNumberActionPerformed(evt);
+        txtCustomerIdentificationNumber.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCustomerIdentificationNumberMouseClicked(evt);
             }
         });
 
         txtCustomerSecondLastName.setPreferredSize(new java.awt.Dimension(211, 25));
-        txtCustomerSecondLastName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCustomerSecondLastNameActionPerformed(evt);
+        txtCustomerSecondLastName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCustomerSecondLastNameMouseClicked(evt);
             }
         });
 
         txtCustomerSecondName.setPreferredSize(new java.awt.Dimension(211, 25));
-        txtCustomerSecondName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCustomerSecondNameActionPerformed(evt);
+        txtCustomerSecondName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCustomerSecondNameMouseClicked(evt);
             }
         });
 
         txtCustomerPhone.setPreferredSize(new java.awt.Dimension(0, 25));
+        txtCustomerPhone.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCustomerPhoneMouseClicked(evt);
+            }
+        });
 
         txtCustomerAddress.setPreferredSize(new java.awt.Dimension(0, 25));
+        txtCustomerAddress.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCustomerAddressMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -576,10 +586,6 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtCustomerFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCustomerFirstNameActionPerformed
-        txtCustomerFirstName.setBackground(COLOR_WHITE);
-    }//GEN-LAST:event_txtCustomerFirstNameActionPerformed
-
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
         if (changeColorRequiredField() && changeColorNoRequiredField()) {
@@ -590,63 +596,57 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
             String personIdentificationType = sltCustomerIdentificationType.getSelectedItem().toString();
             String personIdentificationNumber = CHECKER.removeStringBlanks(txtCustomerIdentificationNumber.getText());
             Date personBirthdate = dtCustomerBirthdate.getDate();
-            
+
             String customerPhone = CHECKER.removeStringBlanks(txtCustomerPhone.getText());
             String customerAddress = txtCustomerAddress.getText();
             String customerEmail = txtCustomerEmail.getText();
-            
+
             Person person = new Person(personFirstName, personSecondName, personFirstLastName, personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
-
+            Customer editCustomer = new Customer(customerPhone, customerAddress, customerEmail, customerInfo.isIsDelete(), person);
+            editCustomer.setCustomerId(this.customerInfo.getCustomerId());
             try {
-                
-                Customer editCustomer = new Customer(customerPhone, customerAddress, customerEmail,
-                        customer.isIsDelete(), person);
-                editCustomer.setCustomerId(this.customer.getCustomerId());
-
-                if (this.customer.getPerson().getIdentificationNumber().equals(personIdentificationNumber)) {
+                if (this.customerInfo.getPerson().getIdentificationNumber().equals(personIdentificationNumber)) {
                     NEW_REQUEST_PERSON.editPerson(person);
                     NEW_REQUEST_CUSTOMER.editCustomer(editCustomer);
                 } else {
                     Customer findCustomer = NEW_REQUEST_CUSTOMER.getCustomerByDNI(personIdentificationNumber);
 
-                    if(findCustomer == null){
+                    if (findCustomer == null) {
                         NEW_REQUEST_PERSON.savePerson(person);
                         NEW_REQUEST_CUSTOMER.editCustomer(editCustomer);
-                        
-                        NEW_REQUEST_PERSON.deletePerson(customer.getPerson().getIdentificationNumber());
-                    }else if (!findCustomer.isIsDelete()) {
-                        personalizedMessage("Error",
+                        NEW_REQUEST_PERSON.deletePerson(customerInfo.getPerson().getIdentificationNumber());
+                    } else if (!findCustomer.isIsDelete()) {
+
+                        JOptionPane.showMessageDialog(this,
                                 "Esta identificación ya está asociada a un cliente, ve y corrigelo para intentarlo nuevamente",
-                                "Registro ya existente");
-                        txtCustomerIdentificationNumber.setBackground(COLOR_RED);
+                                "Registro ya existente", 0);
+                        txtCustomerIdentificationNumber.setBackground(Colors.IncorrectColorFields());
                         return;
-                    } else if (findCustomer.isIsDelete()) {
-                        NEW_REQUEST_CUSTOMER.deleteCustomer(this.customer.getCustomerId());
-                        NEW_REQUEST_PERSON.deletePerson(this.customer.getPerson().getIdentificationNumber());
-                        
+                    } else{
+                        NEW_REQUEST_CUSTOMER.deleteCustomer(this.customerInfo.getCustomerId());
+                        NEW_REQUEST_PERSON.deletePerson(this.customerInfo.getPerson().getIdentificationNumber());
+
                         NEW_REQUEST_PERSON.editPerson(person);
                         editCustomer.setCustomerId(findCustomer.getCustomerId());
                         NEW_REQUEST_CUSTOMER.editCustomer(editCustomer);
                     }
                 }
-
-                personalizedMessage("Information", "La información ha sido cambiada correctamente", "Operación exitosa");
-                backView(personIdentificationNumber);
+                JOptionPane.showMessageDialog(this, "La información ha sido cambiada correctamente", "Operación exitosa", 1);
+                returnCustomerList(personIdentificationNumber);
             } catch (PreexistingEntityException ex) {
-
-                personalizedMessage("Error", "El numero de identificación ya está asociado a alguien.", "Identificación duplicada");
-                txtCustomerIdentificationNumber.setBackground(COLOR_RED);
+                JOptionPane.showMessageDialog(this, "El numero de identificación ya está asociado a alguien.", "Identificación duplicada", 0);
+                txtCustomerIdentificationNumber.setBackground(Colors.IncorrectColorFields());
 
             } catch (NonexistentEntityException ex) {
-
-                personalizedMessage("Error", "El numero de identificación no existe", "Identificación no existente");
-                txtCustomerIdentificationNumber.setBackground(COLOR_RED);
+                JOptionPane.showMessageDialog(this, "El numero de identificación no existe", "Identificación no existente", 0);
+                txtCustomerIdentificationNumber.setBackground(Colors.IncorrectColorFields());
 
             } catch (Exception ex) {
                 Logger.getLogger(AddWorkerView.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
         } else {
-            personalizedMessage("Warning", "Asegurese de que los campos en rojo estén correctamente diligenciados", "Error en Campos");
+            JOptionPane.showMessageDialog(this, "Asegurese de que los campos en rojo estén correctamente diligenciados", "Error en Campos", 0);
             return;
         }
 
@@ -662,25 +662,41 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
         this.PRINCIPALJFRAME.setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
 
-    private void txtCustomerFirstLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCustomerFirstLastNameActionPerformed
-        txtCustomerFirstLastName.setBackground(COLOR_WHITE);
-    }//GEN-LAST:event_txtCustomerFirstLastNameActionPerformed
+    private void txtCustomerFirstNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCustomerFirstNameMouseClicked
+        txtCustomerFirstName.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_txtCustomerFirstNameMouseClicked
 
-    private void sltCustomerIdentificationTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltCustomerIdentificationTypeActionPerformed
-        sltCustomerIdentificationType.setBackground(COLOR_WHITE);
-    }//GEN-LAST:event_sltCustomerIdentificationTypeActionPerformed
+    private void txtCustomerFirstLastNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCustomerFirstLastNameMouseClicked
+        txtCustomerFirstLastName.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_txtCustomerFirstLastNameMouseClicked
 
-    private void txtCustomerSecondNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCustomerSecondNameActionPerformed
-        txtCustomerSecondName.setBackground(COLOR_WHITE);
-    }//GEN-LAST:event_txtCustomerSecondNameActionPerformed
+    private void sltCustomerIdentificationTypeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sltCustomerIdentificationTypeMouseClicked
+        sltCustomerIdentificationType.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_sltCustomerIdentificationTypeMouseClicked
 
-    private void txtCustomerSecondLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCustomerSecondLastNameActionPerformed
-        txtCustomerSecondLastName.setBackground(COLOR_WHITE);
-    }//GEN-LAST:event_txtCustomerSecondLastNameActionPerformed
+    private void txtCustomerEmailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCustomerEmailMouseClicked
+        txtCustomerEmail.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_txtCustomerEmailMouseClicked
 
-    private void txtCustomerIdentificationNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCustomerIdentificationNumberActionPerformed
-        txtCustomerIdentificationNumber.setBackground(COLOR_WHITE);
-    }//GEN-LAST:event_txtCustomerIdentificationNumberActionPerformed
+    private void txtCustomerSecondNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCustomerSecondNameMouseClicked
+        txtCustomerSecondName.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_txtCustomerSecondNameMouseClicked
+
+    private void txtCustomerSecondLastNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCustomerSecondLastNameMouseClicked
+        txtCustomerSecondLastName.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_txtCustomerSecondLastNameMouseClicked
+
+    private void txtCustomerIdentificationNumberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCustomerIdentificationNumberMouseClicked
+        txtCustomerIdentificationNumber.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_txtCustomerIdentificationNumberMouseClicked
+
+    private void txtCustomerPhoneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCustomerPhoneMouseClicked
+        txtCustomerPhone.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_txtCustomerPhoneMouseClicked
+
+    private void txtCustomerAddressMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCustomerAddressMouseClicked
+        txtCustomerAddress.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_txtCustomerAddressMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
