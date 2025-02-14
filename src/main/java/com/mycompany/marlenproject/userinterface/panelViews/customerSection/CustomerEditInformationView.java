@@ -276,33 +276,40 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
         fields1Panel.setPreferredSize(new java.awt.Dimension(223, 338));
 
         txtCustomerFirstName.setPreferredSize(new java.awt.Dimension(211, 25));
-        txtCustomerFirstName.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtCustomerFirstNameMouseClicked(evt);
+        txtCustomerFirstName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCustomerFirstNameFocusGained(evt);
             }
         });
 
         txtCustomerFirstLastName.setPreferredSize(new java.awt.Dimension(211, 25));
-        txtCustomerFirstLastName.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtCustomerFirstLastNameMouseClicked(evt);
+        txtCustomerFirstLastName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCustomerFirstLastNameFocusGained(evt);
             }
         });
 
         sltCustomerIdentificationType.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getIdentificationTypeOptions()));
         sltCustomerIdentificationType.setPreferredSize(new java.awt.Dimension(211, 25));
-        sltCustomerIdentificationType.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sltCustomerIdentificationTypeMouseClicked(evt);
+        sltCustomerIdentificationType.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                sltCustomerIdentificationTypeFocusGained(evt);
             }
         });
 
         dtCustomerBirthdate.setPreferredSize(new java.awt.Dimension(0, 25));
+        this.dtCustomerBirthdate.getDateEditor().getUiComponent().addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if(evt.getClickCount()==1){
+                    dtCustomerBirthdateMouseClicked();
+                }
+            }
+        });
 
         txtCustomerEmail.setPreferredSize(new java.awt.Dimension(0, 25));
-        txtCustomerEmail.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtCustomerEmailMouseClicked(evt);
+        txtCustomerEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCustomerEmailFocusGained(evt);
             }
         });
 
@@ -409,37 +416,37 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
         jPanel3.setPreferredSize(new java.awt.Dimension(223, 338));
 
         txtCustomerIdentificationNumber.setPreferredSize(new java.awt.Dimension(211, 25));
-        txtCustomerIdentificationNumber.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtCustomerIdentificationNumberMouseClicked(evt);
+        txtCustomerIdentificationNumber.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCustomerIdentificationNumberFocusGained(evt);
             }
         });
 
         txtCustomerSecondLastName.setPreferredSize(new java.awt.Dimension(211, 25));
-        txtCustomerSecondLastName.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtCustomerSecondLastNameMouseClicked(evt);
+        txtCustomerSecondLastName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCustomerSecondLastNameFocusGained(evt);
             }
         });
 
         txtCustomerSecondName.setPreferredSize(new java.awt.Dimension(211, 25));
-        txtCustomerSecondName.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtCustomerSecondNameMouseClicked(evt);
+        txtCustomerSecondName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCustomerSecondNameFocusGained(evt);
             }
         });
 
         txtCustomerPhone.setPreferredSize(new java.awt.Dimension(0, 25));
-        txtCustomerPhone.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtCustomerPhoneMouseClicked(evt);
+        txtCustomerPhone.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCustomerPhoneFocusGained(evt);
             }
         });
 
         txtCustomerAddress.setPreferredSize(new java.awt.Dimension(0, 25));
-        txtCustomerAddress.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtCustomerAddressMouseClicked(evt);
+        txtCustomerAddress.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCustomerAddressFocusGained(evt);
             }
         });
 
@@ -610,19 +617,18 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
                     NEW_REQUEST_CUSTOMER.editCustomer(editCustomer);
                 } else {
                     Customer findCustomer = NEW_REQUEST_CUSTOMER.getCustomerByDNI(personIdentificationNumber);
-
+                    
                     if (findCustomer == null) {
                         NEW_REQUEST_PERSON.savePerson(person);
                         NEW_REQUEST_CUSTOMER.editCustomer(editCustomer);
                         NEW_REQUEST_PERSON.deletePerson(customerInfo.getPerson().getIdentificationNumber());
                     } else if (!findCustomer.isIsDelete()) {
-
                         JOptionPane.showMessageDialog(this,
                                 "Esta identificación ya está asociada a un cliente, ve y corrigelo para intentarlo nuevamente",
                                 "Registro ya existente", 0);
                         txtCustomerIdentificationNumber.setBackground(Colors.IncorrectColorFields());
                         return;
-                    } else{
+                    } else {
                         NEW_REQUEST_CUSTOMER.deleteCustomer(this.customerInfo.getCustomerId());
                         NEW_REQUEST_PERSON.deletePerson(this.customerInfo.getPerson().getIdentificationNumber());
 
@@ -644,7 +650,7 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
             } catch (Exception ex) {
                 Logger.getLogger(AddWorkerView.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         } else {
             JOptionPane.showMessageDialog(this, "Asegurese de que los campos en rojo estén correctamente diligenciados", "Error en Campos", 0);
             return;
@@ -662,42 +668,45 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
         this.PRINCIPALJFRAME.setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
 
-    private void txtCustomerFirstNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCustomerFirstNameMouseClicked
+    private void txtCustomerFirstNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCustomerFirstNameFocusGained
         txtCustomerFirstName.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_txtCustomerFirstNameMouseClicked
+    }//GEN-LAST:event_txtCustomerFirstNameFocusGained
 
-    private void txtCustomerFirstLastNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCustomerFirstLastNameMouseClicked
+    private void txtCustomerFirstLastNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCustomerFirstLastNameFocusGained
         txtCustomerFirstLastName.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_txtCustomerFirstLastNameMouseClicked
+    }//GEN-LAST:event_txtCustomerFirstLastNameFocusGained
 
-    private void sltCustomerIdentificationTypeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sltCustomerIdentificationTypeMouseClicked
+    private void sltCustomerIdentificationTypeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sltCustomerIdentificationTypeFocusGained
         sltCustomerIdentificationType.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_sltCustomerIdentificationTypeMouseClicked
+    }//GEN-LAST:event_sltCustomerIdentificationTypeFocusGained
 
-    private void txtCustomerEmailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCustomerEmailMouseClicked
+    private void txtCustomerEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCustomerEmailFocusGained
         txtCustomerEmail.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_txtCustomerEmailMouseClicked
+    }//GEN-LAST:event_txtCustomerEmailFocusGained
 
-    private void txtCustomerSecondNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCustomerSecondNameMouseClicked
+    private void txtCustomerSecondNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCustomerSecondNameFocusGained
         txtCustomerSecondName.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_txtCustomerSecondNameMouseClicked
+    }//GEN-LAST:event_txtCustomerSecondNameFocusGained
 
-    private void txtCustomerSecondLastNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCustomerSecondLastNameMouseClicked
+    private void txtCustomerSecondLastNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCustomerSecondLastNameFocusGained
         txtCustomerSecondLastName.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_txtCustomerSecondLastNameMouseClicked
+    }//GEN-LAST:event_txtCustomerSecondLastNameFocusGained
 
-    private void txtCustomerIdentificationNumberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCustomerIdentificationNumberMouseClicked
+    private void txtCustomerIdentificationNumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCustomerIdentificationNumberFocusGained
         txtCustomerIdentificationNumber.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_txtCustomerIdentificationNumberMouseClicked
+    }//GEN-LAST:event_txtCustomerIdentificationNumberFocusGained
 
-    private void txtCustomerPhoneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCustomerPhoneMouseClicked
+    private void txtCustomerPhoneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCustomerPhoneFocusGained
         txtCustomerPhone.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_txtCustomerPhoneMouseClicked
+    }//GEN-LAST:event_txtCustomerPhoneFocusGained
 
-    private void txtCustomerAddressMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCustomerAddressMouseClicked
+    private void txtCustomerAddressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCustomerAddressFocusGained
         txtCustomerAddress.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_txtCustomerAddressMouseClicked
+    }//GEN-LAST:event_txtCustomerAddressFocusGained
 
+    private void dtCustomerBirthdateMouseClicked() {
+        dtCustomerBirthdate.setBackground(Colors.NormalColorFields());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;

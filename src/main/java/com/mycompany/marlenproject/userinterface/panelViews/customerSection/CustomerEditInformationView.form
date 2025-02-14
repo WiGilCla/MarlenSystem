@@ -262,7 +262,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtCustomerFirstNameMouseClicked"/>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtCustomerFirstNameFocusGained"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtCustomerFirstLastName">
@@ -272,7 +272,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtCustomerFirstLastNameMouseClicked"/>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtCustomerFirstLastNameFocusGained"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="sltCustomerIdentificationType">
@@ -285,7 +285,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sltCustomerIdentificationTypeMouseClicked"/>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="sltCustomerIdentificationTypeFocusGained"/>
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -297,6 +297,9 @@
                       <Dimension value="[0, 25]"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="this.dtCustomerBirthdate.getDateEditor().getUiComponent().addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    public void mouseClicked(java.awt.event.MouseEvent evt) {&#xa;        if(evt.getClickCount()==1){&#xa;            dtCustomerBirthdateMouseClicked();&#xa;        }&#xa;    }&#xa;});"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtCustomerEmail">
                   <Properties>
@@ -305,7 +308,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtCustomerEmailMouseClicked"/>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtCustomerEmailFocusGained"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -487,7 +490,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtCustomerIdentificationNumberMouseClicked"/>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtCustomerIdentificationNumberFocusGained"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtCustomerSecondLastName">
@@ -497,7 +500,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtCustomerSecondLastNameMouseClicked"/>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtCustomerSecondLastNameFocusGained"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtCustomerSecondName">
@@ -507,7 +510,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtCustomerSecondNameMouseClicked"/>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtCustomerSecondNameFocusGained"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtCustomerPhone">
@@ -517,7 +520,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtCustomerPhoneMouseClicked"/>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtCustomerPhoneFocusGained"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtCustomerAddress">
@@ -527,7 +530,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtCustomerAddressMouseClicked"/>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtCustomerAddressFocusGained"/>
                   </Events>
                 </Component>
               </SubComponents>
