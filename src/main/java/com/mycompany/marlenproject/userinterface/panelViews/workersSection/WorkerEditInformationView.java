@@ -109,8 +109,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         }
 
         if (!CHECKER.checkNumberField(personIdentificationNumber)
-                || !(personIdentificationNumber.length() <= 10
-                && personIdentificationNumber.length() >= 8)) {
+                || !CHECKER.checkDNILength(personIdentificationNumber)) {
             txtIdentificationNumber.setBackground(Colors.IncorrectColorFields());
             return false;
         }
@@ -183,6 +182,20 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         dateDayLink.setDate(null);
         sltPosition.setSelectedIndex(0);
         sltState.setSelectedIndex(0);
+        
+        txtFirstName.setBackground(Colors.NormalColorFields());
+        txtSecondName.setBackground(Colors.NormalColorFields());
+        txtFirstLastName.setBackground(Colors.NormalColorFields());
+        txtSecondLastName.setBackground(Colors.NormalColorFields());
+        sltIdentificationType.setBackground(Colors.NormalColorFields());
+        txtIdentificationNumber.setBackground(Colors.NormalColorFields());
+        sltBloodType.setBackground(Colors.NormalColorFields());
+        sltBloodTypeCmpl.setBackground(Colors.NormalColorFields());
+        sltHealthEntity.setBackground(Colors.NormalColorFields());
+        dateBirthdate.setBackground(Colors.NormalColorFields());
+        dateDayLink.setBackground(Colors.NormalColorFields());
+        sltPosition.setBackground(Colors.NormalColorFields());
+        sltState.setBackground(Colors.NormalColorFields());
     }
 
     private int findWorkerByDni(String dni, List<Worker> list) {
@@ -316,51 +329,58 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         fields1Panel.setPreferredSize(new java.awt.Dimension(223, 338));
 
         txtFirstName.setPreferredSize(new java.awt.Dimension(211, 25));
-        txtFirstName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFirstNameActionPerformed(evt);
+        txtFirstName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtFirstNameFocusGained(evt);
             }
         });
 
         txtFirstLastName.setPreferredSize(new java.awt.Dimension(211, 25));
-        txtFirstLastName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFirstLastNameActionPerformed(evt);
+        txtFirstLastName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtFirstLastNameFocusGained(evt);
             }
         });
 
         sltIdentificationType.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getIdentificationTypeOptions()));
         sltIdentificationType.setPreferredSize(new java.awt.Dimension(211, 25));
-        sltIdentificationType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sltIdentificationTypeActionPerformed(evt);
+        sltIdentificationType.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                sltIdentificationTypeFocusGained(evt);
             }
         });
 
         sltBloodType.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getBloodGroupOptions()));
         sltBloodType.setPreferredSize(new java.awt.Dimension(102, 25));
-        sltBloodType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sltBloodTypeActionPerformed(evt);
+        sltBloodType.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                sltBloodTypeFocusGained(evt);
             }
         });
 
         sltBloodTypeCmpl.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getBloodGroupRhdOptions()));
         sltBloodTypeCmpl.setPreferredSize(new java.awt.Dimension(102, 25));
-        sltBloodTypeCmpl.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sltBloodTypeCmplActionPerformed(evt);
+        sltBloodTypeCmpl.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                sltBloodTypeCmplFocusGained(evt);
             }
         });
 
         dateBirthdate.setMaxSelectableDate(new Date());
         dateBirthdate.setPreferredSize(new java.awt.Dimension(211, 25));
+        this.dateBirthdate.getDateEditor().getUiComponent().addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if(evt.getClickCount()==1){
+                    dateBirthdateMouseClicked();
+                }
+            }
+        });
 
         sltPosition.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getPositionOptions()));
         sltPosition.setPreferredSize(new java.awt.Dimension(211, 25));
-        sltPosition.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sltPositionActionPerformed(evt);
+        sltPosition.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                sltPositionFocusGained(evt);
             }
         });
 
@@ -482,41 +502,48 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         jPanel3.setPreferredSize(new java.awt.Dimension(223, 338));
 
         dateDayLink.setPreferredSize(new java.awt.Dimension(211, 25));
+        this.dateDayLink.getDateEditor().getUiComponent().addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if(evt.getClickCount()==1){
+                    dateDayLinkMouseClicked();
+                }
+            }
+        });
 
         sltHealthEntity.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getHealthEntityOptions()));
         sltHealthEntity.setPreferredSize(new java.awt.Dimension(211, 25));
-        sltHealthEntity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sltHealthEntityActionPerformed(evt);
+        sltHealthEntity.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                sltHealthEntityFocusGained(evt);
             }
         });
 
         txtIdentificationNumber.setPreferredSize(new java.awt.Dimension(211, 25));
-        txtIdentificationNumber.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdentificationNumberActionPerformed(evt);
+        txtIdentificationNumber.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtIdentificationNumberFocusGained(evt);
             }
         });
 
         txtSecondLastName.setPreferredSize(new java.awt.Dimension(211, 25));
-        txtSecondLastName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSecondLastNameActionPerformed(evt);
+        txtSecondLastName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtSecondLastNameFocusGained(evt);
             }
         });
 
         txtSecondName.setPreferredSize(new java.awt.Dimension(211, 25));
-        txtSecondName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSecondNameActionPerformed(evt);
+        txtSecondName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtSecondNameFocusGained(evt);
             }
         });
 
         sltState.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getStateOptions()));
         sltState.setPreferredSize(new java.awt.Dimension(211, 25));
-        sltState.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sltStateActionPerformed(evt);
+        sltState.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                sltStateFocusGained(evt);
             }
         });
 
@@ -666,10 +693,6 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFirstNameActionPerformed
-        txtFirstName.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_txtFirstNameActionPerformed
-
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
         if (changeColorRequiredField() && changeColorNoRequiredField()) {
@@ -738,7 +761,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             }
         } else {
             
-            JOptionPane.showMessageDialog(this,"Asegurese de que los campos en rojo estén correctamente diligenciados","Error en Campos",2);
+            JOptionPane.showMessageDialog(this,"Asegurese de que los campos en rojo estén correctamente diligenciados","Error en Campos",0);
             return;
             
         }
@@ -755,46 +778,57 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         this.PRINCIPALJFRAME.setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
 
-    private void txtFirstLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFirstLastNameActionPerformed
+    private void txtFirstNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFirstNameFocusGained
+        txtFirstName.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_txtFirstNameFocusGained
+
+    private void txtFirstLastNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFirstLastNameFocusGained
         txtFirstLastName.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_txtFirstLastNameActionPerformed
+    }//GEN-LAST:event_txtFirstLastNameFocusGained
 
-    private void sltIdentificationTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltIdentificationTypeActionPerformed
+    private void sltIdentificationTypeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sltIdentificationTypeFocusGained
         sltIdentificationType.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_sltIdentificationTypeActionPerformed
+    }//GEN-LAST:event_sltIdentificationTypeFocusGained
 
-    private void sltBloodTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltBloodTypeActionPerformed
+    private void sltBloodTypeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sltBloodTypeFocusGained
         sltBloodType.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_sltBloodTypeActionPerformed
+    }//GEN-LAST:event_sltBloodTypeFocusGained
 
-    private void sltBloodTypeCmplActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltBloodTypeCmplActionPerformed
+    private void sltBloodTypeCmplFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sltBloodTypeCmplFocusGained
         sltBloodTypeCmpl.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_sltBloodTypeCmplActionPerformed
+    }//GEN-LAST:event_sltBloodTypeCmplFocusGained
 
-    private void sltPositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltPositionActionPerformed
+    private void sltPositionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sltPositionFocusGained
         sltPosition.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_sltPositionActionPerformed
+    }//GEN-LAST:event_sltPositionFocusGained
 
-    private void txtSecondNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSecondNameActionPerformed
+    private void txtSecondNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSecondNameFocusGained
         txtSecondName.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_txtSecondNameActionPerformed
+    }//GEN-LAST:event_txtSecondNameFocusGained
 
-    private void txtSecondLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSecondLastNameActionPerformed
+    private void txtSecondLastNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSecondLastNameFocusGained
         txtSecondLastName.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_txtSecondLastNameActionPerformed
+    }//GEN-LAST:event_txtSecondLastNameFocusGained
 
-    private void txtIdentificationNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdentificationNumberActionPerformed
+    private void txtIdentificationNumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdentificationNumberFocusGained
         txtIdentificationNumber.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_txtIdentificationNumberActionPerformed
+    }//GEN-LAST:event_txtIdentificationNumberFocusGained
 
-    private void sltHealthEntityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltHealthEntityActionPerformed
+    private void sltHealthEntityFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sltHealthEntityFocusGained
         sltHealthEntity.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_sltHealthEntityActionPerformed
+    }//GEN-LAST:event_sltHealthEntityFocusGained
 
-    private void sltStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltStateActionPerformed
+    private void sltStateFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sltStateFocusGained
         sltState.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_sltStateActionPerformed
+    }//GEN-LAST:event_sltStateFocusGained
 
+    private void dateBirthdateMouseClicked() { 
+        dateBirthdate.setBackground(Colors.NormalColorFields());
+    }
+    
+    private void dateDayLinkMouseClicked() { 
+        dateDayLink.setBackground(Colors.NormalColorFields());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
