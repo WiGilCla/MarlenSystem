@@ -42,40 +42,40 @@ public class AddWorkerView extends javax.swing.JPanel {
             return false;
         }
         if (!CHECKER.checkStringField(personFirstLastName)) {
-            txtFirstLastName.setBackground(Colors.NormalColorFields());
+            txtFirstLastName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
         if (!CHECKER.checkComboBox(personIdentificationType)) {
-            sltIdentificationType.setBackground(Colors.NormalColorFields());
+            sltIdentificationType.setBackground(Colors.IncorrectColorFields());
             return false;
         }
         if (!CHECKER.checkNumberField(personIdentificationNumber)
                 || !CHECKER.checkDNILength(personIdentificationNumber)) {
-            txtIdentificationNum.setBackground(Colors.NormalColorFields());
+            txtIdentificationNum.setBackground(Colors.IncorrectColorFields());
             return false;
         }
         if (!CHECKER.checkComboBox(bloodType)) {
-            sltBloodType.setBackground(Colors.NormalColorFields());
+            sltBloodType.setBackground(Colors.IncorrectColorFields());
             return false;
         }
         if (!CHECKER.checkComboBox(bloodTypeCmplt)) {
-            sltBloodTypeCmplt.setBackground(Colors.NormalColorFields());
+            sltBloodTypeCmplt.setBackground(Colors.IncorrectColorFields());
             return false;
         }
         if (!CHECKER.checkComboBox(healthEntity)) {
-            sltEPS.setBackground(Colors.NormalColorFields());
+            sltEPS.setBackground(Colors.IncorrectColorFields());
             return false;
         }
         if (null == dateBirthdate.getDate()) {
-            dateBirthdate.setBackground(Colors.NormalColorFields());
+            dateBirthdate.setBackground(Colors.IncorrectColorFields());
             return false;
         }
         if (null == dateVinculation.getDate()) {
-            dateVinculation.setBackground(Colors.NormalColorFields());
+            dateVinculation.setBackground(Colors.IncorrectColorFields());
             return false;
         }
         if (!CHECKER.checkComboBox(position)) {
-            sltPosition.setBackground(Colors.NormalColorFields());
+            sltPosition.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
@@ -87,12 +87,12 @@ public class AddWorkerView extends javax.swing.JPanel {
         String personSecondLastName = CHECKER.removeStringBlanks(txtSecondLastName.getText());
 
         if (!CHECKER.checkStringField(personSecondName) && !personSecondName.equalsIgnoreCase("")) {
-            txtSecondName.setBackground(Colors.NormalColorFields());
+            txtSecondName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
         if (!CHECKER.checkStringField(personSecondLastName) && !personSecondLastName.equalsIgnoreCase("")) {
-            txtSecondLastName.setBackground(Colors.NormalColorFields());
+            txtSecondLastName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
@@ -272,54 +272,61 @@ public class AddWorkerView extends javax.swing.JPanel {
         dataInformation1Panel.setPreferredSize(new java.awt.Dimension(308, 338));
 
         txtFirstName.setPreferredSize(new java.awt.Dimension(296, 25));
-        txtFirstName.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtFirstNameMouseClicked(evt);
+        txtFirstName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtFirstNameFocusGained(evt);
             }
         });
 
         txtFirstLastName.setPreferredSize(new java.awt.Dimension(296, 25));
-        txtFirstLastName.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtFirstLastNameMouseClicked(evt);
+        txtFirstLastName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtFirstLastNameFocusGained(evt);
             }
         });
 
         sltIdentificationType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE UNA ...", "Cédula de ciudadanía", "Cédula de extranjería", "Tarjeta pasaporte", "Sin identificación" }));
         sltIdentificationType.setPreferredSize(new java.awt.Dimension(296, 25));
-        sltIdentificationType.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sltIdentificationTypeMouseClicked(evt);
+        sltIdentificationType.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                sltIdentificationTypeFocusGained(evt);
             }
         });
 
         sltPosition.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE UNA ...", "Jefe", "Administrador", "Pintor", "Lijador", "Carpintero", "Seguridad", " " }));
         sltPosition.setPreferredSize(new java.awt.Dimension(296, 25));
-        sltPosition.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sltPositionMouseClicked(evt);
+        sltPosition.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                sltPositionFocusGained(evt);
             }
         });
 
         sltBloodType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE UNA ...", "A", "B", "O", "AB" }));
         sltBloodType.setPreferredSize(new java.awt.Dimension(136, 25));
-        sltBloodType.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sltBloodTypeMouseClicked(evt);
+        sltBloodType.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                sltBloodTypeFocusGained(evt);
             }
         });
 
         sltBloodTypeCmplt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE UNA ...", "+", "-" }));
         sltBloodTypeCmplt.setPreferredSize(new java.awt.Dimension(136, 25));
-        sltBloodTypeCmplt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sltBloodTypeCmpltMouseClicked(evt);
+        sltBloodTypeCmplt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                sltBloodTypeCmpltFocusGained(evt);
             }
         });
 
         dateBirthdate.setDateFormatString("dd/MM/yyyy");
         dateBirthdate.setMaxSelectableDate(new Date());
         dateBirthdate.setPreferredSize(new java.awt.Dimension(296, 25));
+        this.dateBirthdate.getDateEditor().getUiComponent().addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if(evt.getClickCount()==1){
+                    dateBirthdateMouseClicked();
+                }
+            }
+        });
 
         javax.swing.GroupLayout dataInformation1PanelLayout = new javax.swing.GroupLayout(dataInformation1Panel);
         dataInformation1Panel.setLayout(dataInformation1PanelLayout);
@@ -437,39 +444,41 @@ public class AddWorkerView extends javax.swing.JPanel {
         dataInformation2Panel.setPreferredSize(new java.awt.Dimension(308, 338));
 
         txtSecondName.setPreferredSize(new java.awt.Dimension(296, 25));
-        txtSecondName.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtSecondNameMouseClicked(evt);
+        txtSecondName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtSecondNameFocusGained(evt);
             }
         });
 
         txtSecondLastName.setPreferredSize(new java.awt.Dimension(296, 25));
-        txtSecondLastName.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtSecondLastNameMouseClicked(evt);
+        txtSecondLastName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtSecondLastNameFocusGained(evt);
             }
         });
 
         dateVinculation.setDateFormatString("dd/MM/yyyy");
         dateVinculation.setPreferredSize(new java.awt.Dimension(296, 25));
-        dateVinculation.addMouseListener(new java.awt.event.MouseAdapter() {
+        this.dateVinculation.getDateEditor().getUiComponent().addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                dateVinculationMouseClicked(evt);
+                if(evt.getClickCount()==1){
+                    dateVinculationMouseClicked();
+                }
             }
         });
 
         txtIdentificationNum.setPreferredSize(new java.awt.Dimension(296, 25));
-        txtIdentificationNum.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtIdentificationNumMouseClicked(evt);
+        txtIdentificationNum.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtIdentificationNumFocusGained(evt);
             }
         });
 
         sltEPS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE UNA ...", "NO POSEE", "ALIANSALUD EPS", "ANAS WAYUU EPSI", "ASMET SALUD", "ASOCIACION INDIGENA DEL CAUCA EPSI", "CAJACOPI ATLANTICO", "CAPRESOCA", "CAPITAL SALUD EPS-S", "COMFACHOCO", "COMFAORIENTE", "COMFENALCO VALLE", "COMPENSAR EPS", "COOSALUD EPS-S", "DUSAKAWI EPSI", "EMS SANITAS", "EMSSANAR E.S.S.", "EPS FAMILIAR DE COLOMBIA", "EPS SANITAS", "EPS SURA", "FAMISANAR", "FONDO DE PASIVO SOCIAL DE FERROCARRILES NACIONALES DE COLOMBIA", "MALLAMAS EPSI", "MUTUAL SER", "NUEVA EPS", "PIJAOS SALUD EPSI", "SALUD BÓLIVAR EPS SAS", "SALUD MIA", "SALUD TOTAL EPS S.A.", "SAVIA SALUD EPS EPSS40", "SERVICIO OCCIDENTAL DE SALUD EPS SOS", "OTRO" }));
         sltEPS.setPreferredSize(new java.awt.Dimension(296, 25));
-        sltEPS.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sltEPSMouseClicked(evt);
+        sltEPS.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                sltEPSFocusGained(evt);
             }
         });
 
@@ -596,51 +605,55 @@ public class AddWorkerView extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnSaveWorkerActionPerformed
 
-    private void txtFirstNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFirstNameMouseClicked
-        txtFirstName.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_txtFirstNameMouseClicked
-
-    private void txtSecondNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSecondNameMouseClicked
-        txtSecondName.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_txtSecondNameMouseClicked
-
-    private void txtFirstLastNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFirstLastNameMouseClicked
-        txtFirstLastName.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_txtFirstLastNameMouseClicked
-
-    private void txtSecondLastNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSecondLastNameMouseClicked
-        txtSecondLastName.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_txtSecondLastNameMouseClicked
-
-    private void sltIdentificationTypeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sltIdentificationTypeMouseClicked
-        sltIdentificationType.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_sltIdentificationTypeMouseClicked
-
-    private void txtIdentificationNumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdentificationNumMouseClicked
-        txtIdentificationNum.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_txtIdentificationNumMouseClicked
-
-    private void sltBloodTypeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sltBloodTypeMouseClicked
+    private void sltBloodTypeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sltBloodTypeFocusGained
         sltBloodType.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_sltBloodTypeMouseClicked
+    }//GEN-LAST:event_sltBloodTypeFocusGained
 
-    private void sltBloodTypeCmpltMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sltBloodTypeCmpltMouseClicked
+    private void txtFirstNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFirstNameFocusGained
+        txtFirstName.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_txtFirstNameFocusGained
+
+    private void txtFirstLastNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFirstLastNameFocusGained
+        txtFirstLastName.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_txtFirstLastNameFocusGained
+
+    private void sltIdentificationTypeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sltIdentificationTypeFocusGained
+        sltIdentificationType.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_sltIdentificationTypeFocusGained
+
+    private void sltBloodTypeCmpltFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sltBloodTypeCmpltFocusGained
         sltBloodTypeCmplt.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_sltBloodTypeCmpltMouseClicked
+    }//GEN-LAST:event_sltBloodTypeCmpltFocusGained
 
-    private void sltEPSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sltEPSMouseClicked
-        sltEPS.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_sltEPSMouseClicked
-
-    private void dateVinculationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateVinculationMouseClicked
-        dateVinculation.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_dateVinculationMouseClicked
-
-    private void sltPositionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sltPositionMouseClicked
+    private void sltPositionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sltPositionFocusGained
         sltPosition.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_sltPositionMouseClicked
+    }//GEN-LAST:event_sltPositionFocusGained
 
+    private void txtSecondNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSecondNameFocusGained
+        txtSecondName.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_txtSecondNameFocusGained
 
+    private void txtSecondLastNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSecondLastNameFocusGained
+        txtSecondLastName.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_txtSecondLastNameFocusGained
+
+    private void txtIdentificationNumFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdentificationNumFocusGained
+        txtIdentificationNum.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_txtIdentificationNumFocusGained
+
+    private void sltEPSFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sltEPSFocusGained
+        sltEPS.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_sltEPSFocusGained
+
+    private void dateBirthdateMouseClicked() { 
+        dateBirthdate.setBackground(Colors.NormalColorFields());
+    }
+    
+    private void dateVinculationMouseClicked() { 
+        dateVinculation.setBackground(Colors.NormalColorFields());
+    }
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCleanFields;
     private javax.swing.JButton btnSaveWorker;
