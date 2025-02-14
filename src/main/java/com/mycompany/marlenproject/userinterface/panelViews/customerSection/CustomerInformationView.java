@@ -19,19 +19,16 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class CustomerInformationView extends javax.swing.JPanel {
+
     private final RequestCustomer REQUEST_CUSTOMER = new RequestCustomer();
     private List<Customer> CUSTOMER_LIST = new ArrayList<>();
     private final CheckFields CHECKER = new CheckFields();
     private int customerIndex = 0;
-    
-    private final AdminHome PRINCIPALJFRAME; 
-    
 
-    private void viewWorkerInformation(int index){
+    private final AdminHome PRINCIPALJFRAME;
+
+    private void viewWorkerInformation(int index) {
         Customer customer = this.CUSTOMER_LIST.get(index);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        
-        
         txtCustomerFirstName.setText(customer.getPerson().getFirstName());
         txtCustomerSecondName.setText(customer.getPerson().getSecondName());
         txtCustomerFirstLastName.setText(customer.getPerson().getFirstLastName());
@@ -39,19 +36,19 @@ public class CustomerInformationView extends javax.swing.JPanel {
         txtCustomerIdentificationType.setText(customer.getPerson().getIdentificationType());
         txtCustomerIdentificationNum.setText(String.valueOf(customer.getPerson().getIdentificationNumber()));
         txtCustomerPhone.setText(customer.getPhone());
-        txtCustomerBirthdate.setText((customer.getPerson().getBirthdate() != null)? 
-                String.valueOf(CHECKER.timeElapsed(customer.getPerson().getBirthdate(), new Date())):"No registra");
+        txtCustomerBirthdate.setText((customer.getPerson().getBirthdate() != null)
+                ? String.valueOf(CHECKER.timeElapsed(customer.getPerson().getBirthdate(), new Date())) : "No registra");
         txtCustomerEmail.setText(customer.getEmail());
         txtCustomerAddress.setText(customer.getAddress());
     }
-    
+
     public CustomerInformationView(AdminHome principalJFrame, List<Customer> CustomerList, int index) {
         this.CUSTOMER_LIST = CustomerList;
         this.customerIndex = index;
         this.PRINCIPALJFRAME = principalJFrame;
         initComponents();
         viewWorkerInformation(customerIndex);
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -176,7 +173,7 @@ public class CustomerInformationView extends javax.swing.JPanel {
         lbCustomerIdentificationType.setPreferredSize(new java.awt.Dimension(138, 25));
 
         lbCustomerBirthdate.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
-        lbCustomerBirthdate.setText("Fecha de nacimiento:");
+        lbCustomerBirthdate.setText("Edad");
         lbCustomerBirthdate.setPreferredSize(new java.awt.Dimension(138, 25));
 
         lbCustomerEmail.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -227,7 +224,6 @@ public class CustomerInformationView extends javax.swing.JPanel {
         txtCustomerIdentificationType.setEditable(false);
         txtCustomerIdentificationType.setPreferredSize(new java.awt.Dimension(296, 25));
 
-        txtCustomerBirthdate.setText("jTextField1");
         txtCustomerBirthdate.setPreferredSize(new java.awt.Dimension(71, 25));
 
         javax.swing.GroupLayout dataInformation1PanelLayout = new javax.swing.GroupLayout(dataInformation1Panel);
@@ -461,14 +457,14 @@ public class CustomerInformationView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNextWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextWorkerActionPerformed
-        if(this.customerIndex < this.CUSTOMER_LIST.size()-1){
+        if (this.customerIndex < this.CUSTOMER_LIST.size() - 1) {
             this.customerIndex++;
             viewWorkerInformation(customerIndex);
         }
     }//GEN-LAST:event_btnNextWorkerActionPerformed
 
     private void btnPreviousWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousWorkerActionPerformed
-        if(this.customerIndex > 0){
+        if (this.customerIndex > 0) {
             customerIndex--;
             viewWorkerInformation(customerIndex);
         }
@@ -476,23 +472,26 @@ public class CustomerInformationView extends javax.swing.JPanel {
 
     private void btnDeleteCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCustomerActionPerformed
         try {
-            
-            this.CUSTOMER_LIST.get(customerIndex).setIsDelete(true);
+            Customer customer = this.CUSTOMER_LIST.get(customerIndex);
+            customer.setIsDelete(true);
             
             REQUEST_CUSTOMER.editCustomer(this.CUSTOMER_LIST.get(customerIndex));
-            
             this.CUSTOMER_LIST.remove(customerIndex);
-            
             JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, "El cliente ha sido eliminado exitosamente", "Eliminación exitosa", 1);
-            if(!this.CUSTOMER_LIST.isEmpty() && customerIndex != 0){
-                customerIndex --;
-            }else if(this.CUSTOMER_LIST.isEmpty()) {
-                JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, "No tiene clientes registrados", "Sin registros", 0);
-                WorkersFirstView workersFirstView  = new WorkersFirstView(this.PRINCIPALJFRAME);
+
+            if (this.CUSTOMER_LIST.isEmpty()) {
+                WorkersFirstView workersFirstView = new WorkersFirstView(this.PRINCIPALJFRAME);
                 this.PRINCIPALJFRAME.replacePanel(workersFirstView);
                 return;
             }
+
+            if (customerIndex == (this.CUSTOMER_LIST.size())) {
+                customerIndex--;
+            }
+
             viewWorkerInformation(customerIndex);
+            
+
         } catch (Exception ex) {
             Logger.getLogger(WorkersInformationView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -506,13 +505,13 @@ public class CustomerInformationView extends javax.swing.JPanel {
 
     private void btnSeeAllCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeeAllCustomersActionPerformed
         List<Customer> customerList = REQUEST_CUSTOMER.getNoDeleteCustomer();
-        
-        if(!customerList.isEmpty()){
+
+        if (!customerList.isEmpty()) {
             CustomerListView customerListView = new CustomerListView(PRINCIPALJFRAME, customerList);
             this.PRINCIPALJFRAME.replacePanel(customerListView);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, "No tiene clientes registrados", "Sin registros", 0);
-            WorkersFirstView workersFirstView  = new WorkersFirstView(this.PRINCIPALJFRAME);
+            WorkersFirstView workersFirstView = new WorkersFirstView(this.PRINCIPALJFRAME);
             this.PRINCIPALJFRAME.replacePanel(workersFirstView);
         }
     }//GEN-LAST:event_btnSeeAllCustomersActionPerformed

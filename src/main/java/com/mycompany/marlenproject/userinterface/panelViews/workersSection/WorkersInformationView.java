@@ -510,14 +510,13 @@ public class WorkersInformationView extends javax.swing.JPanel {
             Worker worker = this.WORKER_LIST.get(workerObserved);
             worker.setIsActive(false);
             worker.setIsDelete(true);
-            worker.setWorkerId(this.WORKER_LIST.get(workerObserved).getWorkerId());
 
             REQUEST_WORKER.editWorker(worker);
             this.WORKER_LIST.remove(workerObserved);
+            JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, "El trabajador ha sido eliminado exitosamente", "Eliminación exitosa", 1);
 
             if (this.WORKER_LIST.isEmpty()) {
                 WorkersFirstView workersFirstView = new WorkersFirstView(this.PRINCIPALJFRAME);
-                workersFirstView.setLocation(0, 0);
                 this.PRINCIPALJFRAME.replacePanel(workersFirstView);
                 return;
             }
@@ -527,7 +526,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
             }
 
             viewWorkerInformation(workerObserved);
-            JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, "El trabajador ha sido eliminado exitosamente", "Eliminación exitosa", 1);
+            
 
         } catch (Exception ex) {
             Logger.getLogger(WorkersInformationView.class.getName()).log(Level.SEVERE, null, ex);
