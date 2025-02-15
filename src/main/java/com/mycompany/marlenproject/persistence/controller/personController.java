@@ -21,4 +21,8 @@ public class personController {
     public void deletePersonPersis(String identificationNumber) throws NonexistentEntityException{
         personJpa.destroy(identificationNumber);
     }
+    
+    public Person getPersonByDNIPersis(String dni){
+        return personJpa.findPerson(dni);
+    }
 }

@@ -16,19 +16,26 @@ public class RequestCustomer {
     
     public void saveCustomer(Customer newCustomer){
         
-        String customerAddress = CHECKER.capitalizedString(newCustomer.getAddress());
-        String customerEmail = newCustomer.getEmail().toLowerCase();
+        String customerAddress = ((newCustomer.getAddress().isBlank())? null:CHECKER.capitalizedString(newCustomer.getAddress()));
+        String customerEmail = ((newCustomer.getEmail().isBlank())? null:newCustomer.getEmail().toLowerCase());
+        String customerPhone = ((newCustomer.getPhone().isBlank())? null: newCustomer.getPhone());
         
         newCustomer.setAddress(customerAddress);
         newCustomer.setEmail(customerEmail);
+        newCustomer.setPhone(customerPhone);
         
         customerController.saveCustomerPersis(newCustomer);
     }
     
     public void editCustomer(Customer editCustomer) throws Exception{
         
-        String customerEmail = editCustomer.getEmail().toLowerCase();
+        String customerAddress = ((editCustomer.getAddress().isBlank())? null:CHECKER.capitalizedString(editCustomer.getAddress()));
+        String customerEmail = ((editCustomer.getEmail().isBlank())? null:editCustomer.getEmail().toLowerCase());
+        String customerPhone = ((editCustomer.getPhone().isBlank())? null: editCustomer.getPhone());
+        
+        editCustomer.setAddress(customerAddress);
         editCustomer.setEmail(customerEmail);
+        editCustomer.setPhone(customerPhone);
         
         customerController.editCustomerPersis(editCustomer);
     }

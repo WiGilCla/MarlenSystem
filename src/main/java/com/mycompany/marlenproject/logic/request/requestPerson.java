@@ -9,7 +9,6 @@ import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.persistence.controller.personController;
 import com.mycompany.marlenproject.persistence.exceptions.NonexistentEntityException;
 import java.sql.Timestamp;
-import java.util.Date;
 
 
 public class requestPerson {
@@ -19,9 +18,9 @@ public class requestPerson {
     public void savePerson(Person newPerson) throws Exception{
         
         String firstName = checker.capitalizedString(newPerson.getFirstName());
-        String secondName = (newPerson.getSecondName().isEmpty())? null:checker.capitalizedString(newPerson.getSecondName());
+        String secondName = (newPerson.getSecondName().isBlank())? null:checker.capitalizedString(newPerson.getSecondName());
         String firstLastName = checker.capitalizedString(newPerson.getFirstLastName());
-        String secondLastName = (newPerson.getSecondLastName().isEmpty())? null:checker.capitalizedString(newPerson.getSecondLastName());
+        String secondLastName = (newPerson.getSecondLastName().isBlank())? null:checker.capitalizedString(newPerson.getSecondLastName());
         String identificationType = checker.capitalizedString(newPerson.getIdentificationType());
         Timestamp birthdate = (newPerson.getBirthdate() != null)? new Timestamp(newPerson.getBirthdate().getTime()): null;
         
@@ -39,9 +38,9 @@ public class requestPerson {
         
         
         String firstName = checker.capitalizedString(editPerson.getFirstName());
-        String secondName = (editPerson.getSecondName().isEmpty())? null:checker.capitalizedString(editPerson.getSecondName());
+        String secondName = (editPerson.getSecondName().isBlank())? null:checker.capitalizedString(editPerson.getSecondName());
         String firstLastName = checker.capitalizedString(editPerson.getFirstLastName());
-        String secondLastName = (editPerson.getSecondLastName().isEmpty())? null:checker.capitalizedString(editPerson.getSecondLastName());
+        String secondLastName = (editPerson.getSecondLastName().isBlank())? null:checker.capitalizedString(editPerson.getSecondLastName());
         String identificationType = checker.capitalizedString(editPerson.getIdentificationType());
         Timestamp birthdate = (editPerson.getBirthdate() != null)? new Timestamp(editPerson.getBirthdate().getTime()): null;
         
@@ -57,6 +56,10 @@ public class requestPerson {
     
     public void deletePerson(String personId) throws NonexistentEntityException{
         PersonController.deletePersonPersis(personId);
+    }
+    
+    public Person getPersonByDNI(String dni){
+        return PersonController.getPersonByDNIPersis(dni);
     }
     
 }

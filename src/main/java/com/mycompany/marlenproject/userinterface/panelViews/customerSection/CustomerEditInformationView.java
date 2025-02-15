@@ -140,7 +140,6 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
         txtCustomerFirstLastName.setText("");
         txtCustomerSecondLastName.setText("");
         sltCustomerIdentificationType.setSelectedIndex(0);
-        txtCustomerIdentificationNumber.setText("");
         dtCustomerBirthdate.setDate(null);
         txtCustomerEmail.setText("");
         txtCustomerPhone.setText("");
@@ -151,7 +150,6 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
         txtCustomerFirstLastName.setBackground(Colors.NormalColorFields());
         txtCustomerSecondLastName.setBackground(Colors.NormalColorFields());
         sltCustomerIdentificationType.setBackground(Colors.NormalColorFields());
-        txtCustomerIdentificationNumber.setBackground(Colors.NormalColorFields());
         dtCustomerBirthdate.setBackground(Colors.NormalColorFields());
         txtCustomerEmail.setBackground(Colors.NormalColorFields());
         txtCustomerPhone.setBackground(Colors.NormalColorFields());
@@ -415,10 +413,11 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
 
         jPanel3.setPreferredSize(new java.awt.Dimension(223, 338));
 
+        txtCustomerIdentificationNumber.setEnabled(false);
         txtCustomerIdentificationNumber.setPreferredSize(new java.awt.Dimension(211, 25));
-        txtCustomerIdentificationNumber.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtCustomerIdentificationNumberFocusGained(evt);
+        txtCustomerIdentificationNumber.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCustomerIdentificationNumberMouseClicked(evt);
             }
         });
 
@@ -601,7 +600,7 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
             String personFirstLastName = CHECKER.removeStringBlanks(txtCustomerFirstLastName.getText());
             String personSecondLastName = CHECKER.removeStringBlanks(txtCustomerSecondLastName.getText());//
             String personIdentificationType = sltCustomerIdentificationType.getSelectedItem().toString();
-            String personIdentificationNumber = CHECKER.removeStringBlanks(txtCustomerIdentificationNumber.getText());
+            String personIdentificationNumber = txtCustomerIdentificationNumber.getText();
             Date personBirthdate = dtCustomerBirthdate.getDate();
 
             String customerPhone = CHECKER.removeStringBlanks(txtCustomerPhone.getText());
@@ -612,33 +611,13 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
             Customer editCustomer = new Customer(customerPhone, customerAddress, customerEmail, customerInfo.isIsDelete(), person);
             editCustomer.setCustomerId(this.customerInfo.getCustomerId());
             try {
-                if (this.customerInfo.getPerson().getIdentificationNumber().equals(personIdentificationNumber)) {
-                    NEW_REQUEST_PERSON.editPerson(person);
-                    NEW_REQUEST_CUSTOMER.editCustomer(editCustomer);
-                } else {
-                    Customer findCustomer = NEW_REQUEST_CUSTOMER.getCustomerByDNI(personIdentificationNumber);
-                    
-                    if (findCustomer == null) {
-                        NEW_REQUEST_PERSON.savePerson(person);
-                        NEW_REQUEST_CUSTOMER.editCustomer(editCustomer);
-                        NEW_REQUEST_PERSON.deletePerson(customerInfo.getPerson().getIdentificationNumber());
-                    } else if (!findCustomer.isIsDelete()) {
-                        JOptionPane.showMessageDialog(this,
-                                "Esta identificación ya está asociada a un cliente, ve y corrigelo para intentarlo nuevamente",
-                                "Registro ya existente", 0);
-                        txtCustomerIdentificationNumber.setBackground(Colors.IncorrectColorFields());
-                        return;
-                    } else {
-                        NEW_REQUEST_CUSTOMER.deleteCustomer(this.customerInfo.getCustomerId());
-                        NEW_REQUEST_PERSON.deletePerson(this.customerInfo.getPerson().getIdentificationNumber());
+                
+                NEW_REQUEST_PERSON.editPerson(person);
+                NEW_REQUEST_CUSTOMER.editCustomer(editCustomer);
 
-                        NEW_REQUEST_PERSON.editPerson(person);
-                        editCustomer.setCustomerId(findCustomer.getCustomerId());
-                        NEW_REQUEST_CUSTOMER.editCustomer(editCustomer);
-                    }
-                }
                 JOptionPane.showMessageDialog(this, "La información ha sido cambiada correctamente", "Operación exitosa", 1);
                 returnCustomerList(personIdentificationNumber);
+                
             } catch (PreexistingEntityException ex) {
                 JOptionPane.showMessageDialog(this, "El numero de identificación ya está asociado a alguien.", "Identificación duplicada", 0);
                 txtCustomerIdentificationNumber.setBackground(Colors.IncorrectColorFields());
@@ -692,10 +671,6 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
         txtCustomerSecondLastName.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_txtCustomerSecondLastNameFocusGained
 
-    private void txtCustomerIdentificationNumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCustomerIdentificationNumberFocusGained
-        txtCustomerIdentificationNumber.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_txtCustomerIdentificationNumberFocusGained
-
     private void txtCustomerPhoneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCustomerPhoneFocusGained
         txtCustomerPhone.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_txtCustomerPhoneFocusGained
@@ -703,6 +678,13 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
     private void txtCustomerAddressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCustomerAddressFocusGained
         txtCustomerAddress.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_txtCustomerAddressFocusGained
+
+    private void txtCustomerIdentificationNumberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCustomerIdentificationNumberMouseClicked
+        String Message = "                      Por razones de seguridad este campo no es editable.";
+        String suggest = "\n\n Si el número de cédula es diferente, le recomendamos agregarla como un nuevo cliente.";
+        
+        JOptionPane.showMessageDialog(this, Message.concat(suggest) , "Acción invalida", 1);
+    }//GEN-LAST:event_txtCustomerIdentificationNumberMouseClicked
 
     private void dtCustomerBirthdateMouseClicked() {
         dtCustomerBirthdate.setBackground(Colors.NormalColorFields());
