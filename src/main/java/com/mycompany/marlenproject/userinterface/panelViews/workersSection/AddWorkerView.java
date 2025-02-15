@@ -588,8 +588,28 @@ public class AddWorkerView extends javax.swing.JPanel {
             Worker worker = new Worker(bloodType.concat(bloodTypeCmplt), healthEntity, dayLink, position, state, is_delete, person);
             
             try {
-                NEW_REQUEST_PERSON.savePerson(person);
-                NEW_REQUEST_WORKER.saveWorker(worker);
+                
+                
+                Worker existingWorker = NEW_REQUEST_WORKER.findWorkerByDNI(personIdentificationNumber);
+                Person existingPerson = NEW_REQUEST_PERSON.getPersonByDNI(personIdentificationNumber);
+                
+                if(existingPerson == null){
+                    NEW_REQUEST_PERSON.savePerson(person);
+                    NEW_REQUEST_WORKER.saveWorker(worker);
+                }else if(existingWorker != null && existingWorker.isIsDelete()) {
+                    worker.setWorkerId(existingWorker.getWorkerId());
+                    NEW_REQUEST_PERSON.editPerson(person);
+                    NEW_REQUEST_WORKER.editWorker(worker);
+                } else if (existingWorker != null && !existingWorker.isIsDelete()) {
+                    String Message = "          Esta cédula YA pertenece a un trabajador.";
+                    String suggest = "\n\n Por favor revise la lista de trabajadores y actualice los datos.";
+                    JOptionPane.showMessageDialog(this, Message.concat(suggest) , "Identificación duplicada", 0);
+                    return;
+                }else{
+                    NEW_REQUEST_PERSON.editPerson(person);
+                    NEW_REQUEST_WORKER.saveWorker(worker);
+                }
+                
                 JOptionPane.showMessageDialog(this, "El trabajador ha sido agregado correctamente", "Information", 1);
                 clearFields();
             } catch (PreexistingEntityException ex) {
