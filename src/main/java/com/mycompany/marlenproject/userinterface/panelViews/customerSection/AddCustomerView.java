@@ -525,27 +525,30 @@ public class AddCustomerView extends javax.swing.JPanel {
             String customerEmail = txtEmail.getText();
 
             Person person = new Person(personFirstName, personSecondName, personFirstLastName, personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
-
+            Customer customer = new Customer(customerPhone, customerAddress, customerEmail, false, person);
+            
             try {
                 Customer findCustomer = NEW_REQUEST_CUSTOMER.getCustomerByDNI(personIdentificationNumber);
-
-                if (findCustomer != null && findCustomer.isIsDelete()) {
+                Person existingPerson = NEW_REQUEST_PERSON.getPersonByDNI(personIdentificationNumber);
+                
+                if(existingPerson == null){
+                    NEW_REQUEST_PERSON.savePerson(person);
+                    NEW_REQUEST_CUSTOMER.saveCustomer(customer);
+                }else if(findCustomer != null && findCustomer.isIsDelete()) {
+                    customer.setCustomerId(findCustomer.getCustomerId());
                     NEW_REQUEST_PERSON.editPerson(person);
-                    findCustomer.setPhone(customerPhone);
-                    findCustomer.setAddress(customerAddress);
-                    findCustomer.setEmail(customerEmail);
-                    findCustomer.setIsDelete(false);
-                    NEW_REQUEST_CUSTOMER.editCustomer(findCustomer);
+                    NEW_REQUEST_CUSTOMER.editCustomer(customer);
 
                 } else if (findCustomer != null && !findCustomer.isIsDelete()) {
-
-                    JOptionPane.showMessageDialog(this, "El numero de identificación ya está asociado a alguien.", "Identificación duplicada", 0);
+                    String Message = "          Esta cédula YA pertenece a un cliente.";
+                    String suggest = "\n\n Por favor revise la lista de clientes y actualice los datos.";
+                    JOptionPane.showMessageDialog(this, Message.concat(suggest) , "Identificación duplicada", 0);
                     return;
-                } else {
-                    NEW_REQUEST_PERSON.savePerson(person);
-                    Customer customer = new Customer(customerPhone, customerAddress, customerEmail, false, person);
+                }else{
+                    NEW_REQUEST_PERSON.editPerson(person);
                     NEW_REQUEST_CUSTOMER.saveCustomer(customer);
                 }
+                
                 JOptionPane.showMessageDialog(this, "El cliente ha sido agregado correctamente", "Operación exitosa", 1);
                 clearFields();
 
