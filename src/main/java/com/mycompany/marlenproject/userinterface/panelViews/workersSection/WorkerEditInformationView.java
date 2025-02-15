@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class WorkerEditInformationView extends javax.swing.JFrame {
-    
+
     private final requestPerson NEW_REQUEST_PERSON = new requestPerson();
     private final requestWorker NEW_REQUEST_WORKER = new requestWorker();
     private final CheckFields CHECKER = new CheckFields();
@@ -81,7 +81,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
 
         sltState.setSelectedIndex(workerInfo.isIsActive() ? CBO.getIndexStateActive() : CBO.getIndexStateNoActive());
     }
-    
+
     private boolean changeColorRequiredField() {
         String personFirstName = CHECKER.removeStringBlanks(txtFirstName.getText());
         String personFirstLastName = CHECKER.removeStringBlanks(txtFirstLastName.getText());
@@ -174,7 +174,6 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         txtFirstLastName.setText("");
         txtSecondLastName.setText("");
         sltIdentificationType.setSelectedIndex(0);
-        txtIdentificationNumber.setText("");
         sltBloodType.setSelectedIndex(0);
         sltBloodTypeCmpl.setSelectedIndex(0);
         sltHealthEntity.setSelectedIndex(0);
@@ -182,13 +181,12 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         dateDayLink.setDate(null);
         sltPosition.setSelectedIndex(0);
         sltState.setSelectedIndex(0);
-        
+
         txtFirstName.setBackground(Colors.NormalColorFields());
         txtSecondName.setBackground(Colors.NormalColorFields());
         txtFirstLastName.setBackground(Colors.NormalColorFields());
         txtSecondLastName.setBackground(Colors.NormalColorFields());
         sltIdentificationType.setBackground(Colors.NormalColorFields());
-        txtIdentificationNumber.setBackground(Colors.NormalColorFields());
         sltBloodType.setBackground(Colors.NormalColorFields());
         sltBloodTypeCmpl.setBackground(Colors.NormalColorFields());
         sltHealthEntity.setBackground(Colors.NormalColorFields());
@@ -518,10 +516,11 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             }
         });
 
+        txtIdentificationNumber.setEnabled(false);
         txtIdentificationNumber.setPreferredSize(new java.awt.Dimension(211, 25));
-        txtIdentificationNumber.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtIdentificationNumberFocusGained(evt);
+        txtIdentificationNumber.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtIdentificationNumberMouseClicked(evt);
             }
         });
 
@@ -703,67 +702,46 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
             String personIdentificationNumber = CHECKER.removeStringBlanks(txtIdentificationNumber.getText());
             Date personBirthdate = dateBirthdate.getDate();
-            
+
             String bloodType = sltBloodType.getSelectedItem().toString();
             String bloodTypeCmplt = sltBloodTypeCmpl.getSelectedItem().toString();
             String healthEntity = sltHealthEntity.getSelectedItem().toString();
             Date dayLink = dateDayLink.getDate();
             String position = sltPosition.getSelectedItem().toString();
             boolean state = (sltState.getSelectedIndex() == CBO.getIndexStateActive());
-            
+
             Person person = new Person(personFirstName, personSecondName, personFirstLastName, personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
             Worker worker = new Worker(bloodType.concat(bloodTypeCmplt), healthEntity, dayLink, position, state, false, person);
             worker.setWorkerId(this.workerInfo.getWorkerId());
-            
+
             try {
-                
-                if (workerInfo.getPerson().getIdentificationNumber().equals(personIdentificationNumber)) {
-                    
-                    NEW_REQUEST_PERSON.editPerson(person);
-                    NEW_REQUEST_WORKER.editWorker(worker);
-                    
-                } else {
-                    
-                    Worker existingWorker = NEW_REQUEST_WORKER.findWorkerByDNI(personIdentificationNumber);
-                    
-                    if (existingWorker != null) {
-                        
-                        JOptionPane.showMessageDialog(this,"Esta identificación ya está asociada a un trabajador, ve y corrigelo para intentarlo nuevamente.", "Registro ya existente",0);
-                        txtIdentificationNumber.setBackground(Colors.IncorrectColorFields());
-                        return;
-                        
-                    } else {
-                        
-                        NEW_REQUEST_PERSON.savePerson(person);
-                        NEW_REQUEST_WORKER.editWorker(worker);
-                        NEW_REQUEST_PERSON.deletePerson(workerInfo.getPerson().getIdentificationNumber());
-                        
-                    }
-                }
-                
-                JOptionPane.showMessageDialog(this, "La información ha sido cambiada correctamente.","Operación exitosa",1);
+
+                NEW_REQUEST_PERSON.editPerson(person);
+                NEW_REQUEST_WORKER.editWorker(worker);
+
+                JOptionPane.showMessageDialog(this, "La información ha sido cambiada correctamente.", "Operación exitosa", 1);
                 returnWorkerInfo(personIdentificationNumber);
-                
+
             } catch (PreexistingEntityException ex) {
 
-                JOptionPane.showMessageDialog(this, "El numero de identificación ya está asociado a alguien.","Identificación duplicada",0);
+                JOptionPane.showMessageDialog(this, "El numero de identificación ya está asociado a alguien.", "Identificación duplicada", 0);
                 txtIdentificationNumber.setBackground(Colors.IncorrectColorFields());
 
             } catch (NonexistentEntityException ex) {
 
-                JOptionPane.showMessageDialog(this,"El numero de identificación no existe.","Identificación no existente",0);
+                JOptionPane.showMessageDialog(this, "El numero de identificación no existe.", "Identificación no existente", 0);
                 txtIdentificationNumber.setBackground(Colors.IncorrectColorFields());
 
             } catch (Exception ex) {
-                
+
                 Logger.getLogger(AddWorkerView.class.getName()).log(Level.SEVERE, null, ex);
-            
+
             }
         } else {
-            
-            JOptionPane.showMessageDialog(this,"Asegurese de que los campos en rojo estén correctamente diligenciados","Error en Campos",0);
+
+            JOptionPane.showMessageDialog(this, "Asegurese de que los campos en rojo estén correctamente diligenciados", "Error en Campos", 0);
             return;
-            
+
         }
         this.dispose();
         this.PRINCIPALJFRAME.setVisible(true);
@@ -810,10 +788,6 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         txtSecondLastName.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_txtSecondLastNameFocusGained
 
-    private void txtIdentificationNumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdentificationNumberFocusGained
-        txtIdentificationNumber.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_txtIdentificationNumberFocusGained
-
     private void sltHealthEntityFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sltHealthEntityFocusGained
         sltHealthEntity.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_sltHealthEntityFocusGained
@@ -822,11 +796,18 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         sltState.setBackground(Colors.NormalColorFields());
     }//GEN-LAST:event_sltStateFocusGained
 
-    private void dateBirthdateMouseClicked() { 
+    private void txtIdentificationNumberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdentificationNumberMouseClicked
+        String Message = "                      Por razones de seguridad este campo no es editable.";
+        String suggest = "\n\n Si el número de cédula es diferente, le recomendamos agregarla como un nuevo trabajador.";
+        
+        JOptionPane.showMessageDialog(this, Message.concat(suggest) , "Acción invalida", 1);
+    }//GEN-LAST:event_txtIdentificationNumberMouseClicked
+
+    private void dateBirthdateMouseClicked() {
         dateBirthdate.setBackground(Colors.NormalColorFields());
     }
-    
-    private void dateDayLinkMouseClicked() { 
+
+    private void dateDayLinkMouseClicked() {
         dateDayLink.setBackground(Colors.NormalColorFields());
     }
 
