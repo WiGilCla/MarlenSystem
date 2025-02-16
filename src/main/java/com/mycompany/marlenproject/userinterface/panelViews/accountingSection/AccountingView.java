@@ -41,14 +41,13 @@ public class AccountingView extends javax.swing.JPanel {
 
     public AccountingView(AdminHome principalJFrame, List<AccountBook> listBooks) {
         this.PRINCIPALJFRAME = principalJFrame;
-
-        initComponents();
         Books = listBooks;
+        initComponents();
         showAccountRecords(listBooks);
 
     }
-    
-    private boolean isDateInRange(Date starDate, Date endDate, Date dateToCheck){
+
+    private boolean isDateInRange(Date starDate, Date endDate, Date dateToCheck) {
         return (dateToCheck.after(starDate) && dateToCheck.before(endDate));
     }
 
@@ -57,13 +56,13 @@ public class AccountingView extends javax.swing.JPanel {
         LocalDateTime startOfDay = localDate.atStartOfDay();
         return Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
     }
-    
+
     private static Date setToendtOfDay(Date date) {
         LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDateTime endOfDay = localDate.atTime(23, 59, 59, 999_000_000);
         return Date.from(endOfDay.atZone(ZoneId.systemDefault()).toInstant());
     }
-    
+
     private void settingsBtnWatchRecord(JButton watchButton, AccountBook book) {
         watchButton.addActionListener(new ActionListener() {
             @Override
@@ -80,8 +79,6 @@ public class AccountingView extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 AccountBookView accountBookView = new AccountBookView(PRINCIPALJFRAME, book, true);
-                accountBookView.setSize(970, 576);
-                accountBookView.setLocation(0, 0);
                 PRINCIPALJFRAME.replacePanel(accountBookView);
             }
         });
@@ -91,10 +88,24 @@ public class AccountingView extends javax.swing.JPanel {
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int answer = JOptionPane.showOptionDialog(PRINCIPALJFRAME,
-                        "¿Está seguro de eliminar este registro?. Será eliminado permanentemente.",
-                        "Eliminar registro", 0, 1, null,
-                        new String[]{"Continuar", "Volver"}, null);
+//                int answer = JOptionPane.showOptionDialog(PRINCIPALJFRAME,
+//                        "\t\t\t¿Está seguro de eliminar este registro?. \n\n\n Será ELIMINADO PERMANENTEMENTE.",
+//                        "Eliminar registro", 0, 1, null,
+//                        new String[]{"Continuar", "Volver"}, null);
+
+                int answer = JOptionPane.showOptionDialog(
+    PRINCIPALJFRAME,
+    "<html>" +
+        "<body style='font-family: Arial, sans-serif;'>" + // Cambiar la fuente
+        "<p style='font-size: 16px; color: #2E8B57; text-align: center;'><b>¿Está seguro de eliminar este registro?</b></p>" + // Texto en negrita y color
+        "<p style='font-size: 14px; color: #8B0000; text-align: center;'>Será <b>ELIMINADO PERMANENTEMENTE</b>.</p>" + // Mensaje en color y negrita
+        "<br>" +
+        "</body>" +
+    "</html>",
+    "Eliminar registro", 0, 1, null,
+    new String[]{"Continuar", "Volver"}, null
+);
+
                 if (answer == 0) {
                     RequestAccountBook requestAccountBook = new RequestAccountBook();
                     RequestAccountBookRecord requestAccountBookRecord = new RequestAccountBookRecord();
@@ -124,7 +135,7 @@ public class AccountingView extends javax.swing.JPanel {
         RecordsPanel.removeAll();
         RecordsPanel.revalidate();
         RecordsPanel.repaint();
-        if(listBooks.isEmpty()){
+        if (listBooks.isEmpty()) {
             return;
         }
         JPanel contentPane = new JPanel();
@@ -505,35 +516,35 @@ public class AccountingView extends javax.swing.JPanel {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         List<AccountBook> filteredBooks = new ArrayList<>();
-        
+
         String filterWord = txtFilterText.getText();
-        Date starDate = (dtStarDate.getDate() != null)? setToStartOfDay(dtStarDate.getDate()): null;
-        Date endDate = (dtEndDate.getDate() != null)? setToendtOfDay(dtEndDate.getDate()): null;
-        
-        if(starDate != null && endDate != null && !starDate.before(endDate)){
+        Date starDate = (dtStarDate.getDate() != null) ? setToStartOfDay(dtStarDate.getDate()) : null;
+        Date endDate = (dtEndDate.getDate() != null) ? setToendtOfDay(dtEndDate.getDate()) : null;
+
+        if (starDate != null && endDate != null && !starDate.before(endDate)) {
             JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Error en el rango de fechas");
             return;
         }
-        
-        if(starDate == null && endDate == null && filterWord.isBlank()){
+
+        if (starDate == null && endDate == null && filterWord.isBlank()) {
             showAccountRecords(Books);
             return;
         }
-        
-        for(AccountBook book: this.Books){
-            if(!filterWord.isBlank() && (book.getTitleBook().toLowerCase().contains(filterWord) || 
-                    String.valueOf(book.getAccountBookId()).contains(filterWord))){
+
+        for (AccountBook book : this.Books) {
+            if (!filterWord.isBlank() && (book.getTitleBook().toLowerCase().contains(filterWord)
+                    || String.valueOf(book.getAccountBookId()).contains(filterWord))) {
                 filteredBooks.add(book);
-            }else if(starDate != null && endDate != null){
-                if(isDateInRange(starDate, endDate, book.getCreationDate())){
+            } else if (starDate != null && endDate != null) {
+                if (isDateInRange(starDate, endDate, book.getCreationDate())) {
                     filteredBooks.add(book);
                 }
-            }else if(starDate == null && endDate != null){
-                if(book.getCreationDate().before(endDate)){
+            } else if (starDate == null && endDate != null) {
+                if (book.getCreationDate().before(endDate)) {
                     filteredBooks.add(book);
                 }
-            }else if(endDate == null && starDate != null){
-                if(book.getCreationDate().after(starDate)){
+            } else if (endDate == null && starDate != null) {
+                if (book.getCreationDate().after(starDate)) {
                     filteredBooks.add(book);
                 }
             }
