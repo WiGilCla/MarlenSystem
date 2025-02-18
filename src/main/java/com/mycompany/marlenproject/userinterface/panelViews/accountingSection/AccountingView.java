@@ -33,16 +33,22 @@ public class AccountingView extends javax.swing.JPanel {
 
     private final AdminHome PRINCIPALJFRAME;
     private List<AccountBook> Books = new ArrayList<>();
+    private final RequestAccountBook NEW_REQUEST_ACCOUNTBOOK = new RequestAccountBook();
+    private final RequestAccountBookRecord NEW_REQUEST_RECORD = new RequestAccountBookRecord();
 
     public AccountingView(AdminHome principalJFrame, List<AccountBook> listBooks) {
         this.PRINCIPALJFRAME = principalJFrame;
-        Books = listBooks;
+        this.Books = listBooks;
         initComponents();
         showAccountRecords(listBooks);
 
     }
 
     private boolean isDateInRange(Date starDate, Date endDate, Date dateToCheck) {
+        if (starDate == null || endDate == null) {
+            return false;
+        }
+
         return (dateToCheck.after(starDate) && dateToCheck.before(endDate));
     }
 
@@ -68,12 +74,9 @@ public class AccountingView extends javax.swing.JPanel {
                     PRINCIPALJFRAME,
                     "<html>"
                     + "<body style='font-family: Arial, sans-serif;'>"
-                    + // Cambiar la fuente
-                    "<p style='font-size: 16px; color: #2E8B57; text-align: center;'><b>¿Está seguro de eliminar este registro?</b></p>"
-                    + // Texto en negrita y color
-                    "<p style='font-size: 14px; color: #8B0000; text-align: center;'>Será <b>ELIMINADO PERMANENTEMENTE</b>.</p>"
-                    + // Mensaje en color y negrita
-                    "<br>"
+                    + "<p style='font-size: 16px; color: #2E8B57; text-align: center;'><b>¿Está seguro de eliminar este registro?</b></p>"
+                    + "<p style='font-size: 14px; color: #8B0000; text-align: center;'>Será <b>ELIMINADO PERMANENTEMENTE</b>.</p>"
+                    + "<br>"
                     + "</body>"
                     + "</html>",
                     "Eliminar registro", 0, 1, null,
@@ -81,23 +84,18 @@ public class AccountingView extends javax.swing.JPanel {
             );
 
             if (answer == 0) {
-                RequestAccountBook requestAccountBook = new RequestAccountBook();
-                RequestAccountBookRecord requestAccountBookRecord = new RequestAccountBookRecord();
                 try {
-                    for (AccountBookRecords record : book.getListBookRecords()) {
-                        requestAccountBookRecord.deleteBookRecord(record);
-                    }
-                    requestAccountBook.deleteBook(book);
+                    NEW_REQUEST_RECORD.deleteRecordByBook(book);
+                    NEW_REQUEST_ACCOUNTBOOK.deleteBook(book);
+                    JOptionPane.showMessageDialog(PRINCIPALJFRAME,
+                            "El libro ha sido eliminado con exito", "Eliminación exitosa", 1);
+
                 } catch (Exception ex) {
                     Logger.getLogger(AccountingView.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                JOptionPane.showMessageDialog(PRINCIPALJFRAME,
-                        "El libro ha sido eliminado con exito", "Eliminación exitosa", 1);
 
-                List<AccountBook> listBooks = requestAccountBook.getBooks();
+                List<AccountBook> listBooks = NEW_REQUEST_ACCOUNTBOOK.getBooks();
                 AccountingView accountingView = new AccountingView(PRINCIPALJFRAME, listBooks);
-                accountingView.setSize(970, 576);
-                accountingView.setLocation(0, 0);
                 PRINCIPALJFRAME.replacePanel(accountingView);
             }
         });
@@ -116,7 +114,6 @@ public class AccountingView extends javax.swing.JPanel {
         contentPane.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         for (AccountBook book : listBooks) {
-            
 
             JPanel panelExterior = new JPanel();
             panelExterior.setLayout(new BoxLayout(panelExterior, BoxLayout.X_AXIS));
@@ -482,8 +479,6 @@ public class AccountingView extends javax.swing.JPanel {
 
     private void btnAddAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAccountActionPerformed
         AccountBookView accountBookView = new AccountBookView(this.PRINCIPALJFRAME, null, false);
-        accountBookView.setSize(970, 576);
-        accountBookView.setLocation(0, 0);
         this.PRINCIPALJFRAME.replacePanel(accountBookView);
     }//GEN-LAST:event_btnAddAccountActionPerformed
 
@@ -499,29 +494,20 @@ public class AccountingView extends javax.swing.JPanel {
             return;
         }
 
-        if (starDate == null && endDate == null && filterWord.isBlank()) {
-            showAccountRecords(Books);
-            return;
-        }
-
         for (AccountBook book : this.Books) {
-            if (!filterWord.isBlank() && (book.getTitleBook().toLowerCase().contains(filterWord)
-                    || String.valueOf(book.getAccountBookId()).contains(filterWord))) {
+            boolean textFilter = filterWord.isBlank()
+                    || book.getTitleBook().toLowerCase().contains(filterWord)
+                    || String.valueOf(book.getAccountBookId()).contains(filterWord);
+
+            boolean dateFilter = (starDate == null && endDate == null)
+                    || isDateInRange(starDate, endDate, book.getCreationDate())
+                    || (starDate == null && book.getCreationDate().before(endDate))
+                    || (endDate == null && book.getCreationDate().after(starDate));
+            if (textFilter && dateFilter) {
                 filteredBooks.add(book);
-            } else if (starDate != null && endDate != null) {
-                if (isDateInRange(starDate, endDate, book.getCreationDate())) {
-                    filteredBooks.add(book);
-                }
-            } else if (starDate == null && endDate != null) {
-                if (book.getCreationDate().before(endDate)) {
-                    filteredBooks.add(book);
-                }
-            } else if (endDate == null && starDate != null) {
-                if (book.getCreationDate().after(starDate)) {
-                    filteredBooks.add(book);
-                }
             }
         }
+        txtFilterText.setText("");
         showAccountRecords(filteredBooks);
     }//GEN-LAST:event_btnSearchActionPerformed
 

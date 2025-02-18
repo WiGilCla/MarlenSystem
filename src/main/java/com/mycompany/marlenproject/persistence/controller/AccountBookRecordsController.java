@@ -7,6 +7,7 @@ package com.mycompany.marlenproject.persistence.controller;
 import com.mycompany.marlenproject.logic.AccountBook;
 import com.mycompany.marlenproject.logic.AccountBookRecords;
 import com.mycompany.marlenproject.persistence.AccountBookRecordsJpaController;
+import com.mycompany.marlenproject.persistence.exceptions.NonexistentEntityException;
 import java.util.List;
 
 public class AccountBookRecordsController {
@@ -26,5 +27,9 @@ public class AccountBookRecordsController {
     
     public List<AccountBookRecords> getRecordsByBookIdController(AccountBook book_id){
         return BookRecordJPAController.findRecordsByBookId(book_id);
+    }
+    
+    public void deleteRecordByBookController(AccountBook accountBook) throws NonexistentEntityException{
+        BookRecordJPAController.deleteRecordByBook(accountBook);
     }
 }

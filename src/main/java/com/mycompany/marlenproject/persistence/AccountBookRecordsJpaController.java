@@ -23,6 +23,7 @@ public class AccountBookRecordsJpaController implements Serializable {
     public AccountBookRecordsJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
+
     public AccountBookRecordsJpaController() {
         this.emf = Persistence.createEntityManagerFactory("MarlenProjectPU");
     }
@@ -145,11 +146,45 @@ public class AccountBookRecordsJpaController implements Serializable {
             query.setParameter("accountBook", accountBook);
             return query.getResultList();
         } catch (Exception e) {
-            return null; 
+            return null;
         } finally {
             if (em != null) {
                 em.close();
             }
         }
     }
+
+    public void deleteRecordByBook(AccountBook accountBook) throws NonexistentEntityException {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            AccountBook managedAccountBook = em.find(AccountBook.class, accountBook.getAccountBookId());
+
+            if (managedAccountBook == null) {
+                throw new NonexistentEntityException("El AccountBook no exits.");
+            }
+
+            em.getTransaction().begin();
+
+            Query query = em.createQuery(
+                    "DELETE FROM AccountBookRecords abr WHERE abr.accountBook = :accountBook");
+
+            query.setParameter("accountBook", managedAccountBook);
+
+            int deletedCount = query.executeUpdate();
+
+            if (deletedCount == 0) {
+                throw new NonexistentEntityException("No se encontraron registros para eliminar.");
+            }
+            em.getTransaction().commit();
+
+        } catch (NonexistentEntityException e) {
+            throw new NonexistentEntityException("The accountBookRecords with id " + accountBook.getAccountBookId() + " no longer exists.", e);
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
 }
