@@ -9,12 +9,11 @@ import com.mycompany.marlenproject.logic.AccountBookRecords;
 import com.mycompany.marlenproject.logic.request.RequestAccountBook;
 import com.mycompany.marlenproject.logic.request.RequestAccountBookRecord;
 import com.mycompany.marlenproject.userinterface.AdminHome;
+import com.mycompany.marlenproject.utils.date.DateFunctions;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -651,8 +650,8 @@ public class AccountBookView extends javax.swing.JPanel {
                         new String[]{"Continuar", "Volver"}, null);
 
                 if (userChangeTitle == 0) {
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                    String day = sdf.format(new Date());
+                    
+                    String day = DateFunctions.dateFormatDD_MM_YY(new Date());
                     lbTitleBook.setText("Libro - ".concat(day));
                     titleBookChanged = true;
                 } else {
@@ -667,8 +666,8 @@ public class AccountBookView extends javax.swing.JPanel {
                         new String[]{"Continuar", "Volver"}, null);
 
                 if (userChangeNumber == 0) {
-                    SimpleDateFormat sdf = new SimpleDateFormat("HHmmss", Locale.getDefault());
-                    String datePart = sdf.format(new Date());
+                    
+                    String datePart = DateFunctions.dateFormatHH_MM_SS(new Date());
                     int randomPart = (int) (Math.random() * 1000);
                     String id = datePart + String.format("%03d", randomPart);
                     lbNumberBook.setText(String.valueOf(id));

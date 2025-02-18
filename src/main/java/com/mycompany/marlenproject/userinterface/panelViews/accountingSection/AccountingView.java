@@ -9,19 +9,14 @@ import com.mycompany.marlenproject.logic.AccountBookRecords;
 import com.mycompany.marlenproject.logic.request.RequestAccountBook;
 import com.mycompany.marlenproject.logic.request.RequestAccountBookRecord;
 import com.mycompany.marlenproject.userinterface.AdminHome;
+import com.mycompany.marlenproject.utils.date.DateFunctions;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -51,81 +46,59 @@ public class AccountingView extends javax.swing.JPanel {
         return (dateToCheck.after(starDate) && dateToCheck.before(endDate));
     }
 
-    private static Date setToStartOfDay(Date date) {
-        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDateTime startOfDay = localDate.atStartOfDay();
-        return Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
-    }
-
-    private static Date setToendtOfDay(Date date) {
-        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDateTime endOfDay = localDate.atTime(23, 59, 59, 999_000_000);
-        return Date.from(endOfDay.atZone(ZoneId.systemDefault()).toInstant());
-    }
-
     private void settingsBtnWatchRecord(JButton watchButton, AccountBook book) {
-        watchButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                BookView bookView = new BookView(book.getListBookRecords(), book);
-                bookView.setVisible(true);
-                bookView.setLocationRelativeTo(null);
-            }
+        watchButton.addActionListener((ActionEvent e) -> {
+            BookView bookView = new BookView(book.getListBookRecords(), book);
+            bookView.setVisible(true);
+            bookView.setLocationRelativeTo(null);
         });
     }
 
     private void settingsBtnEditRecord(JButton editButton, AccountBook book) {
-        editButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AccountBookView accountBookView = new AccountBookView(PRINCIPALJFRAME, book, true);
-                PRINCIPALJFRAME.replacePanel(accountBookView);
-            }
+        editButton.addActionListener((ActionEvent e) -> {
+            AccountBookView accountBookView = new AccountBookView(PRINCIPALJFRAME, book, true);
+            PRINCIPALJFRAME.replacePanel(accountBookView);
         });
     }
 
     private void settingsBtnDeleteRecord(JButton deleteButton, AccountBook book) {
-        deleteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-//                int answer = JOptionPane.showOptionDialog(PRINCIPALJFRAME,
-//                        "\t\t\t¿Está seguro de eliminar este registro?. \n\n\n Será ELIMINADO PERMANENTEMENTE.",
-//                        "Eliminar registro", 0, 1, null,
-//                        new String[]{"Continuar", "Volver"}, null);
+        deleteButton.addActionListener((ActionEvent e) -> {
 
-                int answer = JOptionPane.showOptionDialog(
-    PRINCIPALJFRAME,
-    "<html>" +
-        "<body style='font-family: Arial, sans-serif;'>" + // Cambiar la fuente
-        "<p style='font-size: 16px; color: #2E8B57; text-align: center;'><b>¿Está seguro de eliminar este registro?</b></p>" + // Texto en negrita y color
-        "<p style='font-size: 14px; color: #8B0000; text-align: center;'>Será <b>ELIMINADO PERMANENTEMENTE</b>.</p>" + // Mensaje en color y negrita
-        "<br>" +
-        "</body>" +
-    "</html>",
-    "Eliminar registro", 0, 1, null,
-    new String[]{"Continuar", "Volver"}, null
-);
+            int answer = JOptionPane.showOptionDialog(
+                    PRINCIPALJFRAME,
+                    "<html>"
+                    + "<body style='font-family: Arial, sans-serif;'>"
+                    + // Cambiar la fuente
+                    "<p style='font-size: 16px; color: #2E8B57; text-align: center;'><b>¿Está seguro de eliminar este registro?</b></p>"
+                    + // Texto en negrita y color
+                    "<p style='font-size: 14px; color: #8B0000; text-align: center;'>Será <b>ELIMINADO PERMANENTEMENTE</b>.</p>"
+                    + // Mensaje en color y negrita
+                    "<br>"
+                    + "</body>"
+                    + "</html>",
+                    "Eliminar registro", 0, 1, null,
+                    new String[]{"Continuar", "Volver"}, null
+            );
 
-                if (answer == 0) {
-                    RequestAccountBook requestAccountBook = new RequestAccountBook();
-                    RequestAccountBookRecord requestAccountBookRecord = new RequestAccountBookRecord();
-                    try {
-                        for (AccountBookRecords record : book.getListBookRecords()) {
-                            requestAccountBookRecord.deleteBookRecord(record);
-                        }
-                        requestAccountBook.deleteBook(book);
-                    } catch (Exception ex) {
-                        Logger.getLogger(AccountingView.class.getName()).log(Level.SEVERE, null, ex);
+            if (answer == 0) {
+                RequestAccountBook requestAccountBook = new RequestAccountBook();
+                RequestAccountBookRecord requestAccountBookRecord = new RequestAccountBookRecord();
+                try {
+                    for (AccountBookRecords record : book.getListBookRecords()) {
+                        requestAccountBookRecord.deleteBookRecord(record);
                     }
-                    JOptionPane.showMessageDialog(PRINCIPALJFRAME,
-                            "El libro ha sido eliminado con exito", "Eliminación exitosa", 1);
-
-                    List<AccountBook> listBooks = requestAccountBook.getBooks();
-                    AccountingView accountingView = new AccountingView(PRINCIPALJFRAME, listBooks);
-                    accountingView.setSize(970, 576);
-                    accountingView.setLocation(0, 0);
-                    PRINCIPALJFRAME.replacePanel(accountingView);
+                    requestAccountBook.deleteBook(book);
+                } catch (Exception ex) {
+                    Logger.getLogger(AccountingView.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                JOptionPane.showMessageDialog(PRINCIPALJFRAME,
+                        "El libro ha sido eliminado con exito", "Eliminación exitosa", 1);
+
+                List<AccountBook> listBooks = requestAccountBook.getBooks();
+                AccountingView accountingView = new AccountingView(PRINCIPALJFRAME, listBooks);
+                accountingView.setSize(970, 576);
+                accountingView.setLocation(0, 0);
+                PRINCIPALJFRAME.replacePanel(accountingView);
             }
         });
 
@@ -143,7 +116,7 @@ public class AccountingView extends javax.swing.JPanel {
         contentPane.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         for (AccountBook book : listBooks) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            
 
             JPanel panelExterior = new JPanel();
             panelExterior.setLayout(new BoxLayout(panelExterior, BoxLayout.X_AXIS));
@@ -171,7 +144,7 @@ public class AccountingView extends javax.swing.JPanel {
             dateRecordPanel.setPreferredSize(new Dimension(100, 44));
             dateRecordPanel.setMaximumSize(new Dimension(100, 44));
             dateRecordPanel.setBorder(new LineBorder(Color.GREEN));
-            JLabel dateRecordLabel = new JLabel(sdf.format(book.getCreationDate()));
+            JLabel dateRecordLabel = new JLabel(DateFunctions.dateFormatDD_MM_YY(book.getCreationDate()));
             dateRecordPanel.add(dateRecordLabel);
             dataPanel.add(dateRecordPanel);
 
@@ -518,8 +491,8 @@ public class AccountingView extends javax.swing.JPanel {
         List<AccountBook> filteredBooks = new ArrayList<>();
 
         String filterWord = txtFilterText.getText();
-        Date starDate = (dtStarDate.getDate() != null) ? setToStartOfDay(dtStarDate.getDate()) : null;
-        Date endDate = (dtEndDate.getDate() != null) ? setToendtOfDay(dtEndDate.getDate()) : null;
+        Date starDate = (dtStarDate.getDate() != null) ? DateFunctions.setToStartOfDay(dtStarDate.getDate()) : null;
+        Date endDate = (dtEndDate.getDate() != null) ? DateFunctions.setToendtOfDay(dtEndDate.getDate()) : null;
 
         if (starDate != null && endDate != null && !starDate.before(endDate)) {
             JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Error en el rango de fechas");

@@ -8,10 +8,9 @@ import com.mycompany.marlenproject.utils.fields.CheckFields;
 import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.logic.request.requestWorker;
 import com.mycompany.marlenproject.userinterface.AdminHome;
-import java.text.SimpleDateFormat;
+import com.mycompany.marlenproject.utils.date.DateFunctions;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -26,8 +25,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
 
     private void viewWorkerInformation(int index) {
         Worker worker = this.WORKER_LIST.get(index);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-
+        
         txtFirstName.setText(worker.getPerson().getFirstName());
         txtSecondName.setText(worker.getPerson().getSecondName());
         txtBloodType.setText(worker.getBloodType());
@@ -37,7 +35,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
         txtSecondLastName.setText(worker.getPerson().getSecondLastName());
         txtIdentificationType.setText(worker.getPerson().getIdentificationType());
         txtFirstLastName.setText(worker.getPerson().getFirstLastName());
-        txtDateVinculation.setText(sdf.format(worker.getDayLink()));
+        txtDateVinculation.setText(DateFunctions.dateFormatDD_MM_YY(worker.getDayLink()));
         txtIdentificationNum.setText(String.valueOf(worker.getPerson().getIdentificationNumber()));
         txtAge.setText(String.valueOf(CHECKER.timeElapsed(worker.getPerson().getBirthdate(), new Date())));
     }

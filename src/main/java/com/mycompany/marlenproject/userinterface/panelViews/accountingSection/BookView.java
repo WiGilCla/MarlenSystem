@@ -6,9 +6,8 @@ package com.mycompany.marlenproject.userinterface.panelViews.accountingSection;
 
 import com.mycompany.marlenproject.logic.AccountBook;
 import com.mycompany.marlenproject.logic.AccountBookRecords;
-import java.text.SimpleDateFormat;
+import com.mycompany.marlenproject.utils.date.DateFunctions;
 import java.util.List;
-import java.util.Locale;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -31,8 +30,8 @@ public class BookView extends javax.swing.JFrame {
                 return false;
             }
         };
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        String day = sdf.format(book.getCreationDate());
+        
+        String day = DateFunctions.dateFormatDD_MM_YY(book.getCreationDate());
         
         lbIdentificationBook.setText(book.getTitleBook().concat(" - ")
                 .concat(String.valueOf(book.getAccountBookId()))
