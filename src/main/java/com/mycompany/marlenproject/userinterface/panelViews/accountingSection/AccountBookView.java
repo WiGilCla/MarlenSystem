@@ -26,7 +26,8 @@ public class AccountBookView extends javax.swing.JPanel {
 
     private final ArrayList<AccountBookRecords> bookRecords = new ArrayList<>();
     private final ArrayList<AccountBookRecords> bookRecordsDeleted = new ArrayList<>();
-    private AccountBook bookInformation = new AccountBook();
+    private AccountBook CopiedBook = new AccountBook();
+    private final RequestAccountBook NEW_REQUEST_BOOK = new RequestAccountBook();
 
     private final AdminHome PRINCIPALJFRAME;
     private final int DEFAULT_ROWS = 10;
@@ -44,11 +45,8 @@ public class AccountBookView extends javax.swing.JPanel {
     }
 
     private void returnToAccountingView() {
-        RequestAccountBook requestBook = new RequestAccountBook();
-        List<AccountBook> listBooks = requestBook.getBooks();
+        List<AccountBook> listBooks = NEW_REQUEST_BOOK.getBooks();
         AccountingView accountingView = new AccountingView(PRINCIPALJFRAME, listBooks);
-        accountingView.setSize(970, 576);
-        accountingView.setLocation(0, 0);
         PRINCIPALJFRAME.replacePanel(accountingView);
     }
 
@@ -139,34 +137,37 @@ public class AccountBookView extends javax.swing.JPanel {
                 this.bookRecords.add(new AccountBookRecords(null, "", 0L, 0L));
             }
         } else {
-            int lastRecordAdded = 0;
-            lbNumberBook.setText(String.valueOf(book.getAccountBookId()));
-            lbNumberBook.setEnabled(false);
+            this.CopiedBook = new AccountBook(book.getAccountBookId(),
+                    book.getCreationDate(), book.getTitleBook(), this.bookRecords);
+            int indexRow = 0;
+
+            for (AccountBookRecords record : book.getListBookRecords()) {
+
+                AccountBookRecords copiedRecord = new AccountBookRecords(record.getAccountBookId(),
+                        record.getDescription(), record.getCashInflow(), record.getCashExpenses());
+                copiedRecord.setRecordId(record.getRecordId());
+                
+                this.bookRecords.add(copiedRecord);
+
+                modelTable.addRow(new Object[]{indexRow + 1, copiedRecord.getDescription(),
+                    copiedRecord.getCashInflow(), copiedRecord.getCashExpenses()});
+                
+                indexRow++;
+                totalIncome += copiedRecord.getCashInflow();
+                totalExpense += copiedRecord.getCashExpenses();
+            }
+            
+            modelTable.addRow(createEmptyRow(String.valueOf(this.bookRecords.size() + 1)));
+            bookRecords.add(new AccountBookRecords(null, "", 0L, 0L));
 
             lbTitleBook.setText(book.getTitleBook());
             titleBookChanged = true;
-
-            for (AccountBookRecords record : book.getListBookRecords()) {
-                this.bookRecords.add(new AccountBookRecords(record.getAccountBookId(),
-                        record.getDescription(), record.getCashInflow(), record.getCashExpenses()));
-                this.bookRecords.get(lastRecordAdded).setRecordId(record.getRecordId());
-                lastRecordAdded++;
-                totalIncome += record.getCashInflow();
-                totalExpense += record.getCashExpenses();
-
-                lbTotal_In.setText(formatNumber(totalIncome));
-                lbTotal_Ex.setText(formatNumber(totalExpense));
-                lbTotal_InEx.setText(formatNumber((totalIncome - totalExpense)));
-
-            }
-            this.bookInformation = new AccountBook(book.getAccountBookId(),
-                    book.getCreationDate(), book.getTitleBook(), book.getListBookRecords());
-            for (int i = 0; i < this.bookRecords.size(); i++) {
-                modelTable.addRow(new Object[]{i + 1, this.bookRecords.get(i).getDescription(),
-                    this.bookRecords.get(i).getCashInflow(), this.bookRecords.get(i).getCashExpenses()});
-            }
-            modelTable.addRow(createEmptyRow(String.valueOf(this.bookRecords.size() + 1)));
-            bookRecords.add(new AccountBookRecords(null, "", 0L, 0L));
+            lbNumberBook.setText(String.valueOf(book.getAccountBookId()));
+            lbNumberBook.setEnabled(false);
+            lbTotal_In.setText(formatNumber(totalIncome));
+            lbTotal_Ex.setText(formatNumber(totalExpense));
+            lbTotal_InEx.setText(formatNumber((totalIncome - totalExpense)));
+            
         }
 
         modelTable.addTableModelListener((TableModelEvent e) -> {
@@ -548,7 +549,7 @@ public class AccountBookView extends javax.swing.JPanel {
             lbTitleBook.setText(newTitleBook.toUpperCase());
             titleBookChanged = true;
             if (isEditingABook) {
-                this.bookInformation.setTitleBook(newTitleBook.toUpperCase());
+                this.CopiedBook.setTitleBook(newTitleBook.toUpperCase());
             }
         }
     }//GEN-LAST:event_lbTitleBookMouseClicked
@@ -650,7 +651,7 @@ public class AccountBookView extends javax.swing.JPanel {
                         new String[]{"Continuar", "Volver"}, null);
 
                 if (userChangeTitle == 0) {
-                    
+
                     String day = DateFunctions.dateFormatDD_MM_YY(new Date());
                     lbTitleBook.setText("Libro - ".concat(day));
                     titleBookChanged = true;
@@ -666,7 +667,7 @@ public class AccountBookView extends javax.swing.JPanel {
                         new String[]{"Continuar", "Volver"}, null);
 
                 if (userChangeNumber == 0) {
-                    
+
                     String datePart = DateFunctions.dateFormatHH_MM_SS(new Date());
                     int randomPart = (int) (Math.random() * 1000);
                     String id = datePart + String.format("%03d", randomPart);
@@ -705,7 +706,7 @@ public class AccountBookView extends javax.swing.JPanel {
                     AccountBook newBook = new AccountBook(Integer.parseInt(lbNumberBook.getText()),
                             new Date(), lbTitleBook.getText(), null);
                     bookRequest.saveBook(newBook);
-                    
+
                     for (AccountBookRecords record : bookRecords) {
                         if (!record.getDescription().isBlank()) {
                             record.setAccountBookId(newBook);
@@ -732,13 +733,13 @@ public class AccountBookView extends javax.swing.JPanel {
                     for (AccountBookRecords editeRecord : bookRecords) {
                         if (!editeRecord.getDescription().isBlank()) {
                             if (editeRecord.getAccountBookId() == null) {
-                                editeRecord.setAccountBookId(bookInformation);
+                                editeRecord.setAccountBookId(CopiedBook);
                             }
                             recordRequest.editBookRecord(editeRecord);
                         }
                     }
-                    bookInformation.setListBookRecords(recordRequest.getRecordsByBookId(bookInformation));
-                    bookRequest.editBook(bookInformation);
+                    CopiedBook.setListBookRecords(recordRequest.getRecordsByBookId(CopiedBook));
+                    bookRequest.editBook(CopiedBook);
                     JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Los cambios se han guardado exitosamente.");
 
                 } catch (Exception ex) {
