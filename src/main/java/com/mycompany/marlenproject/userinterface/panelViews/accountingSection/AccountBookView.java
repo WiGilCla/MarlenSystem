@@ -119,6 +119,34 @@ public class AccountBookView extends javax.swing.JPanel {
         }
     }
 
+    private boolean addedContentLastRow(DefaultTableModel modelTable, int lastRow) {
+
+        for (int col = 1; col < modelTable.getColumnCount(); col++) {
+            Object value = modelTable.getValueAt(lastRow, col);
+            if (value != null && !value.toString().trim().isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void tableModelUpdate(TableModelEvent e, DefaultTableModel modelTable, int editedColumn, int editedRow) {
+
+        if (editedColumn == getIndexFromHeader("Ingresos")) {
+            
+            updateCellValue(editedRow, editedColumn, false, modelTable);
+        } else if (editedColumn == getIndexFromHeader("Gastos")) {
+            updateCellValue(editedRow, editedColumn, true, modelTable);
+        } else if (editedColumn == getIndexFromHeader("Descripción")) {
+            bookRecords.get(editedRow).setDescription((String) modelTable.getValueAt(editedRow, editedColumn));
+        }
+
+        lbTotal_In.setText(formatNumber(totalIncome));
+        lbTotal_Ex.setText(formatNumber(totalExpense));
+        lbTotal_InEx.setText(formatNumber((totalIncome - totalExpense)));
+        isUpdating = false;
+    }
+
     private void loadTable(AccountBook book) {
 
         DefaultTableModel modelTable = new DefaultTableModel() {
@@ -146,17 +174,17 @@ public class AccountBookView extends javax.swing.JPanel {
                 AccountBookRecords copiedRecord = new AccountBookRecords(record.getAccountBookId(),
                         record.getDescription(), record.getCashInflow(), record.getCashExpenses());
                 copiedRecord.setRecordId(record.getRecordId());
-                
+
                 this.bookRecords.add(copiedRecord);
 
                 modelTable.addRow(new Object[]{indexRow + 1, copiedRecord.getDescription(),
                     copiedRecord.getCashInflow(), copiedRecord.getCashExpenses()});
-                
+
                 indexRow++;
                 totalIncome += copiedRecord.getCashInflow();
                 totalExpense += copiedRecord.getCashExpenses();
             }
-            
+
             modelTable.addRow(createEmptyRow(String.valueOf(this.bookRecords.size() + 1)));
             bookRecords.add(new AccountBookRecords(null, "", 0L, 0L));
 
@@ -167,7 +195,7 @@ public class AccountBookView extends javax.swing.JPanel {
             lbTotal_In.setText(formatNumber(totalIncome));
             lbTotal_Ex.setText(formatNumber(totalExpense));
             lbTotal_InEx.setText(formatNumber((totalIncome - totalExpense)));
-            
+
         }
 
         modelTable.addTableModelListener((TableModelEvent e) -> {
@@ -175,37 +203,22 @@ public class AccountBookView extends javax.swing.JPanel {
                 if (isUpdating) {
                     return;
                 }
-
                 isUpdating = true;
 
                 int editedRow = e.getFirstRow();
                 int editedColumn = e.getColumn();
                 int lastRow = modelTable.getRowCount() - 1;
 
-                if (editedRow == lastRow) {
-                    for (int col = 1; col < modelTable.getColumnCount(); col++) {
-                        Object value = modelTable.getValueAt(lastRow, col);
-                        if (value != null && !value.toString().trim().isEmpty()) {
-                            Object[] row = createEmptyRow(String.valueOf(modelTable.getRowCount() + 1));
-                            modelTable.addRow(row);
-                            this.bookRecords.add(new AccountBookRecords(null, "", 0L, 0L));
-                            break;
-                        }
-                    }
-                }
+                if (editedRow == lastRow && addedContentLastRow(modelTable, lastRow)) {
 
-                if (editedColumn == getIndexFromHeader("Ingresos")) {
-                    updateCellValue(editedRow, editedColumn, false, modelTable);
-                } else if (editedColumn == getIndexFromHeader("Gastos")) {
-                    updateCellValue(editedRow, editedColumn, true, modelTable);
-                } else if (editedColumn == getIndexFromHeader("Descripción")) {
-                    bookRecords.get(editedRow).setDescription((String) modelTable.getValueAt(editedRow, editedColumn));
-                }
+                    Object[] row = createEmptyRow(String.valueOf(modelTable.getRowCount() + 1));
+                    modelTable.addRow(row);
+                    this.bookRecords.add(new AccountBookRecords(null, "", 0L, 0L));
 
-                lbTotal_In.setText(formatNumber(totalIncome));
-                lbTotal_Ex.setText(formatNumber(totalExpense));
-                lbTotal_InEx.setText(formatNumber((totalIncome - totalExpense)));
-                isUpdating = false;
+                }
+                
+                
+                tableModelUpdate(e, modelTable, editedColumn, editedRow);
             }
         });
 
