@@ -22,7 +22,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 
-public class AccountBookView extends javax.swing.JPanel {
+public class EditAccountBookView extends javax.swing.JPanel {
 
     private final ArrayList<AccountBookRecords> bookRecords = new ArrayList<>();
     private final ArrayList<AccountBookRecords> bookRecordsDeleted = new ArrayList<>();
@@ -59,13 +59,26 @@ public class AccountBookView extends javax.swing.JPanel {
         return -1;
     }
 
+    private void updateTotalInflowCount(int editedRow, long value) {
+        totalIncome -= bookRecords.get(editedRow).getCashInflow();
+        bookRecords.get(editedRow).setCashInflow(value);
+        totalIncome += bookRecords.get(editedRow).getCashInflow();
+    }
+
+    private void updateTotalExpenseCount(int editedRow, long value) {
+        totalExpense -= bookRecords.get(editedRow).getCashExpenses();
+        bookRecords.get(editedRow).setCashExpenses(value);
+        totalExpense += bookRecords.get(editedRow).getCashExpenses();
+    }
+
     private void updateCellValue(int editedRow, int editedColumn, boolean isExpense, DefaultTableModel modelTable) {
         String newValue = modelTable.getValueAt(editedRow, editedColumn).toString();
         int index = Integer.parseInt(modelTable.getValueAt(editedRow, 0).toString());
 
         if (isIntegerOrLong(newValue)) {
             long newValueLong = Long.parseLong(newValue);
-            Object newValueFormat = formatNumber(newValueLong);
+
+            Object newValueFormat = formatNumberWithDots(newValueLong);
             modelTable.setValueAt(newValueFormat, editedRow, editedColumn);
             if (isExpense) {
                 totalExpense -= bookRecords.get(index - 1).getCashExpenses();
@@ -81,16 +94,16 @@ public class AccountBookView extends javax.swing.JPanel {
                     "Error de número", JOptionPane.ERROR_MESSAGE);
 
             if (isExpense) {
-                Object oldValue = formatNumber(bookRecords.get(index - 1).getCashExpenses());
+                Object oldValue = formatNumberWithDots(bookRecords.get(index - 1).getCashExpenses());
                 modelTable.setValueAt(oldValue, editedRow, editedColumn);
             } else {
-                Object oldValue = formatNumber(bookRecords.get(index - 1).getCashInflow());
+                Object oldValue = formatNumberWithDots(bookRecords.get(index - 1).getCashInflow());
                 modelTable.setValueAt(oldValue, editedRow, editedColumn);
             }
         }
     }
 
-    private String formatNumber(long number) {
+    private String formatNumberWithDots(long number) {
         DecimalFormat decimalFormat = new DecimalFormat("#,###");
 
         decimalFormat.setGroupingUsed(true);
@@ -130,20 +143,26 @@ public class AccountBookView extends javax.swing.JPanel {
         return false;
     }
 
-    private void tableModelUpdate(TableModelEvent e, DefaultTableModel modelTable, int editedColumn, int editedRow) {
+    private void updateInformation(DefaultTableModel modelTable, int editedColumn, int editedRow) {
+        String valueAdded = modelTable.getValueAt(editedRow, editedColumn).toString();
 
-        if (editedColumn == getIndexFromHeader("Ingresos")) {
+        if (editedColumn == getIndexFromHeader("Ingresos") && isIntegerOrLong(valueAdded)) {
+
+            updateTotalInflowCount(editedRow, Long.parseLong(valueAdded));
+            modelTable.setValueAt((Object) formatNumberWithDots(Long.parseLong(valueAdded)), editedRow, editedColumn);
             
-            updateCellValue(editedRow, editedColumn, false, modelTable);
-        } else if (editedColumn == getIndexFromHeader("Gastos")) {
-            updateCellValue(editedRow, editedColumn, true, modelTable);
+        } else if (editedColumn == getIndexFromHeader("Gastos") && isIntegerOrLong(valueAdded)) {
+            
+            updateTotalExpenseCount(editedRow, Long.parseLong(valueAdded));
+            modelTable.setValueAt((Object) formatNumberWithDots(Long.parseLong(valueAdded)), editedRow, editedColumn);
+        
         } else if (editedColumn == getIndexFromHeader("Descripción")) {
             bookRecords.get(editedRow).setDescription((String) modelTable.getValueAt(editedRow, editedColumn));
         }
 
-        lbTotal_In.setText(formatNumber(totalIncome));
-        lbTotal_Ex.setText(formatNumber(totalExpense));
-        lbTotal_InEx.setText(formatNumber((totalIncome - totalExpense)));
+        lbTotal_In.setText(formatNumberWithDots(totalIncome));
+        lbTotal_Ex.setText(formatNumberWithDots(totalExpense));
+        lbTotal_InEx.setText(formatNumberWithDots((totalIncome - totalExpense)));
         isUpdating = false;
     }
 
@@ -192,9 +211,9 @@ public class AccountBookView extends javax.swing.JPanel {
             titleBookChanged = true;
             lbNumberBook.setText(String.valueOf(book.getAccountBookId()));
             lbNumberBook.setEnabled(false);
-            lbTotal_In.setText(formatNumber(totalIncome));
-            lbTotal_Ex.setText(formatNumber(totalExpense));
-            lbTotal_InEx.setText(formatNumber((totalIncome - totalExpense)));
+            lbTotal_In.setText(formatNumberWithDots(totalIncome));
+            lbTotal_Ex.setText(formatNumberWithDots(totalExpense));
+            lbTotal_InEx.setText(formatNumberWithDots((totalIncome - totalExpense)));
 
         }
 
@@ -216,9 +235,8 @@ public class AccountBookView extends javax.swing.JPanel {
                     this.bookRecords.add(new AccountBookRecords(null, "", 0L, 0L));
 
                 }
-                
-                
-                tableModelUpdate(e, modelTable, editedColumn, editedRow);
+
+                updateInformation(modelTable, editedColumn, editedRow);
             }
         });
 
@@ -239,7 +257,7 @@ public class AccountBookView extends javax.swing.JPanel {
         recordsAccountTable.setRowHeight(25);
     }
 
-    public AccountBookView(AdminHome principalJFrame,
+    public EditAccountBookView(AdminHome principalJFrame,
             AccountBook book, boolean isEditingABook) {
 
         this.PRINCIPALJFRAME = principalJFrame;
@@ -731,7 +749,7 @@ public class AccountBookView extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(PRINCIPALJFRAME, "El libro se guardado exitosamente.");
 
                 } catch (Exception ex) {
-                    Logger.getLogger(AccountBookView.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(EditAccountBookView.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 returnToAccountingView();
@@ -756,7 +774,7 @@ public class AccountBookView extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Los cambios se han guardado exitosamente.");
 
                 } catch (Exception ex) {
-                    Logger.getLogger(AccountBookView.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(EditAccountBookView.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 returnToAccountingView();
             }

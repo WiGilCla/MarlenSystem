@@ -62,8 +62,8 @@ public class AccountingView extends javax.swing.JPanel {
 
     private void settingsBtnEditRecord(JButton editButton, AccountBook book) {
         editButton.addActionListener((ActionEvent e) -> {
-            AccountBookView accountBookView = new AccountBookView(PRINCIPALJFRAME, book, true);
-            PRINCIPALJFRAME.replacePanel(accountBookView);
+            EditAccountBookView editAccountBookView = new EditAccountBookView(this.PRINCIPALJFRAME, book, true);
+            this.PRINCIPALJFRAME.replacePanel(editAccountBookView);
         });
     }
 
@@ -478,7 +478,7 @@ public class AccountingView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAccountActionPerformed
-        AccountBookView accountBookView = new AccountBookView(this.PRINCIPALJFRAME, null, false);
+        AddAccountBookView accountBookView = new AddAccountBookView(this.PRINCIPALJFRAME);
         this.PRINCIPALJFRAME.replacePanel(accountBookView);
     }//GEN-LAST:event_btnAddAccountActionPerformed
 
