@@ -62,7 +62,7 @@ public class AccountingView extends javax.swing.JPanel {
 
     private void settingsBtnEditRecord(JButton editButton, AccountBook book) {
         editButton.addActionListener((ActionEvent e) -> {
-            EditAccountBookView editAccountBookView = new EditAccountBookView(this.PRINCIPALJFRAME, book, true);
+            EditAccountBookView editAccountBookView = new EditAccountBookView(this.PRINCIPALJFRAME, book);
             this.PRINCIPALJFRAME.replacePanel(editAccountBookView);
         });
     }

@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
@@ -24,19 +25,17 @@ import javax.swing.table.DefaultTableModel;
 
 public class EditAccountBookView extends javax.swing.JPanel {
 
-    private final ArrayList<AccountBookRecords> bookRecords = new ArrayList<>();
+    private AccountBook copyBook = new AccountBook();
+    private AccountBook originalBook = new AccountBook();
+    private final ArrayList<AccountBookRecords> copyBookRecords = new ArrayList<>();
     private final ArrayList<AccountBookRecords> bookRecordsDeleted = new ArrayList<>();
-    private AccountBook CopiedBook = new AccountBook();
     private final RequestAccountBook NEW_REQUEST_BOOK = new RequestAccountBook();
+    private final RequestAccountBookRecord NEW_REQUEST_RECORD = new RequestAccountBookRecord();
 
     private final AdminHome PRINCIPALJFRAME;
-    private final int DEFAULT_ROWS = 10;
     private long totalIncome = 0L;
     private long totalExpense = 0L;
     private boolean isUpdating = false;
-    private boolean titleBookChanged = false;
-    private boolean NumberBookChanged = false;
-    private boolean isEditingABook = false;
     private final String[] HEADER = {"N°", "Descripción", "Ingresos", "Gastos"};
 
     private Object[] createEmptyRow(String indexRow) {
@@ -60,47 +59,15 @@ public class EditAccountBookView extends javax.swing.JPanel {
     }
 
     private void updateTotalInflowCount(int editedRow, long value) {
-        totalIncome -= bookRecords.get(editedRow).getCashInflow();
-        bookRecords.get(editedRow).setCashInflow(value);
-        totalIncome += bookRecords.get(editedRow).getCashInflow();
+        totalIncome -= copyBookRecords.get(editedRow).getCashInflow();
+        copyBookRecords.get(editedRow).setCashInflow(value);
+        totalIncome += copyBookRecords.get(editedRow).getCashInflow();
     }
 
     private void updateTotalExpenseCount(int editedRow, long value) {
-        totalExpense -= bookRecords.get(editedRow).getCashExpenses();
-        bookRecords.get(editedRow).setCashExpenses(value);
-        totalExpense += bookRecords.get(editedRow).getCashExpenses();
-    }
-
-    private void updateCellValue(int editedRow, int editedColumn, boolean isExpense, DefaultTableModel modelTable) {
-        String newValue = modelTable.getValueAt(editedRow, editedColumn).toString();
-        int index = Integer.parseInt(modelTable.getValueAt(editedRow, 0).toString());
-
-        if (isIntegerOrLong(newValue)) {
-            long newValueLong = Long.parseLong(newValue);
-
-            Object newValueFormat = formatNumberWithDots(newValueLong);
-            modelTable.setValueAt(newValueFormat, editedRow, editedColumn);
-            if (isExpense) {
-                totalExpense -= bookRecords.get(index - 1).getCashExpenses();
-                bookRecords.get(index - 1).setCashExpenses(newValueLong);
-                totalExpense += bookRecords.get(index - 1).getCashExpenses();
-            } else {
-                totalIncome -= bookRecords.get(index - 1).getCashInflow();
-                bookRecords.get(index - 1).setCashInflow(newValueLong);
-                totalIncome += bookRecords.get(index - 1).getCashInflow();
-            }
-        } else {
-            JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Solo se aceptan números, sin espacios ni comas.",
-                    "Error de número", JOptionPane.ERROR_MESSAGE);
-
-            if (isExpense) {
-                Object oldValue = formatNumberWithDots(bookRecords.get(index - 1).getCashExpenses());
-                modelTable.setValueAt(oldValue, editedRow, editedColumn);
-            } else {
-                Object oldValue = formatNumberWithDots(bookRecords.get(index - 1).getCashInflow());
-                modelTable.setValueAt(oldValue, editedRow, editedColumn);
-            }
-        }
+        totalExpense -= copyBookRecords.get(editedRow).getCashExpenses();
+        copyBookRecords.get(editedRow).setCashExpenses(value);
+        totalExpense += copyBookRecords.get(editedRow).getCashExpenses();
     }
 
     private String formatNumberWithDots(long number) {
@@ -132,7 +99,7 @@ public class EditAccountBookView extends javax.swing.JPanel {
         }
     }
 
-    private boolean addedContentLastRow(DefaultTableModel modelTable, int lastRow) {
+    private boolean isContentInLastRow(DefaultTableModel modelTable, int lastRow) {
 
         for (int col = 1; col < modelTable.getColumnCount(); col++) {
             Object value = modelTable.getValueAt(lastRow, col);
@@ -143,27 +110,12 @@ public class EditAccountBookView extends javax.swing.JPanel {
         return false;
     }
 
-    private void updateInformation(DefaultTableModel modelTable, int editedColumn, int editedRow) {
-        String valueAdded = modelTable.getValueAt(editedRow, editedColumn).toString();
+    public EditAccountBookView(AdminHome principalJFrame, AccountBook book) {
 
-        if (editedColumn == getIndexFromHeader("Ingresos") && isIntegerOrLong(valueAdded)) {
-
-            updateTotalInflowCount(editedRow, Long.parseLong(valueAdded));
-            modelTable.setValueAt((Object) formatNumberWithDots(Long.parseLong(valueAdded)), editedRow, editedColumn);
-            
-        } else if (editedColumn == getIndexFromHeader("Gastos") && isIntegerOrLong(valueAdded)) {
-            
-            updateTotalExpenseCount(editedRow, Long.parseLong(valueAdded));
-            modelTable.setValueAt((Object) formatNumberWithDots(Long.parseLong(valueAdded)), editedRow, editedColumn);
-        
-        } else if (editedColumn == getIndexFromHeader("Descripción")) {
-            bookRecords.get(editedRow).setDescription((String) modelTable.getValueAt(editedRow, editedColumn));
-        }
-
-        lbTotal_In.setText(formatNumberWithDots(totalIncome));
-        lbTotal_Ex.setText(formatNumberWithDots(totalExpense));
-        lbTotal_InEx.setText(formatNumberWithDots((totalIncome - totalExpense)));
-        isUpdating = false;
+        this.PRINCIPALJFRAME = principalJFrame;
+        this.originalBook = book;
+        initComponents();
+        loadTable(this.originalBook);
     }
 
     private void loadTable(AccountBook book) {
@@ -178,45 +130,44 @@ public class EditAccountBookView extends javax.swing.JPanel {
         String[] tableHead = this.HEADER;
         modelTable.setColumnIdentifiers(tableHead);
 
-        if (!isEditingABook) {
-            for (int i = 0; i < DEFAULT_ROWS; i++) {
-                modelTable.addRow(createEmptyRow(String.valueOf(i + 1)));
-                this.bookRecords.add(new AccountBookRecords(null, "", 0L, 0L));
-            }
-        } else {
-            this.CopiedBook = new AccountBook(book.getAccountBookId(),
-                    book.getCreationDate(), book.getTitleBook(), this.bookRecords);
-            int indexRow = 0;
+        int indexRow = 0;
 
-            for (AccountBookRecords record : book.getListBookRecords()) {
+        for (AccountBookRecords record : book.getListBookRecords()) {
 
-                AccountBookRecords copiedRecord = new AccountBookRecords(record.getAccountBookId(),
-                        record.getDescription(), record.getCashInflow(), record.getCashExpenses());
-                copiedRecord.setRecordId(record.getRecordId());
+            AccountBookRecords copyRecord = new AccountBookRecords(record.getAccountBookId(),
+                    record.getDescription(), record.getCashInflow(), record.getCashExpenses());
+            copyRecord.setRecordId(record.getRecordId());
 
-                this.bookRecords.add(copiedRecord);
+            this.copyBookRecords.add(copyRecord);
 
-                modelTable.addRow(new Object[]{indexRow + 1, copiedRecord.getDescription(),
-                    copiedRecord.getCashInflow(), copiedRecord.getCashExpenses()});
+            modelTable.addRow(new Object[]{indexRow + 1, copyRecord.getDescription(),
+                copyRecord.getCashInflow(), copyRecord.getCashExpenses()});
 
-                indexRow++;
-                totalIncome += copiedRecord.getCashInflow();
-                totalExpense += copiedRecord.getCashExpenses();
-            }
-
-            modelTable.addRow(createEmptyRow(String.valueOf(this.bookRecords.size() + 1)));
-            bookRecords.add(new AccountBookRecords(null, "", 0L, 0L));
-
-            lbTitleBook.setText(book.getTitleBook());
-            titleBookChanged = true;
-            lbNumberBook.setText(String.valueOf(book.getAccountBookId()));
-            lbNumberBook.setEnabled(false);
-            lbTotal_In.setText(formatNumberWithDots(totalIncome));
-            lbTotal_Ex.setText(formatNumberWithDots(totalExpense));
-            lbTotal_InEx.setText(formatNumberWithDots((totalIncome - totalExpense)));
-
+            indexRow++;
+            totalIncome += copyRecord.getCashInflow();
+            totalExpense += copyRecord.getCashExpenses();
         }
 
+        this.copyBook = new AccountBook(book.getAccountBookId(),
+                book.getCreationDate(), book.getTitleBook(), this.copyBookRecords);
+
+        modelTable.addRow(createEmptyRow(String.valueOf(this.copyBookRecords.size() + 1)));
+        copyBookRecords.add(new AccountBookRecords(null, "", 0L, 0L));
+
+        lbTitleBook.setText(book.getTitleBook());
+        lbNumberBook.setText(String.valueOf(book.getAccountBookId()));
+        lbNumberBook.setEnabled(false);
+        lbTotal_In.setText(formatNumberWithDots(totalIncome));
+        lbTotal_Ex.setText(formatNumberWithDots(totalExpense));
+        lbTotal_InEx.setText(formatNumberWithDots((totalIncome - totalExpense)));
+
+        addTableModelListener(modelTable);
+        addListSelectionModelListener(recordsAccountTable.getSelectionModel());
+        recordsAccountTable.setModel(modelTable);
+        recordsAccountTable.setRowHeight(25);
+    }
+
+    private void addTableModelListener(DefaultTableModel modelTable) {
         modelTable.addTableModelListener((TableModelEvent e) -> {
             if (e.getType() == TableModelEvent.UPDATE) {
                 if (isUpdating) {
@@ -228,42 +179,64 @@ public class EditAccountBookView extends javax.swing.JPanel {
                 int editedColumn = e.getColumn();
                 int lastRow = modelTable.getRowCount() - 1;
 
-                if (editedRow == lastRow && addedContentLastRow(modelTable, lastRow)) {
+                if (editedRow == lastRow && isContentInLastRow(modelTable, lastRow)) {
 
                     Object[] row = createEmptyRow(String.valueOf(modelTable.getRowCount() + 1));
                     modelTable.addRow(row);
-                    this.bookRecords.add(new AccountBookRecords(null, "", 0L, 0L));
+                    this.copyBookRecords.add(new AccountBookRecords(null, "", 0L, 0L));
 
                 }
 
                 updateInformation(modelTable, editedColumn, editedRow);
             }
         });
-
-        recordsAccountTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                if (!recordsAccountTable.getSelectionModel().isSelectionEmpty()) {
-                    btnAddRow.setEnabled(true);
-                    btnDeleteRow.setEnabled(true);
-                } else {
-                    btnAddRow.setEnabled(false);
-                    btnDeleteRow.setEnabled(false);
-                }
-            }
-        });
-
-        recordsAccountTable.setModel(modelTable);
-        recordsAccountTable.setRowHeight(25);
     }
 
-    public EditAccountBookView(AdminHome principalJFrame,
-            AccountBook book, boolean isEditingABook) {
+    private void updateInformation(DefaultTableModel modelTable, int editedColumn, int editedRow) {
+        String valueAdded = modelTable.getValueAt(editedRow, editedColumn).toString();
 
-        this.PRINCIPALJFRAME = principalJFrame;
-        this.isEditingABook = isEditingABook;
-        initComponents();
-        loadTable(book);
+        if (editedColumn == getIndexFromHeader("Ingresos")) {
+            if (!isIntegerOrLong(valueAdded)) {
+                JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Solo se aceptan números, sin espacios ni comas.", "Error de número", 0);
+                Object oldValue = formatNumberWithDots(copyBookRecords.get(editedRow).getCashInflow());
+                modelTable.setValueAt(oldValue, editedRow, editedColumn);
+                return;
+            }
+
+            updateTotalInflowCount(editedRow, Long.parseLong(valueAdded));
+            modelTable.setValueAt((Object) formatNumberWithDots(Long.parseLong(valueAdded)), editedRow, editedColumn);
+
+        } else if (editedColumn == getIndexFromHeader("Gastos")) {
+            if (!isIntegerOrLong(valueAdded)) {
+                JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Solo se aceptan números, sin espacios ni comas.", "Error de número", 0);
+                Object oldValue = formatNumberWithDots(copyBookRecords.get(editedRow).getCashExpenses());
+                modelTable.setValueAt(oldValue, editedRow, editedColumn);
+                return;
+            }
+
+            updateTotalExpenseCount(editedRow, Long.parseLong(valueAdded));
+            modelTable.setValueAt((Object) formatNumberWithDots(Long.parseLong(valueAdded)), editedRow, editedColumn);
+
+        } else if (editedColumn == getIndexFromHeader("Descripción")) {
+            copyBookRecords.get(editedRow).setDescription((String) modelTable.getValueAt(editedRow, editedColumn));
+        }
+
+        lbTotal_In.setText(formatNumberWithDots(totalIncome));
+        lbTotal_Ex.setText(formatNumberWithDots(totalExpense));
+        lbTotal_InEx.setText(formatNumberWithDots((totalIncome - totalExpense)));
+        isUpdating = false;
+    }
+
+    private void addListSelectionModelListener(ListSelectionModel model) {
+        model.addListSelectionListener((ListSelectionEvent e) -> {
+            if (!recordsAccountTable.getSelectionModel().isSelectionEmpty()) {
+                btnAddRow.setEnabled(true);
+                btnDeleteRow.setEnabled(true);
+            } else {
+                btnAddRow.setEnabled(false);
+                btnDeleteRow.setEnabled(false);
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -310,11 +283,6 @@ public class EditAccountBookView extends javax.swing.JPanel {
         lbNumberBook.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lbNumberBook.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbNumberBook.setMaximumSize(new java.awt.Dimension(280, 34));
-        lbNumberBook.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbNumberBookMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout identificationBookPanelLayout = new javax.swing.GroupLayout(identificationBookPanel);
         identificationBookPanel.setLayout(identificationBookPanelLayout);
@@ -574,54 +542,12 @@ public class EditAccountBookView extends javax.swing.JPanel {
 
     private void lbTitleBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbTitleBookMouseClicked
         String newTitleBook = JOptionPane.showInputDialog(this.PRINCIPALJFRAME,
-                "¿Qué titulo desea darle a este libro?", "Cambiar titulo de libro", 1);
+                "Ingrese el nuevo titulo del libro", "Cambiar titulo de libro", 1);
 
         if (newTitleBook != null && !newTitleBook.isBlank()) {
             lbTitleBook.setText(newTitleBook.toUpperCase());
-            titleBookChanged = true;
-            if (isEditingABook) {
-                this.CopiedBook.setTitleBook(newTitleBook.toUpperCase());
-            }
         }
     }//GEN-LAST:event_lbTitleBookMouseClicked
-
-    private void lbNumberBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNumberBookMouseClicked
-        int messageType = 1;
-        int finalIndexBook = 0;
-        String Message = "¿Qué numero tiene este libro?";
-        String titleMessage = "Cambiar numero de libro";
-        RequestAccountBook bookRequest = new RequestAccountBook();
-
-        while (true) {
-            String newNumberBook = JOptionPane.showInputDialog(this.PRINCIPALJFRAME, Message,
-                    titleMessage, messageType);
-
-            if (newNumberBook == null) {
-                return;
-            }
-
-            if (!isInteger(newNumberBook) || (newNumberBook.length() > 9)) {
-                JOptionPane.showOptionDialog(PRINCIPALJFRAME,
-                        "Debe ingresar un numero de máximo 9 dígitos, sin letras ni caracteres.",
-                        "Numero inválido", 2, 1, null, new String[]{"Continuar"}, null);
-                continue;
-            }
-
-            AccountBook isBookAlreadyExist = bookRequest.getBookById(Integer.parseInt(newNumberBook));
-
-            if (isBookAlreadyExist == null) {
-                finalIndexBook = Integer.parseInt(newNumberBook);
-                break;
-            } else {
-                Message = "Este numero ya está asignado a un libro, por favor, ingrese uno diferente.";
-                messageType = 2;
-                titleMessage = "Numero de registro repetido";
-            }
-        }
-
-        lbNumberBook.setText(String.valueOf(finalIndexBook));
-        NumberBookChanged = true;
-    }//GEN-LAST:event_lbNumberBookMouseClicked
 
     private void btnAddRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddRowActionPerformed
         int selectedRow = recordsAccountTable.getSelectedRow();
@@ -633,7 +559,7 @@ public class EditAccountBookView extends javax.swing.JPanel {
             for (int i = selectedRow + 2; i < tableModel.getRowCount(); i++) {
                 tableModel.setValueAt(i + 1, i, 0);
             }
-            bookRecords.add(selectedRow + 1, new AccountBookRecords(null, "", 0L, 0L));
+            copyBookRecords.add(selectedRow + 1, new AccountBookRecords(null, "", 0L, 0L));
         } else {
             JOptionPane.showMessageDialog(PRINCIPALJFRAME,
                     "Selecciona una fila antes de agregar.", "Advertencia", 1);
@@ -645,13 +571,14 @@ public class EditAccountBookView extends javax.swing.JPanel {
         DefaultTableModel tableModel = (DefaultTableModel) recordsAccountTable.getModel();
 
         if (selectedRow != -1) {
-            tableModel.removeRow(selectedRow);
-            totalExpense -= bookRecords.get(selectedRow).getCashExpenses();
-            totalIncome -= bookRecords.get(selectedRow).getCashInflow();
-            if (isEditingABook && bookRecords.get(selectedRow).getRecordId() != 0) {
-                this.bookRecordsDeleted.add(bookRecords.get(selectedRow));
+            
+            totalExpense -= copyBookRecords.get(selectedRow).getCashExpenses();
+            totalIncome -= copyBookRecords.get(selectedRow).getCashInflow();
+            if (copyBookRecords.get(selectedRow).getRecordId() != 0) {
+                this.bookRecordsDeleted.add(copyBookRecords.get(selectedRow));
             }
-            bookRecords.remove(selectedRow);
+            copyBookRecords.remove(selectedRow);
+            tableModel.removeRow(selectedRow);
             for (int i = selectedRow; i < tableModel.getRowCount(); i++) {
                 tableModel.setValueAt(i + 1, i, 0);
             }
@@ -662,55 +589,17 @@ public class EditAccountBookView extends javax.swing.JPanel {
 
         if (tableModel.getRowCount() == 0) {
             tableModel.addRow(createEmptyRow(String.valueOf(1)));
-            bookRecords.add(new AccountBookRecords(null, "", 0L, 0L));
+            copyBookRecords.add(new AccountBookRecords(null, "", 0L, 0L));
         }
     }//GEN-LAST:event_btnDeleteRowActionPerformed
 
     private void BtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSaveActionPerformed
-        RequestAccountBook bookRequest = new RequestAccountBook();
-        RequestAccountBookRecord recordRequest = new RequestAccountBookRecord();
 
         if (recordsAccountTable.isEditing()) {
             recordsAccountTable.getCellEditor().stopCellEditing();
         }
-
-        if (!isEditingABook) {
-            if (!titleBookChanged) {
-                int userChangeTitle = JOptionPane.showOptionDialog(PRINCIPALJFRAME,
-                        "No ha asignado nombre a este libro, se pondrá uno por DEFECTO ¿desea CONTINUAR?",
-                        "Asignación de nombre", 0, 1, null,
-                        new String[]{"Continuar", "Volver"}, null);
-
-                if (userChangeTitle == 0) {
-
-                    String day = DateFunctions.dateFormatDD_MM_YY(new Date());
-                    lbTitleBook.setText("Libro - ".concat(day));
-                    titleBookChanged = true;
-                } else {
-                    return;
-                }
-            }
-
-            if (!NumberBookChanged) {
-                int userChangeNumber = JOptionPane.showOptionDialog(PRINCIPALJFRAME,
-                        "No ha asignado número a este libro, se pondrá uno por DEFECTO ¿desea CONTINUAR?",
-                        "Asignación de numero", 0, 1, null,
-                        new String[]{"Continuar", "Volver"}, null);
-
-                if (userChangeNumber == 0) {
-
-                    String datePart = DateFunctions.dateFormatHH_MM_SS(new Date());
-                    int randomPart = (int) (Math.random() * 1000);
-                    String id = datePart + String.format("%03d", randomPart);
-                    lbNumberBook.setText(String.valueOf(id));
-                    NumberBookChanged = true;
-                } else {
-                    return;
-                }
-            }
-        }
-
-        if (!bookRecords.isEmpty()) {
+        
+        if (!copyBookRecords.isEmpty()) {
 
             int emptyRecords = 0;
             int indexToCorrect = 0;
@@ -729,23 +618,23 @@ public class EditAccountBookView extends javax.swing.JPanel {
             if (!listIndexToCorrect.isEmpty()) {
                 JOptionPane.showMessageDialog(PRINCIPALJFRAME,
                         "Debe agregar una descripción en los siguientes resgistros: " + listIndexToCorrect.toString());
-            } else if (emptyRecords == bookRecords.size()) {
+            } else if (emptyRecords == copyBookRecords.size()) {
                 JOptionPane.showMessageDialog(PRINCIPALJFRAME,
                         "No tiene ningún registro", "Libro sin registros", 1);
             } else if (!isEditingABook) {
                 try {
                     AccountBook newBook = new AccountBook(Integer.parseInt(lbNumberBook.getText()),
                             new Date(), lbTitleBook.getText(), null);
-                    bookRequest.saveBook(newBook);
+                    NEW_REQUEST_BOOK.saveBook(newBook);
 
                     for (AccountBookRecords record : bookRecords) {
                         if (!record.getDescription().isBlank()) {
                             record.setAccountBookId(newBook);
-                            recordRequest.saveBookRecord(record);
+                            NEW_REQUEST_RECORD.saveBookRecord(record);
                         }
                     }
-                    newBook.setListBookRecords(recordRequest.getRecordsByBookId(newBook));
-                    bookRequest.editBook(newBook);
+                    newBook.setListBookRecords(NEW_REQUEST_RECORD.getRecordsByBookId(newBook));
+                    NEW_REQUEST_BOOK.editBook(newBook);
                     JOptionPane.showMessageDialog(PRINCIPALJFRAME, "El libro se guardado exitosamente.");
 
                 } catch (Exception ex) {
@@ -758,19 +647,19 @@ public class EditAccountBookView extends javax.swing.JPanel {
 
                 try {
                     for (AccountBookRecords deleteRecord : bookRecordsDeleted) {
-                        recordRequest.deleteBookRecord(deleteRecord);
+                        NEW_REQUEST_RECORD.deleteBookRecord(deleteRecord);
                     }
 
                     for (AccountBookRecords editeRecord : bookRecords) {
                         if (!editeRecord.getDescription().isBlank()) {
                             if (editeRecord.getAccountBookId() == null) {
-                                editeRecord.setAccountBookId(CopiedBook);
+                                editeRecord.setAccountBookId(copyBook);
                             }
-                            recordRequest.editBookRecord(editeRecord);
+                            NEW_REQUEST_RECORD.editBookRecord(editeRecord);
                         }
                     }
-                    CopiedBook.setListBookRecords(recordRequest.getRecordsByBookId(CopiedBook));
-                    bookRequest.editBook(CopiedBook);
+                    copyBook.setListBookRecords(NEW_REQUEST_RECORD.getRecordsByBookId(copyBook));
+                    NEW_REQUEST_BOOK.editBook(copyBook);
                     JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Los cambios se han guardado exitosamente.");
 
                 } catch (Exception ex) {
