@@ -9,17 +9,14 @@ import com.mycompany.marlenproject.logic.AccountBookRecords;
 import com.mycompany.marlenproject.logic.request.RequestAccountBook;
 import com.mycompany.marlenproject.logic.request.RequestAccountBookRecord;
 import com.mycompany.marlenproject.userinterface.AdminHome;
-import com.mycompany.marlenproject.utils.date.DateFunctions;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 
@@ -90,15 +87,6 @@ public class EditAccountBookView extends javax.swing.JPanel {
         }
     }
 
-    private boolean isInteger(String number) {
-        try {
-            Integer.valueOf(number);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
     private boolean isContentInLastRow(DefaultTableModel modelTable, int lastRow) {
 
         for (int col = 1; col < modelTable.getColumnCount(); col++) {
@@ -108,6 +96,43 @@ public class EditAccountBookView extends javax.swing.JPanel {
             }
         }
         return false;
+    }
+
+    private boolean checkTitleBook() {
+        return !lbTitleBook.getText().isBlank();
+    }
+
+    private boolean checkBookRecords() {
+        int emptyRecords = 0;
+        int indexToCorrect = 0;
+        ArrayList<String> listIndexToCorrect = new ArrayList<>();
+
+        for (AccountBookRecords record : copyBookRecords) {
+            boolean blankDescription = record.getDescription().isBlank();
+            boolean isZeroInflow = record.getCashInflow() == 0;
+            boolean isZeroExpense = record.getCashInflow() == 0;
+
+            if (blankDescription && !(isZeroInflow && isZeroExpense)) {
+                listIndexToCorrect.add(String.valueOf(indexToCorrect + 1));
+            } else if (record.getDescription().isBlank()) {
+                emptyRecords++;
+            }
+            indexToCorrect++;
+        }
+
+        if (!listIndexToCorrect.isEmpty()) {
+            JOptionPane.showMessageDialog(PRINCIPALJFRAME,
+                    "Debe agregar una descripción en los siguientes resgistros: " + listIndexToCorrect.toString());
+            return false;
+        }
+
+        if (emptyRecords == copyBookRecords.size()) {
+            JOptionPane.showMessageDialog(PRINCIPALJFRAME,
+                    "Debe agregar registros al libro.", "Libro sin registros", 1);
+            return false;
+        }
+
+        return true;
     }
 
     public EditAccountBookView(AdminHome principalJFrame, AccountBook book) {
@@ -571,7 +596,7 @@ public class EditAccountBookView extends javax.swing.JPanel {
         DefaultTableModel tableModel = (DefaultTableModel) recordsAccountTable.getModel();
 
         if (selectedRow != -1) {
-            
+
             totalExpense -= copyBookRecords.get(selectedRow).getCashExpenses();
             totalIncome -= copyBookRecords.get(selectedRow).getCashInflow();
             if (copyBookRecords.get(selectedRow).getRecordId() != 0) {
@@ -598,75 +623,32 @@ public class EditAccountBookView extends javax.swing.JPanel {
         if (recordsAccountTable.isEditing()) {
             recordsAccountTable.getCellEditor().stopCellEditing();
         }
-        
-        if (!copyBookRecords.isEmpty()) {
 
-            int emptyRecords = 0;
-            int indexToCorrect = 0;
-            ArrayList<String> listIndexToCorrect = new ArrayList<>();
+        if (checkTitleBook() && checkBookRecords()) {
 
-            for (AccountBookRecords record : bookRecords) {
-                if (record.getDescription().isBlank()
-                        && (record.getCashInflow() != 0 || record.getCashExpenses() != 0)) {
-                    listIndexToCorrect.add(String.valueOf(indexToCorrect + 1));
-                } else if (record.getDescription().isBlank()) {
-                    emptyRecords++;
+            try {
+                for (AccountBookRecords deleteRecord : bookRecordsDeleted) {
+                    NEW_REQUEST_RECORD.deleteBookRecord(deleteRecord);
                 }
-                indexToCorrect++;
-            }
 
-            if (!listIndexToCorrect.isEmpty()) {
-                JOptionPane.showMessageDialog(PRINCIPALJFRAME,
-                        "Debe agregar una descripción en los siguientes resgistros: " + listIndexToCorrect.toString());
-            } else if (emptyRecords == copyBookRecords.size()) {
-                JOptionPane.showMessageDialog(PRINCIPALJFRAME,
-                        "No tiene ningún registro", "Libro sin registros", 1);
-            } else if (!isEditingABook) {
-                try {
-                    AccountBook newBook = new AccountBook(Integer.parseInt(lbNumberBook.getText()),
-                            new Date(), lbTitleBook.getText(), null);
-                    NEW_REQUEST_BOOK.saveBook(newBook);
-
-                    for (AccountBookRecords record : bookRecords) {
-                        if (!record.getDescription().isBlank()) {
-                            record.setAccountBookId(newBook);
-                            NEW_REQUEST_RECORD.saveBookRecord(record);
+                for (AccountBookRecords editeRecord : copyBookRecords) {
+                    if (!editeRecord.getDescription().isBlank()) {
+                        if (editeRecord.getAccountBookId() == null) {
+                            editeRecord.setAccountBookId(copyBook);
+                            NEW_REQUEST_RECORD.saveBookRecord(editeRecord);
                         }
+                        NEW_REQUEST_RECORD.editBookRecord(editeRecord);
                     }
-                    newBook.setListBookRecords(NEW_REQUEST_RECORD.getRecordsByBookId(newBook));
-                    NEW_REQUEST_BOOK.editBook(newBook);
-                    JOptionPane.showMessageDialog(PRINCIPALJFRAME, "El libro se guardado exitosamente.");
-
-                } catch (Exception ex) {
-                    Logger.getLogger(EditAccountBookView.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                copyBook.setListBookRecords(NEW_REQUEST_RECORD.getRecordsByBookId(copyBook));
+                NEW_REQUEST_BOOK.editBook(copyBook);
+                JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Los cambios se han guardado exitosamente.");
 
-                returnToAccountingView();
-
-            } else if (isEditingABook) {
-
-                try {
-                    for (AccountBookRecords deleteRecord : bookRecordsDeleted) {
-                        NEW_REQUEST_RECORD.deleteBookRecord(deleteRecord);
-                    }
-
-                    for (AccountBookRecords editeRecord : bookRecords) {
-                        if (!editeRecord.getDescription().isBlank()) {
-                            if (editeRecord.getAccountBookId() == null) {
-                                editeRecord.setAccountBookId(copyBook);
-                            }
-                            NEW_REQUEST_RECORD.editBookRecord(editeRecord);
-                        }
-                    }
-                    copyBook.setListBookRecords(NEW_REQUEST_RECORD.getRecordsByBookId(copyBook));
-                    NEW_REQUEST_BOOK.editBook(copyBook);
-                    JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Los cambios se han guardado exitosamente.");
-
-                } catch (Exception ex) {
-                    Logger.getLogger(EditAccountBookView.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                returnToAccountingView();
+            } catch (Exception ex) {
+                Logger.getLogger(EditAccountBookView.class.getName()).log(Level.SEVERE, null, ex);
             }
+            returnToAccountingView();
+
         }
     }//GEN-LAST:event_BtnSaveActionPerformed
 
