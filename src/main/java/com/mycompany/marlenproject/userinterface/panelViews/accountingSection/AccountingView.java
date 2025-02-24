@@ -41,14 +41,12 @@ public class AccountingView extends javax.swing.JPanel {
         this.Books = listBooks;
         initComponents();
         showAccountRecords(listBooks);
-
     }
 
     private boolean isDateInRange(Date starDate, Date endDate, Date dateToCheck) {
         if (starDate == null || endDate == null) {
             return false;
         }
-
         return (dateToCheck.after(starDate) && dateToCheck.before(endDate));
     }
 
@@ -99,7 +97,6 @@ public class AccountingView extends javax.swing.JPanel {
                 PRINCIPALJFRAME.replacePanel(accountingView);
             }
         });
-
     }
 
     private void showAccountRecords(List<AccountBook> listBooks) {
