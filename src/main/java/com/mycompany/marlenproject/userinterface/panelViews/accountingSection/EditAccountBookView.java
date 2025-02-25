@@ -636,10 +636,12 @@ public class EditAccountBookView extends javax.swing.JPanel {
                         if (editeRecord.getAccountBookId() == null) {
                             editeRecord.setAccountBookId(copyBook);
                             NEW_REQUEST_RECORD.saveBookRecord(editeRecord);
+                            continue;
                         }
                         NEW_REQUEST_RECORD.editBookRecord(editeRecord);
                     }
                 }
+                copyBook.setTitleBook(lbTitleBook.getText());
                 copyBook.setListBookRecords(NEW_REQUEST_RECORD.getRecordsByBookId(copyBook));
                 NEW_REQUEST_BOOK.editBook(copyBook);
                 JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Los cambios se han guardado exitosamente.");
