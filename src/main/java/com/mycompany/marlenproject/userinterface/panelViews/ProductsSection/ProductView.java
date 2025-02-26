@@ -10,61 +10,73 @@ import com.mycompany.marlenproject.userinterface.AdminHome;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 public class ProductView extends javax.swing.JPanel {
 
     private final AdminHome PRINCIPALJFRAME;
+    private final List<Product> products;
+    private final RequestProduct NEW_REQUEST_PRODUCT = new RequestProduct();
 
-    private void uploadInfoToTable(List<Product> ListProducts) {
+    public ProductView(AdminHome principalJFrame, List<Product> productList) {
+        this.PRINCIPALJFRAME = principalJFrame;
+        this.products = productList;
+        initComponents();
+        uploadInfoToTable(productList);
+    }
+
+    private void uploadInfoToTable(List<Product> productsList) {
         DefaultTableModel modelTable = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-        String tableHead[] = {"N°", "identificador", "Nombre", "Descripción"};
+        String tableHead[] = {"N°", "ID", "Nombre", "Descripción"};
         modelTable.setColumnIdentifiers(tableHead);
 
-        if (ListProducts.isEmpty()) {
-            JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, "No tiene productos registrados", "Sin registros", 0);
-        } else {
+        if (!productsList.isEmpty()) {
             int count = 0;
-            for (Product product : ListProducts) {
+            for (Product product : productsList) {
                 Object[] productsObject = {(count + 1), product.getId(), product.getName(), product.getDescription()};
                 modelTable.addRow(productsObject);
                 count++;
             }
         }
 
-        productsTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                if (!productsTable.getSelectionModel().isSelectionEmpty()) {
-                    btnEditProduct.setEnabled(true);
-                    btnDeleteProduct.setEnabled(true);
-                } else {
-                    btnEditProduct.setEnabled(false);
-                    btnDeleteProduct.setEnabled(false);
-                }
-            }
-        });
-
-        productsTable.setModel(modelTable);
-        productsTable.getColumnModel().getColumn(0).setMinWidth(25);
-        productsTable.getColumnModel().getColumn(0).setMaxWidth(25);
-        productsTable.getColumnModel().getColumn(1).setMinWidth(0);
-        productsTable.getColumnModel().getColumn(1).setMaxWidth(0);
-        productsTable.getColumnModel().getColumn(2).setMinWidth(150);
-        productsTable.getColumnModel().getColumn(2).setMaxWidth(150);
-
+        addListSelectionListener();
+        setModelSettings(modelTable);
     }
 
-    public ProductView(AdminHome principalJFrame, List<Product> productList) {
-        this.PRINCIPALJFRAME = principalJFrame;
-        initComponents();
-        uploadInfoToTable(productList);
+    private void addListSelectionListener() {
+        productsTable.getSelectionModel().addListSelectionListener((ListSelectionEvent e) -> {
+            if (!productsTable.getSelectionModel().isSelectionEmpty()) {
+                btnEditProduct.setEnabled(true);
+                btnDeleteProduct.setEnabled(true);
+            } else {
+                btnEditProduct.setEnabled(false);
+                btnDeleteProduct.setEnabled(false);
+            }
+        });
+    }
+
+    private void setModelSettings(DefaultTableModel modelTable) {
+        productsTable.setModel(modelTable);
+        productsTable.getColumnModel().getColumn(0).setMinWidth(25);
+        productsTable.getColumnModel().getColumn(0).setMaxWidth(50);
+        productsTable.getColumnModel().getColumn(1).setMinWidth(25);
+        productsTable.getColumnModel().getColumn(1).setMaxWidth(100);
+        productsTable.getColumnModel().getColumn(2).setMinWidth(150);
+        productsTable.getColumnModel().getColumn(2).setMaxWidth(200);
+        productsTable.getColumnModel().getColumn(0).setPreferredWidth(25);
+        productsTable.getColumnModel().getColumn(1).setPreferredWidth(50);
+        productsTable.getColumnModel().getColumn(2).setPreferredWidth(150);
+    }
+    
+    private void backProductListView() {
+        List<Product> productList = new RequestProduct().getAllProducts();
+        ProductView productView = new ProductView(PRINCIPALJFRAME, productList);
+        PRINCIPALJFRAME.replacePanel(productView);
     }
 
     @SuppressWarnings("unchecked")
@@ -234,20 +246,16 @@ public class ProductView extends javax.swing.JPanel {
 
     private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
         AddProductView addProductView = new AddProductView(PRINCIPALJFRAME);
+        addProductView.setLocationRelativeTo(null);
         addProductView.setVisible(true);
-        addProductView.setLocationRelativeTo(PRINCIPALJFRAME);
         PRINCIPALJFRAME.setVisible(false);
     }//GEN-LAST:event_btnAddProductActionPerformed
 
     private void btnDeleteProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteProductActionPerformed
         if (productsTable.getSelectedRow() != -1) {
             try {
-                RequestProduct requestProduct = new RequestProduct();
-
-                Product deleteProduct = new Product("", "");
-                deleteProduct.setId((Integer.parseInt(String.valueOf(productsTable.getValueAt(productsTable.getSelectedRow(), 1)))));
-
-                requestProduct.deteleProduct(deleteProduct);
+                Product deleteProduct = this.products.get(productsTable.getSelectedRow());
+                NEW_REQUEST_PRODUCT.deteleProduct(deleteProduct);
                 JOptionPane.showMessageDialog(this, "El producto ha sido eliminado.", "Eliminación exitosa", 1);
                 backProductListView();
             } catch (Exception ex) {
@@ -257,25 +265,12 @@ public class ProductView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDeleteProductActionPerformed
 
     private void btnEditProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditProductActionPerformed
-        
-        String productName = String.valueOf(productsTable.getValueAt(productsTable.getSelectedRow(), 2));
-        
-        String productDescription = String.valueOf(productsTable.getValueAt(productsTable.getSelectedRow(), 3));
-        
-        Product editProduct = new Product(productName,productDescription);
-        editProduct.setId((Integer.parseInt(String.valueOf(productsTable.getValueAt(productsTable.getSelectedRow(), 1)))));
-        
+        Product editProduct = this.products.get(productsTable.getSelectedRow());
         EditProductView editProductView = new EditProductView(PRINCIPALJFRAME, editProduct);
-        editProductView.setVisible(true);
         editProductView.setLocationRelativeTo(PRINCIPALJFRAME);
+        editProductView.setVisible(true);
         PRINCIPALJFRAME.setVisible(false);
     }//GEN-LAST:event_btnEditProductActionPerformed
-
-    private void backProductListView() {
-        List<Product> productList = new RequestProduct().getAllProducts();
-        ProductView productView = new ProductView(PRINCIPALJFRAME, productList);
-        PRINCIPALJFRAME.replacePanel(productView);
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddProduct;
