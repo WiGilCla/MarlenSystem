@@ -248,10 +248,10 @@ public class ProductView extends javax.swing.JPanel {
                 deleteProduct.setId((Integer.parseInt(String.valueOf(productsTable.getValueAt(productsTable.getSelectedRow(), 1)))));
 
                 requestProduct.deteleProduct(deleteProduct);
-                personalizedMessage("Information", "El producto ha sido eliminado.", "Eliminación exitosa");
+                JOptionPane.showMessageDialog(this, "El producto ha sido eliminado.", "Eliminación exitosa", 1);
                 backProductListView();
             } catch (Exception ex) {
-                personalizedMessage("Error", "Ha ocurrido un error durante la eliminación", "Error inesperado");
+                JOptionPane.showMessageDialog(this, "Ha ocurrido un error durante la eliminación", "Error inesperado", 0);
             }
         }
     }//GEN-LAST:event_btnDeleteProductActionPerformed
@@ -270,23 +270,6 @@ public class ProductView extends javax.swing.JPanel {
         editProductView.setLocationRelativeTo(PRINCIPALJFRAME);
         PRINCIPALJFRAME.setVisible(false);
     }//GEN-LAST:event_btnEditProductActionPerformed
-
-    private void personalizedMessage(String type, String message, String title) {
-        int typeMessage = 0;
-        typeMessage = switch (type) {
-            case "Error" ->
-                0;
-            case "Information" ->
-                1;
-            case "Warning" ->
-                2;
-            case "Question" ->
-                3;
-            default ->
-                1;
-        };
-        JOptionPane.showMessageDialog(this, message, title, typeMessage);
-    }
 
     private void backProductListView() {
         List<Product> productList = new RequestProduct().getAllProducts();
