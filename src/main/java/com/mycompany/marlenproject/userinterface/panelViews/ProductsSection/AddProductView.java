@@ -8,15 +8,13 @@ import com.mycompany.marlenproject.utils.fields.CheckFields;
 import com.mycompany.marlenproject.logic.Product;
 import com.mycompany.marlenproject.logic.request.RequestProduct;
 import com.mycompany.marlenproject.userinterface.AdminHome;
-import java.awt.Color;
+import com.mycompany.marlenproject.utils.colors.Colors;
 import java.util.List;
 import javax.swing.JOptionPane;
 
 public class AddProductView extends javax.swing.JFrame {
 
-    private AdminHome PRINCIPALFRAME;
-    private final Color COLOR_RED = new Color(255, 0, 0);
-    private final Color COLOR_WHITE = new Color(255, 255, 255);
+    private final AdminHome PRINCIPALFRAME;
     private final CheckFields CHECKER = new CheckFields();
 
     public AddProductView(AdminHome principalFrame) {
@@ -24,6 +22,42 @@ public class AddProductView extends javax.swing.JFrame {
         initComponents();
         setResizable(false);
         setTitle("Agregar nuevo producto");
+    }
+
+    private boolean checkRequiredField() {
+        String productName = CHECKER.removeStringBlanks(txtProductName.getText());
+        if (productName.isBlank()) {
+            txtProductName.setBackground(Colors.IncorrectColorFields());
+            JOptionPane.showMessageDialog(this, "Debe dar un nombre al producto", "Campo requerido", 2);
+            return false;
+        }
+        if (!productName.isBlank() && !CHECKER.checkStringField(productName)) {
+            txtProductName.setBackground(Colors.IncorrectColorFields());
+            JOptionPane.showMessageDialog(this, "Debe usar carácteres válidos", "Carácter no válido", 2);
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean checkNoRequiredField() {
+        String productDescription = CHECKER.removeStringBlanks(txtADescriptionProduct.getText());
+
+        if (!productDescription.isBlank() && !CHECKER.checkStringTextArea(productDescription)) {
+            txtADescriptionProduct.setBackground(Colors.IncorrectColorFields());
+            JOptionPane.showMessageDialog(this, "No debe usar caracteres especiales", "Carácter no válido", 2);
+            return false;
+        }
+
+        return true;
+    }
+
+    private void backProductListView() {
+        List<Product> productList = new RequestProduct().getAllProducts();
+        ProductView productView = new ProductView(PRINCIPALFRAME, productList);
+        this.dispose();
+        PRINCIPALFRAME.replacePanel(productView);
+        PRINCIPALFRAME.setVisible(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -47,9 +81,9 @@ public class AddProductView extends javax.swing.JFrame {
         lbProductName.setText("Nombre del producto:");
         lbProductName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        txtProductName.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtProductNameMouseClicked(evt);
+        txtProductName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtProductNameFocusGained(evt);
             }
         });
 
@@ -78,6 +112,11 @@ public class AddProductView extends javax.swing.JFrame {
 
         txtADescriptionProduct.setColumns(20);
         txtADescriptionProduct.setRows(5);
+        txtADescriptionProduct.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtADescriptionProductFocusGained(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtADescriptionProduct);
 
         javax.swing.GroupLayout PanelProductDescriptionLayout = new javax.swing.GroupLayout(PanelProductDescription);
@@ -166,9 +205,6 @@ public class AddProductView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        List<Product> productList = new RequestProduct().getAllProducts();
-        ProductView productView = new ProductView(PRINCIPALFRAME, productList);
-        PRINCIPALFRAME.replacePanel(productView);
         this.dispose();
         PRINCIPALFRAME.setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
@@ -183,71 +219,21 @@ public class AddProductView extends javax.swing.JFrame {
 
                 Product newProduct = new Product(productName, productDescription);
                 requestProduct.saveProduct(newProduct);
-                personalizedMessage("Information", "Se ha guardado el producto con exito.", "Operación exitosa");
+                JOptionPane.showMessageDialog(this, "Se ha guardado el producto con exito.", "Operación exitosa", 1);
                 backProductListView();
             } catch (Exception ex) {
-                personalizedMessage("Error", "Ha ocurrido un error durante el guardado de producto",
-                        "Error de guardado");
+                JOptionPane.showMessageDialog(this, "Ha ocurrido un error durante el guardado de producto", "Error de guardado", 0);
             }
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
-    private void txtProductNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtProductNameMouseClicked
-        txtProductName.setBackground(COLOR_WHITE);
-    }//GEN-LAST:event_txtProductNameMouseClicked
+    private void txtProductNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtProductNameFocusGained
+        txtProductName.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_txtProductNameFocusGained
 
-    private boolean checkRequiredField() {
-        String productName = CHECKER.removeStringBlanks(txtProductName.getText());
-        if (productName.isBlank()) {
-            txtProductName.setBackground(COLOR_RED);
-            personalizedMessage("Warning", "Debe dar un nombre al producto", "Campo requerido");
-            return false;
-        }
-        if (!productName.isBlank() && !CHECKER.checkStringField(productName)) {
-            txtProductName.setBackground(COLOR_RED);
-            personalizedMessage("Warning", "Debe usar carácteres válidos", "Carácter no válido");
-            return false;
-        }
-
-        return true;
-    }
-
-    private boolean checkNoRequiredField() {
-        String productDescription = CHECKER.removeStringBlanks(txtADescriptionProduct.getText());
-
-        if (!productDescription.isBlank() && !CHECKER.checkStringTextArea(productDescription)) {
-            txtADescriptionProduct.setBackground(COLOR_RED);
-            personalizedMessage("Warning", "No debe usar caracteres especiales", "Carácter no válido");
-            return false;
-        }
-
-        return true;
-    }
-
-    private void personalizedMessage(String type, String message, String title) {
-        int typeMessage = 0;
-        typeMessage = switch (type) {
-            case "Error" ->
-                0;
-            case "Information" ->
-                1;
-            case "Warning" ->
-                2;
-            case "Question" ->
-                3;
-            default ->
-                1;
-        };
-        JOptionPane.showMessageDialog(this, message, title, typeMessage);
-    }
-    
-    private void backProductListView(){
-        this.dispose();
-        List<Product> productList = new RequestProduct().getAllProducts();
-        ProductView productView = new ProductView(PRINCIPALFRAME, productList);
-        PRINCIPALFRAME.replacePanel(productView);
-        PRINCIPALFRAME.setVisible(true);
-    }
+    private void txtADescriptionProductFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtADescriptionProductFocusGained
+        txtADescriptionProduct.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_txtADescriptionProductFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelButtons;
