@@ -26,7 +26,6 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
 
     private final requestPerson NEW_REQUEST_PERSON = new requestPerson();
     private final RequestCustomer NEW_REQUEST_CUSTOMER = new RequestCustomer();
-    private final dataFormsPerson CBO = new dataFormsPerson();
     private final CheckFields CHECKER = new CheckFields();
     private final Customer customerInfo;
     private final AdminHome PRINCIPALJFRAME;
@@ -56,8 +55,8 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
 
         txtCustomerSecondLastName.setText(customer.getPerson().getSecondLastName());
 
-        sltCustomerIdentificationType.setSelectedIndex(CBO
-                .findIndexSelected(CBO.getIdentificationTypeOptions(), customer.getPerson().getIdentificationType()));
+        sltCustomerIdentificationType.setSelectedIndex(dataFormsPerson
+                .findIndexSelected(dataFormsPerson.IDENTIFICATION_TYPE, customer.getPerson().getIdentificationType()));
 
         txtCustomerIdentificationNumber.setText(customer.getPerson().getIdentificationNumber());
 
@@ -288,7 +287,7 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
             }
         });
 
-        sltCustomerIdentificationType.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getIdentificationTypeOptions()));
+        sltCustomerIdentificationType.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsPerson.IDENTIFICATION_TYPE));
         sltCustomerIdentificationType.setPreferredSize(new java.awt.Dimension(211, 25));
         sltCustomerIdentificationType.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {

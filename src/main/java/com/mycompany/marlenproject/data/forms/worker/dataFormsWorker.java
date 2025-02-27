@@ -38,12 +38,6 @@ public class dataFormsWorker {
 
     public static int findIndexSelected(String[] list, String value) {
         return Arrays.asList(list).indexOf(value);
-//        for (int i = 0; i < list.length; i++) {
-//            if (list[i].equalsIgnoreCase(value)) {
-//                return i;
-//            }
-//        }
-//        return 0;
     }
 
 }
