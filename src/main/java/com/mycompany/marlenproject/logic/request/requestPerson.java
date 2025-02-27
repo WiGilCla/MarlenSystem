@@ -4,7 +4,7 @@
  */
 package com.mycompany.marlenproject.logic.request;
 
-import com.mycompany.marlenproject.utils.fields.CheckFields;
+import com.mycompany.marlenproject.utils.fields.InputValidator;
 import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.persistence.controller.personController;
 import com.mycompany.marlenproject.persistence.exceptions.NonexistentEntityException;
@@ -13,15 +13,14 @@ import java.sql.Timestamp;
 
 public class requestPerson {
     private final personController PersonController = new personController();
-    private final CheckFields checker = new CheckFields();
     
     public void savePerson(Person newPerson) throws Exception{
         
-        String firstName = checker.capitalizedString(newPerson.getFirstName());
-        String secondName = (newPerson.getSecondName().isBlank())? null:checker.capitalizedString(newPerson.getSecondName());
-        String firstLastName = checker.capitalizedString(newPerson.getFirstLastName());
-        String secondLastName = (newPerson.getSecondLastName().isBlank())? null:checker.capitalizedString(newPerson.getSecondLastName());
-        String identificationType = checker.capitalizedString(newPerson.getIdentificationType());
+        String firstName = InputValidator.capitalizedString(newPerson.getFirstName());
+        String secondName = (newPerson.getSecondName().isBlank())? null:InputValidator.capitalizedString(newPerson.getSecondName());
+        String firstLastName = InputValidator.capitalizedString(newPerson.getFirstLastName());
+        String secondLastName = (newPerson.getSecondLastName().isBlank())? null:InputValidator.capitalizedString(newPerson.getSecondLastName());
+        String identificationType = InputValidator.capitalizedString(newPerson.getIdentificationType());
         Timestamp birthdate = (newPerson.getBirthdate() != null)? new Timestamp(newPerson.getBirthdate().getTime()): null;
         
         newPerson.setFirstName(firstName);
@@ -37,11 +36,11 @@ public class requestPerson {
     public void editPerson(Person editPerson) throws Exception{
         
         
-        String firstName = checker.capitalizedString(editPerson.getFirstName());
-        String secondName = (editPerson.getSecondName().isBlank())? null:checker.capitalizedString(editPerson.getSecondName());
-        String firstLastName = checker.capitalizedString(editPerson.getFirstLastName());
-        String secondLastName = (editPerson.getSecondLastName().isBlank())? null:checker.capitalizedString(editPerson.getSecondLastName());
-        String identificationType = checker.capitalizedString(editPerson.getIdentificationType());
+        String firstName = InputValidator.capitalizedString(editPerson.getFirstName());
+        String secondName = (editPerson.getSecondName().isBlank())? null:InputValidator.capitalizedString(editPerson.getSecondName());
+        String firstLastName = InputValidator.capitalizedString(editPerson.getFirstLastName());
+        String secondLastName = (editPerson.getSecondLastName().isBlank())? null:InputValidator.capitalizedString(editPerson.getSecondLastName());
+        String identificationType = InputValidator.capitalizedString(editPerson.getIdentificationType());
         Timestamp birthdate = (editPerson.getBirthdate() != null)? new Timestamp(editPerson.getBirthdate().getTime()): null;
         
         editPerson.setFirstName(firstName);

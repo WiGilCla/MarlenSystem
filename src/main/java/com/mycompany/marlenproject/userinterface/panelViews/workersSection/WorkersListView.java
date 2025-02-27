@@ -4,9 +4,8 @@
  */
 package com.mycompany.marlenproject.userinterface.panelViews.workersSection;
 
-import com.mycompany.marlenproject.data.forms.person.dataFormsPerson;
 import com.mycompany.marlenproject.data.forms.worker.dataFormsWorker;
-import com.mycompany.marlenproject.utils.fields.CheckFields;
+import com.mycompany.marlenproject.utils.fields.InputValidator;
 import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.userinterface.AdminHome;
 import java.util.ArrayList;
@@ -18,7 +17,6 @@ public class WorkersListView extends javax.swing.JPanel {
     private final AdminHome PRINCIPALJFRAME;
     private final List<Worker> WORKER_LIST;
     private final List<Worker> WORKER_LIST_FILTER = new ArrayList<>();
-    private final CheckFields Checker = new CheckFields();
 
     private void uploadInfoToTable(List<Worker> ListWorker) {
         DefaultTableModel modelTable = new DefaultTableModel() {
@@ -44,7 +42,7 @@ public class WorkersListView extends javax.swing.JPanel {
                     worker.getPerson().getFirstName(),
                     worker.getPerson().getFirstLastName(),
                     worker.getPosition(),
-                    Checker.capitalizedString(status)};
+                    InputValidator.capitalizedString(status)};
 
                 modelTable.addRow(workersObject);
                 count++;
@@ -409,7 +407,7 @@ public class WorkersListView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        String textFilter = Checker.removeStringBlanks(txtSearchWorker.getText()).toLowerCase();
+        String textFilter = InputValidator.removeStringBlanks(txtSearchWorker.getText()).toLowerCase();
         String positionFilter = sltPositionFilter.getSelectedItem().toString();
         String statusFilterActive = sltStatusFilter.getSelectedItem().toString();
         boolean statusFilter = sltStatusFilter.getSelectedIndex() == dataFormsWorker.getIndexStatusActive();
@@ -422,9 +420,9 @@ public class WorkersListView extends javax.swing.JPanel {
                     || worker.getPerson().getFirstName().toLowerCase().contains(textFilter)
                     || worker.getPerson().getFirstLastName().toLowerCase().contains(textFilter);
 
-            boolean matchesPosition = !Checker.checkComboBox(positionFilter) || worker.getPosition().equalsIgnoreCase(positionFilter);
+            boolean matchesPosition = !InputValidator.checkComboBox(positionFilter) || worker.getPosition().equalsIgnoreCase(positionFilter);
 
-            boolean matchesStatus = !Checker.checkComboBox(statusFilterActive) || worker.isIsActive() == statusFilter;
+            boolean matchesStatus = !InputValidator.checkComboBox(statusFilterActive) || worker.isIsActive() == statusFilter;
 
             if (matchesText && matchesPosition && matchesStatus) {
                 WORKER_LIST_FILTER.add(worker);

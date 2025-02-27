@@ -6,7 +6,7 @@ package com.mycompany.marlenproject.userinterface.panelViews.customerSection;
 
 import com.mycompany.marlenproject.data.forms.person.dataFormsPerson;
 import com.mycompany.marlenproject.userinterface.panelViews.workersSection.*;
-import com.mycompany.marlenproject.utils.fields.CheckFields;
+import com.mycompany.marlenproject.utils.fields.InputValidator;
 import com.mycompany.marlenproject.logic.Customer;
 import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.logic.request.RequestCustomer;
@@ -26,7 +26,6 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
 
     private final requestPerson NEW_REQUEST_PERSON = new requestPerson();
     private final RequestCustomer NEW_REQUEST_CUSTOMER = new RequestCustomer();
-    private final CheckFields CHECKER = new CheckFields();
     private final Customer customerInfo;
     private final AdminHome PRINCIPALJFRAME;
 
@@ -70,28 +69,28 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
     }
 
     private boolean changeColorRequiredField() {
-        String personFirstName = CHECKER.removeStringBlanks(txtCustomerFirstName.getText());
-        String personFirstLastName = CHECKER.removeStringBlanks(txtCustomerFirstLastName.getText());
+        String personFirstName = InputValidator.removeStringBlanks(txtCustomerFirstName.getText());
+        String personFirstLastName = InputValidator.removeStringBlanks(txtCustomerFirstLastName.getText());
         String personIdentificationType = sltCustomerIdentificationType.getSelectedItem().toString();
-        String personIdentificationNumber = CHECKER.removeStringBlanks(txtCustomerIdentificationNumber.getText());
+        String personIdentificationNumber = InputValidator.removeStringBlanks(txtCustomerIdentificationNumber.getText());
 
-        if (!CHECKER.checkStringField(personFirstName)) {
+        if (!InputValidator.checkStringField(personFirstName)) {
             txtCustomerFirstName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
-        if (!CHECKER.checkStringField(personFirstLastName)) {
+        if (!InputValidator.checkStringField(personFirstLastName)) {
             txtCustomerFirstLastName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
-        if (!CHECKER.checkComboBox(personIdentificationType)) {
+        if (!InputValidator.checkComboBox(personIdentificationType)) {
             sltCustomerIdentificationType.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
-        if (!CHECKER.checkNumberField(personIdentificationNumber)
-                || !CHECKER.checkDNILength(personIdentificationNumber)) {
+        if (!InputValidator.checkNumberField(personIdentificationNumber)
+                || !InputValidator.checkDNILength(personIdentificationNumber)) {
             txtCustomerIdentificationNumber.setBackground(Colors.IncorrectColorFields());
             return false;
         }
@@ -100,33 +99,33 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
     }
 
     private boolean changeColorNoRequiredField() {
-        String personSecondName = CHECKER.removeStringBlanks(txtCustomerSecondName.getText());
-        String personSecondLastName = CHECKER.removeStringBlanks(txtCustomerSecondLastName.getText());
-        String customerPhone = CHECKER.removeStringBlanks(txtCustomerPhone.getText());
+        String personSecondName = InputValidator.removeStringBlanks(txtCustomerSecondName.getText());
+        String personSecondLastName = InputValidator.removeStringBlanks(txtCustomerSecondLastName.getText());
+        String customerPhone = InputValidator.removeStringBlanks(txtCustomerPhone.getText());
         String customerAddress = txtCustomerAddress.getText();
         String customerEmail = txtCustomerEmail.getText();
 
-        if (!personSecondName.isBlank() && !CHECKER.checkStringField(personSecondName)) {
+        if (!personSecondName.isBlank() && !InputValidator.checkStringField(personSecondName)) {
             txtCustomerSecondName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
-        if (!personSecondLastName.isBlank() && !CHECKER.checkStringField(personSecondLastName)) {
+        if (!personSecondLastName.isBlank() && !InputValidator.checkStringField(personSecondLastName)) {
             txtCustomerSecondLastName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
-        if (!customerPhone.isBlank() && !CHECKER.checkNumberField(customerPhone)) {
+        if (!customerPhone.isBlank() && !InputValidator.checkNumberField(customerPhone)) {
             txtCustomerPhone.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
-        if (!customerEmail.isBlank() && !CHECKER.checkEmail(customerEmail)) {
+        if (!customerEmail.isBlank() && !InputValidator.checkEmail(customerEmail)) {
             txtCustomerEmail.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
-        if (!CHECKER.checkAddress(customerAddress) && !customerAddress.equalsIgnoreCase("")) {
+        if (!InputValidator.checkAddress(customerAddress) && !customerAddress.equalsIgnoreCase("")) {
             txtCustomerAddress.setBackground(Colors.IncorrectColorFields());
             return false;
         }
@@ -595,15 +594,15 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
         if (changeColorRequiredField() && changeColorNoRequiredField()) {
-            String personFirstName = CHECKER.removeStringBlanks(txtCustomerFirstName.getText());
-            String personSecondName = CHECKER.removeStringBlanks(txtCustomerSecondName.getText());//
-            String personFirstLastName = CHECKER.removeStringBlanks(txtCustomerFirstLastName.getText());
-            String personSecondLastName = CHECKER.removeStringBlanks(txtCustomerSecondLastName.getText());//
+            String personFirstName = InputValidator.removeStringBlanks(txtCustomerFirstName.getText());
+            String personSecondName = InputValidator.removeStringBlanks(txtCustomerSecondName.getText());//
+            String personFirstLastName = InputValidator.removeStringBlanks(txtCustomerFirstLastName.getText());
+            String personSecondLastName = InputValidator.removeStringBlanks(txtCustomerSecondLastName.getText());//
             String personIdentificationType = sltCustomerIdentificationType.getSelectedItem().toString();
             String personIdentificationNumber = txtCustomerIdentificationNumber.getText();
             Date personBirthdate = dtCustomerBirthdate.getDate();
 
-            String customerPhone = CHECKER.removeStringBlanks(txtCustomerPhone.getText());
+            String customerPhone = InputValidator.removeStringBlanks(txtCustomerPhone.getText());
             String customerAddress = txtCustomerAddress.getText();
             String customerEmail = txtCustomerEmail.getText();
 

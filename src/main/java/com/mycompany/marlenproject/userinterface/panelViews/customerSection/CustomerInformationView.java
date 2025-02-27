@@ -5,7 +5,7 @@
 package com.mycompany.marlenproject.userinterface.panelViews.customerSection;
 
 import com.mycompany.marlenproject.userinterface.panelViews.workersSection.*;
-import com.mycompany.marlenproject.utils.fields.CheckFields;
+import com.mycompany.marlenproject.utils.fields.InputValidator;
 import com.mycompany.marlenproject.logic.Customer;
 import com.mycompany.marlenproject.logic.request.RequestCustomer;
 import com.mycompany.marlenproject.userinterface.AdminHome;
@@ -20,7 +20,6 @@ public class CustomerInformationView extends javax.swing.JPanel {
 
     private final RequestCustomer REQUEST_CUSTOMER = new RequestCustomer();
     private List<Customer> CUSTOMER_LIST = new ArrayList<>();
-    private final CheckFields CHECKER = new CheckFields();
     private int customerIndex = 0;
 
     private final AdminHome PRINCIPALJFRAME;
@@ -35,7 +34,7 @@ public class CustomerInformationView extends javax.swing.JPanel {
         txtCustomerIdentificationNum.setText(String.valueOf(customer.getPerson().getIdentificationNumber()));
         txtCustomerPhone.setText(customer.getPhone());
         txtCustomerBirthdate.setText((customer.getPerson().getBirthdate() != null)
-                ? String.valueOf(CHECKER.timeElapsed(customer.getPerson().getBirthdate(), new Date())) : "No registra");
+                ? String.valueOf(InputValidator.timeElapsed(customer.getPerson().getBirthdate(), new Date())) : "No registra");
         txtCustomerEmail.setText(customer.getEmail());
         txtCustomerAddress.setText(customer.getAddress());
     }

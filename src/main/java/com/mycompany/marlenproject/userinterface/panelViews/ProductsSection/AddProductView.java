@@ -4,7 +4,7 @@
  */
 package com.mycompany.marlenproject.userinterface.panelViews.ProductsSection;
 
-import com.mycompany.marlenproject.utils.fields.CheckFields;
+import com.mycompany.marlenproject.utils.fields.InputValidator;
 import com.mycompany.marlenproject.logic.Product;
 import com.mycompany.marlenproject.logic.request.RequestProduct;
 import com.mycompany.marlenproject.userinterface.AdminHome;
@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 public class AddProductView extends javax.swing.JFrame {
 
     private final AdminHome PRINCIPALFRAME;
-    private final CheckFields CHECKER = new CheckFields();
 
     public AddProductView(AdminHome principalFrame) {
         this.PRINCIPALFRAME = principalFrame;
@@ -25,13 +24,13 @@ public class AddProductView extends javax.swing.JFrame {
     }
 
     private boolean checkRequiredField() {
-        String productName = CHECKER.removeStringBlanks(txtProductName.getText());
+        String productName = InputValidator.removeStringBlanks(txtProductName.getText());
         if (productName.isBlank()) {
             txtProductName.setBackground(Colors.IncorrectColorFields());
             JOptionPane.showMessageDialog(this, "Debe dar un nombre al producto", "Campo requerido", 2);
             return false;
         }
-        if (!productName.isBlank() && !CHECKER.checkStringField(productName)) {
+        if (!productName.isBlank() && !InputValidator.checkStringField(productName)) {
             txtProductName.setBackground(Colors.IncorrectColorFields());
             JOptionPane.showMessageDialog(this, "Debe usar carácteres válidos", "Carácter no válido", 2);
             return false;
@@ -41,9 +40,9 @@ public class AddProductView extends javax.swing.JFrame {
     }
 
     private boolean checkNoRequiredField() {
-        String productDescription = CHECKER.removeStringBlanks(txtADescriptionProduct.getText());
+        String productDescription = InputValidator.removeStringBlanks(txtADescriptionProduct.getText());
 
-        if (!productDescription.isBlank() && !CHECKER.checkStringTextArea(productDescription)) {
+        if (!productDescription.isBlank() && !InputValidator.checkStringTextArea(productDescription)) {
             txtADescriptionProduct.setBackground(Colors.IncorrectColorFields());
             JOptionPane.showMessageDialog(this, "No debe usar caracteres especiales", "Carácter no válido", 2);
             return false;

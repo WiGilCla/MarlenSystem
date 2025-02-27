@@ -4,7 +4,7 @@
  */
 package com.mycompany.marlenproject.logic.request;
 
-import com.mycompany.marlenproject.utils.fields.CheckFields;
+import com.mycompany.marlenproject.utils.fields.InputValidator;
 import com.mycompany.marlenproject.logic.Product;
 import com.mycompany.marlenproject.persistence.controller.ProductController;
 import java.util.ArrayList;
@@ -13,11 +13,10 @@ import java.util.List;
 
 public class RequestProduct {
     private final ProductController productController = new ProductController();
-    private final CheckFields CHECKER = new CheckFields();
     
     public void saveProduct(Product newProduct){
-        String productName = CHECKER.capitalizedString(newProduct.getName());
-        String productDescription = CHECKER.capitalizedString(newProduct.getDescription());
+        String productName = InputValidator.capitalizedString(newProduct.getName());
+        String productDescription = InputValidator.capitalizedString(newProduct.getDescription());
         
         newProduct.setName(productName);
         newProduct.setDescription(productDescription);
@@ -26,8 +25,8 @@ public class RequestProduct {
     }
     
     public void editProduct(Product editProduct) throws Exception{
-        String productName = CHECKER.capitalizedString(editProduct.getName());
-        String productDescription = CHECKER.capitalizedString(editProduct.getDescription());
+        String productName = InputValidator.capitalizedString(editProduct.getName());
+        String productDescription = InputValidator.capitalizedString(editProduct.getDescription());
         
         editProduct.setName(productName);
         editProduct.setDescription(productDescription);

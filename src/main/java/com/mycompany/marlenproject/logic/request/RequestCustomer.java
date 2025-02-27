@@ -4,7 +4,7 @@
  */
 package com.mycompany.marlenproject.logic.request;
 
-import com.mycompany.marlenproject.utils.fields.CheckFields;
+import com.mycompany.marlenproject.utils.fields.InputValidator;
 import com.mycompany.marlenproject.logic.Customer;
 import com.mycompany.marlenproject.persistence.controller.CustomerController;
 import java.util.ArrayList;
@@ -13,11 +13,10 @@ import java.util.List;
 public class RequestCustomer {
 
     private final CustomerController customerController = new CustomerController();
-    private final CheckFields CHECKER = new CheckFields();
 
     public void saveCustomer(Customer newCustomer) {
 
-        String customerAddress = ((newCustomer.getAddress().isBlank()) ? null : CHECKER.capitalizedString(newCustomer.getAddress()));
+        String customerAddress = ((newCustomer.getAddress().isBlank()) ? null : InputValidator.capitalizedString(newCustomer.getAddress()));
         String customerEmail = ((newCustomer.getEmail().isBlank()) ? null : newCustomer.getEmail().toLowerCase());
         String customerPhone = ((newCustomer.getPhone().isBlank()) ? null : newCustomer.getPhone());
 
@@ -30,7 +29,7 @@ public class RequestCustomer {
 
     public void editCustomer(Customer editCustomer) throws Exception {
 
-        String customerAddress = (editCustomer.getAddress() == null || editCustomer.getAddress().isBlank()) ? null : CHECKER.capitalizedString(editCustomer.getAddress());
+        String customerAddress = (editCustomer.getAddress() == null || editCustomer.getAddress().isBlank()) ? null : InputValidator.capitalizedString(editCustomer.getAddress());
         String customerEmail = (editCustomer.getEmail() == null || editCustomer.getEmail().isBlank()) ? null : editCustomer.getEmail().toLowerCase();
         String customerPhone = (editCustomer.getPhone() == null || editCustomer.getPhone().isBlank()) ? null : editCustomer.getPhone();
 

@@ -6,44 +6,44 @@ package com.mycompany.marlenproject.utils.fields;
 
 import java.util.Date;
 
-public class CheckFields {
+public class InputValidator {
     
-    public boolean checkAddress(String address) {        
+    public static boolean checkAddress(String address) {        
         return address.matches("^[a-zA-Z0-9\\s#-]*$");
     }
 
-    public boolean checkStringField(String text) {
+    public static boolean checkStringField(String text) {
         return text.matches("[a-zA-ZÁ-Úá-úÑñ]+");
     }
 
-    public boolean checkStringTextArea(String text) {
+    public static boolean checkStringTextArea(String text) {
         return text.matches("[a-zA-ZÁ-Úá-úÑñ0-9]+");
     }
 
-    public boolean checkNumberField(String number) {
+    public static boolean checkNumberField(String number) {
         return number.matches("[0-9]+");
     }
     
-    public boolean checkDNILength(String personDNI){
+    public static boolean checkDNILength(String personDNI){
         return (personDNI.length() >= 8 && personDNI.length() <=10) && personDNI.matches("[0-9]+"); 
     }
 
-    public String removeStringBlanks(String text) {
+    public static String removeStringBlanks(String text) {
         if (!text.isEmpty()) {
             return text.replaceAll("[\\s.]+", "");
         }
         return text;
     }
 
-    public boolean checkEmail(String email) {
+    public static boolean checkEmail(String email) {
         return email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
     }
 
-    public boolean checkComboBox(String text) {
+    public static boolean checkComboBox(String text) {
         return !text.equalsIgnoreCase("SELECCIONE UNA ...");
     }
 
-    public String capitalizedString(String text) {
+    public static String capitalizedString(String text) {
         if (!text.isEmpty()) {
             String firstLetter = text.substring(0, 1).toUpperCase();
             String otherLetter = text.substring(1).toLowerCase();
@@ -52,7 +52,7 @@ public class CheckFields {
         return text;
     }
 
-    public int timeElapsed(Date oldDate, Date laterDate) {
+    public static int timeElapsed(Date oldDate, Date laterDate) {
         long tiempoTranscurridoMillis = laterDate.getTime() - oldDate.getTime();
         long segundosTranscurridos = tiempoTranscurridoMillis / 1000;
         long minutosTranscurridos = segundosTranscurridos / 60;

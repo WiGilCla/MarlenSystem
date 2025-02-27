@@ -5,7 +5,7 @@
 package com.mycompany.marlenproject.logic.request;
 
 import com.mycompany.marlenproject.logic.AccountBook;
-import com.mycompany.marlenproject.utils.fields.CheckFields;
+import com.mycompany.marlenproject.utils.fields.InputValidator;
 import com.mycompany.marlenproject.persistence.controller.AccountBookController;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -13,12 +13,11 @@ import java.util.List;
 
 public class RequestAccountBook {
     private final AccountBookController accountBookController = new AccountBookController();
-    private final CheckFields CHECKER = new CheckFields();
     
     public void saveBook(AccountBook newBook) throws Exception{
         
         Timestamp creationBook = new Timestamp(newBook.getCreationDate().getTime());
-        String bookTitle = CHECKER.capitalizedString(newBook.getTitleBook());
+        String bookTitle = InputValidator.capitalizedString(newBook.getTitleBook());
         
         newBook.setCreationDate(creationBook);
         newBook.setTitleBook(bookTitle);
@@ -30,7 +29,7 @@ public class RequestAccountBook {
         
         
         Timestamp creationBook = new Timestamp(editBook.getCreationDate().getTime());
-        String bookTitle = CHECKER.capitalizedString(editBook.getTitleBook());
+        String bookTitle = InputValidator.capitalizedString(editBook.getTitleBook());
         
         editBook.setCreationDate(creationBook);
         editBook.setTitleBook(bookTitle);

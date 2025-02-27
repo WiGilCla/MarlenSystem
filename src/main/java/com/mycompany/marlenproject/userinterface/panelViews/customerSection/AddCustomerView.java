@@ -4,7 +4,7 @@
  */
 package com.mycompany.marlenproject.userinterface.panelViews.customerSection;
 
-import com.mycompany.marlenproject.utils.fields.CheckFields;
+import com.mycompany.marlenproject.utils.fields.InputValidator;
 import com.mycompany.marlenproject.logic.Customer;
 import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.logic.request.RequestCustomer;
@@ -21,32 +21,31 @@ public class AddCustomerView extends javax.swing.JPanel {
 
     private final requestPerson NEW_REQUEST_PERSON = new requestPerson();
     private final RequestCustomer NEW_REQUEST_CUSTOMER = new RequestCustomer();
-    private final CheckFields CHECKER = new CheckFields();
 
     public AddCustomerView() {
         initComponents();
     }
 
     private boolean changeColorRequiredField() {
-        String personFirstName = CHECKER.removeStringBlanks(txtFirstName.getText());
-        String personFirstLastName = CHECKER.removeStringBlanks(txtFirstLastName.getText());
+        String personFirstName = InputValidator.removeStringBlanks(txtFirstName.getText());
+        String personFirstLastName = InputValidator.removeStringBlanks(txtFirstLastName.getText());
         String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
-        String personIdentificationNumber = CHECKER.removeStringBlanks(txtIdentificationNum.getText());
+        String personIdentificationNumber = InputValidator.removeStringBlanks(txtIdentificationNum.getText());
 
-        if (!CHECKER.checkStringField(personFirstName)) {
+        if (!InputValidator.checkStringField(personFirstName)) {
             txtFirstName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
-        if (!CHECKER.checkStringField(personFirstLastName)) {
+        if (!InputValidator.checkStringField(personFirstLastName)) {
             txtFirstLastName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
-        if (!CHECKER.checkComboBox(personIdentificationType)) {
+        if (!InputValidator.checkComboBox(personIdentificationType)) {
             sltIdentificationType.setBackground(Colors.IncorrectColorFields());
             return false;
         }
-        if (!CHECKER.checkNumberField(personIdentificationNumber)
-                || !CHECKER.checkDNILength(personIdentificationNumber)) {
+        if (!InputValidator.checkNumberField(personIdentificationNumber)
+                || !InputValidator.checkDNILength(personIdentificationNumber)) {
             txtIdentificationNum.setBackground(Colors.IncorrectColorFields());
             return false;
         }
@@ -54,33 +53,33 @@ public class AddCustomerView extends javax.swing.JPanel {
     }
 
     private boolean changeColorNoRequiredField() {
-        String personSecondName = CHECKER.removeStringBlanks(txtSecondName.getText());
-        String personSecondLastName = CHECKER.removeStringBlanks(txtSecondLastName.getText());
+        String personSecondName = InputValidator.removeStringBlanks(txtSecondName.getText());
+        String personSecondLastName = InputValidator.removeStringBlanks(txtSecondLastName.getText());
         String personEmail = txtEmail.getText();
         String personPhone = txtPhoneNumber.getText();
         String personAddress = txtAddress.getText();
 
-        if (!CHECKER.checkStringField(personSecondName) && !personSecondName.equalsIgnoreCase("")) {
+        if (!InputValidator.checkStringField(personSecondName) && !personSecondName.equalsIgnoreCase("")) {
             txtSecondName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
-        if (!CHECKER.checkStringField(personSecondLastName) && !personSecondLastName.equalsIgnoreCase("")) {
+        if (!InputValidator.checkStringField(personSecondLastName) && !personSecondLastName.equalsIgnoreCase("")) {
             txtSecondLastName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
-        if (!CHECKER.checkEmail(personEmail) && !personEmail.equalsIgnoreCase("")) {
+        if (!InputValidator.checkEmail(personEmail) && !personEmail.equalsIgnoreCase("")) {
             txtEmail.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
-        if (!CHECKER.checkNumberField(personPhone) && !personPhone.equalsIgnoreCase("")) {
+        if (!InputValidator.checkNumberField(personPhone) && !personPhone.equalsIgnoreCase("")) {
             txtPhoneNumber.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
-        if (!CHECKER.checkAddress(personAddress) && !personAddress.equalsIgnoreCase("")) {
+        if (!InputValidator.checkAddress(personAddress) && !personAddress.equalsIgnoreCase("")) {
             txtAddress.setBackground(Colors.IncorrectColorFields());
             return false;
         }
@@ -513,15 +512,15 @@ public class AddCustomerView extends javax.swing.JPanel {
     private void btnSaveWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveWorkerActionPerformed
 
         if (changeColorRequiredField() && changeColorNoRequiredField()) {
-            String personFirstName = CHECKER.removeStringBlanks(txtFirstName.getText());
-            String personSecondName = CHECKER.removeStringBlanks(txtSecondName.getText());//
-            String personFirstLastName = CHECKER.removeStringBlanks(txtFirstLastName.getText());
-            String personSecondLastName = CHECKER.removeStringBlanks(txtSecondLastName.getText());//
+            String personFirstName = InputValidator.removeStringBlanks(txtFirstName.getText());
+            String personSecondName = InputValidator.removeStringBlanks(txtSecondName.getText());//
+            String personFirstLastName = InputValidator.removeStringBlanks(txtFirstLastName.getText());
+            String personSecondLastName = InputValidator.removeStringBlanks(txtSecondLastName.getText());//
             String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
-            String personIdentificationNumber = CHECKER.removeStringBlanks(txtIdentificationNum.getText());
+            String personIdentificationNumber = InputValidator.removeStringBlanks(txtIdentificationNum.getText());
             Date personBirthdate = (dateBirthdate.getDate() != null) ? dateBirthdate.getDate() : null;
             //Customer information
-            String customerPhone = CHECKER.removeStringBlanks(txtPhoneNumber.getText());
+            String customerPhone = InputValidator.removeStringBlanks(txtPhoneNumber.getText());
             String customerAddress = txtAddress.getText();
             String customerEmail = txtEmail.getText();
 

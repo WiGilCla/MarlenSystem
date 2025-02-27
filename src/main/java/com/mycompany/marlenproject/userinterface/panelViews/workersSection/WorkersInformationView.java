@@ -4,7 +4,7 @@
  */
 package com.mycompany.marlenproject.userinterface.panelViews.workersSection;
 
-import com.mycompany.marlenproject.utils.fields.CheckFields;
+import com.mycompany.marlenproject.utils.fields.InputValidator;
 import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.logic.request.requestWorker;
 import com.mycompany.marlenproject.userinterface.AdminHome;
@@ -20,7 +20,6 @@ public class WorkersInformationView extends javax.swing.JPanel {
     private int workerObserved = 0;
     private final AdminHome PRINCIPALJFRAME;
     private final List<Worker> WORKER_LIST;
-    private final CheckFields CHECKER = new CheckFields();
     private final requestWorker REQUEST_WORKER = new requestWorker();
 
     private void viewWorkerInformation(int index) {
@@ -37,7 +36,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
         txtFirstLastName.setText(worker.getPerson().getFirstLastName());
         txtDateVinculation.setText(DateFunctions.dateFormatDD_MM_YY(worker.getDayLink()));
         txtIdentificationNum.setText(String.valueOf(worker.getPerson().getIdentificationNumber()));
-        txtAge.setText(String.valueOf(CHECKER.timeElapsed(worker.getPerson().getBirthdate(), new Date())));
+        txtAge.setText(String.valueOf(InputValidator.timeElapsed(worker.getPerson().getBirthdate(), new Date())));
     }
 
     public WorkersInformationView(AdminHome principalJFrame, List<Worker> listWorker, int index) {

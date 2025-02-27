@@ -4,7 +4,7 @@
  */
 package com.mycompany.marlenproject.logic.request;
 
-import com.mycompany.marlenproject.utils.fields.CheckFields;
+import com.mycompany.marlenproject.utils.fields.InputValidator;
 import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.persistence.controller.workerController;
 import java.sql.Timestamp;
@@ -14,13 +14,12 @@ import java.util.List;
 
 public class requestWorker {
     private final workerController WorkerController = new workerController();
-    private final CheckFields checker = new CheckFields();
     
     public void saveWorker(Worker worker) throws Exception{
         
         Timestamp dayLink = new Timestamp( worker.getDayLink().getTime());
-        String position = checker.capitalizedString(worker.getPosition());
-        String healthEntity = checker.capitalizedString(worker.getHealthEntity());
+        String position = InputValidator.capitalizedString(worker.getPosition());
+        String healthEntity = InputValidator.capitalizedString(worker.getHealthEntity());
         
         worker.setDayLink(dayLink);
         worker.setPosition(position);
@@ -37,7 +36,7 @@ public class requestWorker {
     
     public void editWorker(Worker worker) throws Exception{
         
-        String healthEntity = checker.capitalizedString(worker.getHealthEntity());
+        String healthEntity = InputValidator.capitalizedString(worker.getHealthEntity());
         Timestamp dayLink = new Timestamp( worker.getDayLink().getTime());
         
         worker.setHealthEntity(healthEntity);

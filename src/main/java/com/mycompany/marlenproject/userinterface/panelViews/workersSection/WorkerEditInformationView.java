@@ -6,7 +6,7 @@ package com.mycompany.marlenproject.userinterface.panelViews.workersSection;
 
 import com.mycompany.marlenproject.data.forms.person.dataFormsPerson;
 import com.mycompany.marlenproject.data.forms.worker.dataFormsWorker;
-import com.mycompany.marlenproject.utils.fields.CheckFields;
+import com.mycompany.marlenproject.utils.fields.InputValidator;
 import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.logic.request.requestPerson;
@@ -25,7 +25,6 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
 
     private final requestPerson NEW_REQUEST_PERSON = new requestPerson();
     private final requestWorker NEW_REQUEST_WORKER = new requestWorker();
-    private final CheckFields CHECKER = new CheckFields();
     private final AdminHome PRINCIPALJFRAME;
     private Worker workerInfo = new Worker();
 
@@ -83,48 +82,48 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
     }
 
     private boolean changeColorRequiredField() {
-        String personFirstName = CHECKER.removeStringBlanks(txtFirstName.getText());
-        String personFirstLastName = CHECKER.removeStringBlanks(txtFirstLastName.getText());
+        String personFirstName = InputValidator.removeStringBlanks(txtFirstName.getText());
+        String personFirstLastName = InputValidator.removeStringBlanks(txtFirstLastName.getText());
         String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
-        String personIdentificationNumber = CHECKER.removeStringBlanks(txtIdentificationNumber.getText());
+        String personIdentificationNumber = InputValidator.removeStringBlanks(txtIdentificationNumber.getText());
         String bloodType = sltBloodType.getSelectedItem().toString();
         String bloodTypeCmplt = sltBloodTypeCmpl.getSelectedItem().toString();
         String healthEntity = sltHealthEntity.getSelectedItem().toString();
         String position = sltPosition.getSelectedItem().toString();
         String state = sltState.getSelectedItem().toString();
 
-        if (!CHECKER.checkStringField(personFirstName)) {
+        if (!InputValidator.checkStringField(personFirstName)) {
             txtFirstName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
-        if (!CHECKER.checkStringField(personFirstLastName)) {
+        if (!InputValidator.checkStringField(personFirstLastName)) {
             txtFirstLastName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
-        if (!CHECKER.checkComboBox(personIdentificationType)) {
+        if (!InputValidator.checkComboBox(personIdentificationType)) {
             sltIdentificationType.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
-        if (!CHECKER.checkNumberField(personIdentificationNumber)
-                || !CHECKER.checkDNILength(personIdentificationNumber)) {
+        if (!InputValidator.checkNumberField(personIdentificationNumber)
+                || !InputValidator.checkDNILength(personIdentificationNumber)) {
             txtIdentificationNumber.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
-        if (!CHECKER.checkComboBox(bloodType)) {
+        if (!InputValidator.checkComboBox(bloodType)) {
             sltBloodType.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
-        if (!CHECKER.checkComboBox(bloodTypeCmplt)) {
+        if (!InputValidator.checkComboBox(bloodTypeCmplt)) {
             sltBloodTypeCmpl.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
-        if (!CHECKER.checkComboBox(healthEntity)) {
+        if (!InputValidator.checkComboBox(healthEntity)) {
             sltHealthEntity.setBackground(Colors.IncorrectColorFields());
             return false;
         }
@@ -139,11 +138,11 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             return false;
         }
 
-        if (!CHECKER.checkComboBox(position)) {
+        if (!InputValidator.checkComboBox(position)) {
             sltPosition.setBackground(Colors.IncorrectColorFields());
             return false;
         }
-        if (!CHECKER.checkComboBox(state)) {
+        if (!InputValidator.checkComboBox(state)) {
             sltState.setBackground(Colors.IncorrectColorFields());
             return false;
         }
@@ -152,15 +151,15 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
     }
 
     private boolean changeColorNoRequiredField() {
-        String personSecondName = CHECKER.removeStringBlanks(txtSecondName.getText());
-        String personSecondLastName = CHECKER.removeStringBlanks(txtSecondLastName.getText());
+        String personSecondName = InputValidator.removeStringBlanks(txtSecondName.getText());
+        String personSecondLastName = InputValidator.removeStringBlanks(txtSecondLastName.getText());
 
-        if (!CHECKER.checkStringField(personSecondName) && !personSecondName.equalsIgnoreCase("")) {
+        if (!InputValidator.checkStringField(personSecondName) && !personSecondName.equalsIgnoreCase("")) {
             txtSecondName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
 
-        if (!CHECKER.checkStringField(personSecondLastName) && !personSecondLastName.equalsIgnoreCase("")) {
+        if (!InputValidator.checkStringField(personSecondLastName) && !personSecondLastName.equalsIgnoreCase("")) {
             txtSecondLastName.setBackground(Colors.IncorrectColorFields());
             return false;
         }
@@ -695,12 +694,12 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
         if (changeColorRequiredField() && changeColorNoRequiredField()) {
-            String personFirstName = CHECKER.removeStringBlanks(txtFirstName.getText());
-            String personSecondName = CHECKER.removeStringBlanks(txtSecondName.getText());//
-            String personFirstLastName = CHECKER.removeStringBlanks(txtFirstLastName.getText());
-            String personSecondLastName = CHECKER.removeStringBlanks(txtSecondLastName.getText());//
+            String personFirstName = InputValidator.removeStringBlanks(txtFirstName.getText());
+            String personSecondName = InputValidator.removeStringBlanks(txtSecondName.getText());//
+            String personFirstLastName = InputValidator.removeStringBlanks(txtFirstLastName.getText());
+            String personSecondLastName = InputValidator.removeStringBlanks(txtSecondLastName.getText());//
             String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
-            String personIdentificationNumber = CHECKER.removeStringBlanks(txtIdentificationNumber.getText());
+            String personIdentificationNumber = InputValidator.removeStringBlanks(txtIdentificationNumber.getText());
             Date personBirthdate = dateBirthdate.getDate();
 
             String bloodType = sltBloodType.getSelectedItem().toString();

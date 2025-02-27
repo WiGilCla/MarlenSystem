@@ -4,7 +4,7 @@
  */
 package com.mycompany.marlenproject.userinterface.panelViews.customerSection;
 
-import com.mycompany.marlenproject.utils.fields.CheckFields;
+import com.mycompany.marlenproject.utils.fields.InputValidator;
 import com.mycompany.marlenproject.logic.Customer;
 import com.mycompany.marlenproject.userinterface.AdminHome;
 import java.util.ArrayList;
@@ -16,7 +16,6 @@ public class CustomerListView extends javax.swing.JPanel {
     private final AdminHome PRINCIPALJFRAME;
     private final List<Customer> CUSTOMER_LIST;
     private final List<Customer> CUSTOMER_LIST_FILTER = new ArrayList<>();
-    private final CheckFields Checker = new CheckFields();
 
     private void uploadInfoToTable(List<Customer> ListCustomer) {
         DefaultTableModel modelTable = new DefaultTableModel() {
@@ -280,7 +279,7 @@ public class CustomerListView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        String textFilter = Checker.removeStringBlanks(txtSearchCustomer.getText()).toLowerCase();
+        String textFilter = InputValidator.removeStringBlanks(txtSearchCustomer.getText()).toLowerCase();
         this.CUSTOMER_LIST_FILTER.clear();
 
         if (!textFilter.equalsIgnoreCase("") && textFilter.length() > 0) {
