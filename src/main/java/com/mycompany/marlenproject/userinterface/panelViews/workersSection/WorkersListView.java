@@ -5,6 +5,7 @@
 package com.mycompany.marlenproject.userinterface.panelViews.workersSection;
 
 import com.mycompany.marlenproject.data.forms.person.dataFormsPerson;
+import com.mycompany.marlenproject.data.forms.worker.dataFormsWorker;
 import com.mycompany.marlenproject.utils.fields.CheckFields;
 import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.userinterface.AdminHome;
@@ -17,7 +18,6 @@ public class WorkersListView extends javax.swing.JPanel {
     private final AdminHome PRINCIPALJFRAME;
     private final List<Worker> WORKER_LIST;
     private final List<Worker> WORKER_LIST_FILTER = new ArrayList<>();
-    private final dataFormsPerson CBO = new dataFormsPerson();
     private final CheckFields Checker = new CheckFields();
 
     private void uploadInfoToTable(List<Worker> ListWorker) {
@@ -36,7 +36,8 @@ public class WorkersListView extends javax.swing.JPanel {
             int count = 0;
             for (Worker worker : ListWorker) {
 
-                String status = (worker.isIsActive()) ? CBO.getStateOptions()[CBO.getIndexStateActive()] : CBO.getStateOptions()[CBO.getIndexStateNoActive()];
+                String status = (worker.isIsActive()) 
+                        ? dataFormsWorker.STATUS[dataFormsWorker.getIndexStatusActive()] : dataFormsWorker.STATUS[dataFormsWorker.getIndexStatusNoActive()];
 
                 Object[] workersObject = {(count + 1),
                     worker.getPerson().getIdentificationNumber(),
@@ -169,7 +170,7 @@ public class WorkersListView extends javax.swing.JPanel {
 
         CBoxFilter2Panel.setPreferredSize(new java.awt.Dimension(116, 76));
 
-        sltPositionFilter.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getPositionOptions()));
+        sltPositionFilter.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsWorker.JOB_TITLE));
         sltPositionFilter.setPreferredSize(new java.awt.Dimension(104, 25));
 
         javax.swing.GroupLayout CBoxFilter2PanelLayout = new javax.swing.GroupLayout(CBoxFilter2Panel);
@@ -238,7 +239,7 @@ public class WorkersListView extends javax.swing.JPanel {
 
         CBoxFilter3Panel.setPreferredSize(new java.awt.Dimension(115, 76));
 
-        sltStatusFilter.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getStateOptions()));
+        sltStatusFilter.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsWorker.STATUS));
         sltStatusFilter.setPreferredSize(new java.awt.Dimension(103, 25));
 
         javax.swing.GroupLayout CBoxFilter3PanelLayout = new javax.swing.GroupLayout(CBoxFilter3Panel);
@@ -411,7 +412,7 @@ public class WorkersListView extends javax.swing.JPanel {
         String textFilter = Checker.removeStringBlanks(txtSearchWorker.getText()).toLowerCase();
         String positionFilter = sltPositionFilter.getSelectedItem().toString();
         String statusFilterActive = sltStatusFilter.getSelectedItem().toString();
-        boolean statusFilter = sltStatusFilter.getSelectedIndex() == CBO.getIndexStateActive();
+        boolean statusFilter = sltStatusFilter.getSelectedIndex() == dataFormsWorker.getIndexStatusActive();
         this.WORKER_LIST_FILTER.clear();
 
         for (Worker worker : this.WORKER_LIST) {
@@ -431,8 +432,8 @@ public class WorkersListView extends javax.swing.JPanel {
         }
 
         uploadInfoToTable(this.WORKER_LIST_FILTER.isEmpty() ? this.WORKER_LIST : this.WORKER_LIST_FILTER);
-        sltPositionFilter.setSelectedIndex(CBO.getNoOneOptionSelected());
-        sltStatusFilter.setSelectedIndex(CBO.getNoOneOptionSelected());
+        sltPositionFilter.setSelectedIndex(dataFormsWorker.getNoOneOptionSelected());
+        sltStatusFilter.setSelectedIndex(dataFormsWorker.getNoOneOptionSelected());
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void WorkersTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WorkersTableMouseClicked
