@@ -11,6 +11,7 @@ import com.mycompany.marlenproject.logic.request.RequestCustomer;
 import com.mycompany.marlenproject.logic.request.requestPerson;
 import com.mycompany.marlenproject.persistence.exceptions.PreexistingEntityException;
 import com.mycompany.marlenproject.utils.colors.Colors;
+import com.mycompany.marlenproject.data.forms.person.dataFormsPerson;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -259,7 +260,7 @@ public class AddCustomerView extends javax.swing.JPanel {
             }
         });
 
-        sltIdentificationType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE UNA ...", "Cédula de ciudadanía", "Cédula de extranjería", "Tarjeta pasaporte", "Sin identificación" }));
+        sltIdentificationType.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsPerson.IDENTIFICATION_TYPE));
         sltIdentificationType.setPreferredSize(new java.awt.Dimension(296, 25));
         sltIdentificationType.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
