@@ -4,6 +4,7 @@
  */
 package com.mycompany.marlenproject.userinterface.panelViews.customerSection;
 
+import com.mycompany.marlenproject.data.forms.person.dataFormsPerson;
 import com.mycompany.marlenproject.userinterface.panelViews.workersSection.*;
 import com.mycompany.marlenproject.utils.fields.CheckFields;
 import com.mycompany.marlenproject.logic.Customer;
@@ -25,7 +26,7 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
 
     private final requestPerson NEW_REQUEST_PERSON = new requestPerson();
     private final RequestCustomer NEW_REQUEST_CUSTOMER = new RequestCustomer();
-    private final ComboBoxWorkerOptions CBO = new ComboBoxWorkerOptions();
+    private final dataFormsPerson CBO = new dataFormsPerson();
     private final CheckFields CHECKER = new CheckFields();
     private final Customer customerInfo;
     private final AdminHome PRINCIPALJFRAME;

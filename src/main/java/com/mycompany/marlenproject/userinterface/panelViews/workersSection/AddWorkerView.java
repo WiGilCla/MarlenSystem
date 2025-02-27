@@ -11,6 +11,8 @@ import com.mycompany.marlenproject.logic.request.requestPerson;
 import com.mycompany.marlenproject.logic.request.requestWorker;
 import com.mycompany.marlenproject.persistence.exceptions.PreexistingEntityException;
 import com.mycompany.marlenproject.utils.colors.Colors;
+import com.mycompany.marlenproject.data.forms.worker.dataFormsWorker;
+import com.mycompany.marlenproject.data.forms.person.dataFormsPerson;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -285,32 +287,32 @@ public class AddWorkerView extends javax.swing.JPanel {
             }
         });
 
-        sltIdentificationType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE UNA ...", "Cédula de ciudadanía", "Cédula de extranjería", "Tarjeta pasaporte", "Sin identificación" }));
         sltIdentificationType.setPreferredSize(new java.awt.Dimension(296, 25));
+        sltIdentificationType.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsPerson.IDENTIFICATION_TYPE));
         sltIdentificationType.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 sltIdentificationTypeFocusGained(evt);
             }
         });
 
-        sltPosition.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE UNA ...", "Jefe", "Administrador", "Pintor", "Lijador", "Carpintero", "Seguridad", " " }));
         sltPosition.setPreferredSize(new java.awt.Dimension(296, 25));
+        sltPosition.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsWorker.JOB_TITLE));
         sltPosition.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 sltPositionFocusGained(evt);
             }
         });
 
-        sltBloodType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE UNA ...", "A", "B", "O", "AB" }));
         sltBloodType.setPreferredSize(new java.awt.Dimension(136, 25));
+        sltBloodType.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsWorker.BLOOD_GROUP));
         sltBloodType.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 sltBloodTypeFocusGained(evt);
             }
         });
 
-        sltBloodTypeCmplt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE UNA ...", "+", "-" }));
         sltBloodTypeCmplt.setPreferredSize(new java.awt.Dimension(136, 25));
+        sltBloodTypeCmplt.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsWorker.BLOOD_GROUP_RHD));
         sltBloodTypeCmplt.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 sltBloodTypeCmpltFocusGained(evt);
@@ -474,8 +476,8 @@ public class AddWorkerView extends javax.swing.JPanel {
             }
         });
 
-        sltEPS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE UNA ...", "NO POSEE", "ALIANSALUD EPS", "ANAS WAYUU EPSI", "ASMET SALUD", "ASOCIACION INDIGENA DEL CAUCA EPSI", "CAJACOPI ATLANTICO", "CAPRESOCA", "CAPITAL SALUD EPS-S", "COMFACHOCO", "COMFAORIENTE", "COMFENALCO VALLE", "COMPENSAR EPS", "COOSALUD EPS-S", "DUSAKAWI EPSI", "EMS SANITAS", "EMSSANAR E.S.S.", "EPS FAMILIAR DE COLOMBIA", "EPS SANITAS", "EPS SURA", "FAMISANAR", "FONDO DE PASIVO SOCIAL DE FERROCARRILES NACIONALES DE COLOMBIA", "MALLAMAS EPSI", "MUTUAL SER", "NUEVA EPS", "PIJAOS SALUD EPSI", "SALUD BÓLIVAR EPS SAS", "SALUD MIA", "SALUD TOTAL EPS S.A.", "SAVIA SALUD EPS EPSS40", "SERVICIO OCCIDENTAL DE SALUD EPS SOS", "OTRO" }));
         sltEPS.setPreferredSize(new java.awt.Dimension(296, 25));
+        sltEPS.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsWorker.HEALTH_ENTITY));
         sltEPS.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 sltEPSFocusGained(evt);

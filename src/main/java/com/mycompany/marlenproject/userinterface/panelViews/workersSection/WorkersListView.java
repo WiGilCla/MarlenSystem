@@ -4,6 +4,7 @@
  */
 package com.mycompany.marlenproject.userinterface.panelViews.workersSection;
 
+import com.mycompany.marlenproject.data.forms.person.dataFormsPerson;
 import com.mycompany.marlenproject.utils.fields.CheckFields;
 import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.userinterface.AdminHome;
@@ -16,7 +17,7 @@ public class WorkersListView extends javax.swing.JPanel {
     private final AdminHome PRINCIPALJFRAME;
     private final List<Worker> WORKER_LIST;
     private final List<Worker> WORKER_LIST_FILTER = new ArrayList<>();
-    private final ComboBoxWorkerOptions CBO = new ComboBoxWorkerOptions();
+    private final dataFormsPerson CBO = new dataFormsPerson();
     private final CheckFields Checker = new CheckFields();
 
     private void uploadInfoToTable(List<Worker> ListWorker) {

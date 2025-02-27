@@ -4,6 +4,7 @@
  */
 package com.mycompany.marlenproject.userinterface.panelViews.workersSection;
 
+import com.mycompany.marlenproject.data.forms.person.dataFormsPerson;
 import com.mycompany.marlenproject.utils.fields.CheckFields;
 import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.logic.Worker;
@@ -24,7 +25,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
     private final requestPerson NEW_REQUEST_PERSON = new requestPerson();
     private final requestWorker NEW_REQUEST_WORKER = new requestWorker();
     private final CheckFields CHECKER = new CheckFields();
-    private final ComboBoxWorkerOptions CBO = new ComboBoxWorkerOptions();
+    private final dataFormsPerson CBO = new dataFormsPerson();
     private final AdminHome PRINCIPALJFRAME;
     private Worker workerInfo = new Worker();
 
