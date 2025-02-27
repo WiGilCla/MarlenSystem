@@ -287,32 +287,32 @@ public class AddWorkerView extends javax.swing.JPanel {
             }
         });
 
-        sltIdentificationType.setPreferredSize(new java.awt.Dimension(296, 25));
         sltIdentificationType.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsPerson.IDENTIFICATION_TYPE));
+        sltIdentificationType.setPreferredSize(new java.awt.Dimension(296, 25));
         sltIdentificationType.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 sltIdentificationTypeFocusGained(evt);
             }
         });
 
-        sltPosition.setPreferredSize(new java.awt.Dimension(296, 25));
         sltPosition.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsWorker.JOB_TITLE));
+        sltPosition.setPreferredSize(new java.awt.Dimension(296, 25));
         sltPosition.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 sltPositionFocusGained(evt);
             }
         });
 
-        sltBloodType.setPreferredSize(new java.awt.Dimension(136, 25));
         sltBloodType.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsWorker.BLOOD_GROUP));
+        sltBloodType.setPreferredSize(new java.awt.Dimension(136, 25));
         sltBloodType.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 sltBloodTypeFocusGained(evt);
             }
         });
 
-        sltBloodTypeCmplt.setPreferredSize(new java.awt.Dimension(136, 25));
         sltBloodTypeCmplt.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsWorker.BLOOD_GROUP_RHD));
+        sltBloodTypeCmplt.setPreferredSize(new java.awt.Dimension(136, 25));
         sltBloodTypeCmplt.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 sltBloodTypeCmpltFocusGained(evt);
@@ -476,8 +476,8 @@ public class AddWorkerView extends javax.swing.JPanel {
             }
         });
 
-        sltEPS.setPreferredSize(new java.awt.Dimension(296, 25));
         sltEPS.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsWorker.HEALTH_ENTITY));
+        sltEPS.setPreferredSize(new java.awt.Dimension(296, 25));
         sltEPS.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 sltEPSFocusGained(evt);
