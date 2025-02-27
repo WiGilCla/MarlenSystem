@@ -25,7 +25,7 @@ public class CheckFields {
     }
     
     public boolean checkDNILength(String personDNI){
-        return personDNI.length() >= 8 && personDNI.length() <=10; 
+        return (personDNI.length() >= 8 && personDNI.length() <=10) && personDNI.matches("[0-9]+"); 
     }
 
     public String removeStringBlanks(String text) {
@@ -36,9 +36,6 @@ public class CheckFields {
     }
 
     public boolean checkEmail(String email) {
-        if (email == null || email.isEmpty()) {
-            return false;
-        }
         return email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
     }
 
