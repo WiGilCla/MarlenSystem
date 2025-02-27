@@ -77,7 +77,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         dateDayLink.setDate(workerInfo.getDayLink());
 
         sltPosition.setSelectedIndex(dataFormsWorker
-                .findIndexSelected(dataFormsWorker.STATUS, workerInfo.getPosition()));
+                .findIndexSelected(dataFormsWorker.JOB_TITLE, workerInfo.getPosition()));
 
         sltState.setSelectedIndex(workerInfo.isIsActive() ? dataFormsWorker.getIndexStatusActive() : dataFormsWorker.getIndexStatusNoActive());
     }

@@ -4,8 +4,6 @@
  */
 package com.mycompany.marlenproject.data.forms.person;
 
-import java.util.Arrays;
-
 public class dataFormsPerson {
     private static final int NO_SELECTED_OPTION = 0;
 
@@ -17,7 +15,12 @@ public class dataFormsPerson {
     }
 
     public static int findIndexSelected(String[] list, String value) {
-        return Arrays.asList(list).indexOf(value);
+        for (int i = 0; i < list.length; i++) {
+            if (list[i].toLowerCase().equals(value.toLowerCase())) {
+                return i;
+            }
+        }
+        return 0;
     }
 
 }
