@@ -5,6 +5,7 @@
 package com.mycompany.marlenproject.userinterface.panelViews.workersSection;
 
 import com.mycompany.marlenproject.data.forms.person.dataFormsPerson;
+import com.mycompany.marlenproject.data.forms.worker.dataFormsWorker;
 import com.mycompany.marlenproject.utils.fields.CheckFields;
 import com.mycompany.marlenproject.logic.Person;
 import com.mycompany.marlenproject.logic.Worker;
@@ -25,7 +26,6 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
     private final requestPerson NEW_REQUEST_PERSON = new requestPerson();
     private final requestWorker NEW_REQUEST_WORKER = new requestWorker();
     private final CheckFields CHECKER = new CheckFields();
-    private final dataFormsPerson CBO = new dataFormsPerson();
     private final AdminHome PRINCIPALJFRAME;
     private Worker workerInfo = new Worker();
 
@@ -59,28 +59,27 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
 
         txtSecondLastName.setText(workerInfo.getPerson().getSecondLastName());
 
-        sltIdentificationType.setSelectedIndex(CBO
-                .findIndexSelected(CBO.getIdentificationTypeOptions(), workerInfo.getPerson().getIdentificationType()));
+        sltIdentificationType.setSelectedIndex(dataFormsPerson.findIndexSelected(dataFormsPerson.IDENTIFICATION_TYPE, workerInfo.getPerson().getIdentificationType()));
 
         txtIdentificationNumber.setText(workerInfo.getPerson().getIdentificationNumber());
 
-        sltBloodType.setSelectedIndex(CBO
-                .findIndexSelected(CBO.getBloodGroupOptions(), bloodGroup));
+        sltBloodType.setSelectedIndex(dataFormsWorker
+                .findIndexSelected(dataFormsWorker.BLOOD_GROUP, bloodGroup));
 
-        sltBloodTypeCmpl.setSelectedIndex(CBO.
-                findIndexSelected(CBO.getBloodGroupRhdOptions(), bloodGroupRhd));
+        sltBloodTypeCmpl.setSelectedIndex(dataFormsWorker.
+                findIndexSelected(dataFormsWorker.BLOOD_GROUP_RHD, bloodGroupRhd));
 
-        sltHealthEntity.setSelectedIndex(CBO
-                .findIndexSelected(CBO.getHealthEntityOptions(), workerInfo.getHealthEntity()));
+        sltHealthEntity.setSelectedIndex(dataFormsWorker
+                .findIndexSelected(dataFormsWorker.HEALTH_ENTITY, workerInfo.getHealthEntity()));
 
         dateBirthdate.setDate(workerInfo.getPerson().getBirthdate());
 
         dateDayLink.setDate(workerInfo.getDayLink());
 
-        sltPosition.setSelectedIndex(CBO
-                .findIndexSelected(CBO.getPositionOptions(), workerInfo.getPosition()));
+        sltPosition.setSelectedIndex(dataFormsWorker
+                .findIndexSelected(dataFormsWorker.STATUS, workerInfo.getPosition()));
 
-        sltState.setSelectedIndex(workerInfo.isIsActive() ? CBO.getIndexStateActive() : CBO.getIndexStateNoActive());
+        sltState.setSelectedIndex(workerInfo.isIsActive() ? dataFormsWorker.getIndexStatusActive() : dataFormsWorker.getIndexStatusNoActive());
     }
 
     private boolean changeColorRequiredField() {
@@ -341,7 +340,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             }
         });
 
-        sltIdentificationType.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getIdentificationTypeOptions()));
+        sltIdentificationType.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsPerson.IDENTIFICATION_TYPE));
         sltIdentificationType.setPreferredSize(new java.awt.Dimension(211, 25));
         sltIdentificationType.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -349,7 +348,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             }
         });
 
-        sltBloodType.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getBloodGroupOptions()));
+        sltBloodType.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsWorker.BLOOD_GROUP));
         sltBloodType.setPreferredSize(new java.awt.Dimension(102, 25));
         sltBloodType.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -357,7 +356,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             }
         });
 
-        sltBloodTypeCmpl.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getBloodGroupRhdOptions()));
+        sltBloodTypeCmpl.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsWorker.BLOOD_GROUP_RHD));
         sltBloodTypeCmpl.setPreferredSize(new java.awt.Dimension(102, 25));
         sltBloodTypeCmpl.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -375,7 +374,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             }
         });
 
-        sltPosition.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getPositionOptions()));
+        sltPosition.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsWorker.JOB_TITLE));
         sltPosition.setPreferredSize(new java.awt.Dimension(211, 25));
         sltPosition.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -509,7 +508,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             }
         });
 
-        sltHealthEntity.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getHealthEntityOptions()));
+        sltHealthEntity.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsWorker.HEALTH_ENTITY));
         sltHealthEntity.setPreferredSize(new java.awt.Dimension(211, 25));
         sltHealthEntity.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -539,7 +538,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             }
         });
 
-        sltState.setModel(new javax.swing.DefaultComboBoxModel<>(CBO.getStateOptions()));
+        sltState.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsWorker.STATUS));
         sltState.setPreferredSize(new java.awt.Dimension(211, 25));
         sltState.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -709,7 +708,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             String healthEntity = sltHealthEntity.getSelectedItem().toString();
             Date dayLink = dateDayLink.getDate();
             String position = sltPosition.getSelectedItem().toString();
-            boolean state = (sltState.getSelectedIndex() == CBO.getIndexStateActive());
+            boolean state = (sltState.getSelectedIndex() == dataFormsWorker.getIndexStatusActive());
 
             Person person = new Person(personFirstName, personSecondName, personFirstLastName, personSecondLastName, personIdentificationType, personIdentificationNumber, personBirthdate);
             Worker worker = new Worker(bloodType.concat(bloodTypeCmplt), healthEntity, dayLink, position, state, false, person);
