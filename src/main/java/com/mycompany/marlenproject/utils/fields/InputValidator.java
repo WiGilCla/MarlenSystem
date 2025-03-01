@@ -6,7 +6,6 @@ package com.mycompany.marlenproject.utils.fields;
 
 import com.mycompany.marlenproject.data.forms.person.dataFormsPerson;
 import java.util.Date;
-import javax.swing.JOptionPane;
 
 public class InputValidator {
 
@@ -27,7 +26,7 @@ public class InputValidator {
     }
 
     public static boolean checkIdentification(int type, String personDNI) {
-        if (type == dataFormsPerson.getNoOneOptionSelected() || type == -1 ) {
+        if (type == dataFormsPerson.getNoOneOptionSelected() || type == -1) {
             return false;
         }
 
@@ -38,7 +37,7 @@ public class InputValidator {
 
         if (is_Id) {
             return (personDNI.length() == 8 || personDNI.length() == 10) && personDNI.matches("[0-9]+");
-            
+
         } else if (is_Passport) {
             return personDNI.length() == 8
                     && personDNI.chars().filter(Character::isDigit).count() == 6
