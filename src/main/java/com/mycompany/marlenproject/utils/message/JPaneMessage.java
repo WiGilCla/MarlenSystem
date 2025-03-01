@@ -10,55 +10,100 @@ import javax.swing.JOptionPane;
 
 public class JPaneMessage {
 
-    public static void incorrectAddressMessage(Component component, String altMsg, String altTitle) {
-        String message;
-        message = (altMsg == null)
-                ? "La dirección solo puede contener letras, números, espacios, el símbolo # y el guion (-)." : altMsg;
+    private static String generateMessage(String Message, String[] conditions) {
 
-        String title;
-        title = (altTitle == null)
-                ? "Dirección inválida" : altTitle;
+        String finalMessage = Message;
 
+        if (conditions != null && conditions.length > 0) {
+            finalMessage += " ";
+            for (String condition : conditions) {
+                finalMessage += "*. " + condition + " ";
+            }
+        }
+
+        return finalMessage;
+    }
+
+    public static void incorrectAddressMessage(Component component, String altMsg, String altTitle, String[] altCond) {
+        
+        String title = (altTitle == null)
+                ? "Formato de dirección erróneo" : altTitle;
+        
+        String message = (altMsg == null)
+                ? "El campo de dirección puede incluir:" : altMsg;
+
+        String[] conditions = altCond;
+        if (conditions == null) {
+            conditions = new String[]{"Letras.", "Números.",
+                "Numeral (#).", "Guión medio (-)."};
+        }
+
+        message = generateMessage(message, conditions);
         JOptionPane.showMessageDialog(component, message, title, 0);
     }
 
-    public static void incorrectTxtField(Component component, String altMsg, String altTitle) {
+    public static void incorrectTxtField(Component component, String altMsg, String altTitle, String[] altCond) {
+        
+        String title = (altTitle == null)
+                ? "Formato de texto erróneo" : altTitle;
+
         String message = (altMsg == null)
-                ? "Solo se permiten letras." : altMsg;
+                ? "Los campos de texto pueden incluir: " : altMsg;
 
-        String title;
-        title = (altTitle == null)
-                ? "Formato inválido" : altTitle;
-
+        String[] conditions = altCond;
+        if (conditions == null) {
+            conditions = new String[]{"Mayúsculas / Minúsculas",
+                "Letras de la A hasta la Z (Incluyendo Ñ)"};
+        }
+        
+        message = generateMessage(message, conditions);
         JOptionPane.showMessageDialog(component, message, title, 0);
     }
 
-    public static void incorrectTextArea(Component component, String altMsg, String altTitle) {
-        String message = (altMsg == null)
-                ? "Solo se permiten números y letras." : altMsg;
-        String title;
-        title = (altTitle == null)
-                ? "Formato inválido" : altTitle;
+    public static void incorrectTextArea(Component component, String altMsg, String altTitle, String[] altCond) {
 
+        String title = (altTitle == null)
+                ? "Formato de texto erróneo" : altTitle;
+
+        String message = (altMsg == null)
+                ? "Las areas de texto pueden incluir:" : altMsg;
+
+        String[] conditions = altCond;
+        if (conditions == null) {
+            conditions = new String[]{"Mayúsculas / Minúsculas.",
+                "Letras de la A hasta la Z (Incluyendo Ñ).", "Números."};
+        }
+        
+        message = generateMessage(message, conditions);
         JOptionPane.showMessageDialog(component, message, title, 0);
     }
 
-    public static void incorrectNumberField(Component component, String altMsg, String altTitle) {
-        String message = (altMsg == null)
-                ? "Solo se permiten números." : altMsg;
-        String title;
-        title = (altTitle == null)
-                ? "Formato inválido" : altTitle;
+    public static void incorrectNumberField(Component component, String altMsg, String altTitle, String[] altCond) {
+        
+        String title = (altTitle == null)
+                ? "Formato de número erróneo" : altTitle;
 
+        String message = (altMsg == null)
+                ? "Los campos númericos pueden incluir:" : altMsg;
+
+        String[] conditions = altCond;
+        if (conditions == null) {
+            conditions = new String[]{"Números."};
+        }
+        
+        message = generateMessage(message, conditions);
         JOptionPane.showMessageDialog(component, message, title, 0);
     }
 
-    public static void incorrectIdentification(Component component, int type, String altMsg, String altTitle) {
+    public static void incorrectIdentification(Component component, int type, String altMsg, String altTitle, String[] altCond) {
+        
+        String title = (altTitle == null)
+                ? "Formato de identificación erróneo" : altTitle;
+
         String message = (altMsg == null)
-                ? "Debe ingresar un Numero de identificación válido." : altMsg;
-        String title;
-        title = (altTitle == null)
-                ? "Formato inválido" : altTitle;
+                ? "Debe ingresar una identificación válida." : altMsg;
+
+        String[] conditions = altCond;
 
         String IdType = dataFormsPerson.IDENTIFICATION_TYPE[type];
         boolean is_Id = (IdType.equals(dataFormsPerson.IDENTIFICATION_TYPE[1]));
@@ -66,23 +111,35 @@ public class JPaneMessage {
         boolean is_Passport = (IdType.equals(dataFormsPerson.IDENTIFICATION_TYPE[3]));
 
         if (is_Id) {
-            message = "La cédula debe ser de 8 o 10 digitos numericos.";
+            message = "La cédula de ciudadanía debe tener:";
+            conditions = new String[]{"Números.", "8 o 10 dígitos."};
+
         } else if (is_ForeingId) {
-            message = "La cédula de extranjería tener unicamente valores numericos.";
+            message = "La cédula de extranjería debe tener:";
+            conditions = new String[]{"Números."};
         } else if (is_Passport) {
-            message = "El pasaporte debe tener 8 digitos, 2 letras y 6 digitos.";
+            message = "El pasaporte debe tener:";
+            conditions = new String[]{"2 Letras.", "6 Números"};
         }
 
+        message = generateMessage(message, conditions);
         JOptionPane.showMessageDialog(component, message, title, 0);
     }
 
-    public static void incorrectEmail(Component component, String altMsg, String altTitle) {
-        String message = (altMsg == null)
-                ? "Por favor, ingresa un correo electrónico válido. Asegúrate de que tenga un formato correcto, como ejemplo@dominio.com." : altMsg;
-        String title;
-        title = (altTitle == null)
-                ? "Formato inválido" : altTitle;
+    public static void incorrectEmail(Component component, String altMsg, String altTitle, String[] altCond) {
+        
+        String title = (altTitle == null)
+                ? "Formato de Email erróneo " : altTitle;
 
+        String message = (altMsg == null)
+                ? "El correo electrónico debe tener el siguiente formato: " : altMsg;
+
+        String[] conditions = altCond;
+        if (conditions == null) {
+            conditions = new String[]{"ejemplo@dominio.com"};
+        }
+        
+        message = generateMessage(message, conditions);
         JOptionPane.showMessageDialog(component, message, title, 0);
     }
 
