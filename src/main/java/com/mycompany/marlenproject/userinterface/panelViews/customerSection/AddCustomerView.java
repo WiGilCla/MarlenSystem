@@ -11,6 +11,7 @@ import com.mycompany.marlenproject.logic.request.RequestCustomer;
 import com.mycompany.marlenproject.logic.request.requestPerson;
 import com.mycompany.marlenproject.persistence.exceptions.PreexistingEntityException;
 import com.mycompany.marlenproject.utils.colors.Colors;
+import com.mycompany.marlenproject.utils.message.JPaneMessage;
 import com.mycompany.marlenproject.data.forms.person.dataFormsPerson;
 import java.util.Date;
 import java.util.logging.Level;
@@ -34,18 +35,22 @@ public class AddCustomerView extends javax.swing.JPanel {
 
         if (!InputValidator.checkStringField(personFirstName)) {
             txtFirstName.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.incorrectTxtField(this, null, null, null);
             return false;
         }
         if (!InputValidator.checkStringField(personFirstLastName)) {
             txtFirstLastName.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.incorrectTxtField(this, null, null, null);
             return false;
         }
         if (!InputValidator.checkComboBox(personIdentificationType)) {
             sltIdentificationType.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.noSelectedBox(this, "Debe escoger un tipo de identificación", null);
             return false;
         }
         if (!InputValidator.checkIdentification(sltIdentificationType.getSelectedIndex(),personIdentificationNumber)) {
             txtIdentificationNum.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.incorrectIdentification(this, sltIdentificationType.getSelectedIndex(),null, null, null);
             return false;
         }
         return true;
@@ -60,26 +65,31 @@ public class AddCustomerView extends javax.swing.JPanel {
 
         if (!InputValidator.checkStringField(personSecondName) && !personSecondName.equalsIgnoreCase("")) {
             txtSecondName.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.incorrectTxtField(this, null, null, null);
             return false;
         }
 
         if (!InputValidator.checkStringField(personSecondLastName) && !personSecondLastName.equalsIgnoreCase("")) {
             txtSecondLastName.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.incorrectTxtField(this, null, null, null);
             return false;
         }
 
         if (!InputValidator.checkEmail(personEmail) && !personEmail.equalsIgnoreCase("")) {
             txtEmail.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.incorrectEmail(this, null, null, null);
             return false;
         }
 
         if (!InputValidator.checkNumberField(personPhone) && !personPhone.equalsIgnoreCase("")) {
             txtPhoneNumber.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.incorrectNumberField(this, null, null, null);
             return false;
         }
 
         if (!InputValidator.checkAddress(personAddress) && !personAddress.equalsIgnoreCase("")) {
             txtAddress.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.incorrectAddress(this, null, null, null);
             return false;
         }
 

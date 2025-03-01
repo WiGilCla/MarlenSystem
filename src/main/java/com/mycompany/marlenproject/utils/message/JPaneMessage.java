@@ -24,7 +24,7 @@ public class JPaneMessage {
         return finalMessage;
     }
 
-    public static void incorrectAddressMessage(Component component, String altMsg, String altTitle, String[] altCond) {
+    public static void incorrectAddress(Component component, String altMsg, String altTitle, String[] altCond) {
         
         String title = (altTitle == null)
                 ? "Formato de dirección erróneo" : altTitle;
