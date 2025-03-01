@@ -111,7 +111,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             return false;
         }
 
-        if (!InputValidator.checkIdentification(sltIdentificationType.getSelectedIndex(),personIdentificationNumber)) {
+        if (!InputValidator.checkIdentification(sltIdentificationType.getSelectedIndex(), personIdentificationNumber)) {
             txtIdentificationNumber.setBackground(Colors.IncorrectColorFields());
             JPaneMessage.incorrectIdentification(this, sltIdentificationType.getSelectedIndex(), null, null, null);
             return false;
@@ -732,6 +732,9 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "La información ha sido cambiada correctamente.", "Operación exitosa", 1);
                 returnWorkerInfo(personIdentificationNumber);
 
+                this.dispose();
+                this.PRINCIPALJFRAME.setVisible(true);
+
             } catch (PreexistingEntityException ex) {
 
                 JOptionPane.showMessageDialog(this, "El numero de identificación ya está asociado a alguien.", "Identificación duplicada", 0);
@@ -747,14 +750,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
                 Logger.getLogger(AddWorkerView.class.getName()).log(Level.SEVERE, null, ex);
 
             }
-        } else {
-
-            JOptionPane.showMessageDialog(this, "Asegurese de que los campos en rojo estén correctamente diligenciados", "Error en Campos", 0);
-            return;
-
         }
-        this.dispose();
-        this.PRINCIPALJFRAME.setVisible(true);
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanActionPerformed
@@ -809,8 +805,8 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
     private void txtIdentificationNumberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdentificationNumberMouseClicked
         String Message = "                      Por razones de seguridad este campo no es editable.";
         String suggest = "\n\n Si el número de cédula es diferente, le recomendamos agregarla como un nuevo trabajador.";
-        
-        JOptionPane.showMessageDialog(this, Message.concat(suggest) , "Acción invalida", 1);
+
+        JOptionPane.showMessageDialog(this, Message.concat(suggest), "Acción invalida", 1);
     }//GEN-LAST:event_txtIdentificationNumberMouseClicked
 
     private void dateBirthdateMouseClicked() {

@@ -624,7 +624,8 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
                 NEW_REQUEST_CUSTOMER.editCustomer(editCustomer);
 
                 JOptionPane.showMessageDialog(this, "La información ha sido cambiada correctamente", "Operación exitosa", 1);
-                returnCustomerList(personIdentificationNumber);
+                this.dispose();
+                returnCustomerList(personIdentificationNumber);  
                 
             } catch (PreexistingEntityException ex) {
                 JOptionPane.showMessageDialog(this, "El numero de identificación ya está asociado a alguien.", "Identificación duplicada", 0);
@@ -638,12 +639,7 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
                 Logger.getLogger(AddWorkerView.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        } else {
-            JOptionPane.showMessageDialog(this, "Asegurese de que los campos en rojo estén correctamente diligenciados", "Error en Campos", 0);
-            return;
         }
-
-        this.dispose();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanActionPerformed

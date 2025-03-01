@@ -567,11 +567,7 @@ public class AddCustomerView extends javax.swing.JPanel {
             } catch (Exception e) {
                 Logger.getLogger(AddCustomerView.class.getName()).log(Level.SEVERE, null, e);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Asegurese de que los campos en rojo estén correctamente diligenciados", "Error en Campos", 0);
         }
-
-
     }//GEN-LAST:event_btnSaveWorkerActionPerformed
 
     private void txtFirstNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFirstNameFocusGained
