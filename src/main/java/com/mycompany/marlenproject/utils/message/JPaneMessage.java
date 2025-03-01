@@ -143,4 +143,14 @@ public class JPaneMessage {
         JOptionPane.showMessageDialog(component, message, title, 0);
     }
 
+    public static void noSelectedBox(Component component, String altMsg, String altTitle){
+        String title = (altTitle == null)
+                ? "Item no seleccionado" : altTitle;
+        
+        String message = (altMsg == null)
+                ? "Debe seleccionar una opción" : altMsg;
+        
+        message = generateMessage(message, null);
+        JOptionPane.showMessageDialog(component, message, title, 0);
+    }
 }

@@ -107,6 +107,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
 
         if (!InputValidator.checkComboBox(personIdentificationType)) {
             sltIdentificationType.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.noSelectedBox(this, "Debe escoger un tipo de identificación.", null);
             return false;
         }
 
@@ -118,16 +119,19 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
 
         if (!InputValidator.checkComboBox(bloodType)) {
             sltBloodType.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.noSelectedBox(this, "Debe escoger un grupo AOB.", null);
             return false;
         }
 
         if (!InputValidator.checkComboBox(bloodTypeCmplt)) {
             sltBloodTypeCmpl.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.noSelectedBox(this, "Debe escoger un factor Rh.", null);
             return false;
         }
 
         if (!InputValidator.checkComboBox(healthEntity)) {
             sltHealthEntity.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.noSelectedBox(this, "Debe escoger una entidad de salud.", null);
             return false;
         }
 
@@ -143,10 +147,12 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
 
         if (!InputValidator.checkComboBox(position)) {
             sltPosition.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.noSelectedBox(this, "Debe escoger una posición.", null);
             return false;
         }
         if (!InputValidator.checkComboBox(state)) {
             sltState.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.noSelectedBox(this, "Debe escoger el estado del trabajador.", null);
             return false;
         }
 

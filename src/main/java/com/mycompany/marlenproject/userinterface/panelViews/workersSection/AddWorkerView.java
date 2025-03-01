@@ -51,6 +51,7 @@ public class AddWorkerView extends javax.swing.JPanel {
         }
         if (!InputValidator.checkComboBox(personIdentificationType)) {
             sltIdentificationType.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.noSelectedBox(this, "Debe escoger un tipo de identificación.", null);
             return false;
         }
         if (!InputValidator.checkIdentification(sltIdentificationType.getSelectedIndex(),personIdentificationNumber)) {
@@ -60,14 +61,17 @@ public class AddWorkerView extends javax.swing.JPanel {
         }
         if (!InputValidator.checkComboBox(bloodType)) {
             sltBloodType.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.noSelectedBox(this, "Debe escoger un grupo AOB.", null);
             return false;
         }
         if (!InputValidator.checkComboBox(bloodTypeCmplt)) {
             sltBloodTypeCmplt.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.noSelectedBox(this, "Debe escoger un factor Rh.", null);
             return false;
         }
         if (!InputValidator.checkComboBox(healthEntity)) {
             sltEPS.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.noSelectedBox(this, "Debe escoger una entidad de salud.", null);
             return false;
         }
         if (null == dateBirthdate.getDate()) {
@@ -80,6 +84,7 @@ public class AddWorkerView extends javax.swing.JPanel {
         }
         if (!InputValidator.checkComboBox(position)) {
             sltPosition.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.noSelectedBox(this, "Debe escoger una posición.", null);
             return false;
         }
 
