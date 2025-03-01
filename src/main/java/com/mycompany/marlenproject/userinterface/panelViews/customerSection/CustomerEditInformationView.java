@@ -89,8 +89,7 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
             return false;
         }
 
-        if (!InputValidator.checkNumberField(personIdentificationNumber)
-                || !InputValidator.checkDNILength(personIdentificationNumber)) {
+        if (!InputValidator.checkIdentification(sltCustomerIdentificationType.getSelectedIndex(),personIdentificationNumber)) {
             txtCustomerIdentificationNumber.setBackground(Colors.IncorrectColorFields());
             return false;
         }

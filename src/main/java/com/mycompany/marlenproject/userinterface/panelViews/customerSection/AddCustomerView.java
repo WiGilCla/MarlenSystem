@@ -44,8 +44,7 @@ public class AddCustomerView extends javax.swing.JPanel {
             sltIdentificationType.setBackground(Colors.IncorrectColorFields());
             return false;
         }
-        if (!InputValidator.checkNumberField(personIdentificationNumber)
-                || !InputValidator.checkDNILength(personIdentificationNumber)) {
+        if (!InputValidator.checkIdentification(sltIdentificationType.getSelectedIndex(),personIdentificationNumber)) {
             txtIdentificationNum.setBackground(Colors.IncorrectColorFields());
             return false;
         }

@@ -107,8 +107,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             return false;
         }
 
-        if (!InputValidator.checkNumberField(personIdentificationNumber)
-                || !InputValidator.checkDNILength(personIdentificationNumber)) {
+        if (!InputValidator.checkIdentification(sltIdentificationType.getSelectedIndex(),personIdentificationNumber)) {
             txtIdentificationNumber.setBackground(Colors.IncorrectColorFields());
             return false;
         }

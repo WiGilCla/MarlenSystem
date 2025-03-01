@@ -4,11 +4,13 @@
  */
 package com.mycompany.marlenproject.utils.fields;
 
+import com.mycompany.marlenproject.data.forms.person.dataFormsPerson;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 public class InputValidator {
-    
-    public static boolean checkAddress(String address) {        
+
+    public static boolean checkAddress(String address) {
         return address.matches("^[a-zA-Z0-9\\s#-]*$");
     }
 
@@ -23,9 +25,30 @@ public class InputValidator {
     public static boolean checkNumberField(String number) {
         return number.matches("[0-9]+");
     }
-    
-    public static boolean checkDNILength(String personDNI){
-        return (personDNI.length() >= 8 && personDNI.length() <=10) && personDNI.matches("[0-9]+"); 
+
+    public static boolean checkIdentification(int type, String personDNI) {
+        if (type == dataFormsPerson.getNoOneOptionSelected() || type == -1 ) {
+            return false;
+        }
+
+        String IdType = dataFormsPerson.IDENTIFICATION_TYPE[type];
+        boolean is_Id = (IdType.equals(dataFormsPerson.IDENTIFICATION_TYPE[1]));
+        boolean is_ForeingId = (IdType.equals(dataFormsPerson.IDENTIFICATION_TYPE[2]));
+        boolean is_Passport = (IdType.equals(dataFormsPerson.IDENTIFICATION_TYPE[3]));
+
+        if (is_Id) {
+            return (personDNI.length() == 8 || personDNI.length() == 10) && personDNI.matches("[0-9]+");
+            
+        } else if (is_Passport) {
+            return personDNI.length() == 8
+                    && personDNI.chars().filter(Character::isDigit).count() == 6
+                    && personDNI.chars().filter(Character::isLetter).count() == 2;
+
+        } else if (is_ForeingId) {
+            return personDNI.matches("[0-9]+");
+        } else {
+            return false;
+        }
     }
 
     public static String removeStringBlanks(String text) {
