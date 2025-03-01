@@ -15,6 +15,7 @@ import com.mycompany.marlenproject.persistence.exceptions.NonexistentEntityExcep
 import com.mycompany.marlenproject.persistence.exceptions.PreexistingEntityException;
 import com.mycompany.marlenproject.userinterface.AdminHome;
 import com.mycompany.marlenproject.utils.colors.Colors;
+import com.mycompany.marlenproject.utils.message.JPaneMessage;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -94,11 +95,13 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
 
         if (!InputValidator.checkStringField(personFirstName)) {
             txtFirstName.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.incorrectTxtField(this, null, null, null);
             return false;
         }
 
         if (!InputValidator.checkStringField(personFirstLastName)) {
             txtFirstLastName.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.incorrectTxtField(this, null, null, null);
             return false;
         }
 
@@ -109,6 +112,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
 
         if (!InputValidator.checkIdentification(sltIdentificationType.getSelectedIndex(),personIdentificationNumber)) {
             txtIdentificationNumber.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.incorrectIdentification(this, sltIdentificationType.getSelectedIndex(), null, null, null);
             return false;
         }
 
@@ -155,11 +159,13 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
 
         if (!InputValidator.checkStringField(personSecondName) && !personSecondName.equalsIgnoreCase("")) {
             txtSecondName.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.incorrectTxtField(this, null, null, null);
             return false;
         }
 
         if (!InputValidator.checkStringField(personSecondLastName) && !personSecondLastName.equalsIgnoreCase("")) {
             txtSecondLastName.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.incorrectTxtField(this, null, null, null);
             return false;
         }
 
