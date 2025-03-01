@@ -13,6 +13,7 @@ import com.mycompany.marlenproject.utils.colors.Colors;
 import com.mycompany.marlenproject.data.forms.worker.dataFormsWorker;
 import com.mycompany.marlenproject.data.forms.person.dataFormsPerson;
 import com.mycompany.marlenproject.utils.fields.InputValidator;
+import com.mycompany.marlenproject.utils.message.JPaneMessage;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,10 +41,12 @@ public class AddWorkerView extends javax.swing.JPanel {
 
         if (!InputValidator.checkStringField(personFirstName)) {
             txtFirstName.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.incorrectTxtField(this, null, null, null);
             return false;
         }
         if (!InputValidator.checkStringField(personFirstLastName)) {
             txtFirstLastName.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.incorrectTxtField(this, null, null, null);
             return false;
         }
         if (!InputValidator.checkComboBox(personIdentificationType)) {
@@ -52,6 +55,7 @@ public class AddWorkerView extends javax.swing.JPanel {
         }
         if (!InputValidator.checkIdentification(sltIdentificationType.getSelectedIndex(),personIdentificationNumber)) {
             txtIdentificationNum.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.incorrectIdentification(this, sltIdentificationType.getSelectedIndex(),null, null, null);
             return false;
         }
         if (!InputValidator.checkComboBox(bloodType)) {
@@ -88,11 +92,13 @@ public class AddWorkerView extends javax.swing.JPanel {
 
         if (!InputValidator.checkStringField(personSecondName) && !personSecondName.equalsIgnoreCase("")) {
             txtSecondName.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.incorrectTxtField(this, null, null, null);
             return false;
         }
 
         if (!InputValidator.checkStringField(personSecondLastName) && !personSecondLastName.equalsIgnoreCase("")) {
             txtSecondLastName.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.incorrectTxtField(this, null, null, null);
             return false;
         }
 
@@ -618,11 +624,7 @@ public class AddWorkerView extends javax.swing.JPanel {
             } catch (Exception ex) {
                 Logger.getLogger(AddWorkerView.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Asegurese de que los campos en rojo estén correctamente diligenciados", "Error en Campos", 0);
         }
-
-
     }//GEN-LAST:event_btnSaveWorkerActionPerformed
 
     private void sltBloodTypeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sltBloodTypeFocusGained
