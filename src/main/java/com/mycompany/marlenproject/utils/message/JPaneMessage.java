@@ -24,11 +24,18 @@ public class JPaneMessage {
         return finalMessage;
     }
 
+    public static void optionDialog(Component component, String message, String title, String[] options) {
+        JOptionPane.showOptionDialog(component,
+                message,
+                title, 0, 1, null,
+                options, 0);
+    }
+
     public static void incorrectAddress(Component component, String altMsg, String altTitle, String[] altCond) {
-        
+
         String title = (altTitle == null)
                 ? "Formato de dirección erróneo" : altTitle;
-        
+
         String message = (altMsg == null)
                 ? "El campo de dirección puede incluir:" : altMsg;
 
@@ -43,7 +50,7 @@ public class JPaneMessage {
     }
 
     public static void incorrectTxtField(Component component, String altMsg, String altTitle, String[] altCond) {
-        
+
         String title = (altTitle == null)
                 ? "Formato de texto erróneo" : altTitle;
 
@@ -55,7 +62,7 @@ public class JPaneMessage {
             conditions = new String[]{"Mayúsculas / Minúsculas",
                 "Letras de la A hasta la Z (Incluyendo Ñ)"};
         }
-        
+
         message = generateMessage(message, conditions);
         JOptionPane.showMessageDialog(component, message, title, 0);
     }
@@ -73,13 +80,13 @@ public class JPaneMessage {
             conditions = new String[]{"Mayúsculas / Minúsculas.",
                 "Letras de la A hasta la Z (Incluyendo Ñ).", "Números."};
         }
-        
+
         message = generateMessage(message, conditions);
         JOptionPane.showMessageDialog(component, message, title, 0);
     }
 
     public static void incorrectNumberField(Component component, String altMsg, String altTitle, String[] altCond) {
-        
+
         String title = (altTitle == null)
                 ? "Formato de número erróneo" : altTitle;
 
@@ -90,13 +97,13 @@ public class JPaneMessage {
         if (conditions == null) {
             conditions = new String[]{"Números."};
         }
-        
+
         message = generateMessage(message, conditions);
         JOptionPane.showMessageDialog(component, message, title, 0);
     }
 
     public static void incorrectIdentification(Component component, int type, String altMsg, String altTitle, String[] altCond) {
-        
+
         String title = (altTitle == null)
                 ? "Formato de identificación erróneo" : altTitle;
 
@@ -127,7 +134,7 @@ public class JPaneMessage {
     }
 
     public static void incorrectEmail(Component component, String altMsg, String altTitle, String[] altCond) {
-        
+
         String title = (altTitle == null)
                 ? "Formato de Email erróneo " : altTitle;
 
@@ -138,18 +145,18 @@ public class JPaneMessage {
         if (conditions == null) {
             conditions = new String[]{"ejemplo@dominio.com"};
         }
-        
+
         message = generateMessage(message, conditions);
         JOptionPane.showMessageDialog(component, message, title, 0);
     }
 
-    public static void noSelectedBox(Component component, String altMsg, String altTitle){
+    public static void noSelectedBox(Component component, String altMsg, String altTitle) {
         String title = (altTitle == null)
                 ? "Item no seleccionado" : altTitle;
-        
+
         String message = (altMsg == null)
                 ? "Debe seleccionar una opción" : altMsg;
-        
+
         message = generateMessage(message, null);
         JOptionPane.showMessageDialog(component, message, title, 0);
     }
