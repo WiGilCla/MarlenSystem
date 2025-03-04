@@ -7,8 +7,8 @@ package com.mycompany.marlenproject.userinterface.panelViews.ProductsSection;
 import com.mycompany.marlenproject.logic.Product;
 import com.mycompany.marlenproject.logic.request.RequestProduct;
 import com.mycompany.marlenproject.userinterface.AdminHome;
+import com.mycompany.marlenproject.utils.message.JPaneMessage;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 
@@ -256,10 +256,11 @@ public class ProductView extends javax.swing.JPanel {
             try {
                 Product deleteProduct = this.products.get(productsTable.getSelectedRow());
                 NEW_REQUEST_PRODUCT.deteleProduct(deleteProduct);
-                JOptionPane.showMessageDialog(this, "El producto ha sido eliminado.", "Eliminación exitosa", 1);
+                JPaneMessage.messageDialog(this, "El producto ha sido eliminado exitosamente.", "Eliminación exitosa", 1);
+                
                 backProductListView();
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Ha ocurrido un error durante la eliminación", "Error inesperado", 0);
+                JPaneMessage.messageDialog(this, "Ha ocurrido un error durante la eliminación", "Error inesperado", 0);
             }
         }
     }//GEN-LAST:event_btnDeleteProductActionPerformed

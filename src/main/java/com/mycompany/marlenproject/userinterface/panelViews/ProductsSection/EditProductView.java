@@ -9,14 +9,13 @@ import com.mycompany.marlenproject.logic.Product;
 import com.mycompany.marlenproject.logic.request.RequestProduct;
 import com.mycompany.marlenproject.userinterface.AdminHome;
 import com.mycompany.marlenproject.utils.colors.Colors;
+import com.mycompany.marlenproject.utils.message.JPaneMessage;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 public class EditProductView extends javax.swing.JFrame {
 
     private final AdminHome PRINCIPALFRAME;
     private final Product product;
-    private final InputValidator CHECKER = new InputValidator();
     private final RequestProduct NEW_REQUEST_PRODUCT = new RequestProduct();
 
     public EditProductView(AdminHome principalFrame, Product product) {
@@ -27,17 +26,18 @@ public class EditProductView extends javax.swing.JFrame {
         setTitle("Editar producto");
         loadProductInformation(product);
     }
-    
+
     private boolean checkRequiredField() {
-        String productName = CHECKER.removeStringBlanks(txtProductName.getText());
+        String productName = InputValidator.removeStringBlanks(txtProductName.getText());
         if (productName.isBlank()) {
             txtProductName.setBackground(Colors.IncorrectColorFields());
-            JOptionPane.showMessageDialog(this, "Debe dar un nombre al producto", "Campo requerido", 2);
+            JPaneMessage.messageDialog(this, "Debe dar un nombre al producto.", "Producto sin nombre", 2);
             return false;
         }
-        if (!productName.isBlank() && !CHECKER.checkStringField(productName)) {
+        
+        if (!InputValidator.checkStringField(productName)) {
             txtProductName.setBackground(Colors.IncorrectColorFields());
-            JOptionPane.showMessageDialog(this, "Debe usar carácteres válidos", "Carácter no válido", 2);
+            JPaneMessage.incorrectTxtField(this, null, null, null);
             return false;
         }
 
@@ -45,11 +45,11 @@ public class EditProductView extends javax.swing.JFrame {
     }
 
     private boolean checkNoRequiredField() {
-        String productDescription = CHECKER.removeStringBlanks(txtADescriptionProduct.getText());
+        String productDescription = InputValidator.removeStringBlanks(txtADescriptionProduct.getText());
 
-        if (!productDescription.isBlank() && !CHECKER.checkStringTextArea(productDescription)) {
+        if (!productDescription.isBlank() && !InputValidator.checkStringTextArea(productDescription)) {
             txtADescriptionProduct.setBackground(Colors.IncorrectColorFields());
-            JOptionPane.showMessageDialog(this, "No debe usar caracteres especiales", "Carácter no válido", 2);
+            JPaneMessage.incorrectTextArea(this, null, null, null);
             return false;
         }
 
@@ -207,7 +207,7 @@ public class EditProductView extends javax.swing.JFrame {
         txtProductName.setText(product.getName());
         txtADescriptionProduct.setText(product.getDescription());
     }
-    
+
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.dispose();
         PRINCIPALFRAME.setVisible(true);
@@ -222,10 +222,11 @@ public class EditProductView extends javax.swing.JFrame {
                 this.product.setName(productName);
                 this.product.setDescription(productDescription);
                 NEW_REQUEST_PRODUCT.editProduct(this.product);
-                JOptionPane.showMessageDialog(this, "Se ha editado el producto con exito.", "Operación exitosa", 1);
+                JPaneMessage.messageDialog(this, "El producto ha sido Editado exitosamente.", "Edición exitosa.", 1);
                 backProductListView();
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Ha ocurrido un error durante la edición del producto", "Error de guardado", 0);
+                JPaneMessage.messageDialog(this, "Ha ocurrido un error durante la edición del producto.", "Error de edición.", 0);
+            
             }
         }
     }//GEN-LAST:event_btnSaveActionPerformed

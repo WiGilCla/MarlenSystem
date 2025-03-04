@@ -9,8 +9,8 @@ import com.mycompany.marlenproject.logic.Product;
 import com.mycompany.marlenproject.logic.request.RequestProduct;
 import com.mycompany.marlenproject.userinterface.AdminHome;
 import com.mycompany.marlenproject.utils.colors.Colors;
+import com.mycompany.marlenproject.utils.message.JPaneMessage;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 public class AddProductView extends javax.swing.JFrame {
 
@@ -27,12 +27,12 @@ public class AddProductView extends javax.swing.JFrame {
         String productName = InputValidator.removeStringBlanks(txtProductName.getText());
         if (productName.isBlank()) {
             txtProductName.setBackground(Colors.IncorrectColorFields());
-            JOptionPane.showMessageDialog(this, "Debe dar un nombre al producto", "Campo requerido", 2);
+            JPaneMessage.messageDialog(this, "Debe dar un nombre al producto.", "Producto sin nombre", 2);
             return false;
         }
         if (!productName.isBlank() && !InputValidator.checkStringField(productName)) {
             txtProductName.setBackground(Colors.IncorrectColorFields());
-            JOptionPane.showMessageDialog(this, "Debe usar carácteres válidos", "Carácter no válido", 2);
+            JPaneMessage.incorrectTxtField(this, null, null, null);
             return false;
         }
 
@@ -44,7 +44,7 @@ public class AddProductView extends javax.swing.JFrame {
 
         if (!productDescription.isBlank() && !InputValidator.checkStringTextArea(productDescription)) {
             txtADescriptionProduct.setBackground(Colors.IncorrectColorFields());
-            JOptionPane.showMessageDialog(this, "No debe usar caracteres especiales", "Carácter no válido", 2);
+            JPaneMessage.incorrectTextArea(this, null, null, null);
             return false;
         }
 
@@ -218,10 +218,12 @@ public class AddProductView extends javax.swing.JFrame {
 
                 Product newProduct = new Product(productName, productDescription);
                 requestProduct.saveProduct(newProduct);
-                JOptionPane.showMessageDialog(this, "Se ha guardado el producto con exito.", "Operación exitosa", 1);
+                JPaneMessage.messageDialog(this, "El producto se ha guardado existosamente.", "Guardado exitoso", 1);
                 backProductListView();
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Ha ocurrido un error durante el guardado de producto", "Error de guardado", 0);
+                JPaneMessage.messageDialog(this, "Ha ocurrido un error durante el guardado de producto", "Error de guardado", 0);
+                
+            
             }
         }
     }//GEN-LAST:event_btnSaveActionPerformed
