@@ -11,8 +11,8 @@ import com.mycompany.marlenproject.logic.request.requestWorker;
 import com.mycompany.marlenproject.userinterface.AdminHome;
 import com.mycompany.marlenproject.userinterface.panelViews.customerSection.AddCustomerView;
 import com.mycompany.marlenproject.userinterface.panelViews.customerSection.CustomerListView;
+import com.mycompany.marlenproject.utils.message.JPaneMessage;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 public class WorkersFirstView extends javax.swing.JPanel {
 
@@ -262,7 +262,7 @@ public class WorkersFirstView extends javax.swing.JPanel {
         
         } else {
         
-            JOptionPane.showMessageDialog(PRINCIPALJFRAME, "No tiene trabajadores registrados", "Sin registros", 0);
+            JPaneMessage.messageDialog(PRINCIPALJFRAME, "No tiene trabajadores registrados", "Sin registros", 0);
         
         }
     }//GEN-LAST:event_btnListWorkersActionPerformed
@@ -289,7 +289,7 @@ public class WorkersFirstView extends javax.swing.JPanel {
         
         } else {
         
-            JOptionPane.showMessageDialog(PRINCIPALJFRAME, "No tiene clientes registrados", "Sin registros", 0);
+            JPaneMessage.messageDialog(PRINCIPALJFRAME, "No tiene clientes registrados", "Sin registros", 0);
         
         }
     }//GEN-LAST:event_btnCustomerListActionPerformed

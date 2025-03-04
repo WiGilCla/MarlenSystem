@@ -20,7 +20,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 public class WorkerEditInformationView extends javax.swing.JFrame {
 
@@ -729,7 +728,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
                 NEW_REQUEST_PERSON.editPerson(person);
                 NEW_REQUEST_WORKER.editWorker(worker);
 
-                JOptionPane.showMessageDialog(this, "La información ha sido cambiada correctamente.", "Operación exitosa", 1);
+                JPaneMessage.messageDialog(this, "La información ha sido cambiada correctamente.", "Operación exitosa", 1);
                 returnWorkerInfo(personIdentificationNumber);
 
                 this.dispose();
@@ -737,12 +736,12 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
 
             } catch (PreexistingEntityException ex) {
 
-                JOptionPane.showMessageDialog(this, "El numero de identificación ya está asociado a alguien.", "Identificación duplicada", 0);
+                JPaneMessage.messageDialog(this, "El numero de identificación ya está asociado a alguien.", "Identificación duplicada", 0);
                 txtIdentificationNumber.setBackground(Colors.IncorrectColorFields());
 
             } catch (NonexistentEntityException ex) {
 
-                JOptionPane.showMessageDialog(this, "El numero de identificación no existe.", "Identificación no existente", 0);
+                JPaneMessage.messageDialog(this, "El numero de identificación no existe.", "Identificación no existente", 0);
                 txtIdentificationNumber.setBackground(Colors.IncorrectColorFields());
 
             } catch (Exception ex) {
@@ -806,7 +805,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         String Message = "                      Por razones de seguridad este campo no es editable.";
         String suggest = "\n\n Si el número de cédula es diferente, le recomendamos agregarla como un nuevo trabajador.";
 
-        JOptionPane.showMessageDialog(this, Message.concat(suggest), "Acción invalida", 1);
+        JPaneMessage.messageDialog(this, Message.concat(suggest), "Acción invalida", 1);
     }//GEN-LAST:event_txtIdentificationNumberMouseClicked
 
     private void dateBirthdateMouseClicked() {

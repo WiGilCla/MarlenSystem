@@ -9,11 +9,11 @@ import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.logic.request.requestWorker;
 import com.mycompany.marlenproject.userinterface.AdminHome;
 import com.mycompany.marlenproject.utils.date.DateFunctions;
+import com.mycompany.marlenproject.utils.message.JPaneMessage;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 public class WorkersInformationView extends javax.swing.JPanel {
 
@@ -510,7 +510,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
 
             REQUEST_WORKER.editWorker(worker);
             this.WORKER_LIST.remove(workerObserved);
-            JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, "El trabajador ha sido eliminado exitosamente", "Eliminación exitosa", 1);
+            JPaneMessage.messageDialog(this, "El trabajador ha sido eliminado exitosamente.", "Eliminación exitosa", 1);
 
             if (this.WORKER_LIST.isEmpty()) {
                 WorkersFirstView workersFirstView = new WorkersFirstView(this.PRINCIPALJFRAME);

@@ -17,7 +17,6 @@ import com.mycompany.marlenproject.utils.message.JPaneMessage;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 public class AddWorkerView extends javax.swing.JPanel {
 
@@ -614,17 +613,17 @@ public class AddWorkerView extends javax.swing.JPanel {
                 } else if (existingWorker != null && !existingWorker.isIsDelete()) {
                     String Message = "          Esta cédula YA pertenece a un trabajador.";
                     String suggest = "\n\n Por favor revise la lista de trabajadores y actualice los datos.";
-                    JOptionPane.showMessageDialog(this, Message.concat(suggest) , "Identificación duplicada", 0);
+                    JPaneMessage.messageDialog(this, Message.concat(suggest) , "Identificación duplicada", 0);
                     return;
                 }else{
                     NEW_REQUEST_PERSON.editPerson(person);
                     NEW_REQUEST_WORKER.saveWorker(worker);
                 }
                 
-                JOptionPane.showMessageDialog(this, "El trabajador ha sido agregado correctamente", "Information", 1);
+                JPaneMessage.messageDialog(this, "El trabajador ha sido agregado correctamente", "Information", 1);
                 clearFields();
             } catch (PreexistingEntityException ex) {
-                JOptionPane.showMessageDialog(this, "El numero de identificación ya está asociado a alguien.", "Identificación duplicada", 0);
+                JPaneMessage.messageDialog(this, "El numero de identificación ya está asociado a alguien.", "Identificación duplicada", 0);
                 txtIdentificationNum.setBackground(Colors.IncorrectColorFields());
             } catch (Exception ex) {
                 Logger.getLogger(AddWorkerView.class.getName()).log(Level.SEVERE, null, ex);
