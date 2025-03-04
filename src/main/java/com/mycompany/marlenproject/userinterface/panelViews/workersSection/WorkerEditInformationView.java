@@ -92,12 +92,22 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         String position = sltPosition.getSelectedItem().toString();
         String state = sltState.getSelectedItem().toString();
 
+        if (personFirstName.isBlank()) {
+            txtFirstName.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.messageDialog(this, "Debe tener un primer nombre.", "Campo requerido", 1);
+            return false;
+        }
         if (!InputValidator.checkStringField(personFirstName)) {
             txtFirstName.setBackground(Colors.IncorrectColorFields());
             JPaneMessage.incorrectTxtField(this, null, null, null);
             return false;
         }
 
+        if (personFirstLastName.isBlank()) {
+            txtFirstLastName.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.messageDialog(this, "Debe tener un primer apellido.", "Campo requerido", 1);
+            return false;
+        }
         if (!InputValidator.checkStringField(personFirstLastName)) {
             txtFirstLastName.setBackground(Colors.IncorrectColorFields());
             JPaneMessage.incorrectTxtField(this, null, null, null);
@@ -110,6 +120,11 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             return false;
         }
 
+        if (personIdentificationNumber.isBlank()) {
+            txtIdentificationNumber.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.messageDialog(this, "Debe tener un número de identificación.", "Campo requerido", 1);
+            return false;
+        }
         if (!InputValidator.checkIdentification(sltIdentificationType.getSelectedIndex(), personIdentificationNumber)) {
             txtIdentificationNumber.setBackground(Colors.IncorrectColorFields());
             JPaneMessage.incorrectIdentification(this, sltIdentificationType.getSelectedIndex(), null, null, null);
@@ -136,11 +151,13 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
 
         if (null == dateBirthdate.getDate()) {
             dateBirthdate.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.messageDialog(this, "Debe seleccionar una fecha.", "Campo requerido", 1);
             return false;
         }
 
         if (null == dateDayLink.getDate()) {
             dateDayLink.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.messageDialog(this, "Debe seleccionar una fecha.", "Campo requerido", 1);
             return false;
         }
 

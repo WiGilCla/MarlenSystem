@@ -38,9 +38,20 @@ public class AddWorkerView extends javax.swing.JPanel {
         String healthEntity = sltEPS.getSelectedItem().toString();
         String position = sltPosition.getSelectedItem().toString();
 
+        if (personFirstName.isBlank()) {
+            txtFirstName.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.messageDialog(this, "Debe tener un primer nombre.", "Campo requerido", 1);
+            return false;
+        }
         if (!InputValidator.checkStringField(personFirstName)) {
             txtFirstName.setBackground(Colors.IncorrectColorFields());
             JPaneMessage.incorrectTxtField(this, null, null, null);
+            return false;
+        }
+        
+        if (personFirstLastName.isBlank()) {
+            txtFirstLastName.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.messageDialog(this, "Debe tener un primer apellido.", "Campo requerido", 1);
             return false;
         }
         if (!InputValidator.checkStringField(personFirstLastName)) {
@@ -48,9 +59,16 @@ public class AddWorkerView extends javax.swing.JPanel {
             JPaneMessage.incorrectTxtField(this, null, null, null);
             return false;
         }
+        
         if (!InputValidator.checkComboBox(personIdentificationType)) {
             sltIdentificationType.setBackground(Colors.IncorrectColorFields());
             JPaneMessage.noSelectedBox(this, "Debe escoger un tipo de identificación.", null);
+            return false;
+        }
+        
+        if (personIdentificationNumber.isBlank()) {
+            txtIdentificationNum.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.messageDialog(this, "Debe tener un número de identificación.", "Campo requerido", 1);
             return false;
         }
         if (!InputValidator.checkIdentification(sltIdentificationType.getSelectedIndex(),personIdentificationNumber)) {
@@ -58,6 +76,7 @@ public class AddWorkerView extends javax.swing.JPanel {
             JPaneMessage.incorrectIdentification(this, sltIdentificationType.getSelectedIndex(),null, null, null);
             return false;
         }
+        
         if (!InputValidator.checkComboBox(bloodType)) {
             sltBloodType.setBackground(Colors.IncorrectColorFields());
             JPaneMessage.noSelectedBox(this, "Debe escoger un grupo AOB.", null);
@@ -75,10 +94,12 @@ public class AddWorkerView extends javax.swing.JPanel {
         }
         if (null == dateBirthdate.getDate()) {
             dateBirthdate.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.messageDialog(this, "Debe seleccionar una fecha.", "Campo requerido", 1);
             return false;
         }
         if (null == dateVinculation.getDate()) {
             dateVinculation.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.messageDialog(this, "Debe seleccionar una fecha.", "Campo requerido", 1);
             return false;
         }
         if (!InputValidator.checkComboBox(position)) {
@@ -611,7 +632,7 @@ public class AddWorkerView extends javax.swing.JPanel {
                     NEW_REQUEST_PERSON.editPerson(person);
                     NEW_REQUEST_WORKER.editWorker(worker);
                 } else if (existingWorker != null && !existingWorker.isIsDelete()) {
-                    String Message = "          Esta cédula YA pertenece a un trabajador.";
+                    String Message = "          Esta cédula YA PERTENECE A UN TRABAJADOR.";
                     String suggest = "\n\n Por favor revise la lista de trabajadores y actualice los datos.";
                     JPaneMessage.messageDialog(this, Message.concat(suggest) , "Identificación duplicada", 0);
                     return;

@@ -503,6 +503,12 @@ public class WorkersInformationView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnPreviousWorkerActionPerformed
 
     private void btnDeleteWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteWorkerActionPerformed
+       int userAnswer = JPaneMessage.MessageOptionDialog(this, 
+               "¿Está seguro que desea eliminar este trabajador?", 
+               "Eliminar trabajador", new String[]{"Eliminar", "Volver"}, 2);
+        if(userAnswer == 1){
+            return;
+        }
         try {
             Worker worker = this.WORKER_LIST.get(workerObserved);
             worker.setIsActive(false);
