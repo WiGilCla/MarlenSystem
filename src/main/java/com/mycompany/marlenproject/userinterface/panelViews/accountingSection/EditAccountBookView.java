@@ -9,12 +9,12 @@ import com.mycompany.marlenproject.logic.AccountBookRecords;
 import com.mycompany.marlenproject.logic.request.RequestAccountBook;
 import com.mycompany.marlenproject.logic.request.RequestAccountBookRecord;
 import com.mycompany.marlenproject.userinterface.AdminHome;
+import com.mycompany.marlenproject.utils.message.JPaneMessage;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.TableModelEvent;
@@ -121,14 +121,14 @@ public class EditAccountBookView extends javax.swing.JPanel {
         }
 
         if (!listIndexToCorrect.isEmpty()) {
-            JOptionPane.showMessageDialog(PRINCIPALJFRAME,
-                    "Debe agregar una descripción en los siguientes resgistros: " + listIndexToCorrect.toString());
+            JPaneMessage.messageDialog(this,
+                    "Debe agregar una descripción en los siguientes resgistros: " + listIndexToCorrect.toString(), "Registros sin descripción", 2);
             return false;
         }
 
         if (emptyRecords == copyBookRecords.size()) {
-            JOptionPane.showMessageDialog(PRINCIPALJFRAME,
-                    "Debe agregar registros al libro.", "Libro sin registros", 1);
+            JPaneMessage.messageDialog(PRINCIPALJFRAME,
+                    "Debe agregar registros al libro.", "Libro sin registros", 2);
             return false;
         }
 
@@ -222,7 +222,7 @@ public class EditAccountBookView extends javax.swing.JPanel {
 
         if (editedColumn == getIndexFromHeader("Ingresos")) {
             if (!isIntegerOrLong(valueAdded)) {
-                JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Solo se aceptan números, sin espacios ni comas.", "Error de número", 0);
+                JPaneMessage.incorrectNumberField(this, "Solo se aceptan: ", null, null);
                 Object oldValue = formatNumberWithDots(copyBookRecords.get(editedRow).getCashInflow());
                 modelTable.setValueAt(oldValue, editedRow, editedColumn);
                 return;
@@ -233,7 +233,7 @@ public class EditAccountBookView extends javax.swing.JPanel {
 
         } else if (editedColumn == getIndexFromHeader("Gastos")) {
             if (!isIntegerOrLong(valueAdded)) {
-                JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Solo se aceptan números, sin espacios ni comas.", "Error de número", 0);
+                JPaneMessage.incorrectNumberField(this, "Solo se aceptan: ", null, null);
                 Object oldValue = formatNumberWithDots(copyBookRecords.get(editedRow).getCashExpenses());
                 modelTable.setValueAt(oldValue, editedRow, editedColumn);
                 return;
@@ -566,8 +566,9 @@ public class EditAccountBookView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lbTitleBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbTitleBookMouseClicked
-        String newTitleBook = JOptionPane.showInputDialog(this.PRINCIPALJFRAME,
-                "Ingrese el nuevo titulo del libro", "Cambiar titulo de libro", 1);
+        
+        String newTitleBook = JPaneMessage.inputDialog(this,
+                "Ingrese el nuevo titulo del libro: ", "Cambiar titulo de libro", 1);
 
         if (newTitleBook != null && !newTitleBook.isBlank()) {
             lbTitleBook.setText(newTitleBook.toUpperCase());
@@ -586,8 +587,8 @@ public class EditAccountBookView extends javax.swing.JPanel {
             }
             copyBookRecords.add(selectedRow + 1, new AccountBookRecords(null, "", 0L, 0L));
         } else {
-            JOptionPane.showMessageDialog(PRINCIPALJFRAME,
-                    "Selecciona una fila antes de agregar.", "Advertencia", 1);
+            
+        JPaneMessage.messageDialog(this, "Selecciona una fila antes de agregar.", "Item no seleccionado", 1);
         }
     }//GEN-LAST:event_btnAddRowActionPerformed
 
@@ -608,8 +609,8 @@ public class EditAccountBookView extends javax.swing.JPanel {
                 tableModel.setValueAt(i + 1, i, 0);
             }
         } else {
-            JOptionPane.showMessageDialog(PRINCIPALJFRAME,
-                    "Selecciona una fila antes de eliminar.", "Advertencia", 1);
+            JPaneMessage.messageDialog(this,
+                    "Selecciona una fila antes de eliminar.", "Item no seleccionado", 1);
         }
 
         if (tableModel.getRowCount() == 0) {
@@ -644,7 +645,7 @@ public class EditAccountBookView extends javax.swing.JPanel {
                 copyBook.setTitleBook(lbTitleBook.getText());
                 copyBook.setListBookRecords(NEW_REQUEST_RECORD.getRecordsByBookId(copyBook));
                 NEW_REQUEST_BOOK.editBook(copyBook);
-                JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Los cambios se han guardado exitosamente.");
+                JPaneMessage.messageDialog(this, "El libro se ha editado exitosamente.", "Edición exitosa",1);
 
             } catch (Exception ex) {
                 Logger.getLogger(EditAccountBookView.class.getName()).log(Level.SEVERE, null, ex);

@@ -5,11 +5,11 @@
 package com.mycompany.marlenproject.userinterface.panelViews.accountingSection;
 
 import com.mycompany.marlenproject.logic.AccountBook;
-import com.mycompany.marlenproject.logic.AccountBookRecords;
 import com.mycompany.marlenproject.logic.request.RequestAccountBook;
 import com.mycompany.marlenproject.logic.request.RequestAccountBookRecord;
 import com.mycompany.marlenproject.userinterface.AdminHome;
 import com.mycompany.marlenproject.utils.date.DateFunctions;
+import com.mycompany.marlenproject.utils.message.JPaneMessage;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -23,7 +23,6 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu.Separator;
 import javax.swing.JScrollPane;
@@ -68,26 +67,19 @@ public class AccountingView extends javax.swing.JPanel {
     private void settingsBtnDeleteRecord(JButton deleteButton, AccountBook book) {
         deleteButton.addActionListener((ActionEvent e) -> {
 
-            int answer = JOptionPane.showOptionDialog(
-                    PRINCIPALJFRAME,
-                    "<html>"
+            int userAnswer = JPaneMessage.MessageOptionDialog(this, "<html>"
                     + "<body style='font-family: Arial, sans-serif;'>"
-                    + "<p style='font-size: 16px; color: #2E8B57; text-align: center;'><b>¿Está seguro de eliminar este registro?</b></p>"
+                    + "<p style='font-size: 16px; color: #2E8B57; text-align: center;'><b>¿Está seguro de eliminar este libro?</b></p>"
                     + "<p style='font-size: 14px; color: #8B0000; text-align: center;'>Será <b>ELIMINADO PERMANENTEMENTE</b>.</p>"
                     + "<br>"
                     + "</body>"
-                    + "</html>",
-                    "Eliminar registro", 0, 1, null,
-                    new String[]{"Continuar", "Volver"}, null
-            );
+                    + "</html>", "Eliminar libro", new String[]{"Continuar", "Volver"}, 2);
 
-            if (answer == 0) {
+            if (userAnswer == 0) {
                 try {
                     NEW_REQUEST_RECORD.deleteRecordByBook(book);
                     NEW_REQUEST_ACCOUNTBOOK.deleteBook(book);
-                    JOptionPane.showMessageDialog(PRINCIPALJFRAME,
-                            "El libro ha sido eliminado con exito", "Eliminación exitosa", 1);
-
+                    JPaneMessage.messageDialog(this, "El libro ha sido eliminado exitosamente", "Eliminación exitosa", 1);
                 } catch (Exception ex) {
                     Logger.getLogger(AccountingView.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -487,7 +479,7 @@ public class AccountingView extends javax.swing.JPanel {
         Date endDate = (dtEndDate.getDate() != null) ? DateFunctions.setToendtOfDay(dtEndDate.getDate()) : null;
 
         if (starDate != null && endDate != null && !starDate.before(endDate)) {
-            JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Error en el rango de fechas");
+            JPaneMessage.messageDialog(this, "Debe ingresar un rango de fechas válido", "Error en el rango de fechas", 1);
             return;
         }
 
