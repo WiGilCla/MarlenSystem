@@ -10,13 +10,13 @@ import com.mycompany.marlenproject.logic.request.RequestAccountBook;
 import com.mycompany.marlenproject.logic.request.RequestAccountBookRecord;
 import com.mycompany.marlenproject.userinterface.AdminHome;
 import com.mycompany.marlenproject.utils.date.DateFunctions;
+import com.mycompany.marlenproject.utils.message.JPaneMessage;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.TableModelEvent;
@@ -116,14 +116,16 @@ public class AddAccountBookView extends javax.swing.JPanel {
         }
 
         if (!listIndexToCorrect.isEmpty()) {
-            JOptionPane.showMessageDialog(PRINCIPALJFRAME,
-                    "Debe agregar una descripción en los siguientes resgistros: " + listIndexToCorrect.toString());
+            JPaneMessage.messageDialog(this,
+                    "Debe agregar una descripción en los siguientes resgistros: " + listIndexToCorrect.toString(),
+                    "Registros sin descripción", 2);
             return false;
         }
 
         if (emptyRecords == bookRecords.size()) {
-            JOptionPane.showMessageDialog(PRINCIPALJFRAME,
-                    "Debe agregar registros al libro.", "Libro sin registros", 1);
+            JPaneMessage.messageDialog(this,
+                    "Debe agregar registros al libro.",
+                    "Libro sin registros", 2);
             return false;
         }
 
@@ -136,12 +138,11 @@ public class AddAccountBookView extends javax.swing.JPanel {
             return true;
         }
 
-        int userChangeTitle = JOptionPane.showOptionDialog(PRINCIPALJFRAME,
+        int userChangedTitle = JPaneMessage.MessageOptionDialog(this,
                 "No ha asignado nombre a este libro, se pondrá uno por DEFECTO ¿desea CONTINUAR?",
-                "Asignación de nombre de libro", 0, 1, null,
-                new String[]{"Continuar", "Volver"}, null);
+                "Asignación de nombre de libro", new String[]{"Continuar", "Volver"}, 1);
 
-        if (userChangeTitle == 0) {
+        if (userChangedTitle == 0) {
 
             String day = DateFunctions.dateFormatDD_MM_YY(new Date());
             lbTitleBook.setText("Libro - ".concat(day));
@@ -158,12 +159,13 @@ public class AddAccountBookView extends javax.swing.JPanel {
             return true;
         }
 
-        int userChangeNumber = JOptionPane.showOptionDialog(PRINCIPALJFRAME,
+        int userChangedNumber = JPaneMessage.MessageOptionDialog(this,
                 "No ha asignado número a este libro, se pondrá uno por DEFECTO ¿desea CONTINUAR?",
-                "Asignación de numero", 0, 1, null,
-                new String[]{"Continuar", "Volver"}, null);
+                "Asignación de numero",
+                new String[]{"Continuar", "Volver"},
+                1);
 
-        if (userChangeNumber == 0) {
+        if (userChangedNumber == 0) {
 
             String datePart = DateFunctions.dateFormatHH_MM_SS(new Date());
             int randomPart = (int) (Math.random() * 1000);
@@ -212,7 +214,7 @@ public class AddAccountBookView extends javax.swing.JPanel {
 
         if (editedColumn == getIndexFromHeader("Ingresos")) {
             if (!isIntegerOrLong(valueAdded)) {
-                JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Solo se aceptan números, sin espacios ni comas.", "Error de número", 0);
+                JPaneMessage.messageDialog(this, "Solo se aceptan números, sin espacios ni comas.", "Error de formato", 0);
                 Object oldValue = formatNumberWithDots(bookRecords.get(editedRow).getCashInflow());
                 modelTable.setValueAt(oldValue, editedRow, editedColumn);
                 return;
@@ -223,7 +225,7 @@ public class AddAccountBookView extends javax.swing.JPanel {
 
         } else if (editedColumn == getIndexFromHeader("Gastos")) {
             if (!isIntegerOrLong(valueAdded)) {
-                JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Solo se aceptan números, sin espacios ni comas.", "Error de número", 0);
+                JPaneMessage.messageDialog(this, "Solo se aceptan números, sin espacios ni comas.", "Error de formato", 0);
                 Object oldValue = formatNumberWithDots(bookRecords.get(editedRow).getCashExpenses());
                 modelTable.setValueAt(oldValue, editedRow, editedColumn);
                 return;
@@ -598,8 +600,10 @@ public class AddAccountBookView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lbTitleBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbTitleBookMouseClicked
-        String newTitleBook = JOptionPane.showInputDialog(this.PRINCIPALJFRAME,
-                "¿Qué titulo desea darle a este libro?", "Cambiar titulo de libro", 1);
+
+        String newTitleBook = JPaneMessage.inputDialog(this,
+                "¿Qué titulo desea darle a este libro?",
+                "Cambiar titulo de libro", 1);
 
         if (newTitleBook != null && !newTitleBook.isBlank()) {
             lbTitleBook.setText(newTitleBook.toUpperCase());
@@ -610,16 +614,17 @@ public class AddAccountBookView extends javax.swing.JPanel {
     private void lbNumberBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNumberBookMouseClicked
 
         while (true) {
-            String newNumberBook = JOptionPane.showInputDialog(this.PRINCIPALJFRAME, "Ingrese el número del libro",
-                    "Número de libro", 1);
+
+            String newNumberBook = JPaneMessage.inputDialog(this,
+                    "Ingrese el número del libro",
+                    "Cambiar número de libro", 1);
 
             if (newNumberBook == null || newNumberBook.isBlank()) {
                 return;
             }
 
             if (!isInteger(newNumberBook) || (newNumberBook.length() > 9)) {
-                JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Debe ingresar un numero de máximo 9 dígitos, sin letras ni caracteres.",
-                        "Numero inválido", 1);
+                JPaneMessage.messageDialog(this, "Debe ingresar un numero de máximo 9 dígitos, sin letras ni caracteres.", "Error de formato", 0);
                 continue;
             }
 
@@ -630,8 +635,9 @@ public class AddAccountBookView extends javax.swing.JPanel {
                 NumberBookChanged = true;
                 break;
             } else {
-                JOptionPane.showMessageDialog(PRINCIPALJFRAME, "Este numero ya está asignado a un libro, por favor, ingrese uno diferente.",
-                        "Numero de libro repetido", 0);
+                JPaneMessage.messageDialog(this,
+                        "Este numero ya está asignado a un libro, por favor, ingrese uno diferente.",
+                        "Numero de libro repetido", 2);
             }
         }
     }//GEN-LAST:event_lbNumberBookMouseClicked
@@ -648,8 +654,10 @@ public class AddAccountBookView extends javax.swing.JPanel {
             }
             bookRecords.add(selectedRow + 1, new AccountBookRecords(null, "", 0L, 0L));
         } else {
-            JOptionPane.showMessageDialog(PRINCIPALJFRAME,
-                    "Selecciona una fila antes de agregar.", "Advertencia", 1);
+            JPaneMessage.messageDialog(this,
+                    "Selecciona una fila antes de agregar.",
+                    "Item no seleccionado",
+                    1);
         }
     }//GEN-LAST:event_btnAddRowActionPerformed
 
@@ -666,8 +674,8 @@ public class AddAccountBookView extends javax.swing.JPanel {
                 tableModel.setValueAt(i + 1, i, 0);
             }
         } else {
-            JOptionPane.showMessageDialog(PRINCIPALJFRAME,
-                    "Selecciona una fila antes de eliminar.", "Advertencia", 1);
+            JPaneMessage.messageDialog(this,
+                    "Selecciona una fila antes de eliminar.", "Item no seleccionado", 1);
         }
 
         if (tableModel.getRowCount() == 0) {
@@ -697,7 +705,7 @@ public class AddAccountBookView extends javax.swing.JPanel {
 
                 newBook.setListBookRecords(NEW_REQUEST_RECORD.getRecordsByBookId(newBook));
                 NEW_REQUEST_BOOK.editBook(newBook);
-                JOptionPane.showMessageDialog(PRINCIPALJFRAME, "El libro se guardado exitosamente.");
+                JPaneMessage.messageDialog(this, "El libro se guardado exitosamente.", "Nuevo libro agregado", 1);
 
             } catch (Exception ex) {
                 Logger.getLogger(AddAccountBookView.class

@@ -24,11 +24,43 @@ public class JPaneMessage {
         return finalMessage;
     }
 
-    public static void optionDialog(Component component, String message, String title, String[] options) {
-        JOptionPane.showOptionDialog(component,
+    public static int MessageOptionDialog(Component component, String message, String title, String[] options, int messageType) {
+
+        if (message.isBlank() || title.isBlank() || options.length == 0) {
+            return -1;
+        }
+
+        if (messageType < 0 || messageType > 4) {
+            return -1;
+        }
+
+        return JOptionPane.showOptionDialog(component,
                 message,
-                title, 0, 1, null,
+                title, 0, messageType, null,
                 options, 0);
+    }
+
+    public static void messageDialog(Component component, String message, String title, int messageType) {
+        if (message.isBlank() || title.isBlank()) {
+            return;
+        }
+
+        if (messageType < 0 || messageType > 4) {
+            return;
+        }
+        
+        JOptionPane.showMessageDialog(component, message, title, messageType);
+    }
+    
+    public static String inputDialog(Component component, String message, String title, int messageType){
+        if (message.isBlank() || title.isBlank()) {
+            return null;
+        }
+
+        if (messageType < 0 || messageType > 4) {
+            return null;
+        }
+        return JOptionPane.showInputDialog(component, message, title, messageType);
     }
 
     public static void incorrectAddress(Component component, String altMsg, String altTitle, String[] altCond) {
