@@ -71,6 +71,12 @@ public class AddCustomerView extends javax.swing.JPanel {
             JPaneMessage.incorrectIdentification(this, sltIdentificationType.getSelectedIndex(),null, null, null);
             return false;
         }
+        
+        if (null == dateBirthdate.getDate()) {
+            dateBirthdate.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.messageDialog(this, "Debe seleccionar una fecha.", "Campo requerido", 1);
+            return false;
+        }
         return true;
     }
 

@@ -97,6 +97,12 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
             JPaneMessage.incorrectIdentification(this, sltCustomerIdentificationType.getSelectedIndex(),null, null, null);
             return false;
         }
+        
+        if (null == dtCustomerBirthdate.getDate()) {
+            dtCustomerBirthdate.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.messageDialog(this, "Debe seleccionar una fecha.", "Campo requerido", 1);
+            return false;
+        }
 
         return true;
     }

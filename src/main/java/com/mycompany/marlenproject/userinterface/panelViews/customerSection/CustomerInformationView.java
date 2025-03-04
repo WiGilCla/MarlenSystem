@@ -468,6 +468,12 @@ public class CustomerInformationView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnPreviousWorkerActionPerformed
 
     private void btnDeleteCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCustomerActionPerformed
+        int userAnswer = JPaneMessage.MessageOptionDialog(this, 
+               "¿Está seguro que desea eliminar este cliente?", 
+               "Eliminar cliente", new String[]{"Eliminar", "Volver"}, 2);
+        if(userAnswer == 1){
+            return;
+        }
         try {
             Customer customer = this.CUSTOMER_LIST.get(customerIndex);
             customer.setIsDelete(true);
