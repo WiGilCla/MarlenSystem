@@ -9,12 +9,12 @@ import com.mycompany.marlenproject.utils.fields.InputValidator;
 import com.mycompany.marlenproject.logic.Customer;
 import com.mycompany.marlenproject.logic.request.RequestCustomer;
 import com.mycompany.marlenproject.userinterface.AdminHome;
+import com.mycompany.marlenproject.utils.message.JPaneMessage;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 public class CustomerInformationView extends javax.swing.JPanel {
 
@@ -474,7 +474,7 @@ public class CustomerInformationView extends javax.swing.JPanel {
             
             REQUEST_CUSTOMER.editCustomer(this.CUSTOMER_LIST.get(customerIndex));
             this.CUSTOMER_LIST.remove(customerIndex);
-            JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, "El cliente ha sido eliminado exitosamente", "Eliminación exitosa", 1);
+            JPaneMessage.messageDialog(this, "El cliente ha sido eliminado exitosamente", "Eliminación exitosa", 1);
 
             if (this.CUSTOMER_LIST.isEmpty()) {
                 WorkersFirstView workersFirstView = new WorkersFirstView(this.PRINCIPALJFRAME);
@@ -507,7 +507,7 @@ public class CustomerInformationView extends javax.swing.JPanel {
             CustomerListView customerListView = new CustomerListView(PRINCIPALJFRAME, customerList);
             this.PRINCIPALJFRAME.replacePanel(customerListView);
         } else {
-            JOptionPane.showMessageDialog(this.PRINCIPALJFRAME, "No tiene clientes registrados", "Sin registros", 0);
+            JPaneMessage.messageDialog(this, "No tiene clientes registrados", "Sin registros", 0);
             WorkersFirstView workersFirstView = new WorkersFirstView(this.PRINCIPALJFRAME);
             this.PRINCIPALJFRAME.replacePanel(workersFirstView);
         }

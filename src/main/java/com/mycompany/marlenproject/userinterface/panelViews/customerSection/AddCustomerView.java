@@ -16,7 +16,6 @@ import com.mycompany.marlenproject.data.forms.person.dataFormsPerson;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 public class AddCustomerView extends javax.swing.JPanel {
 
@@ -32,10 +31,21 @@ public class AddCustomerView extends javax.swing.JPanel {
         String personFirstLastName = InputValidator.removeStringBlanks(txtFirstLastName.getText());
         String personIdentificationType = sltIdentificationType.getSelectedItem().toString();
         String personIdentificationNumber = InputValidator.removeStringBlanks(txtIdentificationNum.getText());
-
+        
+        if (personFirstName.isBlank()) {
+            txtFirstName.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.messageDialog(this, "Debe tener un primer nombre", "Campo requerido", 1);
+            return false;
+        }
         if (!InputValidator.checkStringField(personFirstName)) {
             txtFirstName.setBackground(Colors.IncorrectColorFields());
             JPaneMessage.incorrectTxtField(this, null, null, null);
+            return false;
+        }
+        
+        if (personFirstLastName.isBlank()) {
+            txtFirstLastName.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.messageDialog(this, "Debe tener un primer apellido.", "Campo requerido", 1);
             return false;
         }
         if (!InputValidator.checkStringField(personFirstLastName)) {
@@ -43,10 +53,18 @@ public class AddCustomerView extends javax.swing.JPanel {
             JPaneMessage.incorrectTxtField(this, null, null, null);
             return false;
         }
+        
         if (!InputValidator.checkComboBox(personIdentificationType)) {
             sltIdentificationType.setBackground(Colors.IncorrectColorFields());
-            JPaneMessage.noSelectedBox(this, "Debe escoger un tipo de identificación", null);
+            JPaneMessage.noSelectedBox(this, "Debe escoger un tipo de identificación.", null);
             return false;
+        }
+        
+        if(personIdentificationNumber.isBlank()){
+            txtIdentificationNum.setBackground(Colors.IncorrectColorFields());
+            JPaneMessage.messageDialog(this, "Debe ingresar un número de identificación.", "Campo requerido", 1);
+            return false;
+        
         }
         if (!InputValidator.checkIdentification(sltIdentificationType.getSelectedIndex(),personIdentificationNumber)) {
             txtIdentificationNum.setBackground(Colors.IncorrectColorFields());
@@ -549,20 +567,20 @@ public class AddCustomerView extends javax.swing.JPanel {
                     NEW_REQUEST_CUSTOMER.editCustomer(customer);
 
                 } else if (findCustomer != null && !findCustomer.isIsDelete()) {
-                    String Message = "          Esta cédula YA pertenece a un cliente.";
+                    String Message = "          Esta cédula ya pertenece a un cliente.";
                     String suggest = "\n\n Por favor revise la lista de clientes y actualice los datos.";
-                    JOptionPane.showMessageDialog(this, Message.concat(suggest) , "Identificación duplicada", 0);
+                    JPaneMessage.messageDialog(this, Message.concat(suggest) , "Identificación duplicada", 0);
                     return;
                 }else{
                     NEW_REQUEST_PERSON.editPerson(person);
                     NEW_REQUEST_CUSTOMER.saveCustomer(customer);
                 }
                 
-                JOptionPane.showMessageDialog(this, "El cliente ha sido agregado correctamente", "Operación exitosa", 1);
+                JPaneMessage.messageDialog(this, "El cliente ha sido agregado correctamente", "Operación exitosa", 1);
                 clearFields();
 
             } catch (PreexistingEntityException ex) {
-                JOptionPane.showMessageDialog(this, "El numero de identificación ya está asociado a alguien.", "Identificación duplicada", 0);
+                JPaneMessage.messageDialog(this, "El numero de identificación ya está asociado a alguien.", "Identificación duplicada", 0);
                 txtIdentificationNum.setBackground(Colors.IncorrectColorFields());
             } catch (Exception e) {
                 Logger.getLogger(AddCustomerView.class.getName()).log(Level.SEVERE, null, e);
