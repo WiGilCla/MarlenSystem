@@ -4,6 +4,7 @@
  */
 package com.mycompany.marlenproject.userinterface.panelViews.customerSection;
 
+import com.mycompany.marlenproject.userinterface.PeopleManagementView;
 import com.mycompany.marlenproject.data.forms.person.dataFormsPerson;
 import com.mycompany.marlenproject.userinterface.panelViews.workersSection.*;
 import com.mycompany.marlenproject.utils.fields.InputValidator;
@@ -38,7 +39,7 @@ public class CustomerEditInformationView extends javax.swing.JFrame {
             PRINCIPALJFRAME.replacePanel(customerInformationView);
             PRINCIPALJFRAME.setVisible(true);
         } else {
-            WorkersFirstView workersFirstView = new WorkersFirstView(PRINCIPALJFRAME);
+            PeopleManagementView workersFirstView = new PeopleManagementView(PRINCIPALJFRAME);
             PRINCIPALJFRAME.replacePanel(workersFirstView);
             PRINCIPALJFRAME.setVisible(true);
         }

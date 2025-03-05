@@ -4,6 +4,7 @@
  */
 package com.mycompany.marlenproject.userinterface.panelViews.workersSection;
 
+import com.mycompany.marlenproject.userinterface.PeopleManagementView;
 import com.mycompany.marlenproject.utils.fields.InputValidator;
 import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.logic.request.requestWorker;
@@ -519,7 +520,7 @@ public class WorkersInformationView extends javax.swing.JPanel {
             JPaneMessage.messageDialog(this, "El trabajador ha sido eliminado exitosamente.", "Eliminación exitosa", 1);
 
             if (this.WORKER_LIST.isEmpty()) {
-                WorkersFirstView workersFirstView = new WorkersFirstView(this.PRINCIPALJFRAME);
+                PeopleManagementView workersFirstView = new PeopleManagementView(this.PRINCIPALJFRAME);
                 this.PRINCIPALJFRAME.replacePanel(workersFirstView);
                 return;
             }

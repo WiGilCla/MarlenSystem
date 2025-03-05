@@ -2,23 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.mycompany.marlenproject.userinterface.panelViews.workersSection;
+package com.mycompany.marlenproject.userinterface;
 
 import com.mycompany.marlenproject.logic.Customer;
 import com.mycompany.marlenproject.logic.Worker;
 import com.mycompany.marlenproject.logic.request.RequestCustomer;
 import com.mycompany.marlenproject.logic.request.requestWorker;
-import com.mycompany.marlenproject.userinterface.AdminHome;
 import com.mycompany.marlenproject.userinterface.panelViews.customerSection.AddCustomerView;
 import com.mycompany.marlenproject.userinterface.panelViews.customerSection.CustomerListView;
+import com.mycompany.marlenproject.userinterface.panelViews.workersSection.AddWorkerView;
+import com.mycompany.marlenproject.userinterface.panelViews.workersSection.WorkersListView;
 import com.mycompany.marlenproject.utils.message.JPaneMessage;
 import java.util.List;
 
-public class WorkersFirstView extends javax.swing.JPanel {
+public class PeopleManagementView extends javax.swing.JPanel {
 
     private final AdminHome PRINCIPALJFRAME;
 
-    public WorkersFirstView(AdminHome principalJFrame) {
+    public PeopleManagementView(AdminHome principalJFrame) {
         initComponents();
         this.PRINCIPALJFRAME = principalJFrame;
     }

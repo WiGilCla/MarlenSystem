@@ -4,6 +4,7 @@
  */
 package com.mycompany.marlenproject.userinterface.panelViews.workersSection;
 
+import com.mycompany.marlenproject.userinterface.PeopleManagementView;
 import com.mycompany.marlenproject.data.forms.person.dataFormsPerson;
 import com.mycompany.marlenproject.data.forms.worker.dataFormsWorker;
 import com.mycompany.marlenproject.utils.fields.InputValidator;
@@ -39,7 +40,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
 
         } else {
 
-            WorkersFirstView workersFirstView = new WorkersFirstView(PRINCIPALJFRAME);
+            PeopleManagementView workersFirstView = new PeopleManagementView(PRINCIPALJFRAME);
             PRINCIPALJFRAME.replacePanel(workersFirstView);
             PRINCIPALJFRAME.setVisible(true);
         }

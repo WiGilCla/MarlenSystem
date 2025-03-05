@@ -10,7 +10,6 @@ import com.mycompany.marlenproject.logic.request.RequestAccountBook;
 import com.mycompany.marlenproject.logic.request.RequestProduct;
 import com.mycompany.marlenproject.userinterface.panelViews.ProductsSection.ProductView;
 import com.mycompany.marlenproject.userinterface.panelViews.accountingSection.AccountingView;
-import com.mycompany.marlenproject.userinterface.panelViews.workersSection.WorkersFirstView;
 import java.util.List;
 import javax.swing.JPanel;
 
@@ -356,7 +355,7 @@ public class AdminHome extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnWorkersSectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWorkersSectionActionPerformed
-        WorkersFirstView workersFirstView = new WorkersFirstView(this);
+        PeopleManagementView workersFirstView = new PeopleManagementView(this);
         replacePanel(workersFirstView);
     }//GEN-LAST:event_btnWorkersSectionActionPerformed
 

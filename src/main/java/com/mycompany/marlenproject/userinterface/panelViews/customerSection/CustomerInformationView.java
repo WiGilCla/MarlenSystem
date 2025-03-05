@@ -4,6 +4,7 @@
  */
 package com.mycompany.marlenproject.userinterface.panelViews.customerSection;
 
+import com.mycompany.marlenproject.userinterface.PeopleManagementView;
 import com.mycompany.marlenproject.userinterface.panelViews.workersSection.*;
 import com.mycompany.marlenproject.utils.fields.InputValidator;
 import com.mycompany.marlenproject.logic.Customer;
@@ -483,7 +484,7 @@ public class CustomerInformationView extends javax.swing.JPanel {
             JPaneMessage.messageDialog(this, "El cliente ha sido eliminado exitosamente", "Eliminación exitosa", 1);
 
             if (this.CUSTOMER_LIST.isEmpty()) {
-                WorkersFirstView workersFirstView = new WorkersFirstView(this.PRINCIPALJFRAME);
+                PeopleManagementView workersFirstView = new PeopleManagementView(this.PRINCIPALJFRAME);
                 this.PRINCIPALJFRAME.replacePanel(workersFirstView);
                 return;
             }
@@ -514,7 +515,7 @@ public class CustomerInformationView extends javax.swing.JPanel {
             this.PRINCIPALJFRAME.replacePanel(customerListView);
         } else {
             JPaneMessage.messageDialog(this, "No tiene clientes registrados", "Sin registros", 0);
-            WorkersFirstView workersFirstView = new WorkersFirstView(this.PRINCIPALJFRAME);
+            PeopleManagementView workersFirstView = new PeopleManagementView(this.PRINCIPALJFRAME);
             this.PRINCIPALJFRAME.replacePanel(workersFirstView);
         }
     }//GEN-LAST:event_btnSeeAllCustomersActionPerformed
