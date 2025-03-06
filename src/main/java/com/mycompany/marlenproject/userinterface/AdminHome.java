@@ -79,16 +79,16 @@ public class AdminHome extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1200, 600));
 
-        defaultPanel.setBackground(Colors.PAVLOVA_200);
+        defaultPanel.setBackground(Colors.PRIMARY_200);
         defaultPanel.setPreferredSize(new java.awt.Dimension(1200, 600));
 
-        optionsPanel.setBackground(Colors.PAVLOVA_200);
+        optionsPanel.setBackground(Colors.PRIMARY_200);
         optionsPanel.setPreferredSize(new java.awt.Dimension(200, 588));
 
-        accountingPanel.setBackground(Colors.PAVLOVA_200);
+        accountingPanel.setBackground(Colors.PRIMARY_200);
         accountingPanel.setPreferredSize(new java.awt.Dimension(188, 100));
 
-        btnAccountingSection.setBackground(Colors.PAVLOVA_400);
+        btnAccountingSection.setBackground(Colors.PRIMARY_400);
         btnAccountingSection.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         btnAccountingSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconCalculation.png"))); // NOI18N
         btnAccountingSection.setText("Contabilidad");
@@ -117,10 +117,10 @@ public class AdminHome extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        quotesPanel.setBackground(Colors.PAVLOVA_200);
+        quotesPanel.setBackground(Colors.PRIMARY_200);
         quotesPanel.setPreferredSize(new java.awt.Dimension(188, 100));
 
-        btnDocumentSection.setBackground(Colors.PAVLOVA_400);
+        btnDocumentSection.setBackground(Colors.PRIMARY_400);
         btnDocumentSection.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         btnDocumentSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconNewPage.png"))); // NOI18N
         btnDocumentSection.setText("Documentos");
@@ -149,10 +149,10 @@ public class AdminHome extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        workersPanel.setBackground(Colors.PAVLOVA_200);
+        workersPanel.setBackground(Colors.PRIMARY_200);
         workersPanel.setPreferredSize(new java.awt.Dimension(188, 100));
 
-        btnWorkersSection.setBackground(Colors.PAVLOVA_400);
+        btnWorkersSection.setBackground(Colors.PRIMARY_400);
         btnWorkersSection.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         btnWorkersSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconWorker.png"))); // NOI18N
         btnWorkersSection.setText("Trabajadores / Clientes");
@@ -181,10 +181,10 @@ public class AdminHome extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        productsPanel.setBackground(Colors.PAVLOVA_200);
+        productsPanel.setBackground(Colors.PRIMARY_200);
         productsPanel.setPreferredSize(new java.awt.Dimension(188, 100));
 
-        btnProductsSection.setBackground(Colors.PAVLOVA_400);
+        btnProductsSection.setBackground(Colors.PRIMARY_400);
         btnProductsSection.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         btnProductsSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconProduct.png"))); // NOI18N
         btnProductsSection.setText("Mis productos");
@@ -240,15 +240,14 @@ public class AdminHome extends javax.swing.JFrame {
                 .addContainerGap(170, Short.MAX_VALUE))
         );
 
-        viewPanel.setBackground(Colors.PAVLOVA_200
-        );
+        viewPanel.setBackground(Colors.PRIMARY_200);
         viewPanel.setPreferredSize(new java.awt.Dimension(982, 588));
 
-        welcomeMsgPanel.setBackground(Colors.PAVLOVA_200);
+        welcomeMsgPanel.setBackground(Colors.PRIMARY_200);
         welcomeMsgPanel.setPreferredSize(new java.awt.Dimension(970, 100));
 
         lbWelcome.setFont(new java.awt.Font("Georgia", 1, 48)); // NOI18N
-        lbWelcome.setForeground(Colors.PAVLOVA_700);
+        lbWelcome.setForeground(Colors.PRIMARY_600);
         lbWelcome.setText("¡Bienvenido!");
         lbWelcome.setPreferredSize(new java.awt.Dimension(300, 70));
 
@@ -269,11 +268,11 @@ public class AdminHome extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        timeZonePanel.setBackground(Colors.PAVLOVA_200);
+        timeZonePanel.setBackground(Colors.PRIMARY_200);
         timeZonePanel.setPreferredSize(new java.awt.Dimension(970, 75));
 
         lbTimeZone.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
-        lbTimeZone.setForeground(Colors.PAVLOVA_600);
+        lbTimeZone.setForeground(Colors.PRIMARY_600);
         lbTimeZone.setText("Hoy estamos a " + DateFunctions.dateFormatDD_MM_YY(new Date())
         );
 
@@ -294,11 +293,11 @@ public class AdminHome extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        ViewsPanel.setBackground(Colors.PAVLOVA_200);
+        ViewsPanel.setBackground(Colors.PRIMARY_200);
         ViewsPanel.setPreferredSize(new java.awt.Dimension(970, 389));
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel1.setForeground(Colors.PAVLOVA_800);
+        jLabel1.setForeground(Colors.PRIMARY_800);
         jLabel1.setText("<html><p style='font-size:16px;'>Su sistema de control y registro es una herramienta que le permitirá realizar sus operaciones a través de diferentes herramientas que cumplen tareas específicas, como registrar sus operaciones, controlar la información de sus empleados o realizar documentación necesaria, todo en un mismo lugar.<br><br>¡Trabaje de manera óptima y sencilla!</p></html>");
 
         javax.swing.GroupLayout ViewsPanelLayout = new javax.swing.GroupLayout(ViewsPanel);
