@@ -14,4 +14,18 @@ public class Colors {
     public static Color NormalColorFields(){
         return new Color(255, 255, 255);
     }
+    
+    public static final Color PAVLOVA_50 = new Color(250, 247, 242);
+    public static final Color PAVLOVA_100 = new Color(243, 238, 225);
+    public static final Color PAVLOVA_200 = new Color(230, 218, 194);
+    public static final Color PAVLOVA_300 = new Color(217, 198, 161);
+    public static final Color PAVLOVA_400 = new Color(197, 163, 114);
+    public static final Color PAVLOVA_500 = new Color(185, 142, 86);
+    public static final Color PAVLOVA_600 = new Color(171, 122, 75);
+    public static final Color PAVLOVA_700 = new Color(143, 98, 63);
+    public static final Color PAVLOVA_800 = new Color(116, 80, 56);
+    public static final Color PAVLOVA_900 = new Color(94, 67, 48);
+    public static final Color PAVLOVA_950 = new Color(50, 34, 24);
+    
+    
 }

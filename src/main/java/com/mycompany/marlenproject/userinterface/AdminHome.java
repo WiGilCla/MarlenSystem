@@ -10,15 +10,19 @@ import com.mycompany.marlenproject.logic.request.RequestAccountBook;
 import com.mycompany.marlenproject.logic.request.RequestProduct;
 import com.mycompany.marlenproject.userinterface.panelViews.ProductsSection.ProductView;
 import com.mycompany.marlenproject.userinterface.panelViews.accountingSection.AccountingView;
+import com.mycompany.marlenproject.utils.colors.Colors;
+import com.mycompany.marlenproject.utils.date.DateFunctions;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JPanel;
 
 public class AdminHome extends javax.swing.JFrame {
-
+    
     public AdminHome() {
         initComponents();
         setTitle("Administrador");
         setLocationRelativeTo(null);
+        
     }
 
     public void replacePanel(JPanel newPanel) {
@@ -68,23 +72,28 @@ public class AdminHome extends javax.swing.JFrame {
         timeZonePanel = new javax.swing.JPanel();
         lbTimeZone = new javax.swing.JLabel();
         ViewsPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1200, 600));
 
+        defaultPanel.setBackground(Colors.PAVLOVA_200);
         defaultPanel.setPreferredSize(new java.awt.Dimension(1200, 600));
 
+        optionsPanel.setBackground(Colors.PAVLOVA_200);
         optionsPanel.setPreferredSize(new java.awt.Dimension(200, 588));
 
+        accountingPanel.setBackground(Colors.PAVLOVA_200);
         accountingPanel.setPreferredSize(new java.awt.Dimension(188, 100));
 
+        btnAccountingSection.setBackground(Colors.PAVLOVA_400);
+        btnAccountingSection.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         btnAccountingSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconCalculation.png"))); // NOI18N
         btnAccountingSection.setText("Contabilidad");
-        btnAccountingSection.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAccountingSection.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAccountingSection.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnAccountingSection.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAccountingSectionActionPerformed(evt);
@@ -97,7 +106,7 @@ public class AdminHome extends javax.swing.JFrame {
             accountingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(accountingPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnAccountingSection, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                .addComponent(btnAccountingSection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         accountingPanelLayout.setVerticalGroup(
@@ -108,11 +117,15 @@ public class AdminHome extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        quotesPanel.setBackground(Colors.PAVLOVA_200);
         quotesPanel.setPreferredSize(new java.awt.Dimension(188, 100));
 
+        btnDocumentSection.setBackground(Colors.PAVLOVA_400);
+        btnDocumentSection.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         btnDocumentSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconNewPage.png"))); // NOI18N
         btnDocumentSection.setText("Documentos");
-        btnDocumentSection.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDocumentSection.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnDocumentSection.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnDocumentSection.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDocumentSectionActionPerformed(evt);
@@ -136,11 +149,15 @@ public class AdminHome extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        workersPanel.setBackground(Colors.PAVLOVA_200);
         workersPanel.setPreferredSize(new java.awt.Dimension(188, 100));
 
+        btnWorkersSection.setBackground(Colors.PAVLOVA_400);
+        btnWorkersSection.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         btnWorkersSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconWorker.png"))); // NOI18N
-        btnWorkersSection.setText("<html><center>Trabajadores y <p>clientes<html>");
-        btnWorkersSection.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnWorkersSection.setText("Trabajadores / Clientes");
+        btnWorkersSection.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnWorkersSection.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnWorkersSection.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnWorkersSectionActionPerformed(evt);
@@ -164,11 +181,15 @@ public class AdminHome extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        productsPanel.setBackground(Colors.PAVLOVA_200);
         productsPanel.setPreferredSize(new java.awt.Dimension(188, 100));
 
+        btnProductsSection.setBackground(Colors.PAVLOVA_400);
+        btnProductsSection.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         btnProductsSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconProduct.png"))); // NOI18N
         btnProductsSection.setText("Mis productos");
-        btnProductsSection.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnProductsSection.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProductsSection.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnProductsSection.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProductsSectionActionPerformed(evt);
@@ -199,10 +220,10 @@ public class AdminHome extends javax.swing.JFrame {
             .addGroup(optionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(workersPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(accountingPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(quotesPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(productsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(workersPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                    .addComponent(accountingPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                    .addComponent(quotesPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                    .addComponent(productsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE))
                 .addContainerGap())
         );
         optionsPanelLayout.setVerticalGroup(
@@ -216,15 +237,18 @@ public class AdminHome extends javax.swing.JFrame {
                 .addComponent(workersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(productsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(170, Short.MAX_VALUE))
         );
 
-        viewPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+        viewPanel.setBackground(Colors.PAVLOVA_200
+        );
         viewPanel.setPreferredSize(new java.awt.Dimension(982, 588));
 
+        welcomeMsgPanel.setBackground(Colors.PAVLOVA_200);
         welcomeMsgPanel.setPreferredSize(new java.awt.Dimension(970, 100));
 
-        lbWelcome.setFont(new java.awt.Font("Yu Gothic UI", 1, 48)); // NOI18N
+        lbWelcome.setFont(new java.awt.Font("Georgia", 1, 48)); // NOI18N
+        lbWelcome.setForeground(Colors.PAVLOVA_700);
         lbWelcome.setText("¡Bienvenido!");
         lbWelcome.setPreferredSize(new java.awt.Dimension(300, 70));
 
@@ -234,8 +258,8 @@ public class AdminHome extends javax.swing.JFrame {
             welcomeMsgPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(welcomeMsgPanelLayout.createSequentialGroup()
                 .addGap(55, 55, 55)
-                .addComponent(lbWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lbWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(580, Short.MAX_VALUE))
         );
         welcomeMsgPanelLayout.setVerticalGroup(
             welcomeMsgPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,9 +269,13 @@ public class AdminHome extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
+        timeZonePanel.setBackground(Colors.PAVLOVA_200);
         timeZonePanel.setPreferredSize(new java.awt.Dimension(970, 75));
 
-        lbTimeZone.setText("Hoy estamos a xxx, xxx de xxx de xxx ");
+        lbTimeZone.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
+        lbTimeZone.setForeground(Colors.PAVLOVA_600);
+        lbTimeZone.setText("Hoy estamos a " + DateFunctions.dateFormatDD_MM_YY(new Date())
+        );
 
         javax.swing.GroupLayout timeZonePanelLayout = new javax.swing.GroupLayout(timeZonePanel);
         timeZonePanel.setLayout(timeZonePanelLayout);
@@ -263,39 +291,31 @@ public class AdminHome extends javax.swing.JFrame {
             .addGroup(timeZonePanelLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(lbTimeZone)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
+        ViewsPanel.setBackground(Colors.PAVLOVA_200);
         ViewsPanel.setPreferredSize(new java.awt.Dimension(970, 389));
 
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(30);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Su sistema de control y registro, es una herramienta que le permitirá realizar sus operaciones a través de diferentes herramientas que cumplen tareas especificas como realizar registro de sus operaciones, controlar la información de sus empleados o realizar documentación necesaria, todo en un mismo lugar.\n\n¡Trabaje de manera óptima y sencilla!");
-        jTextArea1.setWrapStyleWord(true);
-        jTextArea1.setAutoscrolls(false);
-        jTextArea1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jTextArea1.setOpaque(false);
-        jScrollPane1.setViewportView(jTextArea1);
+        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        jLabel1.setForeground(Colors.PAVLOVA_800);
+        jLabel1.setText("<html><p style='font-size:16px;'>Su sistema de control y registro es una herramienta que le permitirá realizar sus operaciones a través de diferentes herramientas que cumplen tareas específicas, como registrar sus operaciones, controlar la información de sus empleados o realizar documentación necesaria, todo en un mismo lugar.<br><br>¡Trabaje de manera óptima y sencilla!</p></html>");
 
         javax.swing.GroupLayout ViewsPanelLayout = new javax.swing.GroupLayout(ViewsPanel);
         ViewsPanel.setLayout(ViewsPanelLayout);
         ViewsPanelLayout.setHorizontalGroup(
             ViewsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ViewsPanelLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 862, Short.MAX_VALUE)
-                .addGap(53, 53, 53))
+            .addGroup(ViewsPanelLayout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ViewsPanelLayout.setVerticalGroup(
             ViewsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ViewsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout viewPanelLayout = new javax.swing.GroupLayout(viewPanel);
@@ -305,9 +325,9 @@ public class AdminHome extends javax.swing.JFrame {
             .addGroup(viewPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(welcomeMsgPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 968, Short.MAX_VALUE)
-                    .addComponent(timeZonePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 968, Short.MAX_VALUE)
-                    .addComponent(ViewsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 968, Short.MAX_VALUE))
+                    .addComponent(welcomeMsgPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(timeZonePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ViewsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         viewPanelLayout.setVerticalGroup(
@@ -318,7 +338,7 @@ public class AdminHome extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(timeZonePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ViewsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                .addComponent(ViewsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -424,9 +444,8 @@ public class AdminHome extends javax.swing.JFrame {
     private javax.swing.JButton btnProductsSection;
     private javax.swing.JButton btnWorkersSection;
     private javax.swing.JPanel defaultPanel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lbTimeZone;
     private javax.swing.JLabel lbWelcome;
     private javax.swing.JPanel optionsPanel;
