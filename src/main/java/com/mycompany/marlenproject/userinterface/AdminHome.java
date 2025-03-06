@@ -57,7 +57,7 @@ public class AdminHome extends javax.swing.JFrame {
         accountingPanel = new javax.swing.JPanel();
         btnAccountingSection = new javax.swing.JButton();
         quotesPanel = new javax.swing.JPanel();
-        btnQuotesSection = new javax.swing.JButton();
+        btnDocumentSection = new javax.swing.JButton();
         workersPanel = new javax.swing.JPanel();
         btnWorkersSection = new javax.swing.JButton();
         productsPanel = new javax.swing.JPanel();
@@ -110,9 +110,14 @@ public class AdminHome extends javax.swing.JFrame {
 
         quotesPanel.setPreferredSize(new java.awt.Dimension(188, 100));
 
-        btnQuotesSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconNewPage.png"))); // NOI18N
-        btnQuotesSection.setText("Cotizaciones");
-        btnQuotesSection.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDocumentSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconNewPage.png"))); // NOI18N
+        btnDocumentSection.setText("Documentos");
+        btnDocumentSection.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDocumentSection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDocumentSectionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout quotesPanelLayout = new javax.swing.GroupLayout(quotesPanel);
         quotesPanel.setLayout(quotesPanelLayout);
@@ -120,14 +125,14 @@ public class AdminHome extends javax.swing.JFrame {
             quotesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(quotesPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnQuotesSection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDocumentSection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         quotesPanelLayout.setVerticalGroup(
             quotesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(quotesPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnQuotesSection, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                .addComponent(btnDocumentSection, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -373,6 +378,11 @@ public class AdminHome extends javax.swing.JFrame {
         replacePanel(productView);
     }//GEN-LAST:event_btnProductsSectionActionPerformed
 
+    private void btnDocumentSectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocumentSectionActionPerformed
+        DocumentSelectionView documentsView = new DocumentSelectionView();
+        replacePanel(documentsView);
+    }//GEN-LAST:event_btnDocumentSectionActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -410,8 +420,8 @@ public class AdminHome extends javax.swing.JFrame {
     private javax.swing.JPanel ViewsPanel;
     private javax.swing.JPanel accountingPanel;
     private javax.swing.JButton btnAccountingSection;
+    private javax.swing.JButton btnDocumentSection;
     private javax.swing.JButton btnProductsSection;
-    private javax.swing.JButton btnQuotesSection;
     private javax.swing.JButton btnWorkersSection;
     private javax.swing.JPanel defaultPanel;
     private javax.swing.JLabel jLabel2;
