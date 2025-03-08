@@ -90,6 +90,7 @@ public class AdminHome extends javax.swing.JFrame {
 
         btnAccountingSection.setBackground(Colors.PRIMARY_400);
         btnAccountingSection.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        btnAccountingSection.setForeground(Colors.PRIMARY_950);
         btnAccountingSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconCalculation.png"))); // NOI18N
         btnAccountingSection.setText("Contabilidad");
         btnAccountingSection.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -122,6 +123,7 @@ public class AdminHome extends javax.swing.JFrame {
 
         btnDocumentSection.setBackground(Colors.PRIMARY_400);
         btnDocumentSection.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        btnDocumentSection.setForeground(Colors.PRIMARY_950);
         btnDocumentSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconNewPage.png"))); // NOI18N
         btnDocumentSection.setText("Documentos");
         btnDocumentSection.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -154,6 +156,7 @@ public class AdminHome extends javax.swing.JFrame {
 
         btnWorkersSection.setBackground(Colors.PRIMARY_400);
         btnWorkersSection.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        btnWorkersSection.setForeground(Colors.PRIMARY_950);
         btnWorkersSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconWorker.png"))); // NOI18N
         btnWorkersSection.setText("Trabajadores / Clientes");
         btnWorkersSection.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -186,6 +189,7 @@ public class AdminHome extends javax.swing.JFrame {
 
         btnProductsSection.setBackground(Colors.PRIMARY_400);
         btnProductsSection.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        btnProductsSection.setForeground(Colors.PRIMARY_950);
         btnProductsSection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconProduct.png"))); // NOI18N
         btnProductsSection.setText("Mis productos");
         btnProductsSection.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -247,7 +251,7 @@ public class AdminHome extends javax.swing.JFrame {
         welcomeMsgPanel.setPreferredSize(new java.awt.Dimension(970, 100));
 
         lbWelcome.setFont(new java.awt.Font("Georgia", 1, 48)); // NOI18N
-        lbWelcome.setForeground(Colors.PRIMARY_600);
+        lbWelcome.setForeground(Colors.PRIMARY_950);
         lbWelcome.setText("¡Bienvenido!");
         lbWelcome.setPreferredSize(new java.awt.Dimension(300, 70));
 
@@ -272,7 +276,7 @@ public class AdminHome extends javax.swing.JFrame {
         timeZonePanel.setPreferredSize(new java.awt.Dimension(970, 75));
 
         lbTimeZone.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
-        lbTimeZone.setForeground(Colors.PRIMARY_600);
+        lbTimeZone.setForeground(Colors.PRIMARY_900);
         lbTimeZone.setText("Hoy estamos a " + DateFunctions.dateFormatDD_MM_YY(new Date())
         );
 
@@ -297,7 +301,7 @@ public class AdminHome extends javax.swing.JFrame {
         ViewsPanel.setPreferredSize(new java.awt.Dimension(970, 389));
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel1.setForeground(Colors.PRIMARY_800);
+        jLabel1.setForeground(Colors.PRIMARY_950);
         jLabel1.setText("<html><p style='font-size:16px;'>Su sistema de control y registro es una herramienta que le permitirá realizar sus operaciones a través de diferentes herramientas que cumplen tareas específicas, como registrar sus operaciones, controlar la información de sus empleados o realizar documentación necesaria, todo en un mismo lugar.<br><br>¡Trabaje de manera óptima y sencilla!</p></html>");
 
         javax.swing.GroupLayout ViewsPanelLayout = new javax.swing.GroupLayout(ViewsPanel);
