@@ -294,29 +294,29 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
 
         labelsPanel1.setPreferredSize(new java.awt.Dimension(150, 338));
 
-        lbFirstName.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbFirstName.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         lbFirstName.setText("Primer nombre:");
-        lbFirstName.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbFirstName.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbFirstLastName.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbFirstLastName.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         lbFirstLastName.setText("Primer apellido:");
-        lbFirstLastName.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbFirstLastName.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbIdentificationType.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
-        lbIdentificationType.setText("Tipo de identificación:");
-        lbIdentificationType.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbIdentificationType.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbIdentificationType.setText("Tipo de documento:");
+        lbIdentificationType.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbBloodType.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbBloodType.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         lbBloodType.setText("Tipo de sangre:");
-        lbBloodType.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbBloodType.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbBirthdate.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbBirthdate.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         lbBirthdate.setText("Fecha de nacimiento:");
-        lbBirthdate.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbBirthdate.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbPosition.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbPosition.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         lbPosition.setText("Cargo:");
-        lbPosition.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbPosition.setPreferredSize(new java.awt.Dimension(138, 30));
 
         javax.swing.GroupLayout labelsPanel1Layout = new javax.swing.GroupLayout(labelsPanel1);
         labelsPanel1.setLayout(labelsPanel1Layout);
@@ -353,38 +353,43 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
 
         fields1Panel.setPreferredSize(new java.awt.Dimension(223, 338));
 
-        txtFirstName.setPreferredSize(new java.awt.Dimension(211, 25));
+        txtFirstName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtFirstName.setPreferredSize(new java.awt.Dimension(211, 30));
         txtFirstName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtFirstNameFocusGained(evt);
             }
         });
 
-        txtFirstLastName.setPreferredSize(new java.awt.Dimension(211, 25));
+        txtFirstLastName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtFirstLastName.setPreferredSize(new java.awt.Dimension(211, 30));
         txtFirstLastName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtFirstLastNameFocusGained(evt);
             }
         });
 
+        sltIdentificationType.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         sltIdentificationType.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsPerson.IDENTIFICATION_TYPE));
-        sltIdentificationType.setPreferredSize(new java.awt.Dimension(211, 25));
+        sltIdentificationType.setPreferredSize(new java.awt.Dimension(211, 30));
         sltIdentificationType.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 sltIdentificationTypeFocusGained(evt);
             }
         });
 
+        sltBloodType.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         sltBloodType.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsWorker.BLOOD_GROUP));
-        sltBloodType.setPreferredSize(new java.awt.Dimension(102, 25));
+        sltBloodType.setPreferredSize(new java.awt.Dimension(211, 30));
         sltBloodType.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 sltBloodTypeFocusGained(evt);
             }
         });
 
+        sltBloodTypeCmpl.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         sltBloodTypeCmpl.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsWorker.BLOOD_GROUP_RHD));
-        sltBloodTypeCmpl.setPreferredSize(new java.awt.Dimension(102, 25));
+        sltBloodTypeCmpl.setPreferredSize(new java.awt.Dimension(211, 30));
         sltBloodTypeCmpl.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 sltBloodTypeCmplFocusGained(evt);
@@ -392,7 +397,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         });
 
         dateBirthdate.setMaxSelectableDate(new Date());
-        dateBirthdate.setPreferredSize(new java.awt.Dimension(211, 25));
+        dateBirthdate.setPreferredSize(new java.awt.Dimension(211, 30));
         this.dateBirthdate.getDateEditor().getUiComponent().addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 if(evt.getClickCount()==1){
@@ -401,8 +406,9 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             }
         });
 
+        sltPosition.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         sltPosition.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsWorker.JOB_TITLE));
-        sltPosition.setPreferredSize(new java.awt.Dimension(211, 25));
+        sltPosition.setPreferredSize(new java.awt.Dimension(211, 30));
         sltPosition.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 sltPositionFocusGained(evt);
@@ -467,29 +473,29 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
 
         jPanel2.setPreferredSize(new java.awt.Dimension(150, 338));
 
-        lbSecondName.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbSecondName.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         lbSecondName.setText("Segundo nombre:");
-        lbSecondName.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbSecondName.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbSecondLastName.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbSecondLastName.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         lbSecondLastName.setText("Segundo apellido:");
-        lbSecondLastName.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbSecondLastName.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbIdentificationNumber.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
-        lbIdentificationNumber.setText("Numero de identificación:");
-        lbIdentificationNumber.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbIdentificationNumber.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbIdentificationNumber.setText("Num. de documento:");
+        lbIdentificationNumber.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbHealthEntity.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbHealthEntity.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         lbHealthEntity.setText("Entidad de salud:");
-        lbHealthEntity.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbHealthEntity.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbDayLink.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbDayLink.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         lbDayLink.setText("Fecha vinculación:");
-        lbDayLink.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbDayLink.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbState.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbState.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         lbState.setText("Estado de trabajador:");
-        lbState.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbState.setPreferredSize(new java.awt.Dimension(138, 30));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -526,7 +532,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
 
         jPanel3.setPreferredSize(new java.awt.Dimension(223, 338));
 
-        dateDayLink.setPreferredSize(new java.awt.Dimension(211, 25));
+        dateDayLink.setPreferredSize(new java.awt.Dimension(211, 30));
         this.dateDayLink.getDateEditor().getUiComponent().addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 if(evt.getClickCount()==1){
@@ -535,38 +541,43 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             }
         });
 
+        sltHealthEntity.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         sltHealthEntity.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsWorker.HEALTH_ENTITY));
-        sltHealthEntity.setPreferredSize(new java.awt.Dimension(211, 25));
+        sltHealthEntity.setPreferredSize(new java.awt.Dimension(211, 30));
         sltHealthEntity.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 sltHealthEntityFocusGained(evt);
             }
         });
 
+        txtIdentificationNumber.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txtIdentificationNumber.setEnabled(false);
-        txtIdentificationNumber.setPreferredSize(new java.awt.Dimension(211, 25));
+        txtIdentificationNumber.setPreferredSize(new java.awt.Dimension(211, 30));
         txtIdentificationNumber.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtIdentificationNumberMouseClicked(evt);
             }
         });
 
-        txtSecondLastName.setPreferredSize(new java.awt.Dimension(211, 25));
+        txtSecondLastName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtSecondLastName.setPreferredSize(new java.awt.Dimension(211, 30));
         txtSecondLastName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtSecondLastNameFocusGained(evt);
             }
         });
 
-        txtSecondName.setPreferredSize(new java.awt.Dimension(211, 25));
+        txtSecondName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtSecondName.setPreferredSize(new java.awt.Dimension(211, 30));
         txtSecondName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtSecondNameFocusGained(evt);
             }
         });
 
+        sltState.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         sltState.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsWorker.STATUS));
-        sltState.setPreferredSize(new java.awt.Dimension(211, 25));
+        sltState.setPreferredSize(new java.awt.Dimension(211, 30));
         sltState.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 sltStateFocusGained(evt);
@@ -580,12 +591,12 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sltHealthEntity, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtIdentificationNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtSecondLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtSecondName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(dateDayLink, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(sltState, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(sltHealthEntity, 0, 200, Short.MAX_VALUE)
+                    .addComponent(txtIdentificationNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(txtSecondLastName, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(txtSecondName, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(dateDayLink, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(sltState, 0, 200, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -611,9 +622,9 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         information2PanelLayout.setHorizontalGroup(
             information2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(information2PanelLayout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
                 .addContainerGap())
         );
         information2PanelLayout.setVerticalGroup(
