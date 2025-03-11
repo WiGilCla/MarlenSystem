@@ -4,15 +4,8 @@
  */
 package com.mycompany.marlenproject.userinterface;
 
-/**
- *
- * @author willy
- */
 public class DocumentSelectionView extends javax.swing.JPanel {
 
-    /**
-     * Creates new form DocumentSelectionView
-     */
     public DocumentSelectionView() {
         initComponents();
     }
