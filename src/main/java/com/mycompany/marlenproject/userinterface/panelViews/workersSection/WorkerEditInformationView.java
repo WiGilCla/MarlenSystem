@@ -286,35 +286,45 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(800, 400));
 
-        defaultPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "EDITAR INFORMACIÓN DE TRABAJADOR", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        defaultPanel.setBackground(Colors.PRIMARY_200);
+        defaultPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "EDITAR TRABAJADOR", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 18), Colors.PRIMARY_950)); // NOI18N
+        defaultPanel.setForeground(Colors.PRIMARY_950);
         defaultPanel.setPreferredSize(new java.awt.Dimension(800, 400));
 
+        information1Panel.setBackground(Colors.PRIMARY_200);
         information1Panel.setPreferredSize(new java.awt.Dimension(391, 282));
         information1Panel.setVerifyInputWhenFocusTarget(false);
 
+        labelsPanel1.setBackground(Colors.PRIMARY_200);
         labelsPanel1.setPreferredSize(new java.awt.Dimension(150, 338));
 
         lbFirstName.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbFirstName.setForeground(Colors.PRIMARY_950);
         lbFirstName.setText("Primer nombre:");
         lbFirstName.setPreferredSize(new java.awt.Dimension(138, 30));
 
         lbFirstLastName.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbFirstLastName.setForeground(Colors.PRIMARY_950);
         lbFirstLastName.setText("Primer apellido:");
         lbFirstLastName.setPreferredSize(new java.awt.Dimension(138, 30));
 
         lbIdentificationType.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbIdentificationType.setForeground(Colors.PRIMARY_950);
         lbIdentificationType.setText("Tipo de documento:");
         lbIdentificationType.setPreferredSize(new java.awt.Dimension(138, 30));
 
         lbBloodType.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbBloodType.setForeground(Colors.PRIMARY_950);
         lbBloodType.setText("Tipo de sangre:");
         lbBloodType.setPreferredSize(new java.awt.Dimension(138, 30));
 
         lbBirthdate.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbBirthdate.setForeground(Colors.PRIMARY_950);
         lbBirthdate.setText("Fecha de nacimiento:");
         lbBirthdate.setPreferredSize(new java.awt.Dimension(138, 30));
 
         lbPosition.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbPosition.setForeground(Colors.PRIMARY_950);
         lbPosition.setText("Cargo:");
         lbPosition.setPreferredSize(new java.awt.Dimension(138, 30));
 
@@ -348,9 +358,10 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
                 .addComponent(lbBirthdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
+        fields1Panel.setBackground(Colors.PRIMARY_200);
         fields1Panel.setPreferredSize(new java.awt.Dimension(223, 338));
 
         txtFirstName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
@@ -464,36 +475,44 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         );
         information1PanelLayout.setVerticalGroup(
             information1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(labelsPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
-            .addComponent(fields1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+            .addComponent(labelsPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+            .addComponent(fields1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
         );
 
+        information2Panel.setBackground(Colors.PRIMARY_200);
         information2Panel.setPreferredSize(new java.awt.Dimension(391, 282));
         information2Panel.setVerifyInputWhenFocusTarget(false);
 
+        jPanel2.setBackground(Colors.PRIMARY_200);
         jPanel2.setPreferredSize(new java.awt.Dimension(150, 338));
 
         lbSecondName.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbSecondName.setForeground(Colors.PRIMARY_950);
         lbSecondName.setText("Segundo nombre:");
         lbSecondName.setPreferredSize(new java.awt.Dimension(138, 30));
 
         lbSecondLastName.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbSecondLastName.setForeground(Colors.PRIMARY_950);
         lbSecondLastName.setText("Segundo apellido:");
         lbSecondLastName.setPreferredSize(new java.awt.Dimension(138, 30));
 
         lbIdentificationNumber.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbIdentificationNumber.setForeground(Colors.PRIMARY_950);
         lbIdentificationNumber.setText("Num. de documento:");
         lbIdentificationNumber.setPreferredSize(new java.awt.Dimension(138, 30));
 
         lbHealthEntity.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbHealthEntity.setForeground(Colors.PRIMARY_950);
         lbHealthEntity.setText("Entidad de salud:");
         lbHealthEntity.setPreferredSize(new java.awt.Dimension(138, 30));
 
         lbDayLink.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbDayLink.setForeground(Colors.PRIMARY_950);
         lbDayLink.setText("Fecha vinculación:");
         lbDayLink.setPreferredSize(new java.awt.Dimension(138, 30));
 
         lbState.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbState.setForeground(Colors.PRIMARY_950);
         lbState.setText("Estado de trabajador:");
         lbState.setPreferredSize(new java.awt.Dimension(138, 30));
 
@@ -530,6 +549,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel3.setBackground(Colors.PRIMARY_200);
         jPanel3.setPreferredSize(new java.awt.Dimension(223, 338));
 
         dateDayLink.setPreferredSize(new java.awt.Dimension(211, 30));
@@ -629,33 +649,49 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
         );
         information2PanelLayout.setVerticalGroup(
             information2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
         );
 
+        buttonsPanel.setBackground(Colors.PRIMARY_200);
         buttonsPanel.setPreferredSize(new java.awt.Dimension(788, 100));
 
+        btnCancel.setBackground(Colors.PRIMARY_400);
+        btnCancel.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        btnCancel.setForeground(Colors.PRIMARY_950);
         btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconCancel.png"))); // NOI18N
         btnCancel.setText("Cancelar");
+        btnCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCancel.setPreferredSize(new java.awt.Dimension(180, 60));
+        btnCancel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
             }
         });
 
+        btnClean.setBackground(Colors.PRIMARY_400);
+        btnClean.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        btnClean.setForeground(Colors.PRIMARY_950);
         btnClean.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconDelete.png"))); // NOI18N
         btnClean.setText("Limpiar campos");
+        btnClean.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnClean.setPreferredSize(new java.awt.Dimension(180, 60));
+        btnClean.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnClean.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCleanActionPerformed(evt);
             }
         });
 
+        btnSave.setBackground(Colors.PRIMARY_400);
+        btnSave.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        btnSave.setForeground(Colors.PRIMARY_950);
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconSave.png"))); // NOI18N
         btnSave.setText("Guardar");
+        btnSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnSave.setPreferredSize(new java.awt.Dimension(180, 60));
+        btnSave.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
@@ -680,11 +716,13 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             .addGroup(buttonsPanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnClean, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
+
+        buttonsPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCancel, btnClean, btnSave});
 
         javax.swing.GroupLayout defaultPanelLayout = new javax.swing.GroupLayout(defaultPanel);
         defaultPanel.setLayout(defaultPanelLayout);
@@ -704,10 +742,10 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             defaultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(defaultPanelLayout.createSequentialGroup()
                 .addGroup(defaultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(information1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
-                    .addComponent(information2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE))
+                    .addComponent(information1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+                    .addComponent(information2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                .addComponent(buttonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -723,7 +761,7 @@ public class WorkerEditInformationView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(defaultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(defaultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
