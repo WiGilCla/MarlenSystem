@@ -178,23 +178,35 @@ public class AddCustomerView extends javax.swing.JPanel {
         txtPhoneNumber = new javax.swing.JTextField();
         txtAddress = new javax.swing.JTextField();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "AGREGAR NUEVO CLIENTE", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        setBackground(Colors.PRIMARY_200);
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "AGREGAR NUEVO CLIENTE", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 18), Colors.PRIMARY_950)); // NOI18N
         setPreferredSize(new java.awt.Dimension(970, 576));
 
+        buttonsPanel.setBackground(Colors.PRIMARY_200);
         buttonsPanel.setPreferredSize(new java.awt.Dimension(958, 208));
 
+        btnCleanFields.setBackground(Colors.PRIMARY_400);
+        btnCleanFields.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        btnCleanFields.setForeground(Colors.PRIMARY_950);
         btnCleanFields.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconDelete.png"))); // NOI18N
-        btnCleanFields.setText("Limpiar campos");
+        btnCleanFields.setText("Limpiar");
+        btnCleanFields.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCleanFields.setPreferredSize(new java.awt.Dimension(180, 60));
+        btnCleanFields.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnCleanFields.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCleanFieldsActionPerformed(evt);
             }
         });
 
+        btnSaveWorker.setBackground(Colors.PRIMARY_400);
+        btnSaveWorker.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        btnSaveWorker.setForeground(Colors.PRIMARY_950);
         btnSaveWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconSave.png"))); // NOI18N
         btnSaveWorker.setText("Guardar");
+        btnSaveWorker.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnSaveWorker.setPreferredSize(new java.awt.Dimension(180, 60));
+        btnSaveWorker.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnSaveWorker.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveWorkerActionPerformed(evt);
@@ -206,45 +218,52 @@ public class AddCustomerView extends javax.swing.JPanel {
         buttonsPanelLayout.setHorizontalGroup(
             buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buttonsPanelLayout.createSequentialGroup()
-                .addGap(119, 119, 119)
-                .addComponent(btnCleanFields, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
-                .addGap(121, 121, 121)
-                .addComponent(btnSaveWorker, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
-                .addGap(122, 122, 122))
+                .addGap(244, 244, 244)
+                .addComponent(btnCleanFields, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                .addGap(100, 100, 100)
+                .addComponent(btnSaveWorker, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                .addGap(255, 255, 255))
         );
         buttonsPanelLayout.setVerticalGroup(
             buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buttonsPanelLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(23, 23, 23)
                 .addGroup(buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCleanFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSaveWorker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(108, 108, 108))
+                    .addComponent(btnCleanFields, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSaveWorker, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
+        information1Panel.setBackground(Colors.PRIMARY_200);
         information1Panel.setPreferredSize(new java.awt.Dimension(476, 350));
 
+        lbsInformation1Panel.setBackground(Colors.PRIMARY_200);
         lbsInformation1Panel.setPreferredSize(new java.awt.Dimension(150, 338));
 
-        lbFirstName.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbFirstName.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbFirstName.setForeground(Colors.PRIMARY_950);
         lbFirstName.setText("Primer nombre:");
-        lbFirstName.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbFirstName.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbFirstlastName.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbFirstlastName.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbFirstlastName.setForeground(Colors.PRIMARY_950);
         lbFirstlastName.setText("Primer apellido:");
-        lbFirstlastName.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbFirstlastName.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbIdentificationType.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
-        lbIdentificationType.setText("Tipo de identificación:");
-        lbIdentificationType.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbIdentificationType.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbIdentificationType.setForeground(Colors.PRIMARY_950);
+        lbIdentificationType.setText("Tipo de documento:");
+        lbIdentificationType.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbEmail.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbEmail.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbEmail.setForeground(Colors.PRIMARY_950);
         lbEmail.setText("Correo electrónico:");
-        lbEmail.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbEmail.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbAge.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbAge.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbAge.setForeground(Colors.PRIMARY_950);
         lbAge.setText("Fecha de nacimiento:");
-        lbAge.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbAge.setPreferredSize(new java.awt.Dimension(138, 30));
 
         javax.swing.GroupLayout lbsInformation1PanelLayout = new javax.swing.GroupLayout(lbsInformation1Panel);
         lbsInformation1Panel.setLayout(lbsInformation1PanelLayout);
@@ -276,24 +295,28 @@ public class AddCustomerView extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        dataInformation1Panel.setBackground(Colors.PRIMARY_200);
         dataInformation1Panel.setPreferredSize(new java.awt.Dimension(308, 338));
 
-        txtFirstName.setPreferredSize(new java.awt.Dimension(296, 25));
+        txtFirstName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtFirstName.setPreferredSize(new java.awt.Dimension(296, 30));
         txtFirstName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtFirstNameFocusGained(evt);
             }
         });
 
-        txtFirstLastName.setPreferredSize(new java.awt.Dimension(296, 25));
+        txtFirstLastName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtFirstLastName.setPreferredSize(new java.awt.Dimension(296, 30));
         txtFirstLastName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtFirstLastNameFocusGained(evt);
             }
         });
 
+        sltIdentificationType.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         sltIdentificationType.setModel(new javax.swing.DefaultComboBoxModel<>(dataFormsPerson.IDENTIFICATION_TYPE));
-        sltIdentificationType.setPreferredSize(new java.awt.Dimension(296, 25));
+        sltIdentificationType.setPreferredSize(new java.awt.Dimension(296, 30));
         sltIdentificationType.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 sltIdentificationTypeFocusGained(evt);
@@ -302,7 +325,7 @@ public class AddCustomerView extends javax.swing.JPanel {
 
         dateBirthdate.setDateFormatString("dd/MM/yyyy");
         dateBirthdate.setMaxSelectableDate(new Date());
-        dateBirthdate.setPreferredSize(new java.awt.Dimension(296, 25));
+        dateBirthdate.setPreferredSize(new java.awt.Dimension(296, 30));
         this.dateBirthdate.getDateEditor().getUiComponent().addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 if(evt.getClickCount()==1){
@@ -311,7 +334,8 @@ public class AddCustomerView extends javax.swing.JPanel {
             }
         });
 
-        txtEmail.setPreferredSize(new java.awt.Dimension(71, 25));
+        txtEmail.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtEmail.setPreferredSize(new java.awt.Dimension(296, 30));
         txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtEmailFocusGained(evt);
@@ -345,7 +369,7 @@ public class AddCustomerView extends javax.swing.JPanel {
                 .addComponent(dateBirthdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout information1PanelLayout = new javax.swing.GroupLayout(information1Panel);
@@ -364,34 +388,41 @@ public class AddCustomerView extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, information1PanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(information1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(dataInformation1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
-                    .addComponent(lbsInformation1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE))
+                    .addComponent(dataInformation1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+                    .addComponent(lbsInformation1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
+        information2Panel.setBackground(Colors.PRIMARY_200);
         information2Panel.setPreferredSize(new java.awt.Dimension(476, 350));
 
+        lbsInformation2Panel.setBackground(Colors.PRIMARY_200);
         lbsInformation2Panel.setPreferredSize(new java.awt.Dimension(150, 338));
 
-        lbSecondName.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbSecondName.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbSecondName.setForeground(Colors.PRIMARY_950);
         lbSecondName.setText("Segundo nombre:");
-        lbSecondName.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbSecondName.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbSecondLastName.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbSecondLastName.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbSecondLastName.setForeground(Colors.PRIMARY_950);
         lbSecondLastName.setText("Segundo apellido:");
-        lbSecondLastName.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbSecondLastName.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbIdentificationNum.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
-        lbIdentificationNum.setText("Num. de identificación:");
-        lbIdentificationNum.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbIdentificationNum.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbIdentificationNum.setForeground(Colors.PRIMARY_950);
+        lbIdentificationNum.setText("Num. de documento:");
+        lbIdentificationNum.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbEps.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbEps.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbEps.setForeground(Colors.PRIMARY_950);
         lbEps.setText("Teléfono / Celular:");
-        lbEps.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbEps.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        Dirección.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        Dirección.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        Dirección.setForeground(Colors.PRIMARY_950);
         Dirección.setText("Dirección:");
-        Dirección.setPreferredSize(new java.awt.Dimension(138, 25));
+        Dirección.setPreferredSize(new java.awt.Dimension(138, 30));
 
         javax.swing.GroupLayout lbsInformation2PanelLayout = new javax.swing.GroupLayout(lbsInformation2Panel);
         lbsInformation2Panel.setLayout(lbsInformation2PanelLayout);
@@ -420,40 +451,46 @@ public class AddCustomerView extends javax.swing.JPanel {
                 .addComponent(lbEps, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Dirección, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
+        dataInformation2Panel.setBackground(Colors.PRIMARY_200);
         dataInformation2Panel.setPreferredSize(new java.awt.Dimension(308, 338));
 
-        txtSecondName.setPreferredSize(new java.awt.Dimension(296, 25));
+        txtSecondName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtSecondName.setPreferredSize(new java.awt.Dimension(296, 30));
         txtSecondName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtSecondNameFocusGained(evt);
             }
         });
 
-        txtSecondLastName.setPreferredSize(new java.awt.Dimension(296, 25));
+        txtSecondLastName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtSecondLastName.setPreferredSize(new java.awt.Dimension(296, 30));
         txtSecondLastName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtSecondLastNameFocusGained(evt);
             }
         });
 
-        txtIdentificationNum.setPreferredSize(new java.awt.Dimension(296, 25));
+        txtIdentificationNum.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtIdentificationNum.setPreferredSize(new java.awt.Dimension(296, 30));
         txtIdentificationNum.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtIdentificationNumFocusGained(evt);
             }
         });
 
-        txtPhoneNumber.setPreferredSize(new java.awt.Dimension(71, 25));
+        txtPhoneNumber.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtPhoneNumber.setPreferredSize(new java.awt.Dimension(296, 30));
         txtPhoneNumber.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtPhoneNumberFocusGained(evt);
             }
         });
 
-        txtAddress.setPreferredSize(new java.awt.Dimension(71, 25));
+        txtAddress.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtAddress.setPreferredSize(new java.awt.Dimension(296, 30));
         txtAddress.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtAddressFocusGained(evt);
@@ -506,8 +543,8 @@ public class AddCustomerView extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, information2PanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(information2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(dataInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
-                    .addComponent(lbsInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE))
+                    .addComponent(dataInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+                    .addComponent(lbsInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -530,10 +567,10 @@ public class AddCustomerView extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(information1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
-                    .addComponent(information2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE))
+                    .addComponent(information1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(information2Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                .addComponent(buttonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
