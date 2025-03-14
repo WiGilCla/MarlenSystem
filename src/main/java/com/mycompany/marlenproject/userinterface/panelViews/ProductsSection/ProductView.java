@@ -245,10 +245,10 @@ public class ProductView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
-        AddProductView addProductView = new AddProductView(PRINCIPALJFRAME);
-        addProductView.setLocationRelativeTo(null);
-        addProductView.setVisible(true);
-        PRINCIPALJFRAME.setVisible(false);
+
+        AddProductView addProduct = new AddProductView();
+        PRINCIPALJFRAME.replacePanel(addProduct);
+        
     }//GEN-LAST:event_btnAddProductActionPerformed
 
     private void btnDeleteProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteProductActionPerformed

@@ -1,33 +1,25 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package com.mycompany.marlenproject.userinterface.panelViews.ProductsSection;
 
 import com.mycompany.marlenproject.utils.fields.InputValidator;
 import com.mycompany.marlenproject.logic.Product;
 import com.mycompany.marlenproject.logic.request.RequestProduct;
-import com.mycompany.marlenproject.userinterface.AdminHome;
 import com.mycompany.marlenproject.utils.colors.Colors;
 import com.mycompany.marlenproject.utils.message.JPaneMessage;
-import java.util.List;
+public class AddProductView extends javax.swing.JPanel {
 
-public class AddProductView extends javax.swing.JFrame {
-
-    private final AdminHome PRINCIPALFRAME;
-
-    public AddProductView(AdminHome principalFrame) {
-        this.PRINCIPALFRAME = principalFrame;
+    public AddProductView() {
         initComponents();
-        setResizable(false);
-        setTitle("Agregar nuevo producto");
     }
-
+    
     private boolean checkRequiredField() {
         String productName = InputValidator.removeStringBlanks(txtProductName.getText());
         if (productName.isBlank()) {
             txtProductName.setBackground(Colors.IncorrectColorFields());
-            JPaneMessage.messageDialog(this, "Debe dar un nombre al producto.", "Producto sin nombre", 2);
+            JPaneMessage.messageDialog(this, "Debe dar un nombre al producto.", "Producto sin nombre", 1);
             return false;
         }
         if (!productName.isBlank() && !InputValidator.checkStringField(productName)) {
@@ -38,7 +30,7 @@ public class AddProductView extends javax.swing.JFrame {
 
         return true;
     }
-
+    
     private boolean checkNoRequiredField() {
         String productDescription = InputValidator.removeStringBlanks(txtADescriptionProduct.getText());
 
@@ -50,14 +42,14 @@ public class AddProductView extends javax.swing.JFrame {
 
         return true;
     }
-
-    private void backProductListView() {
-        List<Product> productList = new RequestProduct().getAllProducts();
-        ProductView productView = new ProductView(PRINCIPALFRAME, productList);
-        this.dispose();
-        PRINCIPALFRAME.replacePanel(productView);
-        PRINCIPALFRAME.setVisible(true);
+    
+    private void clearFields(){
+        txtProductName.setText("");
+        txtADescriptionProduct.setText("");
+        txtProductName.setBackground(Colors.NormalColorFields());
+        txtADescriptionProduct.setBackground(Colors.NormalColorFields());
     }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -71,15 +63,17 @@ public class AddProductView extends javax.swing.JFrame {
         txtADescriptionProduct = new javax.swing.JTextArea();
         PanelButtons = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
-        btnCancel = new javax.swing.JButton();
+        btnClearFields = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(Colors.PRIMARY_200);
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "AGREGAR PRODUCTO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 18), Colors.PRIMARY_950)); // NOI18N
 
-        PanelProductName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        PanelProductName.setBackground(Colors.PRIMARY_200);
 
+        lbProductName.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         lbProductName.setText("Nombre del producto:");
-        lbProductName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        txtProductName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txtProductName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtProductNameFocusGained(evt);
@@ -95,7 +89,7 @@ public class AddProductView extends javax.swing.JFrame {
                 .addComponent(lbProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
         PanelProductNameLayout.setVerticalGroup(
             PanelProductNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,9 +101,10 @@ public class AddProductView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        PanelProductDescription.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        PanelProductDescription.setBackground(Colors.PRIMARY_200);
 
         txtADescriptionProduct.setColumns(20);
+        txtADescriptionProduct.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txtADescriptionProduct.setRows(5);
         txtADescriptionProduct.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -124,34 +119,44 @@ public class AddProductView extends javax.swing.JFrame {
             PanelProductDescriptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelProductDescriptionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
                 .addContainerGap())
         );
         PanelProductDescriptionLayout.setVerticalGroup(
             PanelProductDescriptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelProductDescriptionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        PanelButtons.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        PanelButtons.setBackground(Colors.PRIMARY_200);
 
+        btnSave.setBackground(Colors.PRIMARY_400);
+        btnSave.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        btnSave.setForeground(Colors.PRIMARY_950);
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconSave.png"))); // NOI18N
         btnSave.setText("Guardar");
+        btnSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnSave.setPreferredSize(new java.awt.Dimension(150, 60));
+        btnSave.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
             }
         });
 
-        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconCancel.png"))); // NOI18N
-        btnCancel.setText("Cancelar");
-        btnCancel.setPreferredSize(new java.awt.Dimension(150, 60));
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+        btnClearFields.setBackground(Colors.PRIMARY_400);
+        btnClearFields.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        btnClearFields.setForeground(Colors.PRIMARY_950);
+        btnClearFields.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconDelete.png"))); // NOI18N
+        btnClearFields.setText("Limpiar");
+        btnClearFields.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnClearFields.setPreferredSize(new java.awt.Dimension(150, 60));
+        btnClearFields.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnClearFields.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
+                btnClearFieldsActionPerformed(evt);
             }
         });
 
@@ -159,54 +164,59 @@ public class AddProductView extends javax.swing.JFrame {
         PanelButtons.setLayout(PanelButtonsLayout);
         PanelButtonsLayout.setHorizontalGroup(
             PanelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelButtonsLayout.createSequentialGroup()
-                .addContainerGap(136, Short.MAX_VALUE)
-                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
-                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(114, 114, 114))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelButtonsLayout.createSequentialGroup()
+                .addContainerGap(160, Short.MAX_VALUE)
+                .addComponent(btnClearFields, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100)
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(153, Short.MAX_VALUE))
         );
         PanelButtonsLayout.setVerticalGroup(
             PanelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelButtonsLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(PanelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(PanelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnClearFields, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                    .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(PanelButtons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PanelProductName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PanelProductDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addGap(0, 625, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(PanelButtons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(PanelProductName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(PanelProductDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(PanelProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PanelProductDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PanelButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGap(0, 388, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(PanelProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(PanelProductDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(PanelButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        this.dispose();
-        PRINCIPALFRAME.setVisible(true);
-    }//GEN-LAST:event_btnCancelActionPerformed
+    private void txtProductNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtProductNameFocusGained
+        txtProductName.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_txtProductNameFocusGained
+
+    private void txtADescriptionProductFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtADescriptionProductFocusGained
+        txtADescriptionProduct.setBackground(Colors.NormalColorFields());
+    }//GEN-LAST:event_txtADescriptionProductFocusGained
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         if (checkRequiredField() && checkNoRequiredField()) {
@@ -219,28 +229,24 @@ public class AddProductView extends javax.swing.JFrame {
                 Product newProduct = new Product(productName, productDescription);
                 requestProduct.saveProduct(newProduct);
                 JPaneMessage.messageDialog(this, "El producto se ha guardado existosamente.", "Guardado exitoso", 1);
-                backProductListView();
+                clearFields();
             } catch (Exception ex) {
                 JPaneMessage.messageDialog(this, "Ha ocurrido un error durante el guardado de producto", "Error de guardado", 0);
-                
-            
+
             }
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
-    private void txtProductNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtProductNameFocusGained
-        txtProductName.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_txtProductNameFocusGained
+    private void btnClearFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearFieldsActionPerformed
+        clearFields();
+    }//GEN-LAST:event_btnClearFieldsActionPerformed
 
-    private void txtADescriptionProductFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtADescriptionProductFocusGained
-        txtADescriptionProduct.setBackground(Colors.NormalColorFields());
-    }//GEN-LAST:event_txtADescriptionProductFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelButtons;
     private javax.swing.JPanel PanelProductDescription;
     private javax.swing.JPanel PanelProductName;
-    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnClearFields;
     private javax.swing.JButton btnSave;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbProductName;
