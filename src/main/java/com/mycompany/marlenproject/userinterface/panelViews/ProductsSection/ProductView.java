@@ -63,7 +63,7 @@ public class ProductView extends javax.swing.JPanel {
 
     private void setModelSettings(DefaultTableModel modelTable) {
         productsTable.setModel(modelTable);
-        productsTable.getColumnModel().getColumn(0).setMinWidth(25);
+        productsTable.getColumnModel().getColumn(0).setMinWidth(30);
         productsTable.getColumnModel().getColumn(0).setMaxWidth(50);
         productsTable.getColumnModel().getColumn(1).setMinWidth(25);
         productsTable.getColumnModel().getColumn(1).setMaxWidth(100);
@@ -72,6 +72,8 @@ public class ProductView extends javax.swing.JPanel {
         productsTable.getColumnModel().getColumn(0).setPreferredWidth(25);
         productsTable.getColumnModel().getColumn(1).setPreferredWidth(50);
         productsTable.getColumnModel().getColumn(2).setPreferredWidth(150);
+        productsTable.getTableHeader().setFont(new java.awt.Font("Georgia", 1, 14));
+        productsTable.getTableHeader().setForeground(Colors.PRIMARY_950);
     }
     
     private void backProductListView() {
