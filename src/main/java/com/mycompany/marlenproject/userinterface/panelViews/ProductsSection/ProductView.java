@@ -8,6 +8,7 @@ import com.mycompany.marlenproject.logic.Product;
 import com.mycompany.marlenproject.logic.request.RequestProduct;
 import com.mycompany.marlenproject.userinterface.AdminHome;
 import com.mycompany.marlenproject.utils.message.JPaneMessage;
+import com.mycompany.marlenproject.utils.colors.Colors;
 import java.util.List;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
@@ -94,11 +95,14 @@ public class ProductView extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         productsTable = new javax.swing.JTable();
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setBackground(Colors.PRIMARY_200);
 
+        jPanel1.setBackground(Colors.PRIMARY_200);
+
+        jLabel1.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
+        jLabel1.setForeground(Colors.PRIMARY_950);
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MIS PRODUCTOS");
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -106,8 +110,8 @@ public class ProductView extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(406, 406, 406)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                .addGap(408, 408, 408))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(361, 361, 361))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,10 +121,14 @@ public class ProductView extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.setBackground(Colors.PRIMARY_200);
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel3.setBackground(Colors.PRIMARY_200);
 
+        btnAddProduct.setBackground(Colors.PRIMARY_300);
+        btnAddProduct.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        btnAddProduct.setForeground(Colors.PRIMARY_950);
         btnAddProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconAddProduct.png"))); // NOI18N
         btnAddProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,6 +136,9 @@ public class ProductView extends javax.swing.JPanel {
             }
         });
 
+        btnEditProduct.setBackground(Colors.PRIMARY_300);
+        btnEditProduct.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        btnEditProduct.setForeground(Colors.PRIMARY_950);
         btnEditProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconEdit.png"))); // NOI18N
         btnEditProduct.setEnabled(false);
         btnEditProduct.addActionListener(new java.awt.event.ActionListener() {
@@ -136,6 +147,9 @@ public class ProductView extends javax.swing.JPanel {
             }
         });
 
+        btnDeleteProduct.setBackground(Colors.PRIMARY_300);
+        btnDeleteProduct.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        btnDeleteProduct.setForeground(Colors.PRIMARY_950);
         btnDeleteProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconTrash.png"))); // NOI18N
         btnDeleteProduct.setEnabled(false);
         btnDeleteProduct.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +167,7 @@ public class ProductView extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAddProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEditProduct, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-                    .addComponent(btnDeleteProduct, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
+                    .addComponent(btnDeleteProduct, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -168,8 +182,11 @@ public class ProductView extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel4.setBackground(Colors.PRIMARY_200);
 
+        productsTable.setBackground(Colors.PRIMARY_100);
+        productsTable.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        productsTable.setForeground(Colors.PRIMARY_950);
         productsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -181,7 +198,11 @@ public class ProductView extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        productsTable.setRowHeight(30);
+        productsTable.setGridColor(new java.awt.Color(204, 204, 204));
+        productsTable.setRowHeight(25);
+        productsTable.setSelectionBackground(Colors.PRIMARY_300);
+        productsTable.setShowGrid(true);
+        productsTable.setShowVerticalLines(false);
         jScrollPane1.setViewportView(productsTable);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -197,7 +218,7 @@ public class ProductView extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -228,7 +249,7 @@ public class ProductView extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
