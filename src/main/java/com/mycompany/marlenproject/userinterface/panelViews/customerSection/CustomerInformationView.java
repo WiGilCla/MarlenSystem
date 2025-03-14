@@ -11,6 +11,7 @@ import com.mycompany.marlenproject.logic.Customer;
 import com.mycompany.marlenproject.logic.request.RequestCustomer;
 import com.mycompany.marlenproject.userinterface.AdminHome;
 import com.mycompany.marlenproject.utils.message.JPaneMessage;
+import com.mycompany.marlenproject.utils.colors.Colors;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -87,30 +88,43 @@ public class CustomerInformationView extends javax.swing.JPanel {
         buttonListWorkersPanel = new javax.swing.JPanel();
         btnSeeAllCustomers = new javax.swing.JButton();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "INFORMACIÓN DEL CLIENTE", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        setBackground(Colors.PRIMARY_200);
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "INFORMACIÓN DEL CLIENTE", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 18), Colors.PRIMARY_950)); // NOI18N
         setPreferredSize(new java.awt.Dimension(970, 576));
 
+        buttonsPanel.setBackground(Colors.PRIMARY_200);
         buttonsPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         buttonsPanel.setPreferredSize(new java.awt.Dimension(958, 150));
 
+        btnDeleteCustomer.setBackground(Colors.PRIMARY_400);
+        btnDeleteCustomer.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        btnDeleteCustomer.setForeground(Colors.PRIMARY_950);
         btnDeleteCustomer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconTrash.png"))); // NOI18N
-        btnDeleteCustomer.setText("Eliminar cliente");
+        btnDeleteCustomer.setText("Eliminar");
+        btnDeleteCustomer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnDeleteCustomer.setPreferredSize(new java.awt.Dimension(180, 60));
+        btnDeleteCustomer.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnDeleteCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteCustomerActionPerformed(evt);
             }
         });
 
+        btnEditCustomer.setBackground(Colors.PRIMARY_400);
+        btnEditCustomer.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        btnEditCustomer.setForeground(Colors.PRIMARY_950);
         btnEditCustomer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconEdit.png"))); // NOI18N
-        btnEditCustomer.setText("Editar información");
+        btnEditCustomer.setText("Editar");
+        btnEditCustomer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEditCustomer.setPreferredSize(new java.awt.Dimension(180, 60));
+        btnEditCustomer.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnEditCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditCustomerActionPerformed(evt);
             }
         });
 
+        btnNextWorker.setBackground(Colors.PRIMARY_500);
         btnNextWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconNext.png"))); // NOI18N
         btnNextWorker.setPreferredSize(new java.awt.Dimension(38, 38));
         btnNextWorker.addActionListener(new java.awt.event.ActionListener() {
@@ -119,6 +133,7 @@ public class CustomerInformationView extends javax.swing.JPanel {
             }
         });
 
+        btnPreviousWorker.setBackground(Colors.PRIMARY_500);
         btnPreviousWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconPrevious.png"))); // NOI18N
         btnPreviousWorker.setPreferredSize(new java.awt.Dimension(38, 38));
         btnPreviousWorker.addActionListener(new java.awt.event.ActionListener() {
@@ -132,51 +147,60 @@ public class CustomerInformationView extends javax.swing.JPanel {
         buttonsPanelLayout.setHorizontalGroup(
             buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buttonsPanelLayout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addComponent(btnPreviousWorker, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(btnDeleteCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-                .addGap(49, 49, 49)
-                .addComponent(btnEditCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(btnNextWorker, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-                .addGap(139, 139, 139))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnPreviousWorker, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100)
+                .addComponent(btnDeleteCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100)
+                .addComponent(btnEditCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100)
+                .addComponent(btnNextWorker, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         buttonsPanelLayout.setVerticalGroup(
             buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buttonsPanelLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addContainerGap()
                 .addGroup(buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(btnPreviousWorker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDeleteCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPreviousWorker, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDeleteCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEditCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNextWorker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(45, Short.MAX_VALUE))
+                    .addComponent(btnNextWorker, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        buttonsPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnDeleteCustomer, btnEditCustomer});
+
+        information1Panel.setBackground(Colors.PRIMARY_200);
         information1Panel.setPreferredSize(new java.awt.Dimension(476, 300));
 
+        lbsInformation1Panel.setBackground(Colors.PRIMARY_200);
         lbsInformation1Panel.setPreferredSize(new java.awt.Dimension(150, 288));
 
-        lbCustomerFirstName.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbCustomerFirstName.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbCustomerFirstName.setForeground(Colors.PRIMARY_950);
         lbCustomerFirstName.setText("Primer nombre:");
-        lbCustomerFirstName.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbCustomerFirstName.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbCustomerFirstlastName.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbCustomerFirstlastName.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbCustomerFirstlastName.setForeground(Colors.PRIMARY_950);
         lbCustomerFirstlastName.setText("Primer apellido:");
-        lbCustomerFirstlastName.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbCustomerFirstlastName.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbCustomerIdentificationType.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbCustomerIdentificationType.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbCustomerIdentificationType.setForeground(Colors.PRIMARY_950);
         lbCustomerIdentificationType.setText("Tipo de identificación:");
-        lbCustomerIdentificationType.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbCustomerIdentificationType.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbCustomerBirthdate.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbCustomerBirthdate.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbCustomerBirthdate.setForeground(Colors.PRIMARY_950);
         lbCustomerBirthdate.setText("Edad");
-        lbCustomerBirthdate.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbCustomerBirthdate.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbCustomerEmail.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbCustomerEmail.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbCustomerEmail.setForeground(Colors.PRIMARY_950);
         lbCustomerEmail.setText("Correo electrónico:");
-        lbCustomerEmail.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbCustomerEmail.setPreferredSize(new java.awt.Dimension(138, 30));
 
         javax.swing.GroupLayout lbsInformation1PanelLayout = new javax.swing.GroupLayout(lbsInformation1Panel);
         lbsInformation1Panel.setLayout(lbsInformation1PanelLayout);
@@ -208,21 +232,27 @@ public class CustomerInformationView extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        dataInformation1Panel.setBackground(Colors.PRIMARY_200);
         dataInformation1Panel.setPreferredSize(new java.awt.Dimension(308, 288));
 
         txtCustomerFirstName.setEditable(false);
-        txtCustomerFirstName.setPreferredSize(new java.awt.Dimension(296, 25));
+        txtCustomerFirstName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtCustomerFirstName.setPreferredSize(new java.awt.Dimension(296, 30));
 
         txtCustomerFirstLastName.setEditable(false);
-        txtCustomerFirstLastName.setPreferredSize(new java.awt.Dimension(296, 25));
+        txtCustomerFirstLastName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtCustomerFirstLastName.setPreferredSize(new java.awt.Dimension(296, 30));
 
         txtCustomerEmail.setEditable(false);
-        txtCustomerEmail.setPreferredSize(new java.awt.Dimension(296, 25));
+        txtCustomerEmail.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtCustomerEmail.setPreferredSize(new java.awt.Dimension(296, 30));
 
         txtCustomerIdentificationType.setEditable(false);
-        txtCustomerIdentificationType.setPreferredSize(new java.awt.Dimension(296, 25));
+        txtCustomerIdentificationType.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtCustomerIdentificationType.setPreferredSize(new java.awt.Dimension(296, 30));
 
-        txtCustomerBirthdate.setPreferredSize(new java.awt.Dimension(71, 25));
+        txtCustomerBirthdate.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtCustomerBirthdate.setPreferredSize(new java.awt.Dimension(296, 30));
 
         javax.swing.GroupLayout dataInformation1PanelLayout = new javax.swing.GroupLayout(dataInformation1Panel);
         dataInformation1Panel.setLayout(dataInformation1PanelLayout);
@@ -235,7 +265,7 @@ public class CustomerInformationView extends javax.swing.JPanel {
                     .addComponent(txtCustomerFirstLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(txtCustomerFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(txtCustomerIdentificationType, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(txtCustomerBirthdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtCustomerBirthdate, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE))
                 .addContainerGap())
         );
         dataInformation1PanelLayout.setVerticalGroup(
@@ -251,7 +281,7 @@ public class CustomerInformationView extends javax.swing.JPanel {
                 .addComponent(txtCustomerBirthdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addComponent(txtCustomerEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout information1PanelLayout = new javax.swing.GroupLayout(information1Panel);
@@ -270,34 +300,41 @@ public class CustomerInformationView extends javax.swing.JPanel {
             .addGroup(information1PanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(information1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dataInformation1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
-                    .addComponent(lbsInformation1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE))
+                    .addComponent(dataInformation1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                    .addComponent(lbsInformation1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
+        information2Panel.setBackground(Colors.PRIMARY_200);
         information2Panel.setPreferredSize(new java.awt.Dimension(476, 300));
 
+        lbsInformation2Panel.setBackground(Colors.PRIMARY_200);
         lbsInformation2Panel.setPreferredSize(new java.awt.Dimension(150, 288));
 
-        lbCustomerSecondName.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbCustomerSecondName.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbCustomerSecondName.setForeground(Colors.PRIMARY_950);
         lbCustomerSecondName.setText("Segundo nombre:");
-        lbCustomerSecondName.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbCustomerSecondName.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbCustomerSecondLastName.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbCustomerSecondLastName.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbCustomerSecondLastName.setForeground(Colors.PRIMARY_950);
         lbCustomerSecondLastName.setText("Segundo apellido:");
-        lbCustomerSecondLastName.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbCustomerSecondLastName.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbCustomerIdentificationNum.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbCustomerIdentificationNum.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbCustomerIdentificationNum.setForeground(Colors.PRIMARY_950);
         lbCustomerIdentificationNum.setText("Num. de identificación:");
-        lbCustomerIdentificationNum.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbCustomerIdentificationNum.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbCustomerPhone.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbCustomerPhone.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbCustomerPhone.setForeground(Colors.PRIMARY_950);
         lbCustomerPhone.setText("Teléfono / Celular:");
-        lbCustomerPhone.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbCustomerPhone.setPreferredSize(new java.awt.Dimension(138, 30));
 
-        lbCustomerAddress.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        lbCustomerAddress.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lbCustomerAddress.setForeground(Colors.PRIMARY_950);
         lbCustomerAddress.setText("Dirección:");
-        lbCustomerAddress.setPreferredSize(new java.awt.Dimension(138, 25));
+        lbCustomerAddress.setPreferredSize(new java.awt.Dimension(138, 30));
 
         javax.swing.GroupLayout lbsInformation2PanelLayout = new javax.swing.GroupLayout(lbsInformation2Panel);
         lbsInformation2Panel.setLayout(lbsInformation2PanelLayout);
@@ -329,22 +366,28 @@ public class CustomerInformationView extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        dataInformation2Panel.setBackground(Colors.PRIMARY_200);
         dataInformation2Panel.setPreferredSize(new java.awt.Dimension(308, 288));
 
         txtCustomerSecondName.setEditable(false);
-        txtCustomerSecondName.setPreferredSize(new java.awt.Dimension(296, 25));
+        txtCustomerSecondName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtCustomerSecondName.setPreferredSize(new java.awt.Dimension(296, 30));
 
         txtCustomerSecondLastName.setEditable(false);
-        txtCustomerSecondLastName.setPreferredSize(new java.awt.Dimension(296, 25));
+        txtCustomerSecondLastName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtCustomerSecondLastName.setPreferredSize(new java.awt.Dimension(296, 30));
 
         txtCustomerPhone.setEditable(false);
-        txtCustomerPhone.setPreferredSize(new java.awt.Dimension(296, 25));
+        txtCustomerPhone.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtCustomerPhone.setPreferredSize(new java.awt.Dimension(296, 30));
 
         txtCustomerIdentificationNum.setEditable(false);
-        txtCustomerIdentificationNum.setPreferredSize(new java.awt.Dimension(296, 25));
+        txtCustomerIdentificationNum.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtCustomerIdentificationNum.setPreferredSize(new java.awt.Dimension(296, 30));
 
         txtCustomerAddress.setEditable(false);
-        txtCustomerAddress.setPreferredSize(new java.awt.Dimension(296, 25));
+        txtCustomerAddress.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtCustomerAddress.setPreferredSize(new java.awt.Dimension(296, 30));
 
         javax.swing.GroupLayout dataInformation2PanelLayout = new javax.swing.GroupLayout(dataInformation2Panel);
         dataInformation2Panel.setLayout(dataInformation2PanelLayout);
@@ -373,7 +416,7 @@ public class CustomerInformationView extends javax.swing.JPanel {
                 .addComponent(txtCustomerPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtCustomerAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout information2PanelLayout = new javax.swing.GroupLayout(information2Panel);
@@ -392,13 +435,16 @@ public class CustomerInformationView extends javax.swing.JPanel {
             .addGroup(information2PanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(information2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dataInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
-                    .addComponent(lbsInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE))
+                    .addComponent(dataInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                    .addComponent(lbsInformation2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
+        buttonListWorkersPanel.setBackground(Colors.PRIMARY_200);
         buttonListWorkersPanel.setPreferredSize(new java.awt.Dimension(958, 102));
 
+        btnSeeAllCustomers.setBackground(Colors.PRIMARY_400);
+        btnSeeAllCustomers.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         btnSeeAllCustomers.setText("VER COMO LISTADO");
         btnSeeAllCustomers.setPreferredSize(new java.awt.Dimension(180, 60));
         btnSeeAllCustomers.addActionListener(new java.awt.event.ActionListener() {
@@ -411,15 +457,15 @@ public class CustomerInformationView extends javax.swing.JPanel {
         buttonListWorkersPanel.setLayout(buttonListWorkersPanelLayout);
         buttonListWorkersPanelLayout.setHorizontalGroup(
             buttonListWorkersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(buttonListWorkersPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSeeAllCustomers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttonListWorkersPanelLayout.createSequentialGroup()
+                .addContainerGap(353, Short.MAX_VALUE)
+                .addComponent(btnSeeAllCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(351, Short.MAX_VALUE))
         );
         buttonListWorkersPanelLayout.setVerticalGroup(
             buttonListWorkersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttonListWorkersPanelLayout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSeeAllCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -435,22 +481,21 @@ public class CustomerInformationView extends javax.swing.JPanel {
                         .addComponent(information1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(information2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE))
-                    .addComponent(buttonListWorkersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 948, Short.MAX_VALUE)
-                    .addComponent(buttonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 948, Short.MAX_VALUE))
+                    .addComponent(buttonListWorkersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 948, Short.MAX_VALUE))
                 .addContainerGap())
+            .addComponent(buttonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 960, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(information2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
-                    .addComponent(information1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonListWorkersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(information1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(information2Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonListWorkersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
