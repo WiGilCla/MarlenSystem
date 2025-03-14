@@ -7,6 +7,7 @@ package com.mycompany.marlenproject.userinterface.panelViews.customerSection;
 import com.mycompany.marlenproject.utils.fields.InputValidator;
 import com.mycompany.marlenproject.logic.Customer;
 import com.mycompany.marlenproject.userinterface.AdminHome;
+import com.mycompany.marlenproject.utils.colors.Colors;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -40,6 +41,8 @@ public class CustomerListView extends javax.swing.JPanel {
         }
 
         CustomerTable.setModel(modelTable);
+        CustomerTable.getTableHeader().setFont(new java.awt.Font("Georgia", 1, 14));
+        CustomerTable.getTableHeader().setForeground(Colors.PRIMARY_950);
     }
 
     public CustomerListView(AdminHome principalJFrame, List<Customer> customerList) {
@@ -64,19 +67,20 @@ public class CustomerListView extends javax.swing.JPanel {
         TablePanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         CustomerTable = new javax.swing.JTable();
-        ButtonsPanel = new javax.swing.JPanel();
 
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255)));
+        setBackground(Colors.PRIMARY_200);
         setPreferredSize(new java.awt.Dimension(970, 576));
 
-        FilterPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        FilterPanel.setBackground(Colors.PRIMARY_200);
         FilterPanel.setPreferredSize(new java.awt.Dimension(958, 100));
 
-        Filter1Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Filter1Panel.setBackground(Colors.PRIMARY_200);
         Filter1Panel.setPreferredSize(new java.awt.Dimension(467, 88));
 
+        textFilter1Panel.setBackground(Colors.PRIMARY_200);
         textFilter1Panel.setPreferredSize(new java.awt.Dimension(350, 76));
 
+        txtSearchCustomer.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txtSearchCustomer.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtSearchCustomer.setPreferredSize(new java.awt.Dimension(300, 30));
 
@@ -86,7 +90,7 @@ public class CustomerListView extends javax.swing.JPanel {
             textFilter1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(textFilter1PanelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(txtSearchCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtSearchCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addGap(21, 21, 21))
         );
         textFilter1PanelLayout.setVerticalGroup(
@@ -97,8 +101,10 @@ public class CustomerListView extends javax.swing.JPanel {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
+        ButtonFilter1Panel.setBackground(Colors.PRIMARY_200);
         ButtonFilter1Panel.setPreferredSize(new java.awt.Dimension(99, 76));
 
+        btnSearch.setBackground(Colors.PRIMARY_100);
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconLupe.png"))); // NOI18N
         btnSearch.setPreferredSize(new java.awt.Dimension(40, 40));
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -130,7 +136,7 @@ public class CustomerListView extends javax.swing.JPanel {
             Filter1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Filter1PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(textFilter1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+                .addComponent(textFilter1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ButtonFilter1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -145,32 +151,32 @@ public class CustomerListView extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        Filter2Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Filter2Panel.setBackground(Colors.PRIMARY_200);
         Filter2Panel.setPreferredSize(new java.awt.Dimension(234, 88));
 
         javax.swing.GroupLayout Filter2PanelLayout = new javax.swing.GroupLayout(Filter2Panel);
         Filter2Panel.setLayout(Filter2PanelLayout);
         Filter2PanelLayout.setHorizontalGroup(
             Filter2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 232, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         Filter2PanelLayout.setVerticalGroup(
             Filter2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 86, Short.MAX_VALUE)
+            .addGap(0, 88, Short.MAX_VALUE)
         );
 
-        Filter3Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Filter3Panel.setBackground(Colors.PRIMARY_200);
         Filter3Panel.setPreferredSize(new java.awt.Dimension(233, 88));
 
         javax.swing.GroupLayout Filter3PanelLayout = new javax.swing.GroupLayout(Filter3Panel);
         Filter3Panel.setLayout(Filter3PanelLayout);
         Filter3PanelLayout.setHorizontalGroup(
             Filter3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 231, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         Filter3PanelLayout.setVerticalGroup(
             Filter3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 86, Short.MAX_VALUE)
+            .addGap(0, 88, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout FilterPanelLayout = new javax.swing.GroupLayout(FilterPanel);
@@ -179,11 +185,11 @@ public class CustomerListView extends javax.swing.JPanel {
             FilterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FilterPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Filter1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+                .addComponent(Filter1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Filter2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Filter3Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Filter2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Filter3Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
                 .addContainerGap())
         );
         FilterPanelLayout.setVerticalGroup(
@@ -199,10 +205,14 @@ public class CustomerListView extends javax.swing.JPanel {
 
         FilterPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Filter1Panel, Filter2Panel, Filter3Panel});
 
-        TablePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        TablePanel.setBackground(Colors.PRIMARY_200);
+        TablePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         TablePanel.setMinimumSize(new java.awt.Dimension(958, 100));
         TablePanel.setPreferredSize(new java.awt.Dimension(958, 352));
 
+        CustomerTable.setBackground(Colors.PRIMARY_100);
+        CustomerTable.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        CustomerTable.setForeground(Colors.PRIMARY_950);
         CustomerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -214,6 +224,12 @@ public class CustomerListView extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        CustomerTable.setGridColor(new java.awt.Color(204, 204, 204));
+        CustomerTable.setRowHeight(25);
+        CustomerTable.setRowMargin(5);
+        CustomerTable.setSelectionBackground(Colors.PRIMARY_300);
+        CustomerTable.setShowGrid(true);
+        CustomerTable.setShowVerticalLines(false);
         CustomerTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 CustomerTableMouseClicked(evt);
@@ -227,30 +243,14 @@ public class CustomerListView extends javax.swing.JPanel {
             TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TablePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 944, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane2))
         );
         TablePanelLayout.setVerticalGroup(
             TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TablePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
                 .addContainerGap())
-        );
-
-        ButtonsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ButtonsPanel.setMinimumSize(new java.awt.Dimension(958, 100));
-        ButtonsPanel.setPreferredSize(new java.awt.Dimension(958, 100));
-
-        javax.swing.GroupLayout ButtonsPanelLayout = new javax.swing.GroupLayout(ButtonsPanel);
-        ButtonsPanel.setLayout(ButtonsPanelLayout);
-        ButtonsPanelLayout.setHorizontalGroup(
-            ButtonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        ButtonsPanelLayout.setVerticalGroup(
-            ButtonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 98, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -260,9 +260,8 @@ public class CustomerListView extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(FilterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ButtonsPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(TablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(TablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 881, Short.MAX_VALUE)
+                    .addComponent(FilterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 881, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -271,9 +270,7 @@ public class CustomerListView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(FilterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ButtonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -316,7 +313,6 @@ public class CustomerListView extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ButtonFilter1Panel;
-    private javax.swing.JPanel ButtonsPanel;
     private javax.swing.JTable CustomerTable;
     private javax.swing.JPanel Filter1Panel;
     private javax.swing.JPanel Filter2Panel;
