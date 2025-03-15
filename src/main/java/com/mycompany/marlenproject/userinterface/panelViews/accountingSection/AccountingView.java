@@ -9,8 +9,8 @@ import com.mycompany.marlenproject.logic.request.RequestAccountBook;
 import com.mycompany.marlenproject.logic.request.RequestAccountBookRecord;
 import com.mycompany.marlenproject.userinterface.AdminHome;
 import com.mycompany.marlenproject.utils.date.DateFunctions;
+import com.mycompany.marlenproject.utils.colors.Colors;
 import com.mycompany.marlenproject.utils.message.JPaneMessage;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -101,62 +101,71 @@ public class AccountingView extends javax.swing.JPanel {
         JPanel contentPane = new JPanel();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
         contentPane.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        contentPane.setBackground(Colors.PRIMARY_200);
 
         for (AccountBook book : listBooks) {
 
             JPanel panelExterior = new JPanel();
             panelExterior.setLayout(new BoxLayout(panelExterior, BoxLayout.X_AXIS));
-            panelExterior.setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
+            panelExterior.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
+            panelExterior.setBackground(Colors.PRIMARY_300);
 
             JPanel dataPanel = new JPanel();
             dataPanel.setLayout(new BoxLayout(dataPanel, BoxLayout.X_AXIS));
-            dataPanel.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
+            dataPanel.setBackground(Colors.PRIMARY_300);
 
             JPanel numRecordPanel = new JPanel(new GridLayout(1, 1, 6, 6));
             numRecordPanel.setPreferredSize(new Dimension(100, 44));
             numRecordPanel.setMaximumSize(new Dimension(100, 44));
-            numRecordPanel.setBorder(new LineBorder(Color.GREEN));
+            numRecordPanel.setBackground(Colors.PRIMARY_300);
             JLabel numRecordLabel = new JLabel(String.valueOf(book.getAccountBookId()));
+            numRecordLabel.setFont(new java.awt.Font("Georgia", 0, 14));
+            numRecordLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            numRecordLabel.setForeground(Colors.PRIMARY_950);
             numRecordPanel.add(numRecordLabel);
             dataPanel.add(numRecordPanel);
 
             Separator separatorNum = new Separator();
             separatorNum.setOrientation(1);
             separatorNum.setMaximumSize(new Dimension(1, 44));
-            separatorNum.setBorder(new LineBorder(Color.blue));
             dataPanel.add(separatorNum);
 
             JPanel dateRecordPanel = new JPanel(new GridLayout(1, 1, 6, 6));
             dateRecordPanel.setPreferredSize(new Dimension(100, 44));
             dateRecordPanel.setMaximumSize(new Dimension(100, 44));
-            dateRecordPanel.setBorder(new LineBorder(Color.GREEN));
+            dateRecordPanel.setBackground(Colors.PRIMARY_300);
             JLabel dateRecordLabel = new JLabel(DateFunctions.dateFormatDD_MM_YY(book.getCreationDate()));
+            dateRecordLabel.setFont(new java.awt.Font("Georgia", 0, 14));
+            dateRecordLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            dateRecordLabel.setForeground(Colors.PRIMARY_950);
             dateRecordPanel.add(dateRecordLabel);
             dataPanel.add(dateRecordPanel);
 
             Separator separatorDate = new Separator();
             separatorDate.setOrientation(1);
             separatorDate.setMaximumSize(new Dimension(1, 44));
-            separatorDate.setBorder(new LineBorder(Color.blue));
             dataPanel.add(separatorDate);
 
             JPanel titleRecordPanel = new JPanel(new GridLayout(1, 1, 6, 6));
             titleRecordPanel.setPreferredSize(new Dimension(350, 44));
             titleRecordPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 44));
-            titleRecordPanel.setBorder(new LineBorder(Color.GREEN));
+            titleRecordPanel.setBackground(Colors.PRIMARY_300);
             JLabel titleRecordLabel = new JLabel(book.getTitleBook());
+            titleRecordLabel.setFont(new java.awt.Font("Georgia", 0, 14));
+            titleRecordLabel.setForeground(Colors.PRIMARY_950);
             titleRecordPanel.add(titleRecordLabel);
             dataPanel.add(titleRecordPanel);
 
             JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 6, 6));
             buttonPanel.setMaximumSize(new Dimension(158, 44));
-            buttonPanel.setBorder(new LineBorder(Color.red));
+            buttonPanel.setBackground(Colors.PRIMARY_300);
 
             JPanel watchRecordPanel = new JPanel(new GridLayout(1, 1, 6, 6));
             watchRecordPanel.setPreferredSize(new Dimension(44, 44));
             watchRecordPanel.setMaximumSize(new Dimension(44, 44));
-            watchRecordPanel.setBorder(new LineBorder(Color.yellow));
+            watchRecordPanel.setBackground(Colors.PRIMARY_300);
             JButton btnWatchRecord = new JButton();
+            btnWatchRecord.setBackground(Colors.PRIMARY_200);
             settingsBtnWatchRecord(btnWatchRecord, book);
             btnWatchRecord.setPreferredSize(new Dimension(32, 32));
             btnWatchRecord.setMaximumSize(new Dimension(32, 32));
@@ -167,8 +176,9 @@ public class AccountingView extends javax.swing.JPanel {
             JPanel editRecordPanel = new JPanel(new GridLayout(1, 1, 6, 6));
             editRecordPanel.setPreferredSize(new Dimension(44, 44));
             editRecordPanel.setMaximumSize(new Dimension(44, 44));
-            editRecordPanel.setBorder(new LineBorder(Color.yellow));
+            editRecordPanel.setBackground(Colors.PRIMARY_300);
             JButton btnEditRecord = new JButton();
+            btnEditRecord.setBackground(Colors.PRIMARY_200);
             settingsBtnEditRecord(btnEditRecord, book);
             btnEditRecord.setPreferredSize(new Dimension(32, 32));
             btnEditRecord.setMaximumSize(new Dimension(32, 32));
@@ -179,8 +189,9 @@ public class AccountingView extends javax.swing.JPanel {
             JPanel deleteRecordPanel = new JPanel(new GridLayout(1, 1, 6, 6));
             deleteRecordPanel.setPreferredSize(new Dimension(44, 44));
             deleteRecordPanel.setMaximumSize(new Dimension(44, 44));
-            deleteRecordPanel.setBorder(new LineBorder(Color.yellow));
+            deleteRecordPanel.setBackground(Colors.PRIMARY_300);
             JButton btnDeleteRecord = new JButton();
+            btnDeleteRecord.setBackground(Colors.PRIMARY_200);
             settingsBtnDeleteRecord(btnDeleteRecord, book);
             btnDeleteRecord.setPreferredSize(new Dimension(32, 32));
             btnDeleteRecord.setMaximumSize(new Dimension(32, 32));
@@ -191,9 +202,9 @@ public class AccountingView extends javax.swing.JPanel {
             JPanel downloadRecordPanel = new JPanel(new GridLayout(1, 1, 6, 6));
             downloadRecordPanel.setPreferredSize(new Dimension(44, 44));
             downloadRecordPanel.setMaximumSize(new Dimension(44, 44));
-            downloadRecordPanel.setBorder(new LineBorder(Color.yellow));
+            downloadRecordPanel.setBackground(Colors.PRIMARY_300);
             JButton btnDownloadRecord = new JButton();
-            //settingsBtnDownLoadRecord(btnDownloadRecord, book);
+            btnDownloadRecord.setBackground(Colors.PRIMARY_200);
             btnDownloadRecord.setPreferredSize(new Dimension(32, 32));
             btnDownloadRecord.setMaximumSize(new Dimension(32, 32));
             btnDownloadRecord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconDownload.png")));
@@ -205,7 +216,6 @@ public class AccountingView extends javax.swing.JPanel {
             Separator separatorTitle = new Separator();
             separatorTitle.setOrientation(1);
             separatorTitle.setMaximumSize(new Dimension(1, 44));
-            separatorTitle.setBorder(new LineBorder(Color.blue));
             panelExterior.add(separatorTitle);
 
             panelExterior.add(buttonPanel);
@@ -214,7 +224,6 @@ public class AccountingView extends javax.swing.JPanel {
 
             Separator separatorRecord = new Separator();
             separatorRecord.setMaximumSize(new Dimension(Integer.MAX_VALUE, 1));
-            separatorRecord.setBorder(new LineBorder(Color.blue));
             contentPane.add(separatorRecord);
         }
         JScrollPane scrollPane = new JScrollPane(contentPane);
@@ -246,22 +255,25 @@ public class AccountingView extends javax.swing.JPanel {
         btnAddAccount = new javax.swing.JButton();
         RecordsPanel = new javax.swing.JPanel();
 
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 255, 0)));
+        setBackground(Colors.PRIMARY_200);
         setPreferredSize(new java.awt.Dimension(970, 576));
 
-        TitlePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        TitlePanel.setBackground(Colors.PRIMARY_200);
 
-        jLabel4.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
+        jLabel4.setForeground(Colors.PRIMARY_950);
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("HISTORIAL DE REGISTROS CONTABLES");
+        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout TitlePanelLayout = new javax.swing.GroupLayout(TitlePanel);
         TitlePanel.setLayout(TitlePanelLayout);
         TitlePanelLayout.setHorizontalGroup(
             TitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TitlePanelLayout.createSequentialGroup()
-                .addGap(334, 334, 334)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addGap(301, 301, 301))
+            .addGroup(TitlePanelLayout.createSequentialGroup()
+                .addGap(284, 284, 284)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(277, 277, 277))
         );
         TitlePanelLayout.setVerticalGroup(
             TitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,10 +283,14 @@ public class AccountingView extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        FiltersPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        FiltersPanel.setBackground(Colors.PRIMARY_200);
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 255)));
+        jPanel4.setBackground(Colors.PRIMARY_200);
 
+        txtFilterText.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtFilterText.setPreferredSize(new java.awt.Dimension(64, 30));
+
+        btnSearch.setBackground(Colors.PRIMARY_100);
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconLupe.png"))); // NOI18N
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -282,8 +298,10 @@ public class AccountingView extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel1.setForeground(Colors.PRIMARY_950);
         jLabel1.setText("Titulo / N° de folio:");
+        jLabel1.setPreferredSize(new java.awt.Dimension(143, 30));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -291,30 +309,34 @@ public class AccountingView extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtFilterText)
+                .addComponent(txtFilterText, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFilterText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(btnSearch))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 255)));
+        jPanel7.setBackground(Colors.PRIMARY_200);
 
+        dtStarDate.setBackground(Colors.PRIMARY_200);
         dtStarDate.setMaxSelectableDate(new Date());
+        dtStarDate.setPreferredSize(new java.awt.Dimension(82, 30));
 
-        jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel2.setForeground(Colors.PRIMARY_950);
         jLabel2.setText("Desde:");
+        jLabel2.setPreferredSize(new java.awt.Dimension(48, 30));
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -322,27 +344,31 @@ public class AccountingView extends javax.swing.JPanel {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addComponent(dtStarDate, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(dtStarDate, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(17, 17, 17)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel2)
-                    .addComponent(dtStarDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dtStarDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 255)));
+        jPanel8.setBackground(Colors.PRIMARY_200);
 
+        dtEndDate.setBackground(Colors.PRIMARY_200);
         dtEndDate.setMaxSelectableDate(new Date());
+        dtEndDate.setPreferredSize(new java.awt.Dimension(82, 30));
 
-        jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel3.setForeground(Colors.PRIMARY_950);
         jLabel3.setText("Hasta:");
+        jLabel3.setPreferredSize(new java.awt.Dimension(46, 30));
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -350,19 +376,19 @@ public class AccountingView extends javax.swing.JPanel {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addComponent(dtEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(dtEndDate, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dtEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(17, 17, 17)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dtEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout FiltersPanelLayout = new javax.swing.GroupLayout(FiltersPanel);
@@ -386,13 +412,15 @@ public class AccountingView extends javax.swing.JPanel {
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
-        tablePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tablePanel.setBackground(Colors.PRIMARY_200);
+        tablePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        OptionsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 255, 102)));
+        OptionsPanel.setBackground(Colors.PRIMARY_200);
 
+        btnAddAccount.setBackground(Colors.PRIMARY_400);
         btnAddAccount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconNewPage.png"))); // NOI18N
         btnAddAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -414,10 +442,10 @@ public class AccountingView extends javax.swing.JPanel {
             .addGroup(OptionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnAddAccount)
-                .addContainerGap(331, Short.MAX_VALUE))
+                .addContainerGap(349, Short.MAX_VALUE))
         );
 
-        RecordsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 255, 102)));
+        RecordsPanel.setBackground(Colors.PRIMARY_200);
         RecordsPanel.setLayout(new javax.swing.BoxLayout(RecordsPanel, javax.swing.BoxLayout.Y_AXIS));
 
         javax.swing.GroupLayout tablePanelLayout = new javax.swing.GroupLayout(tablePanel);
@@ -448,9 +476,9 @@ public class AccountingView extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TitlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(FiltersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(TitlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
