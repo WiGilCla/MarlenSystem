@@ -7,6 +7,7 @@ package com.mycompany.marlenproject.userinterface.panelViews.accountingSection;
 import com.mycompany.marlenproject.logic.AccountBook;
 import com.mycompany.marlenproject.logic.AccountBookRecords;
 import com.mycompany.marlenproject.utils.date.DateFunctions;
+import com.mycompany.marlenproject.utils.colors.Colors;
 import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
@@ -48,7 +49,8 @@ public class BookView extends javax.swing.JFrame {
         }
 
         recordsAccountTable.setModel(modelTable);
-        recordsAccountTable.setRowHeight(25);
+        recordsAccountTable.getTableHeader().setFont(new java.awt.Font("Georgia", 1, 14));
+        recordsAccountTable.getTableHeader().setForeground(Colors.PRIMARY_950);
     }
 
     @SuppressWarnings("unchecked")
@@ -78,11 +80,12 @@ public class BookView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        defaultPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        defaultPanel.setBackground(Colors.PRIMARY_200);
 
-        titleBookPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        titleBookPanel.setBackground(Colors.PRIMARY_200);
 
-        lbIdentificationBook.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        lbIdentificationBook.setFont(new java.awt.Font("Georgia", 1, 24)); // NOI18N
+        lbIdentificationBook.setForeground(Colors.PRIMARY_950);
         lbIdentificationBook.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbIdentificationBook.setText("TITULO");
         lbIdentificationBook.setMaximumSize(new java.awt.Dimension(100, 20));
@@ -93,9 +96,9 @@ public class BookView extends javax.swing.JFrame {
         titleBookPanelLayout.setHorizontalGroup(
             titleBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(titleBookPanelLayout.createSequentialGroup()
-                .addContainerGap(186, Short.MAX_VALUE)
-                .addComponent(lbIdentificationBook, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(lbIdentificationBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         titleBookPanelLayout.setVerticalGroup(
             titleBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,8 +108,11 @@ public class BookView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tablePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tablePanel.setBackground(Colors.PRIMARY_200);
 
+        recordsAccountTable.setBackground(Colors.PRIMARY_100);
+        recordsAccountTable.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        recordsAccountTable.setForeground(Colors.PRIMARY_950);
         recordsAccountTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -118,6 +124,11 @@ public class BookView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        recordsAccountTable.setGridColor(new java.awt.Color(204, 204, 204));
+        recordsAccountTable.setRowHeight(25);
+        recordsAccountTable.setRowMargin(5);
+        recordsAccountTable.setSelectionBackground(Colors.PRIMARY_300);
+        recordsAccountTable.setShowGrid(true);
         jScrollPane1.setViewportView(recordsAccountTable);
 
         javax.swing.GroupLayout tablePanelLayout = new javax.swing.GroupLayout(tablePanel);
@@ -126,21 +137,25 @@ public class BookView extends javax.swing.JFrame {
             tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tablePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
                 .addContainerGap())
         );
         tablePanelLayout.setVerticalGroup(
             tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tablePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        buttonPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        buttonPanel.setBackground(Colors.PRIMARY_200);
 
+        btnCloseWindow.setBackground(Colors.PRIMARY_400);
+        btnCloseWindow.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         btnCloseWindow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconCancel.png"))); // NOI18N
         btnCloseWindow.setText("Cerrar");
+        btnCloseWindow.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCloseWindow.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnCloseWindow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCloseWindowActionPerformed(evt);
