@@ -341,6 +341,7 @@ public class AddAccountBookView extends javax.swing.JPanel {
         });
 
         lbNumberBook.setFont(new java.awt.Font("Georgia", 1, 24)); // NOI18N
+        lbNumberBook.setForeground(Colors.PRIMARY_950);
         lbNumberBook.setText("Sin numero");
         lbNumberBook.setToolTipText("Presione para cambiar numero de libro");
         lbNumberBook.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -400,14 +401,17 @@ public class AddAccountBookView extends javax.swing.JPanel {
         jPanel5.setBackground(Colors.PRIMARY_200);
 
         jLabel1.setFont(new java.awt.Font("Georgia", 0, 18)); // NOI18N
+        jLabel1.setForeground(Colors.PRIMARY_950);
         jLabel1.setText("Total de ingresos:");
         jLabel1.setPreferredSize(new java.awt.Dimension(0, 30));
 
         jLabel2.setFont(new java.awt.Font("Georgia", 0, 18)); // NOI18N
+        jLabel2.setForeground(Colors.PRIMARY_950);
         jLabel2.setText("Total de gastos:");
         jLabel2.setPreferredSize(new java.awt.Dimension(0, 30));
 
         jLabel3.setFont(new java.awt.Font("Georgia", 0, 18)); // NOI18N
+        jLabel3.setForeground(Colors.PRIMARY_950);
         jLabel3.setText("Ingresos - gastos:");
         jLabel3.setPreferredSize(new java.awt.Dimension(0, 30));
 
@@ -438,14 +442,17 @@ public class AddAccountBookView extends javax.swing.JPanel {
         jPanel6.setBackground(Colors.PRIMARY_200);
 
         lbTotal_In.setFont(new java.awt.Font("Georgia", 0, 18)); // NOI18N
+        lbTotal_In.setForeground(Colors.PRIMARY_950);
         lbTotal_In.setText("0");
         lbTotal_In.setPreferredSize(new java.awt.Dimension(11, 30));
 
         lbTotal_InEx.setFont(new java.awt.Font("Georgia", 0, 18)); // NOI18N
+        lbTotal_InEx.setForeground(Colors.PRIMARY_950);
         lbTotal_InEx.setText("0");
         lbTotal_InEx.setPreferredSize(new java.awt.Dimension(11, 30));
 
         lbTotal_Ex.setFont(new java.awt.Font("Georgia", 0, 18)); // NOI18N
+        lbTotal_Ex.setForeground(Colors.PRIMARY_950);
         lbTotal_Ex.setText("0");
         lbTotal_Ex.setPreferredSize(new java.awt.Dimension(11, 30));
 
@@ -505,7 +512,7 @@ public class AddAccountBookView extends javax.swing.JPanel {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnAddRow)
+                .addComponent(btnAddRow, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnDeleteRow)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))

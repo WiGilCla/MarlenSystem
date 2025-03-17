@@ -10,6 +10,7 @@ import com.mycompany.marlenproject.logic.request.RequestAccountBook;
 import com.mycompany.marlenproject.logic.request.RequestAccountBookRecord;
 import com.mycompany.marlenproject.userinterface.AdminHome;
 import com.mycompany.marlenproject.utils.message.JPaneMessage;
+import com.mycompany.marlenproject.utils.colors.Colors;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -189,7 +190,8 @@ public class EditAccountBookView extends javax.swing.JPanel {
         addTableModelListener(modelTable);
         addListSelectionModelListener(recordsAccountTable.getSelectionModel());
         recordsAccountTable.setModel(modelTable);
-        recordsAccountTable.setRowHeight(25);
+        recordsAccountTable.getTableHeader().setFont(new java.awt.Font("Georgia", 1, 14));
+        recordsAccountTable.getTableHeader().setForeground(Colors.PRIMARY_950);
     }
 
     private void addTableModelListener(DefaultTableModel modelTable) {
@@ -225,6 +227,7 @@ public class EditAccountBookView extends javax.swing.JPanel {
                 JPaneMessage.incorrectNumberField(this, "Solo se aceptan: ", null, null);
                 Object oldValue = formatNumberWithDots(copyBookRecords.get(editedRow).getCashInflow());
                 modelTable.setValueAt(oldValue, editedRow, editedColumn);
+                isUpdating = false;
                 return;
             }
 
@@ -236,6 +239,7 @@ public class EditAccountBookView extends javax.swing.JPanel {
                 JPaneMessage.incorrectNumberField(this, "Solo se aceptan: ", null, null);
                 Object oldValue = formatNumberWithDots(copyBookRecords.get(editedRow).getCashExpenses());
                 modelTable.setValueAt(oldValue, editedRow, editedColumn);
+                isUpdating = false;
                 return;
             }
 
@@ -290,11 +294,14 @@ public class EditAccountBookView extends javax.swing.JPanel {
         btnCancel = new javax.swing.JButton();
         BtnSave = new javax.swing.JButton();
 
-        identificationBookPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setBackground(Colors.PRIMARY_200);
 
-        lbTitleBook.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
-        lbTitleBook.setText("Inserte titulo");
-        lbTitleBook.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        identificationBookPanel.setBackground(Colors.PRIMARY_200);
+
+        lbTitleBook.setFont(new java.awt.Font("Georgia", 1, 24)); // NOI18N
+        lbTitleBook.setForeground(Colors.PRIMARY_950);
+        lbTitleBook.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbTitleBook.setText("Titulo");
         lbTitleBook.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbTitleBook.setMaximumSize(new java.awt.Dimension(280, 34));
         lbTitleBook.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -303,9 +310,10 @@ public class EditAccountBookView extends javax.swing.JPanel {
             }
         });
 
-        lbNumberBook.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
-        lbNumberBook.setText("Inserte número de libro");
-        lbNumberBook.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lbNumberBook.setFont(new java.awt.Font("Georgia", 1, 24)); // NOI18N
+        lbNumberBook.setForeground(Colors.PRIMARY_950);
+        lbNumberBook.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbNumberBook.setText("Número");
         lbNumberBook.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbNumberBook.setMaximumSize(new java.awt.Dimension(280, 34));
 
@@ -315,23 +323,26 @@ public class EditAccountBookView extends javax.swing.JPanel {
             identificationBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(identificationBookPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lbTitleBook, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbTitleBook, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(100, 100, 100)
                 .addComponent(lbNumberBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         identificationBookPanelLayout.setVerticalGroup(
             identificationBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(identificationBookPanelLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, identificationBookPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(identificationBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbTitleBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbNumberBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        tableCalculationPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tableCalculationPanel.setBackground(Colors.PRIMARY_200);
+        tableCalculationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
+        recordsAccountTable.setBackground(Colors.PRIMARY_100);
+        recordsAccountTable.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         recordsAccountTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -343,18 +354,31 @@ public class EditAccountBookView extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        recordsAccountTable.setGridColor(new java.awt.Color(204, 204, 204));
+        recordsAccountTable.setRowHeight(25);
+        recordsAccountTable.setRowMargin(5);
+        recordsAccountTable.setSelectionBackground(Colors.PRIMARY_300);
+        recordsAccountTable.setShowGrid(true);
         jScrollPane1.setViewportView(recordsAccountTable);
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel4.setBackground(Colors.PRIMARY_200);
 
-        jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
+        jPanel5.setBackground(Colors.PRIMARY_200);
+
+        jLabel1.setFont(new java.awt.Font("Georgia", 0, 18)); // NOI18N
+        jLabel1.setForeground(Colors.PRIMARY_950);
         jLabel1.setText("Total de ingresos:");
+        jLabel1.setPreferredSize(new java.awt.Dimension(0, 30));
 
-        jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Georgia", 0, 18)); // NOI18N
+        jLabel2.setForeground(Colors.PRIMARY_950);
         jLabel2.setText("Total de gastos:");
+        jLabel2.setPreferredSize(new java.awt.Dimension(0, 30));
 
-        jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Georgia", 0, 18)); // NOI18N
+        jLabel3.setForeground(Colors.PRIMARY_950);
         jLabel3.setText("Ingresos - gastos:");
+        jLabel3.setPreferredSize(new java.awt.Dimension(0, 30));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -372,22 +396,30 @@ public class EditAccountBookView extends javax.swing.JPanel {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        lbTotal_In.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        jPanel6.setBackground(Colors.PRIMARY_200);
+
+        lbTotal_In.setFont(new java.awt.Font("Georgia", 0, 18)); // NOI18N
+        lbTotal_In.setForeground(Colors.PRIMARY_950);
         lbTotal_In.setText("0");
+        lbTotal_In.setPreferredSize(new java.awt.Dimension(11, 30));
 
-        lbTotal_InEx.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        lbTotal_InEx.setFont(new java.awt.Font("Georgia", 0, 18)); // NOI18N
+        lbTotal_InEx.setForeground(Colors.PRIMARY_950);
         lbTotal_InEx.setText("0");
+        lbTotal_InEx.setPreferredSize(new java.awt.Dimension(11, 30));
 
-        lbTotal_Ex.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        lbTotal_Ex.setFont(new java.awt.Font("Georgia", 0, 18)); // NOI18N
+        lbTotal_Ex.setForeground(Colors.PRIMARY_950);
         lbTotal_Ex.setText("0");
+        lbTotal_Ex.setPreferredSize(new java.awt.Dimension(11, 30));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -396,35 +428,45 @@ public class EditAccountBookView extends javax.swing.JPanel {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbTotal_In)
-                    .addComponent(lbTotal_Ex)
-                    .addComponent(lbTotal_InEx))
-                .addContainerGap(184, Short.MAX_VALUE))
+                    .addComponent(lbTotal_In, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                    .addComponent(lbTotal_Ex, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbTotal_InEx, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbTotal_In)
+                .addComponent(lbTotal_In, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbTotal_Ex)
+                .addComponent(lbTotal_Ex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbTotal_InEx)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addComponent(lbTotal_InEx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel7.setBackground(Colors.PRIMARY_200);
+
+        btnAddRow.setBackground(Colors.PRIMARY_100);
+        btnAddRow.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        btnAddRow.setForeground(Colors.PRIMARY_950);
         btnAddRow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconPlus.png"))); // NOI18N
         btnAddRow.setText("Agregar fila");
         btnAddRow.setEnabled(false);
+        btnAddRow.setPreferredSize(new java.awt.Dimension(150, 40));
         btnAddRow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddRowActionPerformed(evt);
             }
         });
 
+        btnDeleteRow.setBackground(Colors.PRIMARY_100);
+        btnDeleteRow.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        btnDeleteRow.setForeground(Colors.PRIMARY_950);
         btnDeleteRow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images32x32/iconMinus.png"))); // NOI18N
         btnDeleteRow.setText("Eliminar fila");
         btnDeleteRow.setEnabled(false);
+        btnDeleteRow.setPreferredSize(new java.awt.Dimension(150, 40));
         btnDeleteRow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteRowActionPerformed(evt);
@@ -436,19 +478,19 @@ public class EditAccountBookView extends javax.swing.JPanel {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(btnAddRow)
-                .addGap(48, 48, 48)
-                .addComponent(btnDeleteRow)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(btnAddRow, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnDeleteRow, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddRow)
-                    .addComponent(btnDeleteRow))
+                    .addComponent(btnAddRow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDeleteRow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -458,8 +500,8 @@ public class EditAccountBookView extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -473,7 +515,7 @@ public class EditAccountBookView extends javax.swing.JPanel {
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 4, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -493,26 +535,34 @@ public class EditAccountBookView extends javax.swing.JPanel {
             tableCalculationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tableCalculationPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        buttonsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        buttonsPanel.setBackground(Colors.PRIMARY_200);
 
+        btnCancel.setBackground(Colors.PRIMARY_400);
+        btnCancel.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconCancel.png"))); // NOI18N
         btnCancel.setText("Cancelar");
+        btnCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCancel.setPreferredSize(new java.awt.Dimension(130, 60));
+        btnCancel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
             }
         });
 
+        BtnSave.setBackground(Colors.PRIMARY_400);
+        BtnSave.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         BtnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Images48x48/iconSave.png"))); // NOI18N
         BtnSave.setText("Guardar");
+        BtnSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         BtnSave.setPreferredSize(new java.awt.Dimension(130, 60));
+        BtnSave.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         BtnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSaveActionPerformed(evt);
@@ -524,19 +574,19 @@ public class EditAccountBookView extends javax.swing.JPanel {
         buttonsPanelLayout.setHorizontalGroup(
             buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buttonsPanelLayout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(94, 94, 94))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(191, 191, 191)
+                .addComponent(BtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         buttonsPanelLayout.setVerticalGroup(
             buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttonsPanelLayout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addGroup(buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(BtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                    .addComponent(BtnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(19, 19, 19))
         );
 
