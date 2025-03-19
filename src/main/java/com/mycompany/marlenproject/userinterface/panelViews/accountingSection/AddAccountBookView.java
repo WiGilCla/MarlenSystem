@@ -195,7 +195,6 @@ public class AddAccountBookView extends javax.swing.JPanel {
                 return true;
             }
         };
-
         String[] tableHead = this.HEADER;
         modelTable.setColumnIdentifiers(tableHead);
 
@@ -787,12 +786,21 @@ public class AddAccountBookView extends javax.swing.JPanel {
 
             if (column == getIndexFromHeader("Ingresos")) {
                 long value = bookRecords.get(row).getCashInflow();
+                
+                if(value == 0){
+                    isUpdating = false;
+                    return;
+                }
 
                 recordsAccountTable.getModel().setValueAt(value, row, column);
             }
 
             if (column == getIndexFromHeader("Gastos")) {
                 long value = bookRecords.get(row).getCashExpenses();
+                if(value == 0){
+                    isUpdating = false;
+                    return;
+                }
                 recordsAccountTable.getModel().setValueAt(value, row, column);
             }
         }
