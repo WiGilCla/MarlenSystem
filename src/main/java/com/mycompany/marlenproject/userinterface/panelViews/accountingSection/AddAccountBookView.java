@@ -394,6 +394,11 @@ public class AddAccountBookView extends javax.swing.JPanel {
         recordsAccountTable.setRowMargin(5);
         recordsAccountTable.setSelectionBackground(Colors.PRIMARY_300);
         recordsAccountTable.setShowGrid(true);
+        recordsAccountTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                recordsAccountTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(recordsAccountTable);
 
         jPanel4.setBackground(Colors.PRIMARY_200);
@@ -771,6 +776,29 @@ public class AddAccountBookView extends javax.swing.JPanel {
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         returnToAccountingView();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void recordsAccountTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_recordsAccountTableMouseClicked
+        if (evt.getClickCount() == 1) {
+            isUpdating = true;
+            int row = recordsAccountTable.getSelectedRow();
+            int column = recordsAccountTable.getSelectedColumn();
+
+            System.out.println(row + "--" + column);
+
+            if (column == getIndexFromHeader("Ingresos")) {
+                long value = bookRecords.get(row).getCashInflow();
+
+                recordsAccountTable.getModel().setValueAt(value, row, column);
+            }
+
+            if (column == getIndexFromHeader("Gastos")) {
+                long value = bookRecords.get(row).getCashExpenses();
+                recordsAccountTable.getModel().setValueAt(value, row, column);
+            }
+        }
+
+        isUpdating = false;
+    }//GEN-LAST:event_recordsAccountTableMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
